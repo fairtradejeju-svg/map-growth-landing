@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="ko" class="theme-light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAP Growth Support Korea</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { interpolate-size: allow-keywords; }
+
+    html.theme-dark {
+      --bg: #0A0A0A; --surface: #141414; --surface-hover: #1C1C1C;
+      --border: rgba(255,255,255,0.06);
+      --text: #EDEDED; --text-secondary: #888;
+      --accent: #0F6E56; --accent-secondary: #5DCAA5;
+      --positive: #10b981; --negative: #f43f5e; --warning: #f59e0b;
+      --hero-bg: #0B1F14; --hero-text: #fff;
+      --card-glow: rgba(93,202,165,0.06);
+    }
+    html.theme-light {
+      --bg: #FAFAF9; --surface: #FFFFFF; --surface-hover: #F5F5F4;
+      --border: rgba(0,0,0,0.06);
+      --text: #0f172a; --text-secondary: #64748b;
+      --accent: #0F6E56; --accent-secondary: #085041;
+      --positive: #059669; --negative: #e11d48; --warning: #d97706;
+      --hero-bg: #F5F9F7; --hero-text: #0F172A;
+      --card-glow: rgba(15,110,86,0.04);
+    }
+
+    body {
+      font-family: 'Noto Sans KR', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+      transition: background 0.3s, color 0.3s;
+    }
+    h1,h2,h3,h4 { color: var(--text); letter-spacing: -0.03em; line-height: 1.2; text-wrap: balance; }
+    h1 { font-weight: 700; font-size: clamp(2.5rem, 5vw, 3.5rem); }
+    h2 { font-weight: 600; font-size: clamp(2rem, 4vw, 2.5rem); }
+    h3 { font-weight: 600; font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
+    p, li, td, th, span, label { color: var(--text); }
+    .text-secondary { color: var(--text-secondary); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(165deg, #FFFFFF 0%, #F5F9F7 40%, #F0F8F4 100%);
+      color: #1F2937;
+      padding: clamp(72px, 12vw, 120px) 24px clamp(56px, 10vw, 96px);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 20% 10%, rgba(93,202,165,0.08) 0%, transparent 50%),
+                  radial-gradient(ellipse at 80% 90%, rgba(15,110,86,0.05) 0%, transparent 45%),
+                  radial-gradient(circle at 60% 40%, rgba(93,202,165,0.02) 0%, transparent 35%);
+    }
+    .hero::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent 0%, rgba(93,202,165,0.15) 50%, transparent 100%);
+    }
+    .hero .container { position: relative; z-index: 1; }
+    .hero h1 { color: #0F172A; font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 20px; }
+    .hero h1 .em { color: #0F6E56; }
+    .hero p { color: #64748B; font-size: clamp(1rem, 2vw, 1.15rem); max-width: 560px; line-height: 1.8; }
+    .hero-partner-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 16px 6px 8px;
+      background: rgba(15,110,86,0.06);
+      border: 1px solid rgba(15,110,86,0.15);
+      border-radius: 100px; margin-bottom: 24px;
+      font-size: 13px; font-weight: 500; color: #0F6E56;
+      letter-spacing: 0.02em;
+      backdrop-filter: blur(8px);
+    }
+    .hero-partner-badge .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #0F6E56;
+      box-shadow: 0 0 8px rgba(15,110,86,0.4);
+      animation: badge-pulse 2.5s ease-in-out infinite;
+    }
+    .hero-partner-badge .badge-text { color: #0F6E56; font-weight: 600; }
+    @keyframes badge-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 32px; padding: 14px 32px;
+      background: #0F6E56; color: #fff; border: none; border-radius: 8px;
+      font-size: 1rem; font-weight: 600; cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      text-decoration: none;
+    }
+    .hero-cta:hover { background: #0D5C48; transform: translateY(-1px); text-decoration: none; }
+    .hero-sub-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 32px; margin-left: 16px; padding: 14px 32px;
+      background: transparent; color: #0F6E56; border: 1px solid #0F6E56; border-radius: 8px;
+      font-size: 1rem; font-weight: 500; cursor: pointer;
+      transition: all 0.2s; text-decoration: none;
+    }
+    .hero-sub-cta:hover { background: rgba(15,110,86,0.05); color: #0D5C48; border-color: #0D5C48; text-decoration: none; }
+    .hero-report-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 32px; margin-left: 16px; padding: 14px 32px;
+      background: linear-gradient(135deg, #F59E0B, #D97706); color: #fff; border: none; border-radius: 8px;
+      font-size: 1rem; font-weight: 700; cursor: pointer;
+      transition: all 0.2s; text-decoration: none;
+      box-shadow: 0 4px 14px rgba(245,158,11,0.35);
+      animation: pulse-glow 2s ease-in-out infinite;
+    }
+    .hero-report-cta:hover { background: linear-gradient(135deg, #D97706, #B45309); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,158,11,0.45); text-decoration: none; }
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 4px 14px rgba(245,158,11,0.35); }
+      50% { box-shadow: 0 4px 24px rgba(245,158,11,0.55); }
+    }
+
+    /* ===== NAV BAR ===== */
+    .nav-bar {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      max-width: 1120px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-weight: 700; font-size: 1rem; color: var(--text);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-logo-icon {
+      height: 36px; width: auto; object-fit: contain;
+    }
+    .nav-links { display: flex; gap: 4px; align-items: center; }
+    .nav-links a {
+      padding: 8px 14px; border-radius: 6px; font-size: 14px; font-weight: 500;
+      color: var(--text-secondary); transition: all 0.15s; text-decoration: none;
+    }
+    .nav-links a:hover { background: var(--surface-hover); color: var(--text); text-decoration: none; }
+    .nav-links a.active { color: var(--accent); background: var(--card-glow); }
+    .nav-cta-btn {
+      padding: 8px 18px; border-radius: 6px; font-size: 14px; font-weight: 600;
+      background: #0F6E56; color: #fff !important; transition: background 0.2s;
+    }
+    .nav-cta-btn:hover { background: #0D5C48; }
+
+    /* Mobile nav */
+    .nav-mobile-toggle { display: none; background: none; border: none; color: var(--text); cursor: pointer; padding: 8px; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; position: absolute; top: 56px; left: 0; right: 0; flex-direction: column; background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px; gap: 2px; }
+      .nav-links.open { display: flex; }
+      .nav-mobile-toggle { display: flex; align-items: center; justify-content: center; }
+    }
+
+    /* ===== SECTIONS ===== */
+    section { padding: clamp(60px, 10vw, 100px) 0; }
+    .section-label {
+      display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+      padding: 4px 12px; background: var(--card-glow); border-radius: 100px;
+    }
+    .section-title { margin-bottom: 16px; }
+    .section-desc { color: var(--text-secondary); font-size: 1.05rem; max-width: 600px; margin-bottom: 48px; line-height: 1.7; }
+
+    /* ===== SLIDESHOW EMBED ===== */
+    .slideshow-section { background: var(--surface); border-bottom: 1px solid var(--border); }
+    .slideshow-wrapper {
+      max-width: 720px; margin: 0 auto;
+      border-radius: 16px; overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    }
+    /* Slideshow internal styles */
+    .slideshow-wrapper .vp { max-width: 100%; }
+    .slideshow-wrapper .frame { background: var(--surface-hover); border-radius: 0; padding: 12px; }
+    .slideshow-wrapper .screen { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; border-radius: 8px; background: #0B1F14; }
+    .slideshow-wrapper .slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: clamp(18px,3vw,30px) clamp(22px,4vw,40px); opacity: 0; pointer-events: none; transition: opacity .45s ease; }
+    .slideshow-wrapper .slide.active { opacity: 1; pointer-events: auto; }
+    .slideshow-wrapper .slide>* { transform: translateY(12px); opacity: 0; transition: all .5s cubic-bezier(.22,1,.36,1); }
+    .slideshow-wrapper .slide.active>* { transform: translateY(0); opacity: 1; }
+    .slideshow-wrapper .slide.active>*:nth-child(2) { transition-delay: .06s; }
+    .slideshow-wrapper .slide.active>*:nth-child(3) { transition-delay: .12s; }
+    .slideshow-wrapper .slide.active>*:nth-child(4) { transition-delay: .18s; }
+    .slideshow-wrapper .slide.active>*:nth-child(5) { transition-delay: .24s; }
+    .slideshow-wrapper .slide.active>*:nth-child(6) { transition-delay: .3s; }
+    .slideshow-wrapper .slide.active>*:nth-child(7) { transition-delay: .36s; }
+    .slideshow-wrapper .s-dk { background: #0B1F14; }
+    .slideshow-wrapper .s-lt { background: #F2F8F4; }
+    .slideshow-wrapper .s-md { background: #0E2A1C; }
+    .slideshow-wrapper .pill { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 14px; border-radius: 100px; margin-bottom: 12px; }
+    .slideshow-wrapper .pill-l { background: #DFF0E6; color: #085041; }
+    .slideshow-wrapper .pill-d { background: rgba(255,255,255,.06); color: rgba(255,255,255,.4); }
+    .slideshow-wrapper .h1 { font-family: 'Noto Sans KR', sans-serif; font-weight: 600; line-height: 1.25; text-align: center; }
+    .slideshow-wrapper .h1-dk { color: #0B1F14; }
+    .slideshow-wrapper .h1-lt { color: #fff; }
+    .slideshow-wrapper .em { color: #0F6E56; }
+    .slideshow-wrapper .em2 { color: #5DCAA5; }
+    .slideshow-wrapper .sub { font-size: 12px; text-align: center; line-height: 1.65; max-width: 480px; }
+    .slideshow-wrapper .sub-dk { color: #444441; }
+    .slideshow-wrapper .sub-lt { color: rgba(255,255,255,.4); }
+    .slideshow-wrapper .mn { font-family: 'Inter', monospace; }
+    .slideshow-wrapper .ctrls { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 0 0; }
+    .slideshow-wrapper .cbtn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .slideshow-wrapper .cbtn:hover { background: var(--surface-hover); }
+    .slideshow-wrapper .pbtn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .slideshow-wrapper .dots { display: flex; gap: 5px; align-items: center; margin: 0 6px; }
+    .slideshow-wrapper .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); cursor: pointer; transition: all .2s; }
+    .slideshow-wrapper .dot.on { background: #0F6E56; width: 18px; border-radius: 8px; }
+    .slideshow-wrapper .cnt { font-size: 11px; color: var(--text-secondary); font-family: 'Inter', monospace; min-width: 44px; text-align: center; }
+
+    /* ===== CARD ===== */
+    .card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 28px;
+      transition: box-shadow 0.2s ease;
+    }
+    .card:hover { box-shadow: 0 0 0 1px var(--border), 0 8px 20px rgba(0,0,0,0.06); }
+
+    /* ===== SERVICE CARDS ===== */
+    .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+    .service-card { position: relative; overflow: hidden; }
+    .service-card .card-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: #E1F5EE; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px;
+    }
+    .theme-dark .service-card .card-icon { background: rgba(93,202,165,0.1); }
+    .service-card h3 { margin-bottom: 10px; }
+    .service-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65; }
+    .service-card .card-tag {
+      display: inline-block; margin-top: 16px; font-size: 12px; font-weight: 600;
+      color: var(--accent); padding: 4px 10px; background: var(--card-glow); border-radius: 4px;
+    }
+
+    /* ===== WHY MAP ===== */
+    .why-section { background: var(--surface); }
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .why-card { text-align: center; padding: 32px 24px; }
+    .why-card .why-num {
+      font-family: 'Inter'; font-size: 2.5rem; font-weight: 800;
+      color: var(--accent); margin-bottom: 8px;
+    }
+    .why-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .why-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6; }
+
+    /* ===== TEACHER FAQ ===== */
+    .teacher-section { border-top: 1px solid var(--border); }
+    .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+    .faq-item {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+      overflow: hidden;
+    }
+    .faq-item summary {
+      padding: 18px 22px; font-weight: 600; font-size: 0.95rem;
+      display: flex; align-items: center; gap: 12px;
+      cursor: pointer; list-style: none; transition: background 0.15s;
+    }
+    .faq-item summary:hover { background: var(--surface-hover); }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after {
+      content: '+'; margin-left: auto; font-size: 1.2rem; font-weight: 300;
+      color: var(--text-secondary); transition: transform 0.2s;
+    }
+    .faq-item[open] summary::after { content: '−'; }
+    .faq-item .faq-body { padding: 0 22px 18px; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
+    .faq-item .faq-body ol { padding-left: 20px; margin-top: 8px; }
+    .faq-item .faq-body li { margin-bottom: 6px; }
+    .faq-icon {
+      width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+    }
+    .faq-icon-red { background: #FEE2E2; color: #991B1B; }
+    .faq-icon-blue { background: #DBEAFE; color: #1E40AF; }
+    .faq-icon-green { background: #D1FAE5; color: #065F46; }
+    .faq-icon-yellow { background: #FEF3C7; color: #92400E; }
+    .theme-dark .faq-icon-red { background: rgba(239,68,68,0.1); color: #FCA5A5; }
+    .theme-dark .faq-icon-blue { background: rgba(59,130,246,0.1); color: #93C5FD; }
+    .theme-dark .faq-icon-green { background: rgba(16,185,129,0.1); color: #6EE7B7; }
+    .theme-dark .faq-icon-yellow { background: rgba(245,158,11,0.1); color: #FCD34D; }
+
+    /* ===== REPORT ANALYZER PREVIEW ===== */
+    .analyzer-section { background: linear-gradient(165deg, #FFFFFF 0%, #F5F9F7 40%, #F0F8F4 100%); color: #0F172A; position: relative; overflow: hidden; }
+    .analyzer-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 60% 50%, rgba(93,202,165,0.06) 0%, transparent 60%);
+    }
+    .analyzer-section .container { position: relative; z-index: 1; }
+    .analyzer-section h2 { color: #0F172A; }
+    .analyzer-section p { color: #64748B; }
+    .analyzer-section .section-label { background: rgba(15, 110, 86, 0.06); color: #0F6E56; }
+    .analyzer-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 40px; }
+    .analyzer-feat {
+      background: rgba(15, 110, 86, 0.04); border: 1px solid rgba(15, 110, 86, 0.1);
+      border-radius: 10px; padding: 22px; transition: background 0.2s;
+    }
+    .analyzer-feat:hover { background: rgba(15, 110, 86, 0.08); }
+    .analyzer-feat h4 { color: #0F172A; font-size: 0.95rem; margin-bottom: 6px; }
+    .analyzer-feat p { color: #64748B; font-size: 0.85rem; line-height: 1.6; }
+    .analyzer-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 14px; background: rgba(15, 110, 86, 0.08);
+      border: 1px solid rgba(15, 110, 86, 0.15); border-radius: 100px;
+      color: #0F6E56; font-size: 12px; font-weight: 600; margin-top: 32px;
+    }
+    .sample-report-box {
+      margin-top: 40px; padding: 28px 32px;
+      background: rgba(245, 158, 11, 0.04); border: 2px solid rgba(245, 158, 11, 0.2);
+      border-radius: 16px; display: flex; align-items: center; justify-content: space-between;
+      gap: 24px; flex-wrap: wrap;
+    }
+    .sample-report-box .sample-text h3 { color: #0F172A; font-size: 1.2rem; margin-bottom: 6px; }
+    .sample-report-box .sample-text p { color: #64748B; font-size: 0.9rem; }
+    .sample-report-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 16px 36px; background: linear-gradient(135deg, #F59E0B, #D97706);
+      color: #fff; border: none; border-radius: 10px;
+      font-size: 1.05rem; font-weight: 700; cursor: pointer;
+      transition: all 0.2s; text-decoration: none; white-space: nowrap;
+      box-shadow: 0 4px 16px rgba(245,158,11,0.35);
+    }
+    .sample-report-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(245,158,11,0.5); text-decoration: none; }
+    .sample-report-btn svg { flex-shrink: 0; }
+
+    /* ===== CTA SECTION ===== */
+    .cta-section { text-align: center; }
+    .cta-section h2 { margin-bottom: 16px; }
+    .cta-section p { color: var(--text-secondary); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; }
+    .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .cta-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; background: #0F6E56; color: #fff; border: none; border-radius: 8px;
+      font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+      text-decoration: none;
+    }
+    .cta-primary:hover { background: #0D5C48; text-decoration: none; }
+    .cta-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px; background: var(--surface); color: var(--text); border: 1px solid var(--border); border-radius: 8px;
+      font-size: 1rem; font-weight: 500; cursor: pointer; transition: all 0.2s;
+      text-decoration: none;
+    }
+    .cta-secondary:hover { background: var(--surface-hover); text-decoration: none; }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      border-top: 1px solid var(--border); padding: 40px 0;
+      color: var(--text-secondary); font-size: 13px;
+    }
+    .footer-inner {
+      max-width: 1120px; margin: 0 auto; padding: 0 24px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--text-secondary); font-size: 13px; }
+    .footer-links a:hover { color: var(--text); }
+
+    /* ===== ANIMATIONS ===== */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .animate { animation: fadeInUp 0.6s ease-out both; }
+    .animate.delay-1 { animation-delay: 0.1s; }
+    .animate.delay-2 { animation-delay: 0.2s; }
+    .animate.delay-3 { animation-delay: 0.3s; }
+    .animate.delay-4 { animation-delay: 0.4s; }
+    .animate.delay-5 { animation-delay: 0.5s; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    @media print {
+      body { background: white !important; color: black !important; }
+      .viz-menu, .nav-bar { display: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      .card { break-inside: avoid; border: 1px solid #ddd; box-shadow: none; }
+      .hero { background: #F5F9F7 !important; }
+      * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    }
+    @page { margin: 0.75in; }
+
+    /* ===== MENU ===== */
+    .viz-menu { position: fixed; top: 16px; right: 16px; z-index: 9999; }
+    .viz-menu-toggle {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text); cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(12px); transition: all 0.2s;
+    }
+    .viz-menu-toggle:hover { background: var(--surface-hover); }
+    .viz-menu-dropdown {
+      position: absolute; top: 48px; right: 0; min-width: 180px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 6px;
+      opacity: 0; visibility: hidden; transform: translateY(-8px);
+      transition: all 0.2s; backdrop-filter: blur(16px);
+    }
+    .viz-menu-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .viz-menu-dropdown button {
+      width: 100%; padding: 8px 12px; border: none; border-radius: 6px;
+      background: transparent; color: var(--text); font-size: 13px;
+      font-family: inherit; cursor: pointer; text-align: left;
+      display: flex; align-items: center; gap: 8px; transition: background 0.15s;
+    }
+    .viz-menu-dropdown button:hover { background: var(--surface-hover); }
+
+    .skip-link { position: absolute; left: -9999px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+
+    @media (max-width: 375px) {
+      body { overflow-x: hidden; }
+      .service-grid, .why-grid, .faq-grid, .analyzer-features { grid-template-columns: 1fr; }
+      .hero-sub-cta, .hero-report-cta { margin-left: 0; margin-top: 12px; display: flex; }
+      .sample-report-box { flex-direction: column; text-align: center; padding: 20px; }
+      .sample-report-btn { width: 100%; justify-content: center; }
+    }
+    @media (max-width: 768px) {
+      .hero-ctas { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+      .hero-sub-cta, .hero-report-cta { margin-left: 0; }
+      .sample-report-box { flex-direction: column; text-align: center; }
+      .sample-report-btn { width: 100%; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main-content" class="skip-link" onfocus="this.style.cssText='position:fixed;left:16px;top:16px;z-index:10000;padding:8px 16px;background:var(--accent);color:white;text-decoration:none;border-radius:4px;'" onblur="this.style.cssText='position:absolute;left:-9999px;'">Skip to content</a>
+
+  <!-- MENU -->
+  <div class="viz-menu">
+    <button class="viz-menu-toggle" onclick="toggleMenu()" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/></svg>
+    </button>
+    <div class="viz-menu-dropdown" id="vizMenuDropdown">
+      <button onclick="cycleTheme()"><span id="themeIcon">☀️</span><span id="themeLabel">Light</span></button>
+      <button onclick="downloadImage()"><span>📥</span><span>PNG 다운로드</span></button>
+      <button onclick="window.print()"><span>🖨️</span><span>인쇄 / PDF</span></button>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav-bar" role="banner">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <img class="nav-logo-icon" src="data:image/png;base64,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" alt="MAP Growth Logo">
+        <span>MAP Growth Support Korea</span>
+      </div>
+      <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="메뉴">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="nav-links">
+        <a href="#intro" class="active">MAP Growth 소개</a>
+        <a href="#services">서비스</a>
+        <a href="#teacher">교사 가이드</a>
+        <a href="#analyzer">리포트 분석</a>
+        <a href="#contact" class="nav-cta-btn">문의하기</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content" role="main">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="animate">
+          <div class="hero-partner-badge">
+            <span class="badge-dot"></span>
+            <span><span class="badge-text">NWEA</span> 공식 MAP Growth 한국 파트너</span>
+          </div>
+        </div>
+        <h1 class="animate delay-1">우리 아이의 진짜 실력,<br><span class="em">세계 기준</span>으로 확인하세요</h1>
+        <p class="animate delay-2">MAP Growth 테스트 도입부터 운영, 전문 리포트 분석까지.<br>학원과 학교의 영어 교육을 데이터로 지원합니다.</p>
+        <div class="hero-ctas animate delay-3">
+          <a href="#contact" class="hero-cta">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            무료 상담 신청
+          </a>
+          <a href="#analyzer" class="hero-report-cta">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            우리 아이 MAP 리포트 분석하기
+          </a>
+          <a href="#intro" class="hero-sub-cta">MAP Growth 알아보기 ↓</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP GROWTH INTRO SLIDESHOW -->
+    <section class="slideshow-section" id="intro" style="padding:clamp(40px,8vw,80px) 0;">
+      <div class="container">
+        <div class="animate" style="text-align:center;margin-bottom:40px;">
+          <span class="section-label">MAP Growth 소개</span>
+          <h2 class="section-title">MAP Growth는 어떤 시험인가요?</h2>
+          <p class="section-desc" style="margin-left:auto;margin-right:auto;">슬라이드를 넘기며 MAP Growth 테스트에 대해 알아보세요.<br>좌우 화살표 또는 재생 버튼을 사용할 수 있습니다.</p>
+        </div>
+        <div class="slideshow-wrapper animate delay-2">
+          <div class="vp">
+            <div class="frame">
+              <div class="screen">
+                <div class="slide s-dk active" id="s0">
+                  <div style="font-family:'Inter',sans-serif;font-weight:500;font-size:clamp(56px,11vw,96px);color:#fff;letter-spacing:-2px;line-height:.9;">MAP</div>
+                  <div style="font-weight:300;font-size:clamp(15px,2.5vw,22px);color:rgba(255,255,255,.3);letter-spacing:8px;text-transform:uppercase;margin-top:6px;">Growth</div>
+                  <div style="margin-top:28px;font-size:14px;color:rgba(255,255,255,.6);text-align:center;line-height:1.7;">우리 아이의 진짜 실력,<br><span style="color:#5DCAA5;font-weight:500;">세계 기준</span>으로 확인하세요</div>
+                </div>
+                <div class="slide s-lt" id="s1">
+                  <span class="pill pill-l">Why MAP?</span>
+                  <div class="h1 h1-dk" style="font-size:clamp(16px,2.8vw,28px);">학교 시험 성적만으로<br>충분할까요?</div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:460px;margin-top:18px;">
+                    <div style="background:#fff;border-radius:8px;padding:16px;border:0.5px solid #e5e5e5;">
+                      <div style="font-size:11px;color:#5F5E5A;font-weight:500;letter-spacing:1px;text-transform:uppercase;">학교 시험</div>
+                      <div style="font-size:13px;color:#2C2C2A;margin-top:10px;line-height:1.55;">"이번에 90점"<br>그런데 <span style="color:#A32D2D;font-weight:500;">어디가 부족한지</span><br>알 수 없습니다</div>
+                    </div>
+                    <div style="background:#fff;border-radius:8px;padding:16px;border:2px solid #0F6E56;">
+                      <div style="font-size:11px;color:#0F6E56;font-weight:500;letter-spacing:1px;text-transform:uppercase;">MAP Growth</div>
+                      <div style="font-size:13px;color:#2C2C2A;margin-top:10px;line-height:1.55;"><span style="color:#085041;font-weight:500;">영역별 수준</span>을 정확히<br>진단하고 <span style="color:#085041;font-weight:500;">성장 경로</span>를<br>제시합니다</div>
+                    </div>
+                  </div>
+                  <div class="sub sub-dk" style="margin-top:14px;opacity:.6;">MAP Growth는 정답/오답이 아닌, 학생이 무엇을 할 수 있는지를 측정합니다</div>
+                </div>
+                <div class="slide s-dk" id="s2">
+                  <span class="pill pill-d">Junior SAT</span>
+                  <div class="h1 h1-lt" style="font-size:clamp(15px,2.6vw,24px);"><span class="em2">SAT가 바뀌었습니다</span><br>MAP은 그 미래를 먼저 경험합니다</div>
+                  <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;width:100%;max-width:500px;margin-top:20px;">
+                    <div style="background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.08);border-radius:8px;padding:16px 14px;text-align:center;">
+                      <div style="font-size:11px;color:rgba(255,255,255,.3);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Digital SAT (2024~)</div>
+                      <div style="font-size:12px;color:rgba(255,255,255,.8);line-height:1.65;">컴퓨터 적응형<br>난이도 자동 조절<br>Reading + Math</div>
+                    </div>
+                    <div style="text-align:center;"><div style="font-size:20px;color:#5DCAA5;">=</div><div style="font-size:11px;color:rgba(255,255,255,.25);margin-top:4px;">동일 방식</div></div>
+                    <div style="background:rgba(93,202,165,.06);border:2px solid rgba(93,202,165,.25);border-radius:8px;padding:16px 14px;text-align:center;">
+                      <div style="font-size:11px;color:#5DCAA5;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">MAP Growth</div>
+                      <div style="font-size:12px;color:rgba(255,255,255,.8);line-height:1.65;">컴퓨터 적응형<br>난이도 자동 조절<br>Reading + Math + Lang</div>
+                    </div>
+                  </div>
+                  <div style="margin-top:16px;background:rgba(255,255,255,.03);border-radius:8px;padding:12px 20px;max-width:500px;">
+                    <div style="font-size:12px;color:rgba(255,255,255,.55);text-align:center;line-height:1.65;">2024년부터 SAT는 <span style="color:#5DCAA5;font-weight:500;">디지털 적응형</span>으로 전환되었습니다<br>MAP Growth는 <span style="color:#5DCAA5;font-weight:500;">K-12 시절부터</span> 같은 방식으로 훈련하는 유일한 시험입니다</div>
+                  </div>
+                </div>
+                <div class="slide s-lt" id="s3">
+                  <span class="pill pill-l">Global standard</span>
+                  <div class="h1 h1-dk" style="font-size:clamp(16px,2.8vw,28px);">전 세계 <span class="em">1,600만 명</span>의 학생이<br>같은 시험을 봅니다</div>
+                  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%;max-width:480px;margin-top:20px;">
+                    <div style="text-align:center;background:#fff;border-radius:8px;padding:14px 8px;border:0.5px solid #e5e5e5;"><div class="mn" style="font-size:clamp(18px,3.5vw,28px);font-weight:500;color:#085041;">149</div><div style="font-size:11px;color:#5F5E5A;margin-top:4px;">국가</div></div>
+                    <div style="text-align:center;background:#fff;border-radius:8px;padding:14px 8px;border:0.5px solid #e5e5e5;"><div class="mn" style="font-size:clamp(18px,3.5vw,28px);font-weight:500;color:#085041;">36K</div><div style="font-size:11px;color:#5F5E5A;margin-top:4px;">학교</div></div>
+                    <div style="text-align:center;background:#fff;border-radius:8px;padding:14px 8px;border:0.5px solid #e5e5e5;"><div class="mn" style="font-size:clamp(18px,3.5vw,28px);font-weight:500;color:#085041;">60%</div><div style="font-size:11px;color:#5F5E5A;margin-top:4px;">미국 국제학교<br>채택률</div></div>
+                    <div style="text-align:center;background:#fff;border-radius:8px;padding:14px 8px;border:0.5px solid #e5e5e5;"><div class="mn" style="font-size:clamp(18px,3.5vw,28px);font-weight:500;color:#085041;">55+</div><div style="font-size:11px;color:#5F5E5A;margin-top:4px;">년 연구</div></div>
+                  </div>
+                  <div class="sub sub-dk" style="margin-top:14px;">미국 사립학교와 국제학교가 가장 많이 채택한 표준 학력평가입니다</div>
+                </div>
+                <div class="slide s-lt" id="s4">
+                  <span class="pill pill-l">How it works</span>
+                  <div class="h1 h1-dk" style="font-size:clamp(16px,2.8vw,28px);">아이 수준에 맞춰<br><span class="em">실시간으로 조절</span>되는 시험</div>
+                  <div style="width:100%;max-width:460px;margin-top:18px;">
+                    <div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:10px;">
+                      <div style="background:#E1F5EE;border-radius:8px;padding:8px 16px;font-size:12px;color:#04342C;font-weight:500;">문제 출제</div>
+                      <div style="color:#0F6E56;font-size:16px;">→</div>
+                      <div style="background:#9FE1CB;border-radius:8px;padding:8px 16px;font-size:12px;color:#04342C;font-weight:500;">정답</div>
+                      <div style="color:#0F6E56;font-size:16px;">→</div>
+                      <div style="background:#085041;border-radius:8px;padding:8px 16px;font-size:12px;color:#E1F5EE;font-weight:500;">더 어려운 문제</div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:8px;justify-content:center;">
+                      <div style="background:#E1F5EE;border-radius:8px;padding:8px 16px;font-size:12px;color:#04342C;font-weight:500;">문제 출제</div>
+                      <div style="color:#A32D2D;font-size:16px;">→</div>
+                      <div style="background:#FCEBEB;border-radius:8px;padding:8px 16px;font-size:12px;color:#501313;font-weight:500;">오답</div>
+                      <div style="color:#A32D2D;font-size:16px;">→</div>
+                      <div style="background:#791F1F;border-radius:8px;padding:8px 16px;font-size:12px;color:#FCEBEB;font-weight:500;">더 쉬운 문제</div>
+                    </div>
+                  </div>
+                  <div class="sub sub-dk" style="margin-top:16px;">Digital SAT와 동일한 컴퓨터 적응형(CAT) 방식으로<br>학생별 맞춤 난이도를 제공합니다</div>
+                </div>
+                <div class="slide s-lt" id="s5">
+                  <span class="pill pill-l">RIT score</span>
+                  <div class="h1 h1-dk" style="font-size:clamp(16px,2.8vw,28px);"><span class="em">RIT</span>라는 성장 척도로<br>매 시험 비교가 가능합니다</div>
+                  <div style="width:100%;max-width:460px;margin-top:16px;background:#fff;border-radius:12px;overflow:hidden;border:0.5px solid #e5e5e5;">
+                    <div style="padding:18px 22px;display:flex;align-items:center;gap:18px;">
+                      <div style="text-align:center;"><div style="font-size:11px;color:#5F5E5A;font-weight:500;letter-spacing:1px;text-transform:uppercase;">3학년 봄</div><div class="mn" style="font-size:clamp(22px,4.5vw,34px);font-weight:500;color:#0F6E56;margin-top:6px;">188</div></div>
+                      <div style="flex:1;height:4px;background:#E1F5EE;border-radius:2px;position:relative;"><div style="position:absolute;left:0;top:0;height:4px;width:65%;background:#0F6E56;border-radius:2px;"></div><div style="position:absolute;right:0;top:-10px;font-size:11px;color:#5F5E5A;">+12 RIT</div></div>
+                      <div style="text-align:center;"><div style="font-size:11px;color:#5F5E5A;font-weight:500;letter-spacing:1px;text-transform:uppercase;">3학년 겨울</div><div class="mn" style="font-size:clamp(22px,4.5vw,34px);font-weight:500;color:#085041;margin-top:6px;">200</div></div>
+                    </div>
+                    <div style="background:#F2F8F4;padding:12px 22px;font-size:12px;color:#444441;text-align:center;">같은 RIT 척도이므로 학년이 달라도 성장을 추적할 수 있습니다</div>
+                  </div>
+                  <div class="sub sub-dk" style="margin-top:12px;opacity:.5;">RIT 100~350 범위 / 학년 무관 등간 척도 / 미래 SAT 점수 예측 가능</div>
+                </div>
+                <div class="slide s-lt" id="s6">
+                  <span class="pill pill-l">Subjects</span>
+                  <div class="h1 h1-dk" style="font-size:clamp(16px,2.8vw,28px);"><span class="em">3개 핵심 과목</span>을 깊이 있게 진단</div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;width:100%;max-width:500px;margin-top:20px;">
+                    <div style="background:#fff;border-radius:12px;padding:18px 14px;border:0.5px solid #e5e5e5;text-align:center;">
+                      <div style="width:44px;height:44px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:500;color:#085041;margin:0 auto 10px;">R</div>
+                      <div style="font-size:14px;font-weight:500;color:#2C2C2A;">Reading</div>
+                      <div style="font-size:11px;color:#5F5E5A;margin-top:6px;line-height:1.5;">독해력 / 어휘력<br>Lexile 독서 수준 연계</div>
+                    </div>
+                    <div style="background:#fff;border-radius:12px;padding:18px 14px;border:0.5px solid #e5e5e5;text-align:center;">
+                      <div style="width:44px;height:44px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:500;color:#085041;margin:0 auto 10px;">L</div>
+                      <div style="font-size:14px;font-weight:500;color:#2C2C2A;">Language</div>
+                      <div style="font-size:11px;color:#5F5E5A;margin-top:6px;line-height:1.5;">문법 / 작문 능력<br>SAT Writing 기초</div>
+                    </div>
+                    <div style="background:#fff;border-radius:12px;padding:18px 14px;border:0.5px solid #e5e5e5;text-align:center;">
+                      <div style="width:44px;height:44px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:500;color:#085041;margin:0 auto 10px;">M</div>
+                      <div style="font-size:14px;font-weight:500;color:#2C2C2A;">Math</div>
+                      <div style="font-size:11px;color:#5F5E5A;margin-top:6px;line-height:1.5;">수리력 / 문제해결<br>Quantile 수학 수준 연계</div>
+                    </div>
+                  </div>
+                  <div class="sub sub-dk" style="margin-top:14px;">K-12 전 학년 / 과목별 40~55문항 / 약 45~60분 소요</div>
+                </div>
+                <div class="slide s-md" id="s7">
+                  <span class="pill pill-d">Reports</span>
+                  <div class="h1 h1-lt" style="font-size:clamp(15px,2.6vw,24px);">시험 후 받게 되는<br><span class="em2">상세 진단 리포트</span></div>
+                  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;max-width:500px;margin-top:18px;">
+                    <div style="background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.06);border-radius:8px;padding:14px 12px;text-align:center;"><div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.85);">영역별 수준</div><div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:6px;line-height:1.5;">읽기의 어떤 영역이<br>강하고 약한지 진단</div></div>
+                    <div style="background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.06);border-radius:8px;padding:14px 12px;text-align:center;"><div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.85);">성장 추이</div><div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:6px;line-height:1.5;">시험마다 얼마나<br>성장했는지 그래프</div></div>
+                    <div style="background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.06);border-radius:8px;padding:14px 12px;text-align:center;"><div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.85);">글로벌 비교</div><div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:6px;line-height:1.5;">같은 학년 미국 학생<br>대비 어느 위치인지</div></div>
+                  </div>
+                  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;max-width:500px;margin-top:8px;">
+                    <div style="background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.06);border-radius:8px;padding:14px 12px;text-align:center;"><div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.85);">독서 수준</div><div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:6px;line-height:1.5;">Lexile 지수로<br>맞춤 도서 추천</div></div>
+                    <div style="background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.06);border-radius:8px;padding:14px 12px;text-align:center;"><div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.85);">SAT 예측</div><div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:6px;line-height:1.5;">현재 RIT 기반<br>미래 SAT 점수 예측</div></div>
+                    <div style="background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.06);border-radius:8px;padding:14px 12px;text-align:center;"><div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.85);">학습 경로</div><div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:6px;line-height:1.5;">다음 단계로 가기 위해<br>무엇을 해야 하는지</div></div>
+                  </div>
+                </div>
+                <div class="slide s-lt" id="s8">
+                  <span class="pill pill-l">Korea</span>
+                  <div class="h1 h1-dk" style="font-size:clamp(15px,2.6vw,24px);">한국 내 <span class="em">국제학교 입학</span>의<br>핵심 평가 도구</div>
+                  <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:500px;margin-top:16px;">
+                    <span style="background:#fff;border:0.5px solid #e5e5e5;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:500;color:#2C2C2A;">KIS 제주</span>
+                    <span style="background:#fff;border:0.5px solid #e5e5e5;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:500;color:#2C2C2A;">Chadwick International</span>
+                    <span style="background:#fff;border:0.5px solid #e5e5e5;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:500;color:#2C2C2A;">DIS 대구</span>
+                    <span style="background:#fff;border:0.5px solid #e5e5e5;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:500;color:#2C2C2A;">Branksome Hall Asia</span>
+                    <span style="background:#fff;border:0.5px solid #e5e5e5;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:500;color:#2C2C2A;">SJA Jeju</span>
+                    <span style="background:#fff;border:0.5px solid #e5e5e5;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:500;color:#2C2C2A;">셰퍼드 국제학교</span>
+                    <span style="background:#fff;border:0.5px solid #e5e5e5;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:500;color:#2C2C2A;">BC Collegiate</span>
+                    <span style="background:#fff;border:0.5px solid #e5e5e5;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:500;color:#2C2C2A;">청라 달튼</span>
+                  </div>
+                  <div class="sub sub-dk" style="margin-top:14px;">국제학교 입학 전형에서 MAP Growth 점수는 필수 제출 서류입니다</div>
+                </div>
+                <div class="slide s-dk" id="s9" style="justify-content:flex-start;padding-top:clamp(16px,2.5vw,24px);">
+                  <span class="pill pill-d" style="margin-bottom:8px;">Test centers</span>
+                  <div class="h1 h1-lt" style="font-size:clamp(14px,2.2vw,20px);margin-bottom:4px;">전국 <span class="em2">MAP Growth</span> 공인 응시 센터</div>
+                  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(6px,1.2vw,12px);width:100%;max-width:580px;margin-top:clamp(8px,1.5vw,14px);flex:1;overflow:hidden;">
+                    <div style="display:flex;flex-direction:column;gap:clamp(5px,.8vw,8px);">
+                      <div><div style="font-size:clamp(9px,1vw,11px);font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#5DCAA5;padding-bottom:3px;border-bottom:0.5px solid rgba(93,202,165,.15);margin-bottom:3px;">서울 강남구</div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">PACE 아카데미</div></div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">아이큐브 iCUBED</div></div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">쥬빌리 프라임</div></div></div>
+                      <div><div style="font-size:clamp(9px,1vw,11px);font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#5DCAA5;padding-bottom:3px;border-bottom:0.5px solid rgba(93,202,165,.15);margin-bottom:3px;">서울 서초구</div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">SLP 서초어학원</div></div></div>
+                      <div><div style="font-size:clamp(9px,1vw,11px);font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#5DCAA5;padding-bottom:3px;border-bottom:0.5px solid rgba(93,202,165,.15);margin-bottom:3px;">서울 용산구</div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">퓨쳐스 아카데미</div></div></div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:clamp(5px,.8vw,8px);">
+                      <div><div style="font-size:clamp(9px,1vw,11px);font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#5DCAA5;padding-bottom:3px;border-bottom:0.5px solid rgba(93,202,165,.15);margin-bottom:3px;">경기 화성시</div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">FTK 아카데미 동탄</div></div></div>
+                      <div><div style="font-size:clamp(9px,1vw,11px);font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#5DCAA5;padding-bottom:3px;border-bottom:0.5px solid rgba(93,202,165,.15);margin-bottom:3px;">부산 해운대구</div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">SSI Busan</div></div></div>
+                      <div><div style="font-size:clamp(9px,1vw,11px);font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#5DCAA5;padding-bottom:3px;border-bottom:0.5px solid rgba(93,202,165,.15);margin-bottom:3px;">대구 수성구</div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">프라게어학원</div></div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">힐사이드 범어</div></div></div>
+                      <div><div style="font-size:clamp(9px,1vw,11px);font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#5DCAA5;padding-bottom:3px;border-bottom:0.5px solid rgba(93,202,165,.15);margin-bottom:3px;">광주 광산구</div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">팀프레스티지</div></div></div>
+                    </div>
+                    <div style="display:flex;flex-direction:column;gap:clamp(5px,.8vw,8px);">
+                      <div><div style="font-size:clamp(9px,1vw,11px);font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#5DCAA5;padding-bottom:3px;border-bottom:0.5px solid rgba(93,202,165,.15);margin-bottom:3px;">제주시</div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">SLP 제주어학원</div></div></div>
+                      <div><div style="font-size:clamp(9px,1vw,11px);font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#5DCAA5;padding-bottom:3px;border-bottom:0.5px solid rgba(93,202,165,.15);margin-bottom:3px;">서귀포시 영어교육도시</div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">CNE Academy</div></div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">뉴욕아카데미</div></div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">다니엘에듀</div></div></div>
+                    </div>
+                  </div>
+                  <div style="text-align:center;margin-top:auto;padding-top:4px;font-size:11px;color:rgba(255,255,255,.15);">NWEA 공인 MAP Center / 전국 18개 센터에서 정식 응시 가능</div>
+                </div>
+                <div class="slide s-dk" id="s10">
+                  <div style="font-family:'Inter',sans-serif;font-weight:500;font-size:clamp(44px,8vw,72px);color:#fff;letter-spacing:-2px;line-height:.9;">MAP</div>
+                  <div style="font-weight:300;font-size:clamp(13px,2.2vw,20px);color:rgba(255,255,255,.25);letter-spacing:8px;text-transform:uppercase;margin-top:6px;">Growth</div>
+                  <div style="margin-top:28px;font-size:15px;color:rgba(255,255,255,.6);text-align:center;line-height:1.7;">아이의 현재를 정확히 알면<br><span style="color:#5DCAA5;font-weight:500;">미래를 설계</span>할 수 있습니다</div>
+                  <div style="margin-top:22px;font-size:11px;color:rgba(255,255,255,.2);text-align:center;line-height:1.6;">MAP Growth Support Korea<br>www.mapgrowthsupportkorea.com / 070-7623-2105</div>
+                </div>
+              </div>
+            </div>
+            <div class="ctrls">
+              <button class="cbtn" id="bp" aria-label="이전 슬라이드">&#8249;</button>
+              <button class="pbtn" id="pp" aria-label="자동 재생">&#9654;</button>
+              <div class="dots" id="dots"></div>
+              <button class="cbtn" id="bn" aria-label="다음 슬라이드">&#8250;</button>
+              <span class="cnt" id="cnt">1 / 11</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" data-reveal>
+      <div class="container">
+        <span class="section-label">서비스</span>
+        <h2 class="section-title">MAP Growth, 어떻게 도와드릴까요?</h2>
+        <p class="section-desc">테스트 도입부터 리포트 분석까지, 필요한 모든 것을 한 곳에서 지원합니다.</p>
+        <div class="service-grid">
+          <div class="card service-card">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#085041" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            </div>
+            <h3>MAP Growth 도입 지원</h3>
+            <p>라이선스 구매부터 초기 세팅까지 원스톱으로 안내합니다. 학원 규모와 목적에 맞는 최적의 플랜을 설계해 드립니다.</p>
+            <span class="card-tag">도입 상담 무료</span>
+          </div>
+          <div class="card service-card">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#085041" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </div>
+            <h3>테스트 운영 관리</h3>
+            <p>학생 등록, 테스트 일정 관리, 현장 기술 지원까지. 선생님이 테스트에만 집중할 수 있도록 운영 전반을 지원합니다.</p>
+            <span class="card-tag">원격 + 현장 지원</span>
+          </div>
+          <div class="card service-card">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#085041" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            </div>
+            <h3>리포트 전문 분석</h3>
+            <p>RIT 점수, Lexile 지수, 성장 추이를 전문적으로 분석합니다. 학부모 상담에 바로 쓸 수 있는 한국어 진단 리포트를 제공합니다.</p>
+            <span class="card-tag">AI 분석 도입</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY MAP GROWTH -->
+    <section class="why-section" data-reveal>
+      <div class="container">
+        <div style="text-align:center;">
+          <span class="section-label">신뢰할 수 있는 이유</span>
+          <h2 class="section-title" style="margin-bottom:48px;">전 세계가 선택한 학력 평가</h2>
+        </div>
+        <div class="why-grid">
+          <div class="card why-card">
+            <div class="why-num" data-count="149">0</div>
+            <h3>개국에서 시행</h3>
+            <p>미국을 포함한 149개국 학생들이 동일한 기준으로 평가받습니다</p>
+          </div>
+          <div class="card why-card">
+            <div class="why-num" data-count="1600" data-suffix="만">0</div>
+            <h3>명 응시</h3>
+            <p>전 세계 1,600만 명이 같은 시험을 보는 글로벌 표준 평가입니다</p>
+          </div>
+          <div class="card why-card">
+            <div class="why-num" data-count="55" data-suffix="+년">0</div>
+            <h3>연구 기반</h3>
+            <p>NWEA의 55년 이상 교육 연구 데이터를 기반으로 설계되었습니다</p>
+          </div>
+          <div class="card why-card">
+            <div class="why-num" data-count="60" data-suffix="%">0</div>
+            <h3>미국 국제학교 채택률</h3>
+            <p>미국 사립학교와 국제학교에서 가장 많이 채택한 학력 평가입니다</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEACHER GUIDE / FAQ -->
+    <section class="teacher-section" id="teacher" data-reveal>
+      <div class="container">
+        <span class="section-label">교사 가이드</span>
+        <h2 class="section-title">테스트 운영 중 문제가 생겼나요?</h2>
+        <p class="section-desc">자주 발생하는 문제와 해결 방법을 정리했습니다. 아래에서 해당 상황을 찾아보세요.</p>
+        <div class="faq-grid">
+          <details class="faq-item" name="faq">
+            <summary>
+              <span class="faq-icon faq-icon-red">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </span>
+              경고창이 뜨면서 테스트가 시작되지 않아요
+            </summary>
+            <div class="faq-body">
+              <p>팝업 차단이 활성화되어 있을 가능성이 높습니다.</p>
+              <ol>
+                <li>크롬 브라우저 주소창 오른쪽의 팝업 차단 아이콘을 클릭</li>
+                <li>"이 사이트의 팝업 항상 허용" 선택</li>
+                <li>페이지를 새로고침(F5) 후 다시 시도</li>
+              </ol>
+            </div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>
+              <span class="faq-icon faq-icon-yellow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </span>
+              "Some student(s) are unable to test" 경고
+            </summary>
+            <div class="faq-body">
+              <p>학생 계정이 테스트 세션에 제대로 등록되지 않았을 때 나타납니다.</p>
+              <ol>
+                <li>MAP 관리자 페이지에서 해당 학생의 세션 배정 확인</li>
+                <li>학생 이름과 ID가 정확한지 확인</li>
+                <li>세션을 재시작하거나 학생을 다시 추가</li>
+                <li>문제가 지속되면 cs@mapgrowthsupportkorea.com으로 문의</li>
+              </ol>
+            </div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>
+              <span class="faq-icon faq-icon-blue">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </span>
+              테스트 중 에러 메시지가 나타났어요
+            </summary>
+            <div class="faq-body">
+              <p>"We encountered a temporary error" 메시지는 일시적인 서버 문제입니다.</p>
+              <ol>
+                <li>당황하지 마세요 — 학생의 진행 상황은 자동 저장됩니다</li>
+                <li>5~10초 기다린 후 "다시 시도" 버튼 클릭</li>
+                <li>반복되면 인터넷 연결 상태를 확인</li>
+                <li>그래도 안 되면 브라우저를 닫고 다시 로그인하면 이어서 진행됩니다</li>
+              </ol>
+            </div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>
+              <span class="faq-icon faq-icon-green">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </span>
+              해상도 오류 (1024x768)가 나와요
+            </summary>
+            <div class="faq-body">
+              <p>MAP 테스트는 최소 1024x768 해상도가 필요합니다.</p>
+              <ol>
+                <li>크롬에서 Ctrl+0 (또는 Cmd+0)으로 확대/축소를 100%로 리셋</li>
+                <li>전체 화면 모드(F11)로 전환</li>
+                <li>태블릿의 경우 가로 모드로 회전</li>
+                <li>화면이 작은 기기에서는 외부 모니터 연결을 권장합니다</li>
+              </ol>
+            </div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>
+              <span class="faq-icon faq-icon-blue">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              비밀번호를 잊어버렸어요
+            </summary>
+            <div class="faq-body">
+              <p>교사 계정 비밀번호 재설정 방법입니다.</p>
+              <ol>
+                <li>MAP 로그인 페이지에서 "Forgot Password" 클릭</li>
+                <li>등록된 이메일 주소 입력</li>
+                <li>메일로 받은 링크를 클릭하여 새 비밀번호 설정</li>
+                <li>메일이 안 오면 스팸 폴더를 확인하거나 저희에게 문의해 주세요</li>
+              </ol>
+            </div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>
+              <span class="faq-icon faq-icon-green">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </span>
+              어떤 브라우저를 사용해야 하나요?
+            </summary>
+            <div class="faq-body">
+              <p><strong>크롬(Chrome) 브라우저를 사용해 주세요.</strong></p>
+              <ol>
+                <li>MAP Growth는 Chrome에 최적화되어 있습니다</li>
+                <li>Safari, Firefox, Edge에서는 일부 기능이 제한될 수 있습니다</li>
+                <li>Chrome이 설치되어 있지 않으면 google.com/chrome에서 다운로드</li>
+                <li>항상 최신 버전으로 업데이트해 주세요</li>
+              </ol>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- REPORT ANALYZER PREVIEW -->
+    <section class="analyzer-section" id="analyzer" data-reveal>
+      <div class="container">
+        <span class="section-label">AI 리포트 분석</span>
+        <h2 style="margin-bottom:16px;">MAP 리포트, AI가 분석해 드립니다</h2>
+        <p style="max-width:560px;line-height:1.7;">MAP Growth 테스트 결과 PDF를 업로드하면 AI가 자동으로 분석하여 학부모 상담에 바로 활용할 수 있는 한국어 진단 리포트를 생성합니다.</p>
+        <div class="analyzer-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          AI 기반 자동 분석 시스템
+        </div>
+
+        <!-- 샘플 리포트 CTA 박스 -->
+        <div class="sample-report-box">
+          <div class="sample-text">
+            <h3>실제 분석 결과가 궁금하신가요?</h3>
+            <p>MAP Growth Reading 테스트 결과를 AI가 분석한 샘플을 확인해 보세요. 학생 요약, 영역별 분석, 맞춤 도서 추천까지 한눈에 볼 수 있습니다.</p>
+          </div>
+          <a href="map-report-sample.html" class="sample-report-btn" target="_blank">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+            샘플 리포트 보기
+          </a>
+        </div>
+
+        <div class="analyzer-features">
+          <div class="analyzer-feat">
+            <h4>RIT 점수 해석</h4>
+            <p>학년 수준 대비 위치와 퍼센타일을 알기 쉽게 설명합니다</p>
+          </div>
+          <div class="analyzer-feat">
+            <h4>CCSS 역량 매핑</h4>
+            <p>미국 공통핵심기준(CCSS)에 따른 영역별 강약점을 진단합니다</p>
+          </div>
+          <div class="analyzer-feat">
+            <h4>Lexile 기반 도서 추천</h4>
+            <p>학생의 독서 수준에 맞는 영어 도서를 큐레이션합니다</p>
+          </div>
+          <div class="analyzer-feat">
+            <h4>SAT 점수 예측</h4>
+            <p>현재 RIT 점수를 기반으로 미래 SAT 점수 범위를 예측합니다</p>
+          </div>
+          <div class="analyzer-feat">
+            <h4>성장 추이 분석</h4>
+            <p>이전 테스트 대비 성장률을 시각화하고 목표를 제시합니다</p>
+          </div>
+          <div class="analyzer-feat">
+            <h4>학부모 상담 자료</h4>
+            <p>한국어로 작성된 깔끔한 리포트를 PDF로 바로 제공합니다</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section" id="contact" data-reveal>
+      <div class="container">
+        <h2>MAP Growth, 함께 시작하세요</h2>
+        <p>도입이 처음이셔도 괜찮습니다. 궁금한 점을 편하게 물어보세요.</p>
+        <div class="cta-buttons">
+          <a href="https://pf.kakao.com/_xoMxeT" target="_blank" class="cta-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            카카오톡으로 문의하기
+          </a>
+          <a href="mailto:cs@mapgrowthsupportkorea.com" class="cta-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            이메일 문의
+          </a>
+        </div>
+        <p style="margin-top:24px;font-size:13px;color:var(--text-secondary);">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          070-7623-2105 (평일 9:00~18:00)
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <span style="font-weight:600;">MAP Growth Support Korea</span><br>
+        <span style="color:var(--text-secondary);font-size:12px;line-height:1.8;">맵그로스서포트코리아 | 서울 마방로6길13, 4층 4000호<br>cs@mapgrowthsupportkorea.com | 070-7623-2105</span>
+      </div>
+      <div class="footer-links">
+        <a href="#intro">MAP 소개</a>
+        <a href="#services">서비스</a>
+        <a href="#teacher">교사 가이드</a>
+        <a href="#analyzer">리포트 분석</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // === Menu ===
+    function toggleMenu() {
+      var dropdown = document.getElementById('vizMenuDropdown');
+      if (dropdown) dropdown.classList.toggle('open');
+    }
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.viz-menu')) {
+        var dropdown = document.getElementById('vizMenuDropdown');
+        if (dropdown) dropdown.classList.remove('open');
+      }
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        var dropdown = document.getElementById('vizMenuDropdown');
+        if (dropdown) dropdown.classList.remove('open');
+      }
+    });
+
+    // === Theme ===
+    var savedTheme = localStorage.getItem('viz-theme');
+    var currentTheme = savedTheme || 'light';
+    function applyTheme(t) {
+      document.documentElement.className = 'theme-' + t;
+      document.getElementById('themeIcon').textContent = t === 'dark' ? '🌙' : '☀️';
+      document.getElementById('themeLabel').textContent = t === 'dark' ? 'Dark' : 'Light';
+      localStorage.setItem('viz-theme', t);
+      currentTheme = t;
+      if (typeof onThemeChange === 'function') onThemeChange();
+    }
+    function cycleTheme() { applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); }
+    applyTheme(currentTheme);
+
+    // === Scroll Reveal ===
+    document.querySelectorAll('[data-reveal]').forEach(function(el) { el.classList.add('reveal'); });
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+
+    // === Number Counter ===
+    function animateCounters() {
+      document.querySelectorAll('[data-count]').forEach(function(el) {
+        if (el.dataset.counted) return;
+        el.dataset.counted = '1';
+        var target = parseFloat(el.dataset.count), prefix = el.dataset.prefix || '', suffix = el.dataset.suffix || '';
+        var start = performance.now(), duration = 1200;
+        (function tick(now) {
+          var p = Math.min((now - start) / duration, 1), eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = prefix + Math.round(target * eased).toLocaleString() + suffix;
+          if (p < 1) requestAnimationFrame(tick);
+        })(start);
+      });
+    }
+    var counterEl = document.querySelector('[data-count]');
+    if (counterEl) {
+      var cObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { if (e.isIntersecting) { animateCounters(); cObs.disconnect(); } });
+      }, { threshold: 0.3 });
+      cObs.observe(counterEl);
+    }
+
+    // === Download PNG ===
+    async function downloadImage() {
+      var menu = document.querySelector('.viz-menu');
+      menu.style.display = 'none';
+      try {
+        var url = await htmlToImage.toPng(document.body, { quality: 1, pixelRatio: 2, filter: function(n) { return !n.classList || !n.classList.contains('viz-menu'); } });
+        var a = document.createElement('a'); a.href = url;
+        a.download = 'map-growth-support-korea.png'; a.click();
+      } catch(e) { console.error('Download failed:', e); }
+      menu.style.display = '';
+    }
+
+    // === Slideshow ===
+    var T = 11, c = 0, playing = false, timer = null;
+    var ss = [];
+    for (var i = 0; i < T; i++) ss.push(document.getElementById('s' + i));
+    var dc = document.getElementById('dots');
+    for (var i = 0; i < T; i++) {
+      (function(idx) {
+        var d = document.createElement('div');
+        d.className = 'dot' + (idx === 0 ? ' on' : '');
+        d.onclick = function() { go(idx); stop(); };
+        dc.appendChild(d);
+      })(i);
+    }
+    var ds = dc.children;
+    function go(n) {
+      if (n < 0) n = T - 1;
+      if (n >= T) n = 0;
+      ss[c].classList.remove('active');
+      ds[c].classList.remove('on');
+      c = n;
+      ss[c].classList.add('active');
+      ds[c].classList.add('on');
+      document.getElementById('cnt').textContent = (c + 1) + ' / ' + T;
+    }
+    document.getElementById('bp').onclick = function() { go(c - 1); stop(); };
+    document.getElementById('bn').onclick = function() { go(c + 1); stop(); };
+    function play() { playing = true; document.getElementById('pp').innerHTML = '&#9646;&#9646;'; timer = setInterval(function() { go(c + 1); }, 4000); }
+    function stop() { playing = false; document.getElementById('pp').innerHTML = '&#9654;'; if (timer) { clearInterval(timer); timer = null; } }
+    function togglePlay() { playing ? stop() : play(); }
+    document.getElementById('pp').onclick = togglePlay;
+
+    // === Smooth Scroll for nav ===
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Close mobile nav
+          document.querySelector('.nav-links').classList.remove('open');
+        }
+      });
+    });
+
+    // === Active nav on scroll ===
+    var sections = document.querySelectorAll('section[id]');
+    var navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', function() {
+      var scrollY = window.pageYOffset;
+      sections.forEach(function(sec) {
+        var top = sec.offsetTop - 100;
+        var height = sec.offsetHeight;
+        var id = sec.getAttribute('id');
+        if (scrollY >= top && scrollY < top + height) {
+          navLinks.forEach(function(a) {
+            a.classList.remove('active');
+            if (a.getAttribute('href') === '#' + id) a.classList.add('active');
+          });
+        }
+      });
+    });
+
+    function onThemeChange() {}
+  </script>
+</body>
+</html>
