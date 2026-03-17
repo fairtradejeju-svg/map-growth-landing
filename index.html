@@ -336,6 +336,40 @@
     .sample-report-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(245,158,11,0.5); text-decoration: none; }
     .sample-report-btn svg { flex-shrink: 0; }
 
+    /* ===== TEST CENTER SECTION ===== */
+    .center-section { background: var(--surface); border-top: 1px solid var(--border); }
+    .center-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .center-region {
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 12px; padding: 22px 24px; transition: box-shadow 0.2s;
+    }
+    .center-region:hover { box-shadow: 0 0 0 1px var(--border), 0 8px 20px rgba(0,0,0,0.06); }
+    .center-region-name {
+      font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--accent); padding-bottom: 10px; margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .center-list { display: flex; flex-direction: column; gap: 8px; }
+    .center-item {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; color: var(--text); font-weight: 500;
+    }
+    .center-dot {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0;
+    }
+    .center-footer {
+      text-align: center; margin-top: 40px; padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+    .center-footer p { color: var(--text-secondary); font-size: 13px; }
+    .center-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 18px; background: var(--card-glow);
+      border: 1px solid rgba(15,110,86,0.15); border-radius: 100px;
+      color: var(--accent); font-size: 13px; font-weight: 600; margin-bottom: 8px;
+    }
+
     /* ===== CTA SECTION ===== */
     .cta-section { text-align: center; }
     .cta-section h2 { margin-bottom: 16px; }
@@ -482,7 +516,7 @@
         <div class="animate">
           <div class="hero-partner-badge">
             <span class="badge-dot"></span>
-            <span><span class="badge-text">NWEA</span> 공식 MAP Growth 한국 파트너</span>
+            <span><span class="badge-text">NWEA</span> 공식 MAP Growth 한국 유통사</span>
           </div>
         </div>
         <h1 class="animate delay-1">우리 아이의 진짜 실력,<br><span class="em">세계 기준</span>으로 확인하세요</h1>
@@ -806,6 +840,85 @@
             <h4>학부모 상담 자료</h4>
             <p>한국어로 작성된 깔끔한 리포트를 PDF로 바로 제공합니다</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP 공인인증시험센터 -->
+    <section class="center-section" id="centers" data-reveal>
+      <div class="container">
+        <span class="section-label">Test Centers</span>
+        <h2 class="section-title">MAP 공인인증시험센터</h2>
+        <p class="section-desc">전국 NWEA 공인 MAP Center에서 정식으로 응시할 수 있습니다.</p>
+
+        <div class="center-grid">
+          <div class="center-region">
+            <div class="center-region-name">서울 강남구</div>
+            <div class="center-list">
+              <div class="center-item"><div class="center-dot"></div>PACE 아카데미</div>
+              <div class="center-item"><div class="center-dot"></div>아이큐브 iCUBED</div>
+              <div class="center-item"><div class="center-dot"></div>쥬빌리 프라임</div>
+            </div>
+          </div>
+          <div class="center-region">
+            <div class="center-region-name">서울 서초구</div>
+            <div class="center-list">
+              <div class="center-item"><div class="center-dot"></div>SLP 서초어학원</div>
+            </div>
+          </div>
+          <div class="center-region">
+            <div class="center-region-name">서울 용산구</div>
+            <div class="center-list">
+              <div class="center-item"><div class="center-dot"></div>퓨쳐스 아카데미</div>
+            </div>
+          </div>
+          <div class="center-region">
+            <div class="center-region-name">경기 화성시</div>
+            <div class="center-list">
+              <div class="center-item"><div class="center-dot"></div>FTK 아카데미 동탄</div>
+            </div>
+          </div>
+          <div class="center-region">
+            <div class="center-region-name">부산 해운대구</div>
+            <div class="center-list">
+              <div class="center-item"><div class="center-dot"></div>SSI Busan</div>
+            </div>
+          </div>
+          <div class="center-region">
+            <div class="center-region-name">대구 수성구</div>
+            <div class="center-list">
+              <div class="center-item"><div class="center-dot"></div>프라게어학원</div>
+              <div class="center-item"><div class="center-dot"></div>힐사이드 범어</div>
+            </div>
+          </div>
+          <div class="center-region">
+            <div class="center-region-name">광주 광산구</div>
+            <div class="center-list">
+              <div class="center-item"><div class="center-dot"></div>팀프레스티지</div>
+            </div>
+          </div>
+          <div class="center-region">
+            <div class="center-region-name">제주시</div>
+            <div class="center-list">
+              <div class="center-item"><div class="center-dot"></div>SLP 제주어학원</div>
+            </div>
+          </div>
+          <div class="center-region">
+            <div class="center-region-name">서귀포시 영어교육도시</div>
+            <div class="center-list">
+              <div class="center-item"><div class="center-dot"></div>CNE Academy</div>
+              <div class="center-item"><div class="center-dot"></div>뉴욕아카데미</div>
+              <div class="center-item"><div class="center-dot"></div>다니엘에듀</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="center-footer">
+          <div class="center-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            NWEA 공인 MAP Center
+          </div>
+          <p>전국 18개 센터에서 정식 응시 가능 · 센터 추가 문의는 아래 연락처로</p>
         </div>
       </div>
     </section>
