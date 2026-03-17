@@ -231,7 +231,8 @@
 
     /* ===== SERVICE CARDS ===== */
     .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-    .service-card { position: relative; overflow: hidden; }
+    .service-card { position: relative; overflow: hidden; cursor: pointer; }
+    .service-card-link { text-decoration: none; color: inherit; display: block; }
     .service-card .card-icon {
       width: 48px; height: 48px; border-radius: 12px;
       background: #E1F5EE; display: flex; align-items: center; justify-content: center;
@@ -466,8 +467,8 @@
       <div class="nav-links">
         <a href="#intro" class="active">MAP Growth 소개</a>
         <a href="#services">서비스</a>
-        <a href="#teacher">교사 가이드</a>
         <a href="#analyzer">리포트 분석</a>
+        <a href="teacher-guide.html">교사 가이드</a>
         <a href="#contact" class="nav-cta-btn">문의하기</a>
       </div>
     </div>
@@ -695,7 +696,7 @@
         <h2 class="section-title">MAP Growth, 어떻게 도와드릴까요?</h2>
         <p class="section-desc">테스트 도입부터 리포트 분석까지, 필요한 모든 것을 한 곳에서 지원합니다.</p>
         <div class="service-grid">
-          <div class="card service-card">
+          <div class="card service-card" style="cursor:default;">
             <div class="card-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#085041" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
             </div>
@@ -703,22 +704,22 @@
             <p>라이선스 구매부터 초기 세팅까지 원스톱으로 안내합니다. 학원 규모와 목적에 맞는 최적의 플랜을 설계해 드립니다.</p>
             <span class="card-tag">도입 상담 무료</span>
           </div>
-          <div class="card service-card">
+          <a href="teacher-guide.html" class="card service-card service-card-link">
             <div class="card-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#085041" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
             </div>
             <h3>테스트 운영 관리</h3>
             <p>학생 등록, 테스트 일정 관리, 현장 기술 지원까지. 선생님이 테스트에만 집중할 수 있도록 운영 전반을 지원합니다.</p>
-            <span class="card-tag">원격 + 현장 지원</span>
-          </div>
-          <div class="card service-card">
+            <span class="card-tag">교사 가이드 바로가기 →</span>
+          </a>
+          <a href="#analyzer" class="card service-card service-card-link">
             <div class="card-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#085041" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
             </div>
             <h3>리포트 전문 분석</h3>
             <p>RIT 점수, Lexile 지수, 성장 추이를 전문적으로 분석합니다. 학부모 상담에 바로 쓸 수 있는 한국어 진단 리포트를 제공합니다.</p>
             <span class="card-tag">AI 분석 도입</span>
-          </div>
+          </a>
         </div>
       </div>
     </section>
@@ -755,117 +756,6 @@
       </div>
     </section>
 
-    <!-- TEACHER GUIDE / FAQ -->
-    <section class="teacher-section" id="teacher" data-reveal>
-      <div class="container">
-        <span class="section-label">교사 가이드</span>
-        <h2 class="section-title">테스트 운영 중 문제가 생겼나요?</h2>
-        <p class="section-desc">자주 발생하는 문제와 해결 방법을 정리했습니다. 아래에서 해당 상황을 찾아보세요.</p>
-        <div class="faq-grid">
-          <details class="faq-item" name="faq">
-            <summary>
-              <span class="faq-icon faq-icon-red">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-              </span>
-              경고창이 뜨면서 테스트가 시작되지 않아요
-            </summary>
-            <div class="faq-body">
-              <p>팝업 차단이 활성화되어 있을 가능성이 높습니다.</p>
-              <ol>
-                <li>크롬 브라우저 주소창 오른쪽의 팝업 차단 아이콘을 클릭</li>
-                <li>"이 사이트의 팝업 항상 허용" 선택</li>
-                <li>페이지를 새로고침(F5) 후 다시 시도</li>
-              </ol>
-            </div>
-          </details>
-          <details class="faq-item" name="faq">
-            <summary>
-              <span class="faq-icon faq-icon-yellow">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              </span>
-              "Some student(s) are unable to test" 경고
-            </summary>
-            <div class="faq-body">
-              <p>학생 계정이 테스트 세션에 제대로 등록되지 않았을 때 나타납니다.</p>
-              <ol>
-                <li>MAP 관리자 페이지에서 해당 학생의 세션 배정 확인</li>
-                <li>학생 이름과 ID가 정확한지 확인</li>
-                <li>세션을 재시작하거나 학생을 다시 추가</li>
-                <li>문제가 지속되면 cs@mapgrowthsupportkorea.com으로 문의</li>
-              </ol>
-            </div>
-          </details>
-          <details class="faq-item" name="faq">
-            <summary>
-              <span class="faq-icon faq-icon-blue">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-              </span>
-              테스트 중 에러 메시지가 나타났어요
-            </summary>
-            <div class="faq-body">
-              <p>"We encountered a temporary error" 메시지는 일시적인 서버 문제입니다.</p>
-              <ol>
-                <li>당황하지 마세요 — 학생의 진행 상황은 자동 저장됩니다</li>
-                <li>5~10초 기다린 후 "다시 시도" 버튼 클릭</li>
-                <li>반복되면 인터넷 연결 상태를 확인</li>
-                <li>그래도 안 되면 브라우저를 닫고 다시 로그인하면 이어서 진행됩니다</li>
-              </ol>
-            </div>
-          </details>
-          <details class="faq-item" name="faq">
-            <summary>
-              <span class="faq-icon faq-icon-green">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-              </span>
-              해상도 오류 (1024x768)가 나와요
-            </summary>
-            <div class="faq-body">
-              <p>MAP 테스트는 최소 1024x768 해상도가 필요합니다.</p>
-              <ol>
-                <li>크롬에서 Ctrl+0 (또는 Cmd+0)으로 확대/축소를 100%로 리셋</li>
-                <li>전체 화면 모드(F11)로 전환</li>
-                <li>태블릿의 경우 가로 모드로 회전</li>
-                <li>화면이 작은 기기에서는 외부 모니터 연결을 권장합니다</li>
-              </ol>
-            </div>
-          </details>
-          <details class="faq-item" name="faq">
-            <summary>
-              <span class="faq-icon faq-icon-blue">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              </span>
-              비밀번호를 잊어버렸어요
-            </summary>
-            <div class="faq-body">
-              <p>교사 계정 비밀번호 재설정 방법입니다.</p>
-              <ol>
-                <li>MAP 로그인 페이지에서 "Forgot Password" 클릭</li>
-                <li>등록된 이메일 주소 입력</li>
-                <li>메일로 받은 링크를 클릭하여 새 비밀번호 설정</li>
-                <li>메일이 안 오면 스팸 폴더를 확인하거나 저희에게 문의해 주세요</li>
-              </ol>
-            </div>
-          </details>
-          <details class="faq-item" name="faq">
-            <summary>
-              <span class="faq-icon faq-icon-green">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </span>
-              어떤 브라우저를 사용해야 하나요?
-            </summary>
-            <div class="faq-body">
-              <p><strong>크롬(Chrome) 브라우저를 사용해 주세요.</strong></p>
-              <ol>
-                <li>MAP Growth는 Chrome에 최적화되어 있습니다</li>
-                <li>Safari, Firefox, Edge에서는 일부 기능이 제한될 수 있습니다</li>
-                <li>Chrome이 설치되어 있지 않으면 google.com/chrome에서 다운로드</li>
-                <li>항상 최신 버전으로 업데이트해 주세요</li>
-              </ol>
-            </div>
-          </details>
-        </div>
-      </div>
-    </section>
 
     <!-- REPORT ANALYZER PREVIEW -->
     <section class="analyzer-section" id="analyzer" data-reveal>
@@ -879,14 +769,15 @@
         </div>
 
         <!-- 샘플 리포트 CTA 박스 -->
+        <!-- 샘플 리포트 PDF 다운로드 -->
         <div class="sample-report-box">
           <div class="sample-text">
             <h3>실제 분석 결과가 궁금하신가요?</h3>
             <p>MAP Growth Reading 테스트 결과를 AI가 분석한 샘플을 확인해 보세요. 학생 요약, 영역별 분석, 맞춤 도서 추천까지 한눈에 볼 수 있습니다.</p>
           </div>
-          <a href="map-report-sample.html" class="sample-report-btn" target="_blank">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-            샘플 리포트 보기
+          <a href="정샘플-_리포트샘플.pdf" class="sample-report-btn" target="_blank" download>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            샘플 리포트 다운로드
           </a>
         </div>
 
@@ -953,7 +844,7 @@
       <div class="footer-links">
         <a href="#intro">MAP 소개</a>
         <a href="#services">서비스</a>
-        <a href="#teacher">교사 가이드</a>
+        <a href="teacher-guide.html">교사 가이드</a>
         <a href="#analyzer">리포트 분석</a>
       </div>
     </div>
