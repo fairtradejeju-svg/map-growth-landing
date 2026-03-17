@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="ko" class="theme-light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>교사 가이드 — MAP Growth Support Korea</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html.theme-light {
+      --bg: #FAFAF9; --surface: #FFFFFF; --surface-hover: #F5F5F4;
+      --border: rgba(0,0,0,0.06);
+      --text: #0f172a; --text-secondary: #64748b;
+      --accent: #0F6E56; --accent-secondary: #085041;
+      --positive: #059669; --negative: #e11d48; --warning: #d97706;
+      --card-glow: rgba(15,110,86,0.04);
+    }
+    html.theme-dark {
+      --bg: #0A0A0A; --surface: #141414; --surface-hover: #1C1C1C;
+      --border: rgba(255,255,255,0.06);
+      --text: #EDEDED; --text-secondary: #888;
+      --accent: #0F6E56; --accent-secondary: #5DCAA5;
+      --card-glow: rgba(93,202,165,0.06);
+    }
+
+    body {
+      font-family: 'Noto Sans KR', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--text);
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+      transition: background 0.3s, color 0.3s;
+    }
+    h1,h2,h3,h4 { color: var(--text); letter-spacing: -0.03em; line-height: 1.2; text-wrap: balance; }
+    h1 { font-weight: 700; font-size: clamp(2rem, 4vw, 2.8rem); }
+    h2 { font-weight: 600; font-size: clamp(1.5rem, 3vw, 2rem); }
+    h3 { font-weight: 600; font-size: clamp(1.1rem, 2vw, 1.3rem); }
+    p { color: var(--text); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+    /* NAV */
+    .nav-bar {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--surface); border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+    .nav-inner {
+      max-width: 1120px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px;
+    }
+    .nav-logo {
+      font-weight: 700; font-size: 1rem; color: var(--text);
+      display: flex; align-items: center; gap: 8px; text-decoration: none;
+    }
+    .nav-logo:hover { text-decoration: none; }
+    .nav-logo-icon { height: 36px; width: auto; object-fit: contain; }
+    .nav-links { display: flex; gap: 4px; align-items: center; }
+    .nav-links a {
+      padding: 8px 14px; border-radius: 6px; font-size: 14px; font-weight: 500;
+      color: var(--text-secondary); transition: all 0.15s; text-decoration: none;
+    }
+    .nav-links a:hover { background: var(--surface-hover); color: var(--text); text-decoration: none; }
+    .nav-links a.active { color: var(--accent); background: var(--card-glow); }
+    .nav-cta-btn {
+      padding: 8px 18px; border-radius: 6px; font-size: 14px; font-weight: 600;
+      background: #0F6E56; color: #fff !important; transition: background 0.2s;
+    }
+    .nav-cta-btn:hover { background: #0D5C48; }
+    .nav-mobile-toggle { display: none; background: none; border: none; color: var(--text); cursor: pointer; padding: 8px; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; position: absolute; top: 56px; left: 0; right: 0; flex-direction: column; background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px; gap: 2px; }
+      .nav-links.open { display: flex; }
+      .nav-mobile-toggle { display: flex; align-items: center; justify-content: center; }
+    }
+
+    /* HERO */
+    .page-hero {
+      background: linear-gradient(165deg, #FFFFFF 0%, #F5F9F7 40%, #F0F8F4 100%);
+      padding: clamp(48px, 8vw, 80px) 24px clamp(40px, 6vw, 64px);
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 20% 10%, rgba(93,202,165,0.08) 0%, transparent 50%);
+    }
+    .page-hero .container { position: relative; z-index: 1; }
+    .page-hero h1 { color: #0F172A; margin-bottom: 12px; }
+    .page-hero h1 .em { color: #0F6E56; }
+    .page-hero p { color: #64748B; font-size: 1.05rem; max-width: 560px; line-height: 1.8; }
+    .breadcrumb { display: flex; align-items: center; gap: 6px; font-size: 13px; color: #64748B; margin-bottom: 16px; }
+    .breadcrumb a { color: #0F6E56; font-weight: 500; }
+
+    /* SECTIONS */
+    section { padding: clamp(48px, 8vw, 80px) 0; }
+    .section-label {
+      display: inline-block; font-size: 12px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
+      padding: 4px 12px; background: var(--card-glow); border-radius: 100px;
+    }
+    .section-title { margin-bottom: 12px; }
+    .section-desc { color: var(--text-secondary); font-size: 0.95rem; max-width: 600px; margin-bottom: 36px; line-height: 1.7; }
+
+    /* QUICK LINKS */
+    .quick-links {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      padding: 24px 28px; margin-bottom: 48px;
+    }
+    .quick-links h3 { margin-bottom: 16px; font-size: 1rem; }
+    .quick-links-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+    .quick-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 500;
+      background: var(--card-glow); color: var(--accent); border: 1px solid rgba(15,110,86,0.12);
+      transition: all 0.15s; text-decoration: none;
+    }
+    .quick-link:hover { background: rgba(15,110,86,0.1); text-decoration: none; }
+
+    /* RESOURCE CARDS */
+    .resources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px; }
+    .resource-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      padding: 28px; transition: box-shadow 0.2s;
+    }
+    .resource-card:hover { box-shadow: 0 0 0 1px var(--border), 0 8px 20px rgba(0,0,0,0.06); }
+    .resource-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px; font-size: 22px;
+    }
+    .icon-pdf { background: #FEE2E2; }
+    .icon-video { background: #DBEAFE; }
+    .icon-link { background: #D1FAE5; }
+    .icon-info { background: #FEF3C7; }
+    .resource-card h3 { margin-bottom: 8px; }
+    .resource-card p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.65; margin-bottom: 16px; }
+    .resource-tag {
+      display: inline-block; font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 4px; margin-right: 6px; margin-bottom: 6px;
+    }
+    .tag-pdf { background: #FEE2E2; color: #991B1B; }
+    .tag-video { background: #DBEAFE; color: #1E40AF; }
+    .tag-link { background: #D1FAE5; color: #065F46; }
+    .tag-essential { background: #FEF3C7; color: #92400E; }
+    .resource-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 20px; border-radius: 8px; font-size: 13px; font-weight: 600;
+      transition: all 0.15s; text-decoration: none; margin-top: 4px;
+    }
+    .btn-primary { background: #0F6E56; color: #fff; }
+    .btn-primary:hover { background: #0D5C48; text-decoration: none; }
+    .btn-secondary { background: var(--card-glow); color: var(--accent); border: 1px solid rgba(15,110,86,0.15); }
+    .btn-secondary:hover { background: rgba(15,110,86,0.1); text-decoration: none; }
+    .resource-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    /* VIDEO EMBED */
+    .video-card { grid-column: 1 / -1; }
+    .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 16px; }
+    .video-item {
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--border); background: var(--surface);
+    }
+    .video-item .video-wrapper {
+      position: relative; width: 100%; padding-bottom: 56.25%; background: #000;
+    }
+    .video-item iframe {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;
+    }
+    .video-item .video-info { padding: 16px 18px; }
+    .video-item h4 { font-size: 0.95rem; margin-bottom: 4px; }
+    .video-item p { color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5; }
+
+    /* INFO BOX */
+    .info-box {
+      background: rgba(15,110,86,0.04); border: 1px solid rgba(15,110,86,0.12);
+      border-radius: 12px; padding: 24px 28px; margin-top: 48px;
+    }
+    .info-box h3 { color: var(--accent); margin-bottom: 12px; font-size: 1rem; }
+    .info-box p { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
+    .info-box a { font-weight: 600; }
+    .info-list { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+    .info-item {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6;
+    }
+    .info-item .info-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+      flex-shrink: 0; margin-top: 8px;
+    }
+
+    /* FAQ */
+    .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+    .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+    .faq-item summary { padding: 18px 22px; font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 12px; cursor: pointer; list-style: none; transition: background 0.15s; }
+    .faq-item summary:hover { background: var(--surface-hover); }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: '+'; margin-left: auto; font-size: 1.2rem; font-weight: 300; color: var(--text-secondary); }
+    .faq-item[open] summary::after { content: '−'; }
+    .faq-item .faq-body { padding: 0 22px 18px; color: var(--text-secondary); font-size: 0.9rem; line-height: 1.7; }
+    .faq-item .faq-body ol { padding-left: 20px; margin-top: 8px; }
+    .faq-item .faq-body li { margin-bottom: 6px; }
+    .faq-icon { width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+    .faq-icon-red { background: #FEE2E2; color: #991B1B; }
+    .faq-icon-blue { background: #DBEAFE; color: #1E40AF; }
+    .faq-icon-green { background: #D1FAE5; color: #065F46; }
+    .faq-icon-yellow { background: #FEF3C7; color: #92400E; }
+
+    /* FOOTER */
+    .site-footer {
+      border-top: 1px solid var(--border); padding: 40px 0;
+      color: var(--text-secondary); font-size: 13px;
+    }
+    .footer-inner {
+      max-width: 1120px; margin: 0 auto; padding: 0 24px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--text-secondary); font-size: 13px; }
+    .footer-links a:hover { color: var(--text); }
+
+    /* ANIMATIONS */
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .animate { animation: fadeInUp 0.6s ease-out both; }
+    .animate.delay-1 { animation-delay: 0.1s; }
+    .animate.delay-2 { animation-delay: 0.2s; }
+    .animate.delay-3 { animation-delay: 0.3s; }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .resources-grid { grid-template-columns: 1fr; }
+      .video-grid { grid-template-columns: 1fr; }
+      .video-card { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav-bar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img class="nav-logo-icon" src="data:image/png;base64,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" alt="MAP Growth Logo">
+        <span>MAP Growth Support Korea</span>
+      </a>
+      <button class="nav-mobile-toggle" onclick="document.querySelector('.nav-links').classList.toggle('open')" aria-label="메뉴">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <div class="nav-links">
+        <a href="index.html#intro">MAP Growth 소개</a>
+        <a href="index.html#services">서비스</a>
+        <a href="index.html#teacher">교사 가이드</a>
+        <a href="index.html#analyzer">리포트 분석</a>
+        <a href="teacher-guide.html" class="active">교사 가이드</a>
+        <a href="index.html#contact" class="nav-cta-btn">문의하기</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+      <div class="container">
+        <div class="breadcrumb animate">
+          <a href="index.html">홈</a>
+          <span>›</span>
+          <span>교사 가이드</span>
+        </div>
+        <h1 class="animate delay-1">MAP Growth <span class="em">교사 가이드</span></h1>
+        <p class="animate delay-2">테스트 시작부터 종료까지 필요한 모든 자료와 FAQ를 한 곳에 모았습니다.<br>PDF 가이드, 영상 튜토리얼, 문제 해결 방법을 확인하세요.</p>
+      </div>
+    </section>
+
+    <!-- QUICK LINKS -->
+    <section style="padding-top:48px;padding-bottom:0;">
+      <div class="container">
+        <div class="quick-links animate">
+          <h3>🔗 자주 사용하는 링크</h3>
+          <div class="quick-links-grid">
+            <a href="https://auth.nwea.org/adult/login" target="_blank" class="quick-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+              관리자 로그인
+            </a>
+            <a href="https://start.mapnwea.org/" target="_blank" class="quick-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              테스트 관리 (start.mapnwea.org)
+            </a>
+            <a href="http://check.nwea.org/" target="_blank" class="quick-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              시스템 진단 (check.nwea.org)
+            </a>
+            <a href="https://connection.nwea.org/s/technical-resources?language=en_US" target="_blank" class="quick-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+              Secure Testing Browser 다운로드
+            </a>
+            <a href="https://test.mapnwea.org/" target="_blank" class="quick-link">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+              안드로이드/웹 테스트 페이지
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PDF GUIDES -->
+    <section id="guides" data-reveal>
+      <div class="container">
+        <span class="section-label">PDF 가이드</span>
+        <h2 class="section-title">테스트 운영 문서</h2>
+        <p class="section-desc">테스트 전 준비, 진행 중 유의사항, 비밀번호 설정까지 필요한 문서를 다운로드하세요.</p>
+
+        <div class="resources-grid">
+
+          <!-- 테스트 시작하기 -->
+          <div class="resource-card">
+            <div class="resource-icon icon-pdf">📄</div>
+            <span class="resource-tag tag-essential">필수</span>
+            <span class="resource-tag tag-pdf">PDF</span>
+            <h3>테스트 시작하기 (셋팅)</h3>
+            <p>NWEA Secure Testing Browser 설치부터 테스트 세션 생성, 학생 로그인, 테스트 종료까지 전체 프로세스를 단계별로 안내합니다.</p>
+            <div class="resource-btns">
+              <a href="테스트_시작하기__셋팅_.pdf" target="_blank" class="resource-btn btn-primary">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                PDF 다운로드
+              </a>
+            </div>
+          </div>
+
+          <!-- Testing Tips -->
+          <div class="resource-card">
+            <div class="resource-icon icon-info">💡</div>
+            <span class="resource-tag tag-essential">필수</span>
+            <span class="resource-tag tag-pdf">PDF</span>
+            <h3>Testing Tips</h3>
+            <p>시험 중 발생할 수 있는 상황별 대처 방법을 정리했습니다. 학생 자리 비움, 시험 재배정, 해상도 오류, 에러 메시지 등 실전 팁을 확인하세요.</p>
+            <div class="resource-btns">
+              <a href="Testing_Tips.pdf" target="_blank" class="resource-btn btn-primary">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                PDF 다운로드
+              </a>
+            </div>
+          </div>
+
+          <!-- 패스워드 리셋팅 -->
+          <div class="resource-card">
+            <div class="resource-icon icon-link">🔑</div>
+            <span class="resource-tag tag-pdf">PDF</span>
+            <h3>MAP 패스워드 리셋팅</h3>
+            <p>관리자 비밀번호를 잊어버렸을 때 초기화하는 방법을 스크린샷과 함께 단계별로 설명합니다. start.mapnwea.org 접속부터 재설정 완료까지.</p>
+            <div class="resource-btns">
+              <a href="MAP_패스워드_리셋팅.pdf" target="_blank" class="resource-btn btn-primary">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                PDF 다운로드
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEO GUIDES -->
+    <section id="videos" style="background:var(--surface);border-top:1px solid var(--border);" data-reveal>
+      <div class="container">
+        <span class="section-label">영상 가이드</span>
+        <h2 class="section-title">동영상 튜토리얼</h2>
+        <p class="section-desc">실제 MAP 테스트 실행 방법과 리포트 확인 방법을 영상으로 확인하세요.</p>
+
+        <div class="video-grid">
+          <div class="video-item">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/4MAbYjF5vj8" title="MAP 테스트 시작하기" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+              <span class="resource-tag tag-video">영상</span>
+              <span class="resource-tag tag-essential">필수</span>
+              <h4>MAP 테스트 시작하기 (가이드 동영상)</h4>
+              <p>테스트 세션 생성부터 학생 로그인, 시험 진행, 종료까지 전체 과정을 보여줍니다.</p>
+            </div>
+          </div>
+          <div class="video-item">
+            <div class="video-wrapper">
+              <iframe src="https://www.youtube.com/embed/bhjpitWWA5Y" title="MAP TEST 관리자 가이드" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+            </div>
+            <div class="video-info">
+              <span class="resource-tag tag-video">영상</span>
+              <h4>MAP TEST 관리자 가이드 (테스트 결과보기)</h4>
+              <p>테스트 완료 후 리포트를 확인하고 추출하는 방법을 안내합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ (기존 index.html에서 이동) -->
+    <section id="faq" data-reveal>
+      <div class="container">
+        <span class="section-label">자주 묻는 질문</span>
+        <h2 class="section-title">테스트 운영 중 문제가 생겼나요?</h2>
+        <p class="section-desc">자주 발생하는 문제와 해결 방법을 정리했습니다.</p>
+        <div class="faq-grid">
+          <details class="faq-item" name="faq">
+            <summary>
+              <span class="faq-icon faq-icon-red">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </span>
+              경고창이 뜨면서 테스트가 시작되지 않아요
+            </summary>
+            <div class="faq-body">
+              <p>팝업 차단이 활성화되어 있을 가능성이 높습니다.</p>
+              <ol>
+                <li>크롬 브라우저 주소창 오른쪽의 팝업 차단 아이콘을 클릭</li>
+                <li>"이 사이트의 팝업 항상 허용" 선택</li>
+                <li>페이지를 새로고침(F5) 후 다시 시도</li>
+              </ol>
+            </div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>
+              <span class="faq-icon faq-icon-yellow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </span>
+              "Some student(s) are unable to test" 경고
+            </summary>
+            <div class="faq-body">
+              <p>학생 계정이 테스트 세션에 제대로 등록되지 않았을 때 나타납니다.</p>
+              <ol>
+                <li>MAP 관리자 페이지에서 해당 학생의 세션 배정 확인</li>
+                <li>학생 이름과 ID가 정확한지 확인</li>
+                <li>세션을 재시작하거나 학생을 다시 추가</li>
+                <li>문제가 지속되면 cs@mapgrowthsupportkorea.com으로 문의</li>
+              </ol>
+            </div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>
+              <span class="faq-icon faq-icon-blue">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </span>
+              테스트 중 에러 메시지가 나타났어요
+            </summary>
+            <div class="faq-body">
+              <p>"We encountered a temporary error" 메시지는 일시적인 서버 문제입니다.</p>
+              <ol>
+                <li>당황하지 마세요 — 학생의 진행 상황은 자동 저장됩니다</li>
+                <li>5~10초 기다린 후 "다시 시도" 버튼 클릭</li>
+                <li>반복되면 인터넷 연결 상태를 확인</li>
+                <li>그래도 안 되면 브라우저를 닫고 다시 로그인하면 이어서 진행됩니다</li>
+              </ol>
+            </div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>
+              <span class="faq-icon faq-icon-green">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              </span>
+              해상도 오류 (1024x768)가 나와요
+            </summary>
+            <div class="faq-body">
+              <p>MAP 테스트는 최소 1024x768 해상도가 필요합니다.</p>
+              <ol>
+                <li>크롬에서 Ctrl+0 (또는 Cmd+0)으로 확대/축소를 100%로 리셋</li>
+                <li>전체 화면 모드(F11)로 전환</li>
+                <li>태블릿의 경우 가로 모드로 회전</li>
+                <li>화면이 작은 기기에서는 외부 모니터 연결을 권장합니다</li>
+              </ol>
+            </div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>
+              <span class="faq-icon faq-icon-blue">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </span>
+              비밀번호를 잊어버렸어요
+            </summary>
+            <div class="faq-body">
+              <p>교사 계정 비밀번호 재설정 방법입니다.</p>
+              <ol>
+                <li>MAP 로그인 페이지에서 "Forgot Password" 클릭</li>
+                <li>등록된 이메일 주소 입력</li>
+                <li>메일로 받은 링크를 클릭하여 새 비밀번호 설정</li>
+                <li>메일이 안 오면 스팸 폴더를 확인하거나 저희에게 문의해 주세요</li>
+              </ol>
+            </div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>
+              <span class="faq-icon faq-icon-green">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </span>
+              어떤 브라우저를 사용해야 하나요?
+            </summary>
+            <div class="faq-body">
+              <p><strong>크롬(Chrome) 브라우저를 사용해 주세요.</strong></p>
+              <ol>
+                <li>MAP Growth는 Chrome에 최적화되어 있습니다</li>
+                <li>Safari, Firefox, Edge에서는 일부 기능이 제한될 수 있습니다</li>
+                <li>Chrome이 설치되어 있지 않으면 google.com/chrome에서 다운로드</li>
+                <li>항상 최신 버전으로 업데이트해 주세요</li>
+              </ol>
+            </div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>
+              <span class="faq-icon faq-icon-yellow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </span>
+              "Students are Ineligible to Test" 메시지가 표시될 경우
+            </summary>
+            <div class="faq-body">
+              <p>프로그램 재 설정(학기 변경)이 필요합니다. CS팀으로 연락주시길 바랍니다.</p>
+              <ol>
+                <li>cs@mapgrowthsupportkorea.com 으로 문의</li>
+                <li>또는 카카오톡 채널로 문의</li>
+              </ol>
+            </div>
+          </details>
+          <details class="faq-item" name="faq">
+            <summary>
+              <span class="faq-icon faq-icon-blue">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </span>
+              "Action Needed to Continue" 메시지가 표시될 경우
+            </summary>
+            <div class="faq-body">
+              <p>일시 중단된 시험을 이어서 진행해야 합니다.</p>
+              <ol>
+                <li><strong>Resume Test</strong> — 일시 중단된 시험을 이어서 진행</li>
+                <li><strong>Start Test Over</strong> — 시험을 처음부터 다시 시작 (기존 기록 삭제)</li>
+                <li><strong>Do Not Confirm</strong> — 기존 시험을 종료</li>
+              </ol>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- IMPORTANT NOTES -->
+    <section id="notes" data-reveal>
+      <div class="container">
+        <span class="section-label">참고사항</span>
+        <h2 class="section-title">테스트 운영 시 알아두세요</h2>
+
+        <div class="info-box">
+          <h3>⚡ 테스트 전 체크리스트</h3>
+          <div class="info-list">
+            <div class="info-item">
+              <div class="info-dot"></div>
+              <div><strong>크롬 브라우저</strong>를 사용해 주세요. 가능하면 <strong>NWEA Secure Testing Browser</strong> 설치를 권장합니다.</div>
+            </div>
+            <div class="info-item">
+              <div class="info-dot"></div>
+              <div>관리자 ID는 초기 설정한 <strong>이메일 주소</strong>입니다. <a href="https://start.mapnwea.org/" target="_blank">start.mapnwea.org</a>에서 비밀번호를 설정해 주세요.</div>
+            </div>
+            <div class="info-item">
+              <div class="info-dot"></div>
+              <div>테스트 전 <a href="http://check.nwea.org/" target="_blank">check.nwea.org</a>에서 시스템 진단을 실행하세요.</div>
+            </div>
+            <div class="info-item">
+              <div class="info-dot"></div>
+              <div>아이패드는 앱스토어에서 <strong>"NWEA"</strong>를 검색하여 전용 앱을 설치하세요.</div>
+            </div>
+            <div class="info-item">
+              <div class="info-dot"></div>
+              <div>테스트 후 점수는 화면에 바로 표시됩니다. <strong>정식 리포트는 48시간 후</strong>에 확인 가능하므로, 점수 화면을 핸드폰으로 촬영해 기록해 두세요.</div>
+            </div>
+            <div class="info-item">
+              <div class="info-dot"></div>
+              <div>테스트가 끝나면 반드시 <strong>End Session</strong>을 클릭하세요. 누르지 않으면 다음 테스트 시작 시 에러가 발생합니다.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-box" style="margin-top:20px;background:rgba(245,158,11,0.04);border-color:rgba(245,158,11,0.15);">
+          <h3 style="color:#92400E;">📞 도움이 필요하신가요?</h3>
+          <p>자료에서 해결되지 않는 문제가 있다면 언제든 연락해 주세요.</p>
+          <div class="info-list" style="margin-top:8px;">
+            <div class="info-item">
+              <div class="info-dot" style="background:#D97706;"></div>
+              <div>카카오톡 채널: <a href="http://pf.kakao.com/_cAmIn" target="_blank">MAP Growth Support Korea</a></div>
+            </div>
+            <div class="info-item">
+              <div class="info-dot" style="background:#D97706;"></div>
+              <div>이메일: <a href="mailto:cs@mapgrowthsupportkorea.com">cs@mapgrowthsupportkorea.com</a></div>
+            </div>
+            <div class="info-item">
+              <div class="info-dot" style="background:#D97706;"></div>
+              <div>전화: 070-7623-2105 (평일 9:00~18:00)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div>
+        <span style="font-weight:600;">MAP Growth Support Korea</span><br>
+        <span style="color:var(--text-secondary);font-size:12px;line-height:1.8;">맵그로스서포트코리아 | 서울 마방로6길13, 4층 4000호<br>cs@mapgrowthsupportkorea.com | 070-7623-2105</span>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">홈</a>
+        <a href="index.html#services">서비스</a>
+        <a href="index.html#teacher">교사 가이드</a>
+        <a href="index.html#analyzer">리포트 분석</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme
+    var savedTheme = localStorage.getItem('viz-theme');
+    if (savedTheme) document.documentElement.className = 'theme-' + savedTheme;
+
+    // Scroll Reveal
+    document.querySelectorAll('[data-reveal]').forEach(function(el) { el.classList.add('reveal'); });
+    var revealObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(function(el) { revealObserver.observe(el); });
+  </script>
+</body>
+</html>
