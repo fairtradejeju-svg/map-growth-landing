@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>시험 세션 만들기 가이드 — MAP Growth</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #0F6E56;
+    --accent-light: rgba(15,110,86,0.06);
+    --accent-mid: rgba(15,110,86,0.12);
+    --bg: #FAFAF9;
+    --surface: #FFFFFF;
+    --border: rgba(0,0,0,0.06);
+    --text: #0f172a;
+    --text-secondary: #64748b;
+    --text-tertiary: #94a3b8;
+    --positive: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== NAV ===== */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    background: rgba(250,250,249,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .nav-back {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.15s;
+  }
+  .nav-back:hover { background: var(--accent-light); color: var(--accent); }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(165deg, #FFFFFF 0%, #F5F9F7 40%, #F0F8F4 100%);
+    padding: clamp(48px, 8vw, 72px) 24px clamp(40px, 6vw, 56px);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(15,110,86,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: var(--accent-light);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .hero-badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .hero h1 {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-desc {
+    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+    color: var(--text-secondary);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .hero-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ===== MAIN CONTAINER ===== */
+  .main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ===== INFO BOX ===== */
+  .info-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 32px 0;
+  }
+  .info-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .info-card-title::before {
+    content: '';
+    width: 4px;
+    height: 16px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .info-card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .info-card li {
+    padding: 6px 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .info-card li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: var(--accent-mid);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+
+  /* ===== PREP LIST ===== */
+  .prep-section {
+    margin: 40px 0 32px;
+  }
+  .section-label {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--accent);
+    padding: 4px 12px;
+    background: var(--accent-light);
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+  .prep-list {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .prep-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .prep-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ===== STEP SECTION ===== */
+  .step-section {
+    margin: 48px 0 0;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .step-section:first-of-type {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 40px;
+  }
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .step-num {
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .step-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* ===== UI MOCKUP (inside step) ===== */
+  .ui-mockup {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 16px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    background: var(--surface);
+  }
+  .ui-header { background: #2d3436; padding: 12px 20px; display: flex; align-items: center; gap: 8px; }
+  .ui-logo { color: #8bc34a; font-weight: bold; font-size: 18px; font-style: italic; }
+  .ui-nav { background: #f5a623; padding: 8px 20px; display: flex; gap: 24px; }
+  .ui-nav-item { color: white; font-weight: bold; font-size: 14px; cursor: default; }
+  .ui-nav-item.active { border-bottom: 2px solid white; }
+  .ui-body { padding: 20px; background: white; }
+  .ui-welcome { color: var(--accent); font-size: 18px; margin-bottom: 8px; }
+  .ui-subtitle { color: #333; font-weight: bold; margin-bottom: 12px; }
+  .ui-card { display: inline-block; border: 1px solid #ddd; border-radius: 8px; padding: 20px 30px; text-align: center; margin: 8px; }
+  .ui-card-icon { width: 50px; height: 50px; border: 2px solid #8bc34a; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; font-size: 20px; }
+  .ui-card-label { font-weight: bold; font-size: 13px; border-bottom: 3px solid #8bc34a; padding-bottom: 4px; }
+
+  .ui-dropdown { background: white; border: 1px solid #ddd; padding: 16px 20px; margin-top: -1px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .ui-dropdown-desc { color: #666; font-size: 13px; margin-bottom: 12px; }
+  .ui-dropdown-item { padding: 8px 0; font-weight: bold; color: #333; border-bottom: 1px solid #f0f0f0; }
+  .ui-dropdown-item:last-child { border-bottom: none; }
+  .ui-dropdown-item small { display: block; font-weight: normal; color: #666; font-size: 12px; }
+
+  .ui-legacy { display: flex; }
+  .ui-sidebar { background: #1a3a5c; color: white; padding: 16px; width: 220px; }
+  .ui-sidebar-item { padding: 8px 12px; font-size: 13px; font-weight: bold; cursor: default; }
+  .ui-sidebar-item.active { background: rgba(255,255,255,0.15); border-left: 3px solid #f5a623; }
+  .ui-sidebar-item:hover { background: rgba(255,255,255,0.08); }
+  .ui-main { padding: 20px; flex: 1; }
+  .ui-main h3 { color: #1a3a5c; font-size: 20px; margin-top: 0; }
+  .ui-status-box { background: #e3f2fd; border: 1px solid #90caf9; padding: 12px 16px; border-radius: 4px; margin: 12px 0; }
+  .ui-btn { display: inline-block; background: #5c8db5; color: white; padding: 6px 16px; border-radius: 4px; font-size: 13px; cursor: default; }
+  .ui-btn-gold { background: #f5a623; }
+  .ui-btn-green { background: #4caf50; }
+  .ui-btn-blue { background: #1976d2; }
+  .ui-btn-sm { padding: 4px 12px; font-size: 12px; }
+
+  .ui-tabs { display: flex; background: #f5f5f5; border-bottom: 2px solid #ddd; }
+  .ui-tab { padding: 10px 16px; font-size: 13px; font-weight: bold; color: #666; cursor: default; }
+  .ui-tab.active { background: #f5a623; color: white; border-radius: 4px 4px 0 0; }
+  .ui-tab-arrow { color: #ccc; padding: 10px 4px; }
+  .ui-form { padding: 20px; }
+  .ui-form-label { font-weight: bold; margin-top: 16px; font-size: 14px; }
+  .ui-form-label .required { color: red; }
+  .ui-radio { margin: 6px 0 6px 16px; font-size: 13px; }
+  .ui-radio input { margin-right: 6px; }
+  .ui-select { border: 1px solid #999; padding: 4px 8px; font-size: 13px; margin-top: 4px; }
+
+  .ui-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .ui-table th { background: #e8eef4; color: #333; padding: 8px 12px; text-align: left; border-bottom: 2px solid #ccc; font-size: 12px; }
+  .ui-table td { padding: 8px 12px; border-bottom: 1px solid #eee; }
+  .ui-table tr:hover { background: #f5f9ff; }
+  .ui-checkbox { width: 16px; height: 16px; margin-right: 6px; vertical-align: middle; }
+
+  .ui-search-bar { display: flex; gap: 8px; align-items: center; margin: 12px 0; flex-wrap: wrap; }
+  .ui-search-input { border: 1px solid #ccc; padding: 6px 10px; border-radius: 4px; font-size: 13px; }
+  .ui-search-select { border: 1px solid #ccc; padding: 6px 8px; border-radius: 4px; font-size: 13px; background: white; }
+
+  .ui-assign-panel { background: #f9f9f9; border: 1px solid #ddd; border-radius: 6px; padding: 16px; margin: 12px 0; }
+  .ui-assign-row { display: flex; align-items: center; gap: 12px; padding: 6px 0; border-bottom: 1px solid #eee; font-size: 13px; }
+  .ui-assign-row:last-child { border-bottom: none; }
+  .ui-assign-label { font-weight: bold; min-width: 120px; }
+
+  .ui-session-bar { background: #e8f0fe; border: 1px solid #b3d4fc; border-radius: 6px; padding: 12px 16px; margin: 12px 0; display: flex; align-items: center; gap: 12px; }
+  .ui-session-input { border: 1px solid #999; padding: 6px 12px; border-radius: 4px; font-size: 13px; width: 200px; }
+
+  .arrow-indicator {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 8px;
+    animation: pulse 1.5s infinite;
+  }
+  .arrow-indicator-red {
+    display: inline-block;
+    background: var(--danger);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 6px;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+  /* ===== STEP INSTRUCTION ===== */
+  .step-instruction {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .step-instruction ol,
+  .step-instruction ul {
+    margin: 8px 0 0;
+    padding-left: 20px;
+  }
+  .step-instruction li {
+    margin: 4px 0;
+    font-size: 14px;
+  }
+
+  /* ===== OPTION BOX ===== */
+  .option-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 16px 0;
+  }
+  .option-title {
+    font-weight: 600;
+    color: var(--accent);
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  .option-box p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+  .option-box ol {
+    padding-left: 20px;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+  .option-box li {
+    margin: 4px 0;
+  }
+
+  /* ===== HIGHLIGHT BANNER ===== */
+  .highlight-banner {
+    background: linear-gradient(135deg, var(--accent), #0b5a46);
+    color: white;
+    padding: 20px 24px;
+    border-radius: 12px;
+    margin: 32px 0 8px 0;
+  }
+  .highlight-banner-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .highlight-banner-desc {
+    font-size: 14px;
+    opacity: 0.9;
+  }
+
+  .danger-banner {
+    background: linear-gradient(135deg, #b91c1c, #ef4444);
+    color: white;
+    padding: 20px 24px;
+    border-radius: 12px;
+    margin: 32px 0 8px 0;
+  }
+  .danger-banner-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .danger-banner-desc {
+    font-size: 14px;
+    opacity: 0.9;
+  }
+
+  /* ===== CALLOUT BOXES ===== */
+  .callout {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    border: 1px solid;
+  }
+  .callout-warning {
+    background: #FFFBEB;
+    border-color: #FDE68A;
+    color: #92400E;
+  }
+  .callout-danger {
+    background: #FEF2F2;
+    border-color: #FECACA;
+    color: #991B1B;
+  }
+  .callout-tip {
+    background: #F0FDF4;
+    border-color: #BBF7D0;
+    color: #166534;
+  }
+  .callout-info {
+    background: #EFF6FF;
+    border-color: #BFDBFE;
+    color: #1E40AF;
+  }
+  .callout-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+
+  /* ===== TABLE ===== */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .data-table th {
+    background: var(--accent);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .data-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) { background: var(--bg); }
+
+  /* ===== VIDEO SECTION ===== */
+  .video-section {
+    margin: 48px 0 0;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .video-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .video-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .video-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    transform: translateY(-1px);
+  }
+  .video-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .video-info { flex: 1; }
+  .video-title { font-weight: 600; font-size: 14px; color: var(--text); margin-bottom: 2px; }
+  .video-desc { font-size: 13px; color: var(--text-secondary); }
+  .video-link {
+    background: var(--accent);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .video-link:hover { background: #0b5a46; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    margin-top: 64px;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  /* ===== REVEAL ANIMATION ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .nav-bar { padding: 0 16px; }
+    .hero { padding: 40px 16px 32px; }
+    .main { padding: 0 16px; }
+    .hero-meta { flex-wrap: wrap; gap: 12px; }
+    .prep-list { flex-direction: column; }
+    .ui-legacy { flex-direction: column; }
+    .ui-sidebar { width: 100%; }
+    .ui-search-bar { flex-direction: column; align-items: flex-start; }
+    .video-card { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-dot"></div>
+    MAP Growth Support Korea
+  </a>
+  <a class="nav-back" href="#">CS 가이드 목록 &rarr;</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      02 &mdash; 시험 진행
+    </div>
+    <h1>시험 세션 <span>만들기</span> 가이드</h1>
+    <p class="hero-desc">Proctor(감독관) 역할이 필요합니다. 시험 전 세션을 생성하고 학생에게 시험을 배정하는 과정입니다.</p>
+    <div class="hero-meta">
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        5단계 프로세스
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        약 10분 소요
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        Proctor 권한 필요
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- 준비물 -->
+  <div class="prep-section reveal">
+    <div class="section-label">준비물</div>
+    <div class="prep-list">
+      <div class="prep-item">
+        <div class="prep-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>
+        </div>
+        MAP 관리자/Proctor 계정
+      </div>
+      <div class="prep-item">
+        <div class="prep-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        </div>
+        등록된 학생 명단
+      </div>
+      <div class="prep-item">
+        <div class="prep-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+        </div>
+        시험 볼 과목 확인
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== STEP 1: 로그인 후 MAP Growth 선택 → Manage Test Sessions ===== -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">start.mapnwea.org 로그인 후 Manage Test Sessions 이동</div>
+    </div>
+    <div class="ui-mockup">
+      <div class="ui-header">
+        <div class="ui-logo">nwea</div>
+      </div>
+      <div class="ui-nav">
+        <div class="ui-nav-item">Rostering &#9662;</div>
+        <div class="ui-nav-item active">MAP Growth &#9662; <span class="arrow-indicator">클릭</span></div>
+        <div class="ui-nav-item">Professional Learning &#9662;</div>
+      </div>
+      <div class="ui-dropdown">
+        <div class="ui-dropdown-desc">Manage and administer MAP Growth assessments.</div>
+        <div class="ui-dropdown-item">View Reports <small>View student and class performance data.</small></div>
+        <div class="ui-dropdown-item" style="color: #0f4c81;">
+          Manage Test Sessions <span class="arrow-indicator">클릭</span>
+          <small>Create and manage testing sessions.<br>Assign tests to students and start testing.</small>
+        </div>
+      </div>
+    </div>
+    <div class="step-instruction">
+      <strong>start.mapnwea.org</strong>에 로그인 &rarr; 상단 메뉴에서 <strong>MAP Growth</strong> 클릭 &rarr; <strong>Manage Test Sessions</strong> 클릭
+    </div>
+  </div>
+
+  <!-- ===== STEP 2: Manage Test Sessions 메인 화면 (3가지 방법) ===== -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">3가지 방법 중 선택</div>
+    </div>
+    <div class="ui-mockup">
+      <div class="ui-header">
+        <div class="ui-logo">nwea</div>
+      </div>
+      <div class="ui-nav">
+        <div class="ui-nav-item">Rostering &#9662;</div>
+        <div class="ui-nav-item active">MAP Growth &#9662;</div>
+        <div class="ui-nav-item">Professional Learning &#9662;</div>
+      </div>
+      <div class="ui-legacy">
+        <div class="ui-sidebar">
+          <div class="ui-sidebar-item">IMPORT PROFILES / ROSTERING</div>
+          <div class="ui-sidebar-item">MANAGE USERS</div>
+          <div class="ui-sidebar-item">MANAGE STUDENTS</div>
+          <div class="ui-sidebar-item active">MANAGE TEST SESSIONS</div>
+          <div class="ui-sidebar-item">MANAGE DATA PARTNERS</div>
+          <div class="ui-sidebar-item">VIEW REPORTS &#9662;</div>
+        </div>
+        <div class="ui-main">
+          <h3 style="margin-bottom: 4px;">MANAGE TEST SESSIONS</h3>
+          <div style="color: #666; font-size: 13px; margin-bottom: 16px;">Create a testing session and assign tests to students.</div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: 200px;">
+              <div class="ui-btn ui-btn-gold" style="padding: 12px 20px; font-size: 14px; text-align: center; display: block; border-radius: 6px;">
+                Find Students to Test <span class="arrow-indicator">클릭</span>
+              </div>
+              <div style="font-size: 12px; color: #666; margin-top: 6px; text-align: center;">학생을 검색해서 세션 구성</div>
+            </div>
+          </div>
+          <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid #eee;">
+            <div style="font-weight: bold; font-size: 13px; color: #333;">Saved Testing Sessions</div>
+            <div style="font-size: 12px; color: #666; margin-top: 4px;">
+              이전에 저장한 세션이 있으면 여기서 불러옵니다.
+              <span class="ui-btn ui-btn-sm" style="margin-left: 8px;">Show</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-instruction">
+      아래 3가지 방법 중 하나를 선택하세요.
+    </div>
+
+    <!-- 방법 1 -->
+    <div class="option-box">
+      <div class="option-title">방법 1: Find Students to Test (학생 검색) -- 추천</div>
+      <p>특정 학생 그룹을 구성할 때 사용합니다.</p>
+    </div>
+
+    <!-- 방법 2 -->
+    <div class="option-box">
+      <div class="option-title">방법 2: Use Saved Testing Session (저장된 세션)</div>
+      <p>이전에 저장한 세션을 불러옵니다.</p>
+      <ol>
+        <li>Saved Testing Sessions 옆 <strong>Show</strong> 클릭</li>
+        <li>세션 선택 후 <strong>Test Now</strong></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ===== STEP 3-A: Find Students to Test 학생 검색 ===== -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Find Students to Test: 학생 검색</div>
+    </div>
+    <div class="ui-mockup">
+      <div class="ui-legacy">
+        <div class="ui-sidebar">
+          <div class="ui-sidebar-item active">MANAGE TEST SESSIONS</div>
+        </div>
+        <div class="ui-main">
+          <h3 style="margin-bottom: 12px;">FIND STUDENTS TO TEST</h3>
+          <div class="ui-search-bar">
+            <span style="font-weight: bold; font-size: 13px;">School:</span>
+            <span class="ui-search-select">All Schools &#9662;</span> <span class="arrow-indicator">내 학교 선택</span>
+            <span style="font-weight: bold; font-size: 13px;">Grade:</span>
+            <span class="ui-search-select">All Grades &#9662;</span>
+            <span style="font-weight: bold; font-size: 13px;">Instructor:</span>
+            <span class="ui-search-select">All Instructors &#9662;</span>
+            <span style="font-weight: bold; font-size: 13px;">Class:</span>
+            <span class="ui-search-select">All Classes &#9662;</span>
+          </div>
+          <div style="margin: 12px 0;">
+            <span class="ui-btn ui-btn-gold">Search <span class="arrow-indicator">클릭</span></span>
+          </div>
+
+          <div style="margin-top: 16px; border-top: 1px solid #eee; padding-top: 12px;">
+            <div style="font-weight: bold; font-size: 14px; margin-bottom: 8px;">Search Results</div>
+            <table class="ui-table">
+              <tr>
+                <th><input type="checkbox" class="ui-checkbox" checked disabled>Select All</th>
+                <th>Student Name</th>
+                <th>Grade</th>
+                <th>Class</th>
+                <th>Instructor</th>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="ui-checkbox" checked disabled></td>
+                <td>Kim, Minjun</td>
+                <td>3</td>
+                <td>Class A</td>
+                <td>Park Teacher</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="ui-checkbox" checked disabled></td>
+                <td>Lee, Soyeon</td>
+                <td>3</td>
+                <td>Class A</td>
+                <td>Park Teacher</td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="ui-checkbox" checked disabled></td>
+                <td>Choi, Jiwon</td>
+                <td>3</td>
+                <td>Class B</td>
+                <td>Kim Teacher</td>
+              </tr>
+            </table>
+            <div style="margin-top: 12px; text-align: right;">
+              <span class="ui-btn ui-btn-gold">Add Students to Session <span class="arrow-indicator">클릭</span></span>
+            </div>
+            <div style="font-size: 12px; color: #666; margin-top: 6px; text-align: right;">100명 이하 권장</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="step-instruction">
+      <ol>
+        <li><strong>Find Students to Test</strong> 클릭</li>
+        <li>검색 조건(학교, 학년, 교사, 학급) 선택 후 <strong>Search</strong></li>
+        <li>검색 결과에서 학생 체크 후 <strong>Add Students to Session</strong> (100명 이하 권장)</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ===== STEP 4: 시험 배정 (Assign Test) — 가장 중요 ===== -->
+  <div class="highlight-banner reveal">
+    <div class="highlight-banner-title">STEP 4 -- 시험 배정 (가장 중요!)</div>
+    <div class="highlight-banner-desc">학생에게 어떤 시험을 볼지 배정하는 단계입니다. 이 단계를 빠뜨리면 학생이 시험을 시작할 수 없습니다.</div>
+  </div>
+
+  <div class="step-section reveal" style="border-top: none; padding-top: 0; margin-top: 8px;">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div class="step-title">Assign Test: 시험 배정</div>
+    </div>
+    <div class="ui-mockup">
+      <div class="ui-legacy">
+        <div class="ui-sidebar">
+          <div class="ui-sidebar-item active">MANAGE TEST SESSIONS</div>
+        </div>
+        <div class="ui-main">
+          <h3 style="margin-bottom: 4px;">ASSIGN TESTS</h3>
+          <div style="color: #666; font-size: 13px; margin-bottom: 16px;">Select students and assign the appropriate test.</div>
+
+          <div style="margin-bottom: 16px;">
+            <table class="ui-table">
+              <tr>
+                <th><input type="checkbox" class="ui-checkbox" checked disabled></th>
+                <th>Student Name</th>
+                <th>Grade</th>
+                <th>Assigned Test</th>
+                <th>Status</th>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="ui-checkbox" checked disabled></td>
+                <td>Kim, Minjun</td>
+                <td>3</td>
+                <td style="color: #999;">-- Not Assigned --</td>
+                <td><span style="color: #f5a623; font-weight: bold;">Pending</span></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="ui-checkbox" checked disabled></td>
+                <td>Lee, Soyeon</td>
+                <td>3</td>
+                <td style="color: #999;">-- Not Assigned --</td>
+                <td><span style="color: #f5a623; font-weight: bold;">Pending</span></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox" class="ui-checkbox" checked disabled></td>
+                <td>Choi, Jiwon</td>
+                <td>3</td>
+                <td style="color: #999;">-- Not Assigned --</td>
+                <td><span style="color: #f5a623; font-weight: bold;">Pending</span></td>
+              </tr>
+            </table>
+          </div>
+
+          <div style="margin-bottom: 12px;">
+            <span class="ui-btn ui-btn-blue" style="padding: 10px 20px; font-size: 14px;">
+              Assign Test <span class="arrow-indicator">클릭</span>
+            </span>
+            <span class="ui-btn" style="padding: 10px 20px; font-size: 14px; margin-left: 8px; background: #78909c;">
+              Assign Accommodations
+            </span>
+          </div>
+
+          <div class="ui-assign-panel">
+            <div style="font-weight: bold; margin-bottom: 10px; font-size: 14px;">Select a Test to Assign</div>
+            <div class="ui-assign-row">
+              <span class="ui-assign-label">Subject:</span>
+              <span class="ui-search-select">Reading &#9662; <span class="arrow-indicator">선택</span></span>
+            </div>
+            <div class="ui-assign-row">
+              <span class="ui-assign-label">Test:</span>
+              <span class="ui-search-select">Growth: Reading 2-5 &#9662;</span>
+            </div>
+            <div style="margin-top: 12px; text-align: right;">
+              <span class="ui-btn ui-btn-gold">Assign to Selected Students <span class="arrow-indicator">클릭</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-instruction" style="border-left-color: var(--danger);">
+      <strong>시험 배정 -- 반드시 확인하세요!</strong>
+      <ul>
+        <li>학생을 선택(체크)한 후 <strong>Assign Test</strong> 클릭</li>
+        <li>Subject(과목) 선택: <strong>Reading, Language Usage, Math, Science</strong> 중 택 1</li>
+        <li>Test(시험) 선택: 학년에 맞는 시험 자동 추천됨</li>
+        <li><strong>Assign to Selected Students</strong> 클릭하여 배정 완료</li>
+        <li>필요 시 <strong>Assign Accommodations</strong>로 편의사항(시간 연장 등) 설정</li>
+      </ul>
+    </div>
+
+    <div class="callout callout-warning">
+      <div class="callout-title">시험 미배정 시</div>
+      시험 배정을 하지 않으면 학생이 로그인해도 <strong>"No tests available"</strong> 메시지가 뜹니다!
+    </div>
+  </div>
+
+  <!-- ===== 최중요 경고: Return to Testing ===== -->
+  <div class="danger-banner reveal">
+    <div class="danger-banner-title">자주 묻는 질문 #1 -- "Test Now 버튼이 안 눌려요!"</div>
+    <div class="danger-banner-desc">이전 세션이 아직 열려있으면 아래와 같이 <strong>Return to Testing</strong> 버튼이 나타나고, 새 세션을 시작할 수 없습니다.</div>
+  </div>
+
+  <div class="step-section reveal" style="border-top: none; padding-top: 0; margin-top: 8px;">
+    <div class="step-header">
+      <div class="step-num" style="background: var(--danger);">!</div>
+      <div class="step-title">이 화면이 보이면 -- 이전 세션을 먼저 종료하세요!</div>
+    </div>
+    <div class="ui-mockup">
+      <div style="background: #f0f4f8; border-bottom: 1px solid #ddd; padding: 10px 20px; display: flex; align-items: center;">
+        <span style="font-weight: bold; font-size: 18px; font-style: italic; color: #1a3a5c;">nwea</span>
+        <span style="font-size: 11px; color: #888; margin-left: 6px;">believe in what's possible</span>
+        <span style="color: #888; margin-left: auto; font-size: 12px;">Logged in as admin@academy.kr</span>
+      </div>
+      <div style="padding: 20px; background: white;">
+        <div style="font-size: 20px; color: #5b8fbd; font-weight: bold; margin-bottom: 16px;">MANAGE TESTING SESSIONS</div>
+        <div style="border: 1px solid #ddd; border-radius: 6px; padding: 16px 20px; margin-bottom: 16px;">
+          <div style="font-size: 13px; color: #666; margin-bottom: 12px;">Click Find Students to Test button to search for students or, if User Role includes Instructor, click Test My Class button to select class.</div>
+          <div style="display: flex; gap: 12px; margin-bottom: 12px;">
+            <span style="background: #f5a623; color: white; padding: 8px 18px; border-radius: 4px; font-size: 13px; font-weight: bold;">Find Students to Test</span>
+            <span style="border: 1px solid #ccc; padding: 8px 18px; border-radius: 4px; font-size: 13px; color: #888;">Test My Class</span>
+          </div>
+        </div>
+        <!-- Return to Testing 박스 -->
+        <div style="float: right; margin-top: -80px; border: 2px dashed #5b8fbd; border-radius: 6px; padding: 14px 20px; max-width: 300px; background: #fafcff;">
+          <div style="font-weight: bold; color: #5b8fbd; font-size: 14px;">Testing Session Name: <span style="color: #333;">spring2026</span></div>
+          <div style="font-size: 12px; color: #4caf50; margin: 4px 0 10px;">This session is active and students may already be testing.</div>
+          <span style="background: #5b8fbd; color: white; padding: 6px 16px; border-radius: 4px; font-size: 13px; font-weight: bold;">Return to Testing</span>
+          <span class="arrow-indicator-red">1. 먼저 클릭!</span>
+        </div>
+        <div style="clear: both;"></div>
+      </div>
+      <div style="border: 1px solid #ddd; border-radius: 6px; padding: 12px 20px;">
+        <div style="font-weight: bold; font-size: 14px;">Saved Testing Sessions <span style="float: right; color: #5b8fbd; font-size: 13px;">Show &#9656;</span></div>
+      </div>
+    </div>
+
+    <div class="step-instruction" style="border-left-color: var(--danger);">
+      <strong>해결 방법:</strong>
+      <ol>
+        <li>오른쪽의 <strong>Return to Testing</strong> 버튼 클릭 &rarr; 이전 세션으로 이동</li>
+        <li>이전 세션에서 <strong>End Session</strong> 클릭하여 종료 (&rarr; 04-2 시험종료 가이드 참고)</li>
+        <li>다시 Manage Test Sessions로 돌아오면 <strong>Test Now</strong>가 정상 활성화됩니다</li>
+      </ol>
+    </div>
+
+    <div class="callout callout-warning">
+      <div class="callout-title">한 번에 하나의 세션만 실행 가능</div>
+      <strong>한 번에 하나의 세션만 실행할 수 있습니다.</strong> 이전 세션을 반드시 End Session으로 종료한 후 새 세션을 시작하세요!
+    </div>
+  </div>
+
+  <!-- ===== STEP 5: Save Session 또는 Test Now ===== -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">5</div>
+      <div class="step-title">Save Session 또는 Test Now</div>
+    </div>
+    <div class="ui-mockup">
+      <div class="ui-legacy">
+        <div class="ui-sidebar">
+          <div class="ui-sidebar-item active">MANAGE TEST SESSIONS</div>
+        </div>
+        <div class="ui-main">
+          <h3 style="margin-bottom: 4px;">SESSION READY</h3>
+          <div style="color: #666; font-size: 13px; margin-bottom: 16px;">All students have been assigned tests. Choose an action below.</div>
+
+          <table class="ui-table">
+            <tr>
+              <th>Student Name</th>
+              <th>Grade</th>
+              <th>Assigned Test</th>
+              <th>Status</th>
+            </tr>
+            <tr>
+              <td>Kim, Minjun</td>
+              <td>3</td>
+              <td><strong>Growth: Reading 2-5</strong></td>
+              <td><span style="color: #4caf50; font-weight: bold;">Assigned</span></td>
+            </tr>
+            <tr>
+              <td>Lee, Soyeon</td>
+              <td>3</td>
+              <td><strong>Growth: Reading 2-5</strong></td>
+              <td><span style="color: #4caf50; font-weight: bold;">Assigned</span></td>
+            </tr>
+            <tr>
+              <td>Choi, Jiwon</td>
+              <td>3</td>
+              <td><strong>Growth: Math 2-5</strong></td>
+              <td><span style="color: #4caf50; font-weight: bold;">Assigned</span></td>
+            </tr>
+          </table>
+
+          <div class="ui-session-bar">
+            <span style="font-weight: bold; font-size: 13px;">Session Name:</span>
+            <span class="ui-session-input" style="display: inline-block; background: white;">jbread72</span>
+            <span style="font-size: 12px; color: #666;">(이니셜+과목+학년+반)</span>
+          </div>
+
+          <div style="margin-top: 16px; display: flex; gap: 12px;">
+            <div>
+              <span class="ui-btn ui-btn-green" style="padding: 12px 24px; font-size: 15px; font-weight: bold;">
+                Test Now <span class="arrow-indicator">바로 시험</span>
+              </span>
+              <div style="font-size: 12px; color: #666; margin-top: 4px;">지금 바로 시험을 시작합니다</div>
+            </div>
+            <div>
+              <span class="ui-btn" style="padding: 12px 24px; font-size: 15px; font-weight: bold; background: #78909c;">
+                Save Session <span class="arrow-indicator">나중에 시험</span>
+              </span>
+              <div style="font-size: 12px; color: #666; margin-top: 4px;">세션을 저장하고 나중에 시작합니다</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-instruction">
+      <strong>세션 이름 입력</strong> 후:
+      <ul>
+        <li><strong>Test Now</strong> &rarr; 지금 바로 시험 시작 (Proctor 콘솔 열림)</li>
+        <li><strong>Save Session</strong> &rarr; 세션 저장 후 나중에 시작</li>
+      </ul>
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-title">세션 이름 팁</div>
+      공백, 특수문자, 대문자를 피하세요.<br>
+      예: <code>jbmath72</code> (이니셜+과목+학년+반) 또는 <code>21eagle918</code> (교실+마스코트+날짜)
+    </div>
+
+    <div class="callout callout-warning">
+      <div class="callout-title">세션 제한</div>
+      <strong>한 번에 하나의 세션만 실행할 수 있습니다.</strong> 이미 실행 중인 세션이 있으면 <strong>Return to Testing</strong>을 선택하세요.
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-title">시험 당일 체크리스트</div>
+      1. 학생들에게 <strong>test.mapnwea.org</strong> 접속 안내<br>
+      2. Session Name과 Password를 학생에게 전달<br>
+      3. 학생이 로그인하면 Proctor 콘솔에 표시됨<br>
+      4. 모든 학생 확인 후 시험 시작
+    </div>
+  </div>
+
+  <!-- ===== 영상 가이드 ===== -->
+  <div class="video-section reveal">
+    <div class="section-label">참고 영상</div>
+    <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 4px;">영상 가이드</h2>
+    <p style="color: var(--text-secondary); font-size: 14px;">영상으로 보면 더 쉽습니다. Chrome 실시간 자막으로 한국어 자막도 지원됩니다.</p>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-icon">&#9654;</div>
+        <div class="video-info">
+          <div class="video-title">MAP Growth 로그인 방법</div>
+          <div class="video-desc">MAP 관리 플랫폼 로그인부터 세션 생성까지</div>
+        </div>
+        <a href="https://vimeo.com/nwea" target="_blank" class="video-link">영상 보기 &rarr;</a>
+      </div>
+      <div class="video-card">
+        <div class="video-icon">&#9654;</div>
+        <div class="video-info">
+          <div class="video-title">Find Students to Test</div>
+          <div class="video-desc">학생 검색으로 세션 구성하기</div>
+        </div>
+        <a href="https://vimeo.com/nwea" target="_blank" class="video-link">영상 보기 &rarr;</a>
+      </div>
+      <div class="video-card">
+        <div class="video-icon">&#9654;</div>
+        <div class="video-info">
+          <div class="video-title">시험/편의사항 배정</div>
+          <div class="video-desc">학생에게 시험을 배정하는 방법</div>
+        </div>
+        <a href="https://vimeo.com/nwea" target="_blank" class="video-link">영상 보기 &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  MAP Growth Support Korea &nbsp;&middot;&nbsp; cs@mapgrowthsupportkorea.com &nbsp;&middot;&nbsp; 070-7623-2105<br>
+  본 자료는 NWEA MAP Help Center 공식 문서 기반으로 작성되었습니다.
+</footer>
+
+<!-- REVEAL ANIMATION -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>트러블슈팅 & 문제 해결 — MAP Growth</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #0F6E56;
+    --accent-light: rgba(15,110,86,0.06);
+    --accent-mid: rgba(15,110,86,0.12);
+    --bg: #FAFAF9;
+    --surface: #FFFFFF;
+    --border: rgba(0,0,0,0.06);
+    --text: #0f172a;
+    --text-secondary: #64748b;
+    --text-tertiary: #94a3b8;
+    --positive: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== NAV ===== */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    background: rgba(250,250,249,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .nav-back {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.15s;
+  }
+  .nav-back:hover { background: var(--accent-light); color: var(--accent); }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(165deg, #FFFFFF 0%, #F5F9F7 40%, #F0F8F4 100%);
+    padding: clamp(48px, 8vw, 72px) 24px clamp(40px, 6vw, 56px);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(15,110,86,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: var(--accent-light);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .hero-badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .hero h1 {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-desc {
+    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+    color: var(--text-secondary);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .hero-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ===== MAIN CONTAINER ===== */
+  .main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ===== SECTION LABEL ===== */
+  .section-label {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--accent);
+    padding: 4px 12px;
+    background: var(--accent-light);
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+
+  /* ===== CATEGORY SECTION ===== */
+  .category-section {
+    margin: 48px 0 0;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .category-section:first-of-type {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 40px;
+  }
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 24px;
+  }
+  .category-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--accent-light);
+    border: 1px solid var(--accent-mid);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+  .category-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* ===== QA CARD ===== */
+  .qa-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    transition: box-shadow 0.2s;
+  }
+  .qa-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+  }
+  .qa-question {
+    padding: 16px 20px;
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--bg);
+  }
+  .qa-q-icon {
+    width: 24px;
+    height: 24px;
+    background: var(--accent);
+    color: white;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .qa-answer {
+    padding: 20px;
+  }
+  .qa-answer p {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+  .qa-answer p:last-child { margin-bottom: 0; }
+
+  /* ===== SOLVE STEP ===== */
+  .solve-step {
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.03);
+  }
+  .solve-step:last-child { border-bottom: none; }
+  .solve-num {
+    width: 26px;
+    height: 26px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+  .solve-num.arrow {
+    background: var(--accent-mid);
+    color: var(--accent);
+    font-size: 14px;
+  }
+  .solve-text {
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .solve-text strong { color: var(--accent); }
+
+  /* ===== BADGES ===== */
+  .badge {
+    padding: 2px 10px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+  }
+  .badge-testing { background: #D1FAE5; color: #065F46; }
+  .badge-confirmed { background: #DBEAFE; color: #1E40AF; }
+  .badge-suspended { background: #FEF3C7; color: #92400E; }
+  .badge-completed { background: #F3F4F6; color: #374151; }
+  .badge-rg { background: #FEE2E2; color: #991B1B; }
+
+  /* ===== CALLOUT BOXES ===== */
+  .callout {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    border: 1px solid;
+  }
+  .callout-warning {
+    background: #FFFBEB;
+    border-color: #FDE68A;
+    color: #92400E;
+  }
+  .callout-danger {
+    background: #FEF2F2;
+    border-color: #FECACA;
+    color: #991B1B;
+  }
+  .callout-tip {
+    background: #F0FDF4;
+    border-color: #BBF7D0;
+    color: #166534;
+  }
+  .callout-info {
+    background: #EFF6FF;
+    border-color: #BFDBFE;
+    color: #1E40AF;
+  }
+  .callout-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+
+  /* ===== VIDEO SECTION ===== */
+  .video-section {
+    margin: 48px 0 0;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .video-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .video-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .video-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    transform: translateY(-1px);
+  }
+  .video-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .video-info { flex: 1; }
+  .video-title { font-weight: 600; font-size: 14px; color: var(--text); margin-bottom: 2px; }
+  .video-desc { font-size: 13px; color: var(--text-secondary); }
+  .video-link {
+    background: var(--accent);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .video-link:hover { background: #0b5a46; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    margin-top: 64px;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  /* ===== REVEAL ANIMATION ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .nav-bar { padding: 0 16px; }
+    .hero { padding: 40px 16px 32px; }
+    .main { padding: 0 16px; }
+    .hero-meta { flex-wrap: wrap; gap: 12px; }
+    .video-card { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-dot"></div>
+    MAP Growth Support Korea
+  </a>
+  <a class="nav-back" href="#">CS 가이드 목록 &rarr;</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      05 &mdash; 부록
+    </div>
+    <h1>트러블슈팅 &amp; <span>문제 해결</span></h1>
+    <p class="hero-desc">시험 중 자주 발생하는 문제와 해결 방법을 상황별로 정리했습니다. 당황하지 마시고, 아래 가이드를 따라 해결해 보세요.</p>
+    <div class="hero-meta">
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        5개 카테고리
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        상황별 즉시 대응
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        단계별 해결법
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- ===== 로그인 문제 ===== -->
+  <div class="category-section reveal">
+    <div class="category-header">
+      <div class="category-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>
+      </div>
+      <div class="category-title">로그인 문제</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-question">
+        <div class="qa-q-icon">Q</div>
+        학생이 로그인했는데 Proctor 콘솔 목록에 안 보여요
+      </div>
+      <div class="qa-answer">
+        <p>학생의 현재 상태에 따라 조치가 다릅니다:</p>
+        <div class="solve-step">
+          <div class="solve-num">1</div>
+          <div class="solve-text"><span class="badge badge-confirmed">Confirmed</span> 상태 &rarr; Select Action &rarr; <strong>Do Not Confirm</strong> &rarr; 다시 Confirm</div>
+        </div>
+        <div class="solve-step">
+          <div class="solve-num">2</div>
+          <div class="solve-text"><span class="badge badge-testing">Testing</span> 상태 &rarr; Select Action &rarr; <strong>Suspend</strong> &rarr; <strong>Test Again</strong></div>
+        </div>
+        <div class="solve-step">
+          <div class="solve-num">3</div>
+          <div class="solve-text"><span class="badge badge-suspended">Suspended</span> 상태 &rarr; Select Action &rarr; <strong>Test Again</strong> &rarr; 학생에게 다시 로그인 안내 &rarr; Confirm</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-question">
+        <div class="qa-q-icon">Q</div>
+        "Students are Ineligible to Test" 메시지가 나와요
+      </div>
+      <div class="qa-answer">
+        <p>시험이 <strong>"학기당 1회"(Once Per Term)</strong>로 제한되어 있을 수 있습니다.</p>
+        <p>&rarr; District Assessment Coordinator에게 시험 제한 설정 확인을 요청하세요.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 시험 배정 문제 ===== -->
+  <div class="category-section reveal">
+    <div class="category-header">
+      <div class="category-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+      </div>
+      <div class="category-title">시험 배정 문제</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-question">
+        <div class="qa-q-icon">Q</div>
+        잘못된 시험이 배정되었어요
+      </div>
+      <div class="qa-answer">
+        <p><strong>아직 시험 시작 전</strong> (To Be Confirmed):</p>
+        <div class="solve-step">
+          <div class="solve-num arrow">&rarr;</div>
+          <div class="solve-text">Select Action &rarr; <strong>Do Not Confirm</strong> &rarr; <strong>Assign Test</strong>로 올바른 시험 재배정</div>
+        </div>
+        <br>
+        <p><strong>이미 시험 중</strong> (Testing):</p>
+        <div class="solve-step">
+          <div class="solve-num arrow">&rarr;</div>
+          <div class="solve-text">Select Action &rarr; <strong>Suspend</strong> (나중에 볼 수도 있으면) 또는 <strong>Terminate</strong> (완전 취소)</div>
+        </div>
+        <div class="solve-step">
+          <div class="solve-num arrow">&rarr;</div>
+          <div class="solve-text"><strong>Test Again</strong> &rarr; 올바른 시험 재배정</div>
+        </div>
+        <div class="callout callout-danger" style="margin-top: 12px;">
+          <div class="callout-title">Terminate 주의</div>
+          Terminate는 모든 답안을 삭제합니다. 신중하게 사용하세요.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 화면/기술 문제 ===== -->
+  <div class="category-section reveal">
+    <div class="category-header">
+      <div class="category-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+      </div>
+      <div class="category-title">화면 / 기술 문제</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-question">
+        <div class="qa-q-icon">Q</div>
+        학생 PC가 튕겼어요 (인터넷 끊김, 브라우저 종료)
+      </div>
+      <div class="qa-answer">
+        <div class="solve-step">
+          <div class="solve-num">1</div>
+          <div class="solve-text">Proctor 콘솔에서 해당 학생 이름 앞의 <strong>체크박스 클릭</strong>하여 선택</div>
+        </div>
+        <div class="solve-step">
+          <div class="solve-num">2</div>
+          <div class="solve-text">상단 <strong>두 번째 칸 Select Action</strong>이 활성화됨 &rarr; 클릭 &rarr; <strong>Suspend</strong> 선택 (답안 안전 저장)</div>
+        </div>
+        <div class="solve-step">
+          <div class="solve-num">3</div>
+          <div class="solve-text">Select Action &rarr; <strong>Test Again</strong></div>
+        </div>
+        <div class="solve-step">
+          <div class="solve-num">4</div>
+          <div class="solve-text">학생이 같은 Session Name/Password로 다시 로그인 &rarr; <strong>중단된 곳부터 이어서 진행</strong></div>
+        </div>
+        <div class="callout callout-tip" style="margin-top: 12px;">
+          <div class="callout-title">안심하세요</div>
+          답안은 안전하게 보존됩니다. Suspend &rarr; Test Again 순서만 기억하세요.
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-question">
+        <div class="qa-q-icon">Q</div>
+        문제 화면이 하얗게 나와요 (Blank Screen)
+      </div>
+      <div class="qa-answer">
+        <div class="solve-step">
+          <div class="solve-num">1</div>
+          <div class="solve-text">Proctor 콘솔에서 해당 학생 &rarr; Select Action &rarr; <strong>Suspend</strong></div>
+        </div>
+        <div class="solve-step">
+          <div class="solve-num">2</div>
+          <div class="solve-text">학생 기기에서 테스트 브라우저 <strong>완전 종료</strong></div>
+        </div>
+        <div class="solve-step">
+          <div class="solve-num">3</div>
+          <div class="solve-text">Proctor 콘솔에서 &rarr; Select Action &rarr; <strong>Test Again</strong></div>
+        </div>
+        <div class="solve-step">
+          <div class="solve-num">4</div>
+          <div class="solve-text">학생이 다시 로그인 &rarr; 중단된 곳부터 이어서 진행</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-question">
+        <div class="qa-q-icon">Q</div>
+        시험이 너무 느려요
+      </div>
+      <div class="qa-answer">
+        <p>학생 기기에서 화면을 새로고침하세요:</p>
+        <div class="solve-step">
+          <div class="solve-num" style="font-size: 10px; font-weight: 600;">PC</div>
+          <div class="solve-text"><strong>F5</strong> 또는 Reset 버튼 클릭</div>
+        </div>
+        <div class="solve-step">
+          <div class="solve-num" style="font-size: 10px; font-weight: 600;">Mac</div>
+          <div class="solve-text"><strong>Cmd + R</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-question">
+        <div class="qa-q-icon">Q</div>
+        결함이 있는 문제를 건너뛰고 싶어요
+      </div>
+      <div class="qa-answer">
+        <div class="solve-step">
+          <div class="solve-num">1</div>
+          <div class="solve-text">해당 학생 &rarr; Select Action &rarr; <strong>Pause</strong></div>
+        </div>
+        <div class="solve-step">
+          <div class="solve-num">2</div>
+          <div class="solve-text">다시 해당 학생 &rarr; Select Action &rarr; <strong>Resume</strong></div>
+        </div>
+        <div class="solve-step">
+          <div class="solve-num">3</div>
+          <div class="solve-text">학생이 Resume을 누르면 <strong>새 문제가 표시</strong>됩니다</div>
+        </div>
+        <div class="callout callout-tip" style="margin-top: 12px;">
+          <div class="callout-title">문제 신고 방법</div>
+          문제 자체를 신고하려면: 학생 기기에서 <strong>Ctrl + Shift + P</strong> &rarr; Proctor PIN 입력 &rarr; 문제 상황 설명
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 중단된 시험 재개 ===== -->
+  <div class="category-section reveal">
+    <div class="category-header">
+      <div class="category-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </div>
+      <div class="category-title">중단된 시험 이어서 보기</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="qa-question">
+        <div class="qa-q-icon">Q</div>
+        Suspend된 시험을 이어서 보려면?
+      </div>
+      <div class="qa-answer">
+        <p><strong>같은 날, 같은 세션:</strong></p>
+        <div class="solve-step">
+          <div class="solve-num arrow">&rarr;</div>
+          <div class="solve-text">해당 학생 &rarr; Select Action &rarr; <strong>Test Again</strong></div>
+        </div>
+        <br>
+        <p><strong>다른 날:</strong></p>
+        <div class="solve-step">
+          <div class="solve-num">1</div>
+          <div class="solve-text">저장된 세션을 다시 열거나 새 세션 생성</div>
+        </div>
+        <div class="solve-step">
+          <div class="solve-num">2</div>
+          <div class="solve-text">Find Students to Test &rarr; <strong>Test History Search</strong> 탭</div>
+        </div>
+        <div class="solve-step">
+          <div class="solve-num">3</div>
+          <div class="solve-text">학교, 시험 등 필터 &rarr; Search &rarr; 학생 추가</div>
+        </div>
+        <div class="solve-step">
+          <div class="solve-num">4</div>
+          <div class="solve-text">시험 배정 &rarr; Test Now &rarr; Confirm 시 <strong>Resume Test</strong> 선택</div>
+        </div>
+        <div class="callout callout-warning" style="margin-top: 12px;">
+          <div class="callout-title">재개 기한</div>
+          <strong>14일 이내</strong>에 재개하는 것을 권장합니다 (최대 28일 가능).
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 영상 가이드 ===== -->
+  <div class="video-section reveal">
+    <div class="section-label">참고 영상</div>
+    <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 4px;">영상 가이드</h2>
+    <p style="color: var(--text-secondary); font-size: 14px;">영상으로 보면 더 쉽습니다. Chrome 실시간 자막으로 한국어 자막도 지원됩니다.</p>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-icon">&#9654;</div>
+        <div class="video-info">
+          <div class="video-title">Pause &amp; Resume</div>
+          <div class="video-desc">일시정지/재개 방법</div>
+        </div>
+        <a href="https://vimeo.com/nwea" target="_blank" class="video-link">영상 보기 &rarr;</a>
+      </div>
+      <div class="video-card">
+        <div class="video-icon">&#9654;</div>
+        <div class="video-info">
+          <div class="video-title">Suspend &amp; Test Again</div>
+          <div class="video-desc">중단/재시험 방법</div>
+        </div>
+        <a href="https://vimeo.com/nwea" target="_blank" class="video-link">영상 보기 &rarr;</a>
+      </div>
+      <div class="video-card">
+        <div class="video-icon">&#9654;</div>
+        <div class="video-info">
+          <div class="video-title">Confirmed 멈춤 해결</div>
+          <div class="video-desc">Confirmed 상태 문제 해결</div>
+        </div>
+        <a href="https://vimeo.com/nwea" target="_blank" class="video-link">영상 보기 &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  MAP Growth Support Korea &nbsp;&middot;&nbsp; cs@mapgrowthsupportkorea.com &nbsp;&middot;&nbsp; 070-7623-2105<br>
+  본 자료는 NWEA MAP Help Center 공식 문서 기반으로 작성되었습니다.
+</footer>
+
+<!-- REVEAL ANIMATION -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

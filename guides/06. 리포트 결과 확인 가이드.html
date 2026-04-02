@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>리포트 결과 확인 가이드 — MAP Growth</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #0F6E56;
+    --accent-light: rgba(15,110,86,0.06);
+    --accent-mid: rgba(15,110,86,0.12);
+    --bg: #FAFAF9;
+    --surface: #FFFFFF;
+    --border: rgba(0,0,0,0.06);
+    --text: #0f172a;
+    --text-secondary: #64748b;
+    --text-tertiary: #94a3b8;
+    --positive: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== NAV ===== */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    background: rgba(250,250,249,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .nav-back {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.15s;
+  }
+  .nav-back:hover { background: var(--accent-light); color: var(--accent); }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(165deg, #FFFFFF 0%, #F5F9F7 40%, #F0F8F4 100%);
+    padding: clamp(48px, 8vw, 72px) 24px clamp(40px, 6vw, 56px);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(15,110,86,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: var(--accent-light);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .hero-badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .hero h1 {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-desc {
+    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+    color: var(--text-secondary);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .hero-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ===== MAIN CONTAINER ===== */
+  .main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ===== INFO BOX ===== */
+  .info-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 32px 0;
+  }
+  .info-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .info-card-title::before {
+    content: '';
+    width: 4px;
+    height: 16px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .info-card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .info-card li {
+    padding: 6px 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .info-card li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: var(--accent-mid);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+
+  /* ===== SECTION LABEL ===== */
+  .section-label {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--accent);
+    padding: 4px 12px;
+    background: var(--accent-light);
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+
+  /* ===== STEP SECTION ===== */
+  .step-section {
+    margin: 48px 0 0;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .step-section:first-of-type {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 40px;
+  }
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .step-num {
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .step-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* ===== UI MOCKUP ===== */
+  .ui-mockup {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 16px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    background: var(--surface);
+  }
+  .ui-header { background: #2d3436; padding: 12px 20px; display: flex; align-items: center; gap: 8px; }
+  .ui-logo { color: #8bc34a; font-weight: bold; font-size: 18px; font-style: italic; }
+  .ui-nav { background: #f5a623; padding: 8px 20px; display: flex; gap: 24px; }
+  .ui-nav-item { color: white; font-weight: bold; font-size: 14px; cursor: default; }
+  .ui-nav-item.active { border-bottom: 2px solid white; }
+  .ui-body { padding: 20px; background: white; }
+  .ui-legacy { display: flex; }
+  .ui-sidebar { background: #1a3a5c; color: white; padding: 16px; width: 220px; }
+  .ui-sidebar-item { padding: 8px 12px; font-size: 13px; font-weight: bold; cursor: default; }
+  .ui-sidebar-item.active { background: rgba(255,255,255,0.15); border-left: 3px solid #f5a623; }
+  .ui-sidebar-item:hover { background: rgba(255,255,255,0.08); }
+  .ui-sidebar-sub { padding: 6px 12px 6px 28px; font-size: 12px; color: #90caf9; cursor: default; }
+  .ui-sidebar-sub:hover { color: white; }
+  .ui-main { padding: 20px; flex: 1; }
+  .ui-main h3 { color: #1a3a5c; font-size: 20px; margin-top: 0; }
+  .ui-btn { display: inline-block; background: #5c8db5; color: white; padding: 6px 16px; border-radius: 4px; font-size: 13px; cursor: default; }
+
+  .arrow-indicator {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 8px;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+  /* ===== STEP INSTRUCTION ===== */
+  .step-instruction {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .step-instruction ul, .step-instruction ol {
+    margin: 8px 0 0;
+    padding-left: 20px;
+  }
+  .step-instruction li {
+    margin: 4px 0;
+    font-size: 14px;
+  }
+
+  /* ===== CALLOUT BOXES ===== */
+  .callout {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    border: 1px solid;
+  }
+  .callout-warning {
+    background: #FFFBEB;
+    border-color: #FDE68A;
+    color: #92400E;
+  }
+  .callout-danger {
+    background: #FEF2F2;
+    border-color: #FECACA;
+    color: #991B1B;
+  }
+  .callout-tip {
+    background: #F0FDF4;
+    border-color: #BBF7D0;
+    color: #166534;
+  }
+  .callout-info {
+    background: #EFF6FF;
+    border-color: #BFDBFE;
+    color: #1E40AF;
+  }
+  .callout-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+
+  /* ===== TABLE ===== */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .data-table th {
+    background: var(--accent);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .data-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) { background: var(--bg); }
+
+  /* ===== REPORT CARD ===== */
+  .report-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 10px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    transition: box-shadow 0.2s;
+  }
+  .report-card:hover {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .report-card strong { color: var(--accent); }
+
+  /* ===== PROFILE MOCKUP ELEMENTS ===== */
+  .profile-bar { display: flex; gap: 16px; align-items: center; padding: 12px 16px; background: #f0f7ff; border-bottom: 1px solid #ddd; }
+  .profile-avatar { width: 40px; height: 40px; background: #1a3a5c; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 16px; }
+  .rit-box { display: inline-block; background: #0f4c81; color: white; padding: 8px 16px; border-radius: 6px; text-align: center; margin: 4px; }
+  .rit-box .score { font-size: 28px; font-weight: bold; }
+  .rit-box .label { font-size: 11px; opacity: 0.8; }
+  .growth-bar { height: 16px; border-radius: 8px; background: #e0e0e0; overflow: hidden; margin: 4px 0; }
+  .growth-fill { height: 100%; border-radius: 8px; }
+
+  /* ===== VIDEO SECTION ===== */
+  .video-section {
+    margin: 48px 0 0;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .video-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .video-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .video-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    transform: translateY(-1px);
+  }
+  .video-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .video-info { flex: 1; }
+  .video-title { font-weight: 600; font-size: 14px; color: var(--text); margin-bottom: 2px; }
+  .video-desc { font-size: 13px; color: var(--text-secondary); }
+  .video-link {
+    background: var(--accent);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .video-link:hover { background: #0b5a46; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    margin-top: 64px;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  /* ===== REVEAL ANIMATION ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== SUBSECTION HEADING ===== */
+  .subsection-heading {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  /* ===== FEATURE BANNER ===== */
+  .feature-banner {
+    background: linear-gradient(135deg, var(--accent), #0b5a46);
+    color: white;
+    padding: 24px 28px;
+    border-radius: 12px;
+    margin: 32px 0 16px 0;
+  }
+  .feature-banner-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .feature-banner-desc {
+    font-size: 14px;
+    opacity: 0.9;
+  }
+
+  /* ===== REPORT LEVEL SECTION ===== */
+  .report-level-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 32px 0 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .report-level-title::before {
+    content: '';
+    width: 4px;
+    height: 18px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .report-level-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+  }
+
+  /* ===== URL TAG ===== */
+  .url-tag {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-family: 'Inter', monospace;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .nav-bar { padding: 0 16px; }
+    .hero { padding: 40px 16px 32px; }
+    .main { padding: 0 16px; }
+    .hero-meta { flex-wrap: wrap; gap: 12px; }
+    .ui-legacy { flex-direction: column; }
+    .ui-sidebar { width: 100%; }
+    .video-card { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-dot"></div>
+    MAP Growth Support Korea
+  </a>
+  <a class="nav-back" href="#">CS 가이드 목록 &rarr;</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      06 &mdash; 리포트
+    </div>
+    <h1>MAP Growth <span>리포트 결과 확인</span> 가이드</h1>
+    <p class="hero-desc">start.mapnwea.org 로그인 후 리포트 메뉴에서 학생별 성적과 성장 데이터를 확인할 수 있습니다. 학부모 상담, 학생 포트폴리오에 가장 많이 활용되는 리포트 확인법을 안내합니다.</p>
+    <div class="hero-meta">
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+        10종 리포트
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        약 10분 소요
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>
+        관리자 계정 필요
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- ===== 국제학교 스타일: Student Progress Report ===== -->
+  <div class="feature-banner reveal">
+    <div class="feature-banner-title">국제학교 스타일 &mdash; Student Progress Report 뽑는 법</div>
+    <div class="feature-banner-desc">학부모 상담이나 학생 포트폴리오에 가장 많이 사용하는 리포트입니다.</div>
+  </div>
+
+  <!-- STEP 1-A: 사이드바 VIEW REPORTS → MAP Growth Reports 클릭 -->
+  <div class="step-section reveal" style="border-top: none; padding-top: 0; margin-top: 16px;">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">VIEW REPORTS &rarr; MAP Growth Reports 클릭</div>
+    </div>
+    <div class="ui-mockup">
+      <div class="ui-legacy">
+        <div class="ui-sidebar">
+          <div class="ui-sidebar-item">IMPORT PROFILES / ROSTERING</div>
+          <div class="ui-sidebar-item">MANAGE USERS</div>
+          <div class="ui-sidebar-item">MANAGE STUDENTS</div>
+          <div class="ui-sidebar-item">MANAGE TEST SESSIONS</div>
+          <div class="ui-sidebar-item">MANAGE DATA PARTNERS</div>
+          <div class="ui-sidebar-item active" style="background:rgba(255,255,255,0.2);">VIEW REPORTS &#9650; <span style="display:inline-block; background:#e53935; color:white; padding:1px 8px; border-radius:10px; font-size:11px; margin-left:4px;">1. 클릭</span></div>
+          <div class="ui-sidebar-sub" style="color: white; background: rgba(255,255,255,0.15); font-weight: bold;">MAP Growth Reports <span style="display:inline-block; background:#e53935; color:white; padding:1px 8px; border-radius:10px; font-size:11px; margin-left:4px;">2. 클릭</span></div>
+          <div class="ui-sidebar-sub">Operational Reports</div>
+          <div class="ui-sidebar-sub">Reports Queue</div>
+          <div class="ui-sidebar-item">MANAGE PREFERENCES &#9662;</div>
+        </div>
+        <div class="ui-main">
+          <h3 style="margin-top: 0; color: #5b8fbd;">MANAGE TESTING SESSIONS</h3>
+          <div style="color: #666; font-size: 13px;">왼쪽 사이드바에서 <strong>VIEW REPORTS</strong> 클릭 &rarr; 펼쳐진 메뉴에서 <strong>MAP Growth Reports</strong> 클릭하면 리포트 사이트로 이동합니다.</div>
+        </div>
+      </div>
+    </div>
+    <div class="step-instruction">
+      <span class="url-tag">start.mapnwea.org</span> 로그인 후 왼쪽 사이드바에서 <strong>VIEW REPORTS</strong> 클릭 &rarr; 펼쳐진 메뉴에서 <strong>MAP Growth Reports</strong> 클릭하면 리포트 사이트로 이동합니다.
+    </div>
+  </div>
+
+  <!-- STEP 1-B: reports.mapnwea.org 리포트 목록에서 Student Progress 선택 -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">리포트 목록에서 Student Progress 선택</div>
+    </div>
+    <div class="ui-mockup">
+      <!-- reports.mapnwea.org 헤더 -->
+      <div style="background: white; padding: 10px 20px; border-bottom: 1px solid #ddd; display: flex; align-items: center;">
+        <span style="font-weight: bold; font-size: 22px; font-style: italic; color: #e67e22;">m</span><span style="font-weight: bold; font-size: 22px; font-style: italic; color: #27ae60;">a</span><span style="font-weight: bold; font-size: 22px; font-style: italic; color: #2980b9;">p</span>
+        <span style="color: #888; margin-left: auto; font-size: 12px;">Logged in as admin@academy.kr</span>
+      </div>
+      <!-- 탭 -->
+      <div style="background: #666; padding: 0; display: flex;">
+        <div style="background: #888; padding: 8px 20px; color: white; font-size: 13px; font-weight: bold;">GROWTH REPORTS</div>
+        <div style="padding: 8px 20px; color: #ccc; font-size: 13px;">OPERATIONAL REPORTS</div>
+        <div style="padding: 8px 20px; color: #ccc; font-size: 13px;">REPORTS QUEUE</div>
+      </div>
+      <!-- 안내 문구 -->
+      <div style="background: #f8f9fa; padding: 14px 20px; border-bottom: 1px solid #eee; font-size: 13px; color: #555;">
+        Select a report to view or request. Requested reports will appear in the Reports Queue.
+      </div>
+      <!-- 리포트 목록 -->
+      <div style="padding: 0; background: white;">
+        <div style="display: flex;">
+          <!-- 왼쪽 필터 -->
+          <div style="width: 200px; padding: 16px; border-right: 1px solid #eee; font-size: 12px;">
+            <div style="font-weight: bold; color: #333; margin-bottom: 8px;">Filter By:</div>
+            <div style="border: 1px solid #ddd; padding: 6px 10px; border-radius: 3px; margin-bottom: 8px;">REPORT LEVEL &#9662;</div>
+            <div style="border: 1px solid #ddd; padding: 6px 10px; border-radius: 3px; margin-bottom: 16px;">WHAT I'M DOING &#9662;</div>
+            <div style="color: #2980b9; font-weight: bold; font-size: 12px;">Student Quick Search</div>
+            <div style="font-size: 11px; color: #888; margin-top: 2px;">Search Student Profile or Student Progress Report for a single student.</div>
+          </div>
+          <!-- 오른쪽 리포트 카드 목록 -->
+          <div style="flex: 1; padding: 12px 20px;">
+            <div style="font-size: 13px; color: #666; margin-bottom: 12px;">Showing All Reports</div>
+            <!-- District Profile -->
+            <div style="padding: 14px 16px; border: 1px solid #eee; border-radius: 4px; margin-bottom: 10px; display: flex; align-items: center; gap: 14px;">
+              <div style="width: 70px; height: 50px; background: #e8ece8; border-radius: 4px;"></div>
+              <div>
+                <div style="font-weight: bold; color: #2980b9; font-size: 13px;">District Profile</div>
+                <div style="font-size: 11px; color: #888;">- Gain a holistic understanding of achievement and growth</div>
+              </div>
+            </div>
+            <!-- School Profile -->
+            <div style="padding: 14px 16px; border: 1px solid #eee; border-radius: 4px; margin-bottom: 10px; display: flex; align-items: center; gap: 14px;">
+              <div style="width: 70px; height: 50px; background: #e8ece8; border-radius: 4px;"></div>
+              <div>
+                <div style="font-weight: bold; color: #2980b9; font-size: 13px;">School Profile</div>
+                <div style="font-size: 11px; color: #888;">- Interactive school and grade-level data visualizations</div>
+              </div>
+            </div>
+            <!-- Student Progress — 하이라이트 -->
+            <div style="padding: 14px 16px; border: 2px solid #2980b9; border-radius: 4px; margin-bottom: 10px; display: flex; align-items: center; gap: 14px; background: #eaf4fb;">
+              <div style="width: 70px; height: 50px; background: #bbdefb; border-radius: 4px;"></div>
+              <div>
+                <div style="font-weight: bold; color: #2980b9; font-size: 14px;">Student Progress <span style="display:inline-block; background:#e53935; color:white; padding:1px 10px; border-radius:10px; font-size:11px; margin-left:6px;">3. 클릭!</span></div>
+                <div style="font-size: 11px; color: #555;">- View a student's overall progress from all past terms</div>
+                <div style="font-size: 11px; color: #555;">- Use to discuss a student's term-to-term growth</div>
+              </div>
+            </div>
+            <div style="font-size: 11px; color: #999;">... 아래로 스크롤하면 더 많은 리포트가 있습니다</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="callout callout-info">
+      <div class="callout-title">참고</div>
+      MAP Growth Reports를 클릭하면 <strong>reports.mapnwea.org</strong> 별도 사이트로 이동합니다. 여기서 리포트 종류를 선택하면 다시 <strong>teach.mapnwea.org</strong>로 돌아가서 리포트를 생성합니다.
+    </div>
+  </div>
+
+  <!-- STEP 2: School 이름 클릭 → 학생 선택으로 이동 -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">School(학원) 이름 클릭</div>
+    </div>
+    <div class="ui-mockup">
+      <div style="background: #f0f4f8; padding: 10px 20px; display: flex; align-items: center;">
+        <span style="color: #5b8fbd; font-weight: bold; font-size: 18px;">Student Progress Report</span>
+        <span style="color: #ccc; margin-left: auto; font-size: 12px;">Logged in as admin@academy.kr</span>
+      </div>
+      <div style="padding: 20px; background: white;">
+        <div>
+          <div style="font-size: 15px; font-weight: bold; color: #5b8fbd; border-bottom: 1px solid #e0e0e0; padding-bottom: 6px; margin-bottom: 10px;">Select a School</div>
+          <div style="font-size: 13px; color: #666; margin-bottom: 10px;">아래 목록에서 <strong>내 학원 이름을 클릭</strong>하면 학생 선택 화면으로 바로 이동합니다.</div>
+          <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+            <tr style="background: #f8f9fa;"><td style="padding: 10px 14px; border-bottom: 1px solid #eee;"><a style="color: #2980b9; text-decoration: underline; cursor: pointer;">DEF Academy</a></td></tr>
+            <tr><td style="padding: 10px 14px; border-bottom: 1px solid #eee;"><a style="color: #2980b9; text-decoration: underline; cursor: pointer;">GHI School</a></td></tr>
+            <tr style="background: #e3f2fd;"><td style="padding: 10px 14px; border-bottom: 1px solid #eee;"><a style="color: #2980b9; text-decoration: underline; cursor: pointer; font-weight: bold;">ABC School</a> <span style="display:inline-block; background:#e53935; color:white; padding:1px 10px; border-radius:10px; font-size:11px; margin-left:6px;">&larr; 내 학원 클릭!</span></td></tr>
+            <tr><td style="padding: 10px 14px; border-bottom: 1px solid #eee;"><a style="color: #2980b9; text-decoration: underline; cursor: pointer;">JKL Academy</a></td></tr>
+            <tr style="background: #f8f9fa;"><td style="padding: 10px 14px; border-bottom: 1px solid #eee;"><a style="color: #2980b9; text-decoration: underline; cursor: pointer;">MNO School</a></td></tr>
+          </table>
+          <div style="font-size: 12px; color: #888; margin-top: 8px;">체크박스 없음 &mdash; 이름 자체가 링크입니다. 클릭하면 바로 학생 목록으로 이동해요.</div>
+        </div>
+      </div>
+    </div>
+    <div class="step-instruction">
+      School 목록에서 <strong>내 학원 이름을 클릭</strong>하면 학생 선택 화면으로 바로 이동합니다.
+    </div>
+  </div>
+
+  <!-- STEP 3: 학생 선택 -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div class="step-title">Student(학생) 선택</div>
+    </div>
+    <div class="ui-mockup">
+      <div style="background: #f0f4f8; padding: 10px 20px;">
+        <span style="color: #5b8fbd; font-weight: bold; font-size: 18px;">Student Progress Report</span>
+      </div>
+      <div style="padding: 20px; background: white;">
+        <div style="font-size: 12px; color: #888; margin-bottom: 4px;">
+          <strong>Term:</strong> Spring 2025-2026 &nbsp; <strong>School:</strong> ABC School &nbsp; <strong>Instructor:</strong> ABC School, ABC School &nbsp; <strong>Class:</strong> English Language Learner (ELL)
+        </div>
+        <div style="font-size: 15px; font-weight: bold; color: #5b8fbd; border-bottom: 1px solid #e0e0e0; padding-bottom: 6px; margin: 12px 0 6px;">Student <span style="color: #e53935;">*</span></div>
+        <div style="font-size: 13px; color: #666; margin-bottom: 8px;">Use the checkboxes to select student(s) from the list below</div>
+        <div style="display: inline-block; background: #5b8fbd; color: white; padding: 4px 12px; border-radius: 3px; font-size: 12px; margin-bottom: 8px;">Select All <span style="display:inline-block; background:#e53935; color:white; padding:1px 8px; border-radius:10px; font-size:11px; margin-left:4px;">전체 선택</span></div>
+        <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+          <tr style="background: #f0f0f0;">
+            <th style="padding: 6px 10px; text-align: left; color: #333; border-bottom: 1px solid #ddd;"></th>
+            <th style="padding: 6px 10px; text-align: left; color: #333; border-bottom: 1px solid #ddd;">Student ID</th>
+            <th style="padding: 6px 10px; text-align: left; color: #333; border-bottom: 1px solid #ddd;">Name</th>
+            <th style="padding: 6px 10px; text-align: left; color: #333; border-bottom: 1px solid #ddd;">Class</th>
+          </tr>
+          <tr style="background: #f8f9fa;"><td style="padding: 6px 10px; border-bottom: 1px solid #eee;"><input type="checkbox" disabled checked></td><td>STAR07</td><td>KIM, JIMIN</td><td>English Language Learner (ELL)</td></tr>
+          <tr><td style="padding: 6px 10px; border-bottom: 1px solid #eee;"><input type="checkbox" disabled checked></td><td>STAR06</td><td>LEE, SOYEON</td><td>English Language Learner (ELL)</td></tr>
+          <tr style="background: #f8f9fa;"><td style="padding: 6px 10px; border-bottom: 1px solid #eee;"><input type="checkbox" disabled checked></td><td>STAR01</td><td>PARK, MINJUN</td><td>English Language Learner (ELL)</td></tr>
+          <tr><td style="padding: 6px 10px; border-bottom: 1px solid #eee;"><input type="checkbox" disabled checked></td><td>STAR10</td><td>CHOI, YUNA</td><td>English Language Learner (ELL)</td></tr>
+        </table>
+        <div style="font-size: 11px; color: #999; margin-top: 6px;">학생을 선택한 후 Next 클릭</div>
+      </div>
+    </div>
+    <div class="step-instruction">
+      학생을 개별 선택하거나 <strong>Select All</strong>로 전체 선택 후 <strong>Next</strong> 클릭
+    </div>
+  </div>
+
+  <!-- STEP 4: Report Options 설정 -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">5</div>
+      <div class="step-title">Report Options 설정</div>
+    </div>
+    <div class="ui-mockup">
+      <div style="padding: 20px; background: white;">
+        <div style="font-size: 15px; font-weight: bold; color: #5b8fbd; border-bottom: 1px solid #e0e0e0; padding-bottom: 6px; margin-bottom: 16px;">Report Options</div>
+        <div style="display: flex; gap: 40px; flex-wrap: wrap; font-size: 13px;">
+          <!-- 왼쪽 -->
+          <div style="flex: 1; min-width: 200px;">
+            <div style="font-weight: bold; color: #333; margin-bottom: 6px;">Growth Comparison Period</div>
+            <div style="margin-left: 8px; line-height: 2;">
+              <div><input type="radio" checked disabled> <strong>Fall to Spring</strong> <span style="display:inline-block; background:#e53935; color:white; padding:1px 8px; border-radius:10px; font-size:11px; margin-left:4px;">추천</span></div>
+              <div><input type="radio" disabled> Fall to Winter</div>
+              <div><input type="radio" disabled> Winter to Spring</div>
+              <div><input type="radio" disabled> Spring to Spring</div>
+              <div><input type="radio" disabled> Fall to Fall</div>
+              <div><input type="radio" disabled> Winter to Winter</div>
+            </div>
+            <div style="font-weight: bold; color: #333; margin: 14px 0 6px;">Goal Ranges</div>
+            <div style="margin-left: 8px; line-height: 2;">
+              <div><input type="radio" checked disabled> Instructional Area Descriptor</div>
+              <div><input type="radio" disabled> Instructional Area RIT Ranges</div>
+            </div>
+            <div style="font-weight: bold; color: #333; margin: 14px 0 6px;">Reference</div>
+            <div style="margin-left: 8px; line-height: 2;">
+              <div><input type="checkbox" checked disabled> District Grade Level Mean RIT</div>
+              <div><input type="checkbox" checked disabled> Norm Grade Level Mean RIT</div>
+            </div>
+          </div>
+          <!-- 오른쪽 -->
+          <div style="flex: 1; min-width: 200px;">
+            <div style="font-weight: bold; color: #333; margin-bottom: 6px;">Test Events</div>
+            <div style="margin-left: 8px; line-height: 2;">
+              <div><input type="radio" checked disabled> Growth Only</div>
+              <div><input type="radio" disabled> All Valid</div>
+            </div>
+            <div style="font-weight: bold; color: #333; margin: 14px 0 6px;">Graph Style</div>
+            <div style="margin-left: 8px; line-height: 2;">
+              <div><input type="radio" checked disabled> Bar</div>
+              <div><input type="radio" disabled> Line</div>
+            </div>
+            <div style="font-weight: bold; color: #333; margin: 14px 0 6px;">Group Output</div>
+            <div style="margin-left: 8px; line-height: 2;">
+              <div><input type="radio" disabled> One PDF per Grade</div>
+              <div><input type="radio" checked disabled> <strong>One PDF per Student</strong> <span style="display:inline-block; background:#e53935; color:white; padding:1px 8px; border-radius:10px; font-size:11px; margin-left:4px;">학생별 출력</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- 버튼 -->
+        <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid #e0e0e0;">
+          <span style="display:inline-block; background:#5b8fbd; color:white; padding:8px 24px; border-radius:4px; font-size:14px; font-weight:bold;">Create PDF Report</span>
+          <span style="display:inline-block; background:#e53935; color:white; padding:2px 10px; border-radius:12px; font-size:12px; font-weight:bold; margin-left:8px;">클릭하여 PDF 생성!</span>
+        </div>
+      </div>
+    </div>
+    <div class="step-instruction">
+      옵션 설정 후 <strong>Create PDF Report</strong> 클릭하여 PDF를 생성합니다.
+      <ul>
+        <li>Growth Comparison Period: <strong>Fall to Spring</strong> 추천</li>
+        <li>Group Output: <strong>One PDF per Student</strong> &mdash; 학생별 개별 PDF 생성</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 순서 요약 -->
+  <div class="step-instruction reveal" style="margin-top: 24px;">
+    <strong>Student Progress Report 뽑는 순서 요약:</strong>
+    <ol>
+      <li><span class="url-tag">start.mapnwea.org</span> 로그인</li>
+      <li>왼쪽 사이드바 <strong>VIEW REPORTS</strong> &rarr; <strong>MAP Growth Reports</strong></li>
+      <li>리포트 목록에서 <strong>Student Progress</strong> 선택</li>
+      <li><strong>Term</strong>(학기) 선택 &rarr; <strong>Next</strong></li>
+      <li><strong>School</strong>(내 학원) 체크 &rarr; <strong>Next</strong></li>
+      <li><strong>Student</strong>(학생) 선택 또는 Select All &rarr; <strong>Next</strong></li>
+      <li>Report Options 설정 &rarr; <strong>One PDF per Student</strong> 선택</li>
+      <li><strong>Create PDF Report</strong> 클릭 &rarr; PDF 다운로드!</li>
+    </ol>
+  </div>
+
+  <div class="callout callout-tip reveal">
+    <div class="callout-title">팁</div>
+    Group Output에서 <strong>One PDF per Student</strong>를 선택하면 학생별로 개별 PDF가 생성됩니다. 학부모 상담 시 학생별로 나눠줄 수 있어요. <strong>One PDF per Grade</strong>를 선택하면 학년 전체가 한 파일로 나옵니다.
+  </div>
+
+  <!-- ===== 전체 리포트 종류 ===== -->
+  <div class="step-section reveal">
+    <div class="section-label">리포트 종류</div>
+    <h2 class="subsection-heading">전체 리포트 종류</h2>
+  </div>
+
+  <!-- 시각 가이드 1: VIEW REPORTS 사이드바 메뉴 -->
+  <div class="step-section reveal" style="border-top: none; padding-top: 0; margin-top: 16px;">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">VIEW REPORTS 메뉴 클릭</div>
+    </div>
+    <div class="ui-mockup">
+      <div class="ui-header">
+        <div class="ui-logo">nwea</div>
+        <div style="color:#ccc; margin-left:auto; font-size:13px;">MAP Growth Reports</div>
+      </div>
+      <div class="ui-nav">
+        <div class="ui-nav-item">Rostering &#9662;</div>
+        <div class="ui-nav-item active">MAP Growth &#9662;</div>
+        <div class="ui-nav-item">Professional Learning &#9662;</div>
+      </div>
+      <div class="ui-legacy">
+        <div class="ui-sidebar">
+          <div class="ui-sidebar-item">IMPORT PROFILES / ROSTERING</div>
+          <div class="ui-sidebar-item">MANAGE USERS</div>
+          <div class="ui-sidebar-item">MANAGE STUDENTS</div>
+          <div class="ui-sidebar-item">MANAGE TEST SESSIONS</div>
+          <div class="ui-sidebar-item">MANAGE DATA PARTNERS</div>
+          <div class="ui-sidebar-item active" style="background:rgba(255,255,255,0.2);">VIEW REPORTS &#9662; <span class="arrow-indicator">클릭</span></div>
+          <div class="ui-sidebar-sub">Student Profile</div>
+          <div class="ui-sidebar-sub">Student Progress</div>
+          <div class="ui-sidebar-sub">Family Report</div>
+          <div class="ui-sidebar-sub">Achievement Status &amp; Growth</div>
+          <div class="ui-sidebar-sub">Class Profile</div>
+          <div class="ui-sidebar-sub">Learning Continuum</div>
+          <div class="ui-sidebar-sub">Grade Report</div>
+          <div class="ui-sidebar-sub">Student Growth Summary</div>
+          <div class="ui-sidebar-sub">Projected Proficiency</div>
+          <div class="ui-sidebar-sub">Data Export</div>
+          <div class="ui-sidebar-item">MANAGE PREFERENCES &#9662;</div>
+        </div>
+        <div class="ui-main">
+          <h3>VIEW REPORTS</h3>
+          <p style="color:#666; font-size:14px;">왼쪽 사이드바에서 <strong>VIEW REPORTS</strong>를 클릭하면<br>리포트 목록이 펼쳐집니다.</p>
+          <div style="background:#EFF6FF; padding:12px 16px; border-radius:6px; font-size:13px;">
+            <strong>학생 레벨:</strong> Student Profile, Student Progress, Family Report<br>
+            <strong>학급 레벨:</strong> Achievement Status &amp; Growth, Class Profile, Learning Continuum<br>
+            <strong>학교 레벨:</strong> Grade Report, Student Growth Summary, Projected Proficiency, Data Export
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 시각 가이드 2: Student Profile 리포트 레이아웃 -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Student Profile 리포트 화면</div>
+    </div>
+    <div class="ui-mockup">
+      <div class="ui-header">
+        <div class="ui-logo">nwea</div>
+        <div style="color:#ccc; margin-left:auto; font-size:13px;">Student Profile Report</div>
+      </div>
+      <div class="ui-body" style="padding:0;">
+        <div class="profile-bar">
+          <div class="profile-avatar">KM</div>
+          <div>
+            <div style="font-weight:bold; font-size:16px; color:#1a3a5c;">Kim, Minjun</div>
+            <div style="font-size:12px; color:#666;">Grade 4 | ABC School | Spring 2025-2026</div>
+          </div>
+        </div>
+        <div style="padding:20px;">
+          <div style="font-weight:bold; color:#1a3a5c; margin-bottom:12px; font-size:15px;">Reading RIT Scores</div>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <div class="rit-box" style="background:#78909c;">
+              <div class="label">Fall 2025</div>
+              <div class="score">198</div>
+            </div>
+            <div class="rit-box" style="background:#5c6bc0;">
+              <div class="label">Winter 2026</div>
+              <div class="score">205</div>
+            </div>
+            <div class="rit-box" style="background:#0f4c81;">
+              <div class="label">Spring 2026</div>
+              <div class="score">212</div>
+            </div>
+          </div>
+          <div style="margin-top:16px; font-weight:bold; color:#1a3a5c; font-size:14px;">Growth Over Time</div>
+          <div style="display:flex; align-items:center; gap:12px; margin-top:8px;">
+            <div style="font-size:12px; color:#666; width:80px;">Fall &rarr; Spring</div>
+            <div class="growth-bar" style="flex:1;">
+              <div class="growth-fill" style="width:75%; background: linear-gradient(90deg, #78909c, #0f4c81);"></div>
+            </div>
+            <div style="font-size:14px; font-weight:bold; color:#2e7d32;">+14 RIT</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:12px; margin-top:6px;">
+            <div style="font-size:12px; color:#666; width:80px;">Norm Growth</div>
+            <div class="growth-bar" style="flex:1;">
+              <div class="growth-fill" style="width:50%; background:#e0e0e0;"></div>
+            </div>
+            <div style="font-size:14px; font-weight:bold; color:#666;">+7 RIT</div>
+          </div>
+          <div style="margin-top:8px; font-size:12px; color:#2e7d32; background:#e8f5e9; padding:6px 10px; border-radius:4px; display:inline-block;">
+            Norm 대비 <strong>+7 RIT</strong> 초과 달성 (우수)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 시각 가이드 3: Class Profile / Grade Report 선택 화면 -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Class Profile / Grade Report 선택</div>
+    </div>
+    <div class="ui-mockup">
+      <div class="ui-legacy">
+        <div class="ui-sidebar">
+          <div class="ui-sidebar-item">VIEW REPORTS &#9662;</div>
+          <div class="ui-sidebar-sub">Student Profile</div>
+          <div class="ui-sidebar-sub">Student Progress</div>
+          <div class="ui-sidebar-sub">Family Report</div>
+          <div class="ui-sidebar-sub" style="color:white; background:rgba(255,255,255,0.15); border-left:3px solid #f5a623;">Class Profile <span class="arrow-indicator">클릭</span></div>
+          <div class="ui-sidebar-sub">Learning Continuum</div>
+          <div class="ui-sidebar-sub" style="color:white;">Grade Report <span class="arrow-indicator">클릭</span></div>
+        </div>
+        <div class="ui-main">
+          <h3>리포트 선택 안내</h3>
+          <div style="display:flex; gap:16px; flex-wrap:wrap;">
+            <div style="flex:1; min-width:200px; border:2px solid #1565c0; border-radius:8px; padding:16px;">
+              <div style="font-weight:bold; color:#1565c0; font-size:15px; margin-bottom:8px;">Class Profile</div>
+              <div style="font-size:13px; color:#555;">
+                <strong>대상:</strong> Instructor 이상<br>
+                <strong>내용:</strong> 학급 전체 RIT 분포, Norms 비교<br>
+                <strong>활용:</strong> 학급 수준 분석, 수업 계획
+              </div>
+            </div>
+            <div style="flex:1; min-width:200px; border:2px solid #e65100; border-radius:8px; padding:16px;">
+              <div style="font-weight:bold; color:#e65100; font-size:15px; margin-bottom:8px;">Grade Report</div>
+              <div style="font-size:13px; color:#555;">
+                <strong>대상:</strong> Administrator 이상<br>
+                <strong>내용:</strong> 학년별 성적 + Norms 비교<br>
+                <strong>활용:</strong> 학년별 수준 분석, 기관 보고
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 학생 레벨 리포트 -->
+  <div class="step-section reveal">
+    <div class="report-level-title">학생 레벨 리포트</div>
+    <div class="report-level-desc">Instructor(담당 선생님) 이상 접근 가능</div>
+
+    <div class="report-card">
+      <strong>Student Profile</strong> &mdash; 학생의 모든 데이터 종합<br>
+      활용: 개별 상담, 성장 목표 설정
+    </div>
+
+    <div class="report-card">
+      <strong>Student Progress</strong> &mdash; 전체 학기의 진행 추이<br>
+      활용: 학부모 상담, 성장 소통
+    </div>
+
+    <div class="report-card">
+      <strong>Family Report</strong> &mdash; 학부모용 간소화 리포트<br>
+      활용: 학부모 안내문 배포
+    </div>
+  </div>
+
+  <!-- 학급 레벨 리포트 -->
+  <div class="step-section reveal">
+    <div class="report-level-title">학급 레벨 리포트</div>
+    <div class="report-level-desc">Instructor(담당 선생님) 이상 접근 가능</div>
+
+    <div class="report-card">
+      <strong>Achievement Status &amp; Growth</strong> &mdash; 성장 예측, 사분면 차트<br>
+      활용: 성장 계획 수립, 시각화
+    </div>
+
+    <div class="report-card">
+      <strong>Class Profile</strong> &mdash; 학급 전체 성적 + Norms 비교<br>
+      활용: 현재 학급 수준 분석
+    </div>
+
+    <div class="report-card">
+      <strong>Learning Continuum</strong> &mdash; 학습 진술문 (Learning Statements)<br>
+      활용: 교수 내용 탐색, 수업 계획
+    </div>
+  </div>
+
+  <!-- 학교/기관 레벨 리포트 -->
+  <div class="step-section reveal">
+    <div class="report-level-title">학교/기관 레벨 리포트</div>
+    <div class="report-level-desc">Administrator 이상 접근 가능</div>
+
+    <div class="report-card">
+      <strong>Grade Report</strong> &mdash; 학년별 성적 + Norms<br>
+      활용: 학년별 수준 분석
+    </div>
+
+    <div class="report-card">
+      <strong>Student Growth Summary</strong> &mdash; Norms 대비 성장 집계<br>
+      활용: 커리큘럼 효과성 평가
+    </div>
+
+    <div class="report-card">
+      <strong>Projected Proficiency</strong> &mdash; 주 시험/SAT 예측 성적<br>
+      활용: 입시 준비 지원
+    </div>
+
+    <div class="report-card">
+      <strong>Data Export</strong> &mdash; CSV로 전체 데이터 내보내기<br>
+      활용: 커스텀 분석, 외부 도구 연동
+    </div>
+  </div>
+
+  <!-- RIT 점수란? -->
+  <div class="step-section reveal">
+    <div class="section-label">핵심 개념</div>
+    <h2 class="subsection-heading">RIT 점수란?</h2>
+    <div class="callout callout-info">
+      <div class="callout-title">RIT(Rasch Unit)는 MAP Growth의 점수 단위입니다</div>
+      &middot; 학년에 무관한 동일 척도로 <strong>성장을 추적</strong>할 수 있습니다.<br>
+      &middot; 같은 학생의 가을/겨울/봄 점수를 비교하여 얼마나 성장했는지 확인합니다.<br>
+      &middot; RIT 점수와 Reading Level 대조는 별도 제공되는 <strong>RIT Score Reading Level Table</strong>을 참고하세요.
+    </div>
+  </div>
+
+  <!-- 시험 시기 -->
+  <div class="step-section reveal">
+    <h2 class="subsection-heading">시험 시기 (일반적 기준)</h2>
+    <table class="data-table">
+      <tr><th>시기</th><th>명칭</th><th>목적</th></tr>
+      <tr><td>가을 (9&ndash;10월)</td><td>Fall Testing</td><td>기초선(Baseline) 측정</td></tr>
+      <tr><td>겨울 (1&ndash;2월)</td><td>Winter Testing</td><td>중간 진도 점검</td></tr>
+      <tr><td>봄 (4&ndash;6월)</td><td>Spring Testing</td><td>연간 성장 측정</td></tr>
+    </table>
+    <div class="callout callout-tip">
+      <div class="callout-title">팁</div>
+      한국 학원의 경우 시험 시기를 자체적으로 설정할 수 있습니다. 학원 일정에 맞추어 Testing Window를 조정합니다.
+    </div>
+  </div>
+
+  <!-- 영상 가이드 -->
+  <div class="video-section reveal">
+    <div class="section-label">참고 영상</div>
+    <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 4px;">영상 가이드</h2>
+    <p style="color: var(--text-secondary); font-size: 14px;">영상으로 보면 더 쉽습니다. Chrome 실시간 자막으로 한국어 자막도 지원됩니다.</p>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-icon">&#9654;</div>
+        <div class="video-info">
+          <div class="video-title">Student Profile 리포트</div>
+          <div class="video-desc">학생 개별 리포트 확인 방법</div>
+        </div>
+        <a href="https://vimeo.com/nwea" target="_blank" class="video-link">영상 보기 &rarr;</a>
+      </div>
+      <div class="video-card">
+        <div class="video-icon">&#9654;</div>
+        <div class="video-info">
+          <div class="video-title">Achievement Status &amp; Growth</div>
+          <div class="video-desc">성장 분석 리포트</div>
+        </div>
+        <a href="https://vimeo.com/nwea" target="_blank" class="video-link">영상 보기 &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  MAP Growth Support Korea &nbsp;&middot;&nbsp; cs@mapgrowthsupportkorea.com &nbsp;&middot;&nbsp; 070-7623-2105<br>
+  본 자료는 NWEA MAP Help Center 공식 문서 기반으로 작성되었습니다.
+</footer>
+
+<!-- REVEAL ANIMATION -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

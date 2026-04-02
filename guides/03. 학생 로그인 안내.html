@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>학생 로그인 안내 — MAP Growth</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #0F6E56;
+    --accent-light: rgba(15,110,86,0.06);
+    --accent-mid: rgba(15,110,86,0.12);
+    --bg: #FAFAF9;
+    --surface: #FFFFFF;
+    --border: rgba(0,0,0,0.06);
+    --text: #0f172a;
+    --text-secondary: #64748b;
+    --text-tertiary: #94a3b8;
+    --positive: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== NAV ===== */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    background: rgba(250,250,249,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .nav-back {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.15s;
+  }
+  .nav-back:hover { background: var(--accent-light); color: var(--accent); }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(165deg, #FFFFFF 0%, #F5F9F7 40%, #F0F8F4 100%);
+    padding: clamp(48px, 8vw, 72px) 24px clamp(40px, 6vw, 56px);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(15,110,86,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: var(--accent-light);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .hero-badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .hero h1 {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-desc {
+    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+    color: var(--text-secondary);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .hero-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ===== MAIN CONTAINER ===== */
+  .main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ===== PART DIVIDER ===== */
+  .part-divider {
+    margin: 48px 0 32px;
+    padding: 20px 24px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    border-radius: 0 12px 12px 0;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .part-divider-number {
+    width: 44px;
+    height: 44px;
+    background: var(--accent);
+    color: white;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .part-divider-content {
+    flex: 1;
+  }
+  .part-divider-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .part-divider-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+
+  /* ===== INFO CARD ===== */
+  .info-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 32px 0;
+  }
+  .info-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .info-card-title::before {
+    content: '';
+    width: 4px;
+    height: 16px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  /* ===== SECTION LABEL ===== */
+  .section-label {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--accent);
+    padding: 4px 12px;
+    background: var(--accent-light);
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+
+  /* ===== STEP SECTION ===== */
+  .step-section {
+    margin: 48px 0 0;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .step-section:first-of-type,
+  .step-section.no-border {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 40px;
+  }
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .step-num {
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .step-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* ===== UI MOCKUP ===== */
+  .ui-mockup {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 16px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    background: var(--surface);
+  }
+  .ui-header { background: #2d3436; padding: 12px 20px; display: flex; align-items: center; gap: 8px; }
+  .ui-logo { color: #8bc34a; font-weight: bold; font-size: 18px; font-style: italic; }
+  .ui-nav { background: #f5a623; padding: 8px 20px; display: flex; gap: 24px; }
+  .ui-nav-item { color: white; font-weight: bold; font-size: 14px; cursor: default; }
+  .ui-nav-item.active { border-bottom: 2px solid white; }
+  .ui-body { padding: 20px; background: white; }
+
+  .ui-btn { display: inline-block; background: #5c8db5; color: white; padding: 6px 16px; border-radius: 4px; font-size: 13px; cursor: default; }
+  .ui-btn-gold { background: #f5a623; }
+  .ui-btn-green { background: #4caf50; }
+  .ui-btn-blue { background: #2196f3; }
+  .ui-btn-large { padding: 12px 32px; font-size: 16px; border-radius: 6px; }
+
+  .arrow-indicator {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 8px;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+  /* Proctor table (inside mockup) */
+  .proctor-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  .proctor-table th { background: #1a3a5c; color: white; padding: 8px 12px; text-align: left; font-size: 12px; }
+  .proctor-table td { border: 1px solid #ddd; padding: 8px 12px; }
+  .status-pending { color: #e65100; font-weight: bold; }
+  .status-confirmed { color: #2e7d32; font-weight: bold; }
+  .status-testing { color: #1565c0; font-weight: bold; }
+
+  /* Login mockup styles */
+  .browser-bar { background: #e8e8e8; padding: 8px 16px; display: flex; align-items: center; gap: 8px; font-size: 13px; border-bottom: 1px solid #ccc; }
+  .browser-dots { display: flex; gap: 5px; }
+  .browser-dot { width: 10px; height: 10px; border-radius: 50%; }
+  .browser-dot.red { background: #e53935; }
+  .browser-dot.yellow { background: #ffc107; }
+  .browser-dot.green { background: #4caf50; }
+  .browser-url { background: white; border: 1px solid #ccc; border-radius: 4px; padding: 4px 12px; flex: 1; color: #333; font-size: 12px; }
+
+  .login-screen { background: #f0f4f8; padding: 40px; text-align: center; }
+  .login-box { background: white; border-radius: 12px; padding: 32px 40px; max-width: 380px; margin: 0 auto; box-shadow: 0 4px 16px rgba(0,0,0,0.12); }
+  .login-title { color: #0f4c81; font-size: 20px; font-weight: bold; margin-bottom: 6px; }
+  .login-subtitle { color: #666; font-size: 13px; margin-bottom: 24px; }
+  .login-field { text-align: left; margin-bottom: 16px; }
+  .login-field label { display: block; font-size: 13px; font-weight: bold; color: #333; margin-bottom: 4px; }
+  .login-field .input-mock { border: 2px solid #ddd; border-radius: 6px; padding: 10px 14px; font-size: 14px; color: #999; background: #fafafa; }
+  .login-field .input-filled { border-color: #0f4c81; color: #333; background: white; }
+
+  .student-name-screen { background: #e8f0fe; padding: 30px; text-align: center; }
+  .student-name-box { background: white; border-radius: 10px; padding: 24px 32px; max-width: 400px; margin: 0 auto; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+  .student-greeting { font-size: 22px; color: #0f4c81; font-weight: bold; margin-bottom: 8px; }
+
+  .practice-badge { display: inline-block; background: #fff3e0; border: 2px solid #f5a623; border-radius: 8px; padding: 4px 12px; font-size: 12px; font-weight: bold; color: #e65100; margin-bottom: 12px; }
+
+  /* ===== STEP INSTRUCTION ===== */
+  .step-instruction {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .step-instruction ul {
+    margin: 8px 0 0;
+    padding-left: 20px;
+    list-style: disc;
+  }
+  .step-instruction li {
+    margin: 4px 0;
+    font-size: 14px;
+  }
+
+  /* ===== CALLOUT BOXES ===== */
+  .callout {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    border: 1px solid;
+  }
+  .callout-warning {
+    background: #FFFBEB;
+    border-color: #FDE68A;
+    color: #92400E;
+  }
+  .callout-danger {
+    background: #FEF2F2;
+    border-color: #FECACA;
+    color: #991B1B;
+  }
+  .callout-tip {
+    background: #F0FDF4;
+    border-color: #BBF7D0;
+    color: #166534;
+  }
+  .callout-info {
+    background: #EFF6FF;
+    border-color: #BFDBFE;
+    color: #1E40AF;
+  }
+  .callout-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+
+  /* ===== BOARD CARD ===== */
+  .board-card {
+    background: linear-gradient(135deg, var(--accent), #0b5a46);
+    color: white;
+    padding: 20px 24px;
+    border-radius: 12px;
+    margin: 16px 0;
+    font-family: 'Inter', monospace;
+    letter-spacing: 0.5px;
+  }
+  .board-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.8;
+    margin-bottom: 10px;
+  }
+  .board-card-content {
+    font-size: 18px;
+    line-height: 1.8;
+  }
+  .board-card-content strong {
+    color: #A7F3D0;
+  }
+
+  /* ===== SCRIPT BOX ===== */
+  .script-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 20px 0;
+    font-size: 14px;
+    line-height: 1.9;
+    color: var(--text-secondary);
+    font-style: italic;
+    position: relative;
+  }
+  .script-box::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: var(--accent);
+    border-radius: 12px 0 0 12px;
+  }
+
+  /* ===== TABLE ===== */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .data-table th {
+    background: var(--accent);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .data-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) { background: var(--bg); }
+
+  /* ===== VIDEO SECTION ===== */
+  .video-section {
+    margin: 48px 0 0;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .video-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .video-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .video-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    transform: translateY(-1px);
+  }
+  .video-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .video-info { flex: 1; }
+  .video-title { font-weight: 600; font-size: 14px; color: var(--text); margin-bottom: 2px; }
+  .video-desc { font-size: 13px; color: var(--text-secondary); }
+  .video-link {
+    background: var(--accent);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .video-link:hover { background: #0b5a46; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    margin-top: 64px;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  /* ===== REVEAL ANIMATION ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .nav-bar { padding: 0 16px; }
+    .hero { padding: 40px 16px 32px; }
+    .main { padding: 0 16px; }
+    .hero-meta { flex-wrap: wrap; gap: 12px; }
+    .part-divider { flex-direction: column; text-align: center; }
+    .video-card { flex-direction: column; text-align: center; }
+    .board-card-content { font-size: 15px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-dot"></div>
+    MAP Growth Support Korea
+  </a>
+  <a class="nav-back" href="#">CS 가이드 목록 &rarr;</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      03 &mdash; 시험 진행
+    </div>
+    <h1>MAP Growth <span>학생 로그인</span> 안내</h1>
+    <p class="hero-desc">시험 당일, 감독관(선생님)이 세션을 열고 학생이 로그인하는 전체 과정을 안내합니다. PART 1은 감독관용, PART 2는 학생용입니다.</p>
+    <div class="hero-meta">
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        PART 1 + PART 2
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        약 10분 소요
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        감독관 + 학생
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- 문서 구성 안내 -->
+  <div class="info-card reveal">
+    <div class="info-card-title">이 문서의 구성</div>
+    <div style="display: flex; gap: 12px; margin-top: 8px; flex-wrap: wrap;">
+      <div style="flex: 1; min-width: 200px; padding: 14px 18px; background: var(--accent-light); border-radius: 10px; border: 1px solid var(--accent-mid);">
+        <div style="font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px;">PART 1</div>
+        <div style="font-size: 14px; font-weight: 600; color: var(--text);">감독관(선생님)이 할 일</div>
+      </div>
+      <div style="flex: 1; min-width: 200px; padding: 14px 18px; background: #F0FDF4; border-radius: 10px; border: 1px solid #BBF7D0;">
+        <div style="font-size: 12px; color: var(--positive); font-weight: 600; margin-bottom: 4px;">PART 2 (별도 첨부 가능)</div>
+        <div style="font-size: 14px; font-weight: 600; color: var(--text);">학생이 할 일 (PDF 안내문)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- PART 1: 감독관 -->
+  <!-- ============================================== -->
+  <div class="part-divider reveal">
+    <div class="part-divider-number">P1</div>
+    <div class="part-divider-content">
+      <div class="part-divider-title">PART 1 -- 감독관(선생님)이 할 일</div>
+      <div class="part-divider-desc">Proctor 콘솔에서 세션 정보를 확인하고, 학생 로그인을 승인하는 과정입니다.</div>
+    </div>
+  </div>
+
+  <!-- ===== STEP 1: Session Name & Password 확인 ===== -->
+  <div class="step-section no-border reveal">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">Session Name &amp; Password 확인</div>
+    </div>
+
+    <!-- Proctor 콘솔 목업 -->
+    <div class="ui-mockup">
+      <div style="background: #333; padding: 10px 20px; display: flex; align-items: center;">
+        <span class="ui-logo">nwea</span>
+        <span style="color: #ccc; margin-left: auto; font-size: 13px;">Proctor Console</span>
+      </div>
+      <div style="background: #f5a623; padding: 8px 20px; display: flex; gap: 24px;">
+        <span style="color: white; font-weight: bold; font-size: 14px;">MAP Growth &#9662;</span>
+        <span style="color: white; font-weight: bold; font-size: 14px; border-bottom: 2px solid white;">Test Sessions</span>
+      </div>
+      <!-- Session Info Bar -->
+      <div style="background: #e8f0fe; padding: 16px 24px; border-bottom: 2px solid #b3d4fc; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+        <div>
+          <div style="font-size: 11px; color: #666; text-transform: uppercase; font-weight: bold;">Session Name</div>
+          <div style="font-size: 22px; font-weight: bold; color: #0f4c81; letter-spacing: 1px;">
+            Mrs. Kim - Math Spring
+            <span class="arrow-indicator">여기!</span>
+          </div>
+        </div>
+        <div style="width: 1px; height: 40px; background: #b3d4fc;"></div>
+        <div>
+          <div style="font-size: 11px; color: #666; text-transform: uppercase; font-weight: bold;">Password</div>
+          <div style="font-size: 22px; font-weight: bold; color: #e53935; letter-spacing: 2px;">
+            A3B7X9
+            <span class="arrow-indicator">여기!</span>
+          </div>
+        </div>
+        <div style="width: 1px; height: 40px; background: #b3d4fc;"></div>
+        <div>
+          <div style="font-size: 11px; color: #666; text-transform: uppercase; font-weight: bold;">Proctor PIN</div>
+          <div style="font-size: 22px; font-weight: bold; color: #f5a623;">4827</div>
+        </div>
+      </div>
+      <!-- 학생 테이블 미리보기 -->
+      <div style="padding: 16px 24px; background: white;">
+        <div style="font-weight: bold; color: #1a3a5c; margin-bottom: 8px; font-size: 14px;">Test Students</div>
+        <table class="proctor-table">
+          <tr>
+            <th style="width: 30px;"></th>
+            <th>Student Name</th>
+            <th>Test</th>
+            <th>Status</th>
+          </tr>
+          <tr>
+            <td><input type="checkbox" disabled></td>
+            <td>Kim, Minjun</td>
+            <td>Growth: Math 2-5</td>
+            <td><span class="status-pending" style="color: #999;">Waiting...</span></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" disabled></td>
+            <td>Lee, Soyeon</td>
+            <td>Growth: Math 2-5</td>
+            <td><span class="status-pending" style="color: #999;">Waiting...</span></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" disabled></td>
+            <td>Park, Jiwoo</td>
+            <td>Growth: Math 2-5</td>
+            <td><span class="status-pending" style="color: #999;">Waiting...</span></td>
+          </tr>
+        </table>
+        <div style="font-size: 12px; color: #888; margin-top: 8px;">학생이 로그인하면 "To Be Confirmed" 상태로 바뀝니다.</div>
+      </div>
+    </div>
+
+    <div class="step-instruction">
+      <ul>
+        <li>Test Now를 클릭하면 위와 같은 <strong>Proctor 콘솔</strong>이 열립니다.</li>
+        <li>화면 상단에 <strong>Session Name</strong>과 <strong>Password</strong>가 크게 표시됩니다.</li>
+        <li>이 정보를 <strong>칠판이나 화면에 표시</strong>하여 학생들에게 안내하세요.</li>
+      </ul>
+    </div>
+
+    <div class="board-card">
+      <div class="board-card-title">학생에게 안내할 내용 (칠판에 적어주세요)</div>
+      <div class="board-card-content">
+        접속 주소: <strong>test.mapnwea.org</strong><br>
+        Session Name: <strong>[콘솔에서 확인]</strong><br>
+        Password: <strong>[콘솔에서 확인]</strong>
+      </div>
+    </div>
+
+    <div class="callout callout-info">
+      비밀번호는 세션을 시작할 때마다 새로 생성되며, <strong>당일 밤에 만료</strong>됩니다.
+    </div>
+  </div>
+
+  <!-- ===== STEP 2: 학생이 로그인하면 Confirm 하기 ===== -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">학생이 로그인하면 Confirm 하기</div>
+    </div>
+
+    <!-- STEP 2-1: test.mapnwea.org 접속 -->
+    <div style="font-size: 13px; font-weight: 600; color: var(--accent); margin-bottom: 8px; letter-spacing: 0.5px;">STEP A -- test.mapnwea.org 접속 및 세션 정보 입력</div>
+    <div class="ui-mockup">
+      <div class="browser-bar">
+        <div class="browser-dots">
+          <div class="browser-dot red"></div>
+          <div class="browser-dot yellow"></div>
+          <div class="browser-dot green"></div>
+        </div>
+        <div class="browser-url">https://test.mapnwea.org</div>
+      </div>
+      <div class="login-screen">
+        <div class="login-box">
+          <div style="margin-bottom: 16px;">
+            <span class="ui-logo" style="font-size: 24px;">nwea</span>
+          </div>
+          <div class="login-title">MAP Growth Test</div>
+          <div class="login-subtitle">Enter the session information provided by your proctor.</div>
+          <div class="login-field">
+            <label>Session Name</label>
+            <div class="input-mock input-filled">Mrs. Kim - Math Spring</div>
+          </div>
+          <div class="login-field">
+            <label>Password</label>
+            <div class="input-mock input-filled">A3B7X9</div>
+          </div>
+          <div style="margin-top: 20px;">
+            <span class="ui-btn ui-btn-blue ui-btn-large" style="width: 100%; display: block; text-align: center; box-sizing: border-box;">Join Session</span>
+            <span class="arrow-indicator">클릭</span>
+          </div>
+          <div style="margin-top: 16px; font-size: 12px; color: #666;">
+            <a href="#" style="color: #1565c0; text-decoration: underline;">Try the Practice Test</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-instruction">
+      <ul>
+        <li>학생 기기에서 브라우저를 열고 <strong>test.mapnwea.org</strong>에 접속합니다.</li>
+        <li>감독관이 알려준 <strong>Session Name</strong>을 입력합니다.</li>
+        <li><strong>Password</strong>를 입력하고 <strong>Join Session</strong>을 클릭합니다.</li>
+      </ul>
+    </div>
+
+    <div class="callout callout-tip">
+      Session Name과 Password는 감독관(Proctor)이 칠판이나 화면에 표시해 주세요. 학생이 직접 타이핑합니다.
+    </div>
+
+    <!-- STEP 2-2: 학생 이름 확인 -->
+    <div style="font-size: 13px; font-weight: 600; color: var(--accent); margin-top: 32px; margin-bottom: 8px; letter-spacing: 0.5px;">STEP B -- 학생 이름 확인</div>
+    <div class="ui-mockup">
+      <div class="browser-bar">
+        <div class="browser-dots">
+          <div class="browser-dot red"></div>
+          <div class="browser-dot yellow"></div>
+          <div class="browser-dot green"></div>
+        </div>
+        <div class="browser-url">https://test.mapnwea.org/session</div>
+      </div>
+      <div class="student-name-screen">
+        <div class="student-name-box">
+          <div style="margin-bottom: 12px;">
+            <span class="ui-logo" style="font-size: 20px;">nwea</span>
+          </div>
+          <div class="student-greeting">Hello, Minjun Kim!</div>
+          <div style="color: #555; font-size: 14px; margin-bottom: 8px;">Is this you?</div>
+          <div style="color: #888; font-size: 13px; margin-bottom: 20px;">
+            Grade 5 &nbsp;|&nbsp; Mrs. Kim - Math Spring
+          </div>
+          <div style="display: flex; gap: 12px; justify-content: center;">
+            <span class="ui-btn ui-btn-green" style="padding: 10px 28px; font-size: 15px;">Yes, this is me</span>
+            <span class="arrow-indicator">클릭</span>
+            <span class="ui-btn" style="background: #999; padding: 10px 28px; font-size: 15px;">No, this is not me</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-instruction">
+      학생 이름이 맞으면 <strong>"Yes, this is me"</strong>를 클릭합니다.<br>
+      만약 다른 학생 이름이 보이면 <strong>"No, this is not me"</strong>를 클릭하고 감독관에게 알립니다.
+    </div>
+  </div>
+
+  <!-- ===== STEP 3: Proctor 콘솔에서 Confirm ===== -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Proctor 콘솔에서 Confirm (학생 확인)</div>
+    </div>
+
+    <div class="ui-mockup">
+      <div class="ui-header">
+        <div class="ui-logo">nwea</div>
+        <div style="color: #ccc; font-size: 13px; margin-left: auto;">Proctor Console</div>
+      </div>
+      <div class="ui-nav">
+        <div class="ui-nav-item active">Test Students</div>
+        <div class="ui-nav-item">Test History</div>
+        <div class="ui-nav-item">Reports</div>
+      </div>
+      <div class="ui-body" style="padding: 16px 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <div>
+            <div style="font-weight: bold; font-size: 16px; color: #1a3a5c;">Session: Mrs. Kim - Math Spring</div>
+            <div style="font-size: 12px; color: #888;">Password: A3B7X9 &nbsp;|&nbsp; Expires tonight</div>
+          </div>
+          <div>
+            <span class="ui-btn" style="background: #78909c; margin-right: 6px;">Refresh Page</span>
+            <span class="ui-btn ui-btn-green">Confirm All</span>
+            <span class="arrow-indicator">클릭</span>
+          </div>
+        </div>
+
+        <table class="proctor-table">
+          <tr>
+            <th style="width: 30px;"><input type="checkbox" checked disabled></th>
+            <th>Student Name</th>
+            <th>Grade</th>
+            <th>Test</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+          <tr>
+            <td><input type="checkbox" checked disabled></td>
+            <td>Kim, Minjun</td>
+            <td>5</td>
+            <td>Math 2-5</td>
+            <td><span class="status-pending">To Be Confirmed</span></td>
+            <td><span class="ui-btn ui-btn-green" style="padding: 3px 12px; font-size: 11px;">Confirm</span> <span class="arrow-indicator">클릭</span></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" checked disabled></td>
+            <td>Park, Siyeon</td>
+            <td>5</td>
+            <td>Math 2-5</td>
+            <td><span class="status-pending">To Be Confirmed</span></td>
+            <td><span class="ui-btn ui-btn-green" style="padding: 3px 12px; font-size: 11px;">Confirm</span></td>
+          </tr>
+          <tr style="background: #e8f5e9;">
+            <td><input type="checkbox" disabled></td>
+            <td>Lee, Jiwon</td>
+            <td>5</td>
+            <td>Math 2-5</td>
+            <td><span class="status-confirmed">Confirmed</span></td>
+            <td><span style="color: #999; font-size: 11px;">--</span></td>
+          </tr>
+          <tr style="background: #e3f2fd;">
+            <td><input type="checkbox" disabled></td>
+            <td>Choi, Haeun</td>
+            <td>5</td>
+            <td>Math 2-5</td>
+            <td><span class="status-testing">Testing</span></td>
+            <td><span style="color: #999; font-size: 11px;">--</span></td>
+          </tr>
+        </table>
+
+        <div style="font-size: 12px; color: #888; margin-top: 8px;">
+          Tip: "Confirm All" 버튼으로 대기 중인 학생을 한꺼번에 확인할 수 있습니다.
+        </div>
+      </div>
+    </div>
+
+    <div class="step-instruction">
+      <ul>
+        <li>학생이 로그인하면 Proctor 콘솔에 <strong>"To Be Confirmed"</strong> 상태가 표시됩니다.</li>
+        <li><strong>Refresh Page</strong>를 눌러 상태를 갱신합니다.</li>
+        <li>개별 <strong>Confirm</strong> 버튼 또는 상단의 <strong>Confirm All</strong> 버튼으로 학생을 확인합니다.</li>
+      </ul>
+    </div>
+
+    <div class="callout callout-danger">
+      <div class="callout-title">중요</div>
+      감독관이 Confirm을 하지 않으면 학생은 시험을 시작할 수 없습니다. 반드시 확인해 주세요.
+    </div>
+  </div>
+
+  <!-- ============================================== -->
+  <!-- PART 2: 학생이 할 일 -->
+  <!-- ============================================== -->
+  <div class="part-divider reveal">
+    <div class="part-divider-number" style="background: var(--positive);">P2</div>
+    <div class="part-divider-content">
+      <div class="part-divider-title">PART 2 -- 학생이 할 일</div>
+      <div class="part-divider-desc">아래 내용을 별도 PDF 안내문으로 프린트하여 학생에게 나눠주세요.</div>
+    </div>
+  </div>
+
+  <!-- ===== STEP 4: Start Test ===== -->
+  <div class="step-section no-border reveal">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div class="step-title">학생이 Start Test 클릭</div>
+    </div>
+
+    <div class="ui-mockup">
+      <div class="browser-bar">
+        <div class="browser-dots">
+          <div class="browser-dot red"></div>
+          <div class="browser-dot yellow"></div>
+          <div class="browser-dot green"></div>
+        </div>
+        <div class="browser-url">https://test.mapnwea.org/test</div>
+      </div>
+      <div style="background: #f0f4f8; padding: 50px 40px; text-align: center;">
+        <div style="background: white; border-radius: 12px; padding: 40px; max-width: 420px; margin: 0 auto; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+          <div style="margin-bottom: 12px;">
+            <span class="ui-logo" style="font-size: 22px;">nwea</span>
+          </div>
+          <div style="font-size: 20px; color: #0f4c81; font-weight: bold; margin-bottom: 8px;">Ready to begin!</div>
+          <div style="color: #555; font-size: 14px; margin-bottom: 6px;">Minjun Kim</div>
+          <div style="color: #888; font-size: 13px; margin-bottom: 24px;">Math 2-5 &nbsp;|&nbsp; Grade 5</div>
+          <div style="background: #e8f5e9; border-radius: 6px; padding: 12px; margin-bottom: 24px; font-size: 13px; color: #2e7d32;">
+            Your proctor has confirmed your session. You may now start the test.
+          </div>
+          <div>
+            <span class="ui-btn ui-btn-green ui-btn-large" style="width: 100%; display: block; text-align: center; box-sizing: border-box; font-size: 18px; padding: 14px;">Start Test</span>
+            <span class="arrow-indicator">클릭</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-instruction">
+      감독관이 Confirm한 후, 학생 화면에 <strong>Start Test</strong> 버튼이 활성화됩니다.<br>
+      학생이 <strong>Start Test</strong>를 클릭하면 시험이 시작됩니다!
+    </div>
+
+    <div class="callout callout-tip">
+      인터넷이 느린 경우, 학생들이 한꺼번에 시작하지 말고 <strong>몇 명씩 순차적으로</strong> 시작하게 하세요.
+    </div>
+  </div>
+
+  <!-- ===== 연습 시험 ===== -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num" style="background: #f5a623;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+      </div>
+      <div class="step-title">연습 시험 (첫 시험 전 권장)</div>
+    </div>
+
+    <div class="ui-mockup">
+      <div class="browser-bar">
+        <div class="browser-dots">
+          <div class="browser-dot red"></div>
+          <div class="browser-dot yellow"></div>
+          <div class="browser-dot green"></div>
+        </div>
+        <div class="browser-url">https://test.mapnwea.org</div>
+      </div>
+      <div class="login-screen">
+        <div class="login-box">
+          <div style="margin-bottom: 12px;">
+            <span class="ui-logo" style="font-size: 24px;">nwea</span>
+          </div>
+          <div class="practice-badge">Practice Test</div>
+          <div class="login-title">MAP Growth Practice Test</div>
+          <div class="login-subtitle">Try a practice test to get familiar with MAP Growth.</div>
+          <div class="login-field">
+            <label>Username</label>
+            <div class="input-mock input-filled" style="font-weight: bold; color: #0f4c81; font-size: 16px;">grow</div>
+          </div>
+          <div class="login-field">
+            <label>Password</label>
+            <div class="input-mock input-filled" style="font-weight: bold; color: #0f4c81; font-size: 16px;">grow</div>
+          </div>
+          <div style="margin-top: 20px;">
+            <span class="ui-btn ui-btn-gold ui-btn-large" style="width: 100%; display: block; text-align: center; box-sizing: border-box;">Start Practice</span>
+            <span class="arrow-indicator">클릭</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <table class="data-table">
+      <tr><th>항목</th><th>내용</th></tr>
+      <tr><td>접속</td><td>test.mapnwea.org 로그인 화면에서 <strong>Try the Practice Test</strong> 선택</td></tr>
+      <tr><td>Username</td><td><strong>grow</strong></td></tr>
+      <tr><td>Password</td><td><strong>grow</strong></td></tr>
+    </table>
+
+    <div class="callout callout-tip">
+      첫 시험 전에 반드시 연습 시험을 먼저 해보세요. 학생이 화면 조작에 익숙해지면 본 시험에서 더 정확한 결과가 나옵니다.
+    </div>
+  </div>
+
+  <!-- ===== 시험 전 학생 안내 스크립트 ===== -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num" style="background: var(--text-secondary);">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+      </div>
+      <div class="step-title">시험 전 학생 안내 스크립트</div>
+    </div>
+
+    <div class="script-box">
+      "이 시험에서 최선을 다해주세요. 여러분이 무엇을 잘하고, 어디를 더 도와줄 수 있는지 알기 위한 시험입니다.<br><br>
+      시간제한은 없으니 각 문제를 천천히 읽고 답해주세요. 쉬운 문제도 있고, 어려운 문제도 있습니다. 모든 답을 알 필요는 없어요.<br><br>
+      확실하지 않은 문제는 분명히 틀린 답을 먼저 제외하고, 나머지에서 선택하세요.<br><br>
+      <strong style="color: var(--text); font-style: normal;">다음 문제로 넘어가면 이전 문제로 돌아갈 수 없으니</strong> 신중하게 답하세요.<br><br>
+      시험 중 문제가 생기면 손을 들어주세요."
+    </div>
+  </div>
+
+  <!-- ===== 영상 가이드 ===== -->
+  <div class="video-section reveal">
+    <div class="section-label">참고 영상</div>
+    <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 4px;">영상 가이드</h2>
+    <p style="color: var(--text-secondary); font-size: 14px;">영상으로 보면 더 쉽습니다. Chrome 실시간 자막으로 한국어 자막도 지원됩니다.</p>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-icon">&#9654;</div>
+        <div class="video-info">
+          <div class="video-title">학생 Confirm 방법</div>
+          <div class="video-desc">학생이 로그인하면 감독관이 확인하는 과정</div>
+        </div>
+        <a href="https://vimeo.com/nwea" target="_blank" class="video-link">영상 보기 &rarr;</a>
+      </div>
+      <div class="video-card">
+        <div class="video-icon">&#9654;</div>
+        <div class="video-info">
+          <div class="video-title">MAP Growth 로그인 방법</div>
+          <div class="video-desc">플랫폼 접속 및 세션 시작</div>
+        </div>
+        <a href="https://vimeo.com/nwea" target="_blank" class="video-link">영상 보기 &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  MAP Growth Support Korea &nbsp;&middot;&nbsp; cs@mapgrowthsupportkorea.com &nbsp;&middot;&nbsp; 070-7623-2105<br>
+  본 자료는 NWEA MAP Help Center 공식 문서 기반으로 작성되었습니다.
+</footer>
+
+<!-- REVEAL ANIMATION -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

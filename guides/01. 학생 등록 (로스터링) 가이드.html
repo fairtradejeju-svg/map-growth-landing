@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>학생 등록 (로스터링) 가이드 — MAP Growth</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #0F6E56;
+    --accent-light: rgba(15,110,86,0.06);
+    --accent-mid: rgba(15,110,86,0.12);
+    --bg: #FAFAF9;
+    --surface: #FFFFFF;
+    --border: rgba(0,0,0,0.06);
+    --text: #0f172a;
+    --text-secondary: #64748b;
+    --text-tertiary: #94a3b8;
+    --positive: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== NAV ===== */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    background: rgba(250,250,249,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .nav-back {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.15s;
+  }
+  .nav-back:hover { background: var(--accent-light); color: var(--accent); }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(165deg, #FFFFFF 0%, #F5F9F7 40%, #F0F8F4 100%);
+    padding: clamp(48px, 8vw, 72px) 24px clamp(40px, 6vw, 56px);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(15,110,86,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: var(--accent-light);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .hero-badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .hero h1 {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-desc {
+    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+    color: var(--text-secondary);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .hero-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ===== MAIN CONTAINER ===== */
+  .main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ===== INFO BOX ===== */
+  .info-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 32px 0;
+  }
+  .info-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .info-card-title::before {
+    content: '';
+    width: 4px;
+    height: 16px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+  .info-card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .info-card li {
+    padding: 6px 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .info-card li::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    background: var(--accent-mid);
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 7px;
+  }
+
+  /* ===== PREP LIST ===== */
+  .prep-section {
+    margin: 40px 0 32px;
+  }
+  .section-label {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--accent);
+    padding: 4px 12px;
+    background: var(--accent-light);
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+  .prep-list {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .prep-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .prep-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ===== STEP SECTION ===== */
+  .step-section {
+    margin: 48px 0 0;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .step-section:first-of-type {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 40px;
+  }
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .step-num {
+    width: 36px;
+    height: 36px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .step-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* ===== UI MOCKUP (inside step) ===== */
+  .ui-mockup {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 16px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    background: var(--surface);
+  }
+  .ui-header { background: #2d3436; padding: 12px 20px; display: flex; align-items: center; gap: 8px; }
+  .ui-logo { color: #8bc34a; font-weight: bold; font-size: 18px; font-style: italic; }
+  .ui-nav { background: #f5a623; padding: 8px 20px; display: flex; gap: 24px; }
+  .ui-nav-item { color: white; font-weight: bold; font-size: 14px; cursor: default; }
+  .ui-nav-item.active { border-bottom: 2px solid white; }
+  .ui-body { padding: 20px; background: white; }
+  .ui-welcome { color: var(--accent); font-size: 18px; margin-bottom: 8px; }
+  .ui-subtitle { color: #333; font-weight: bold; margin-bottom: 12px; }
+  .ui-card { display: inline-block; border: 1px solid #ddd; border-radius: 8px; padding: 20px 30px; text-align: center; margin: 8px; }
+  .ui-card-icon { width: 50px; height: 50px; border: 2px solid #8bc34a; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; font-size: 20px; }
+  .ui-card-label { font-weight: bold; font-size: 13px; border-bottom: 3px solid #8bc34a; padding-bottom: 4px; }
+
+  .ui-dropdown { background: white; border: 1px solid #ddd; padding: 16px 20px; margin-top: -1px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+  .ui-dropdown-desc { color: #666; font-size: 13px; margin-bottom: 12px; }
+  .ui-dropdown-item { padding: 8px 0; font-weight: bold; color: #333; border-bottom: 1px solid #f0f0f0; }
+  .ui-dropdown-item:last-child { border-bottom: none; }
+  .ui-dropdown-item small { display: block; font-weight: normal; color: #666; font-size: 12px; }
+
+  .ui-legacy { display: flex; }
+  .ui-sidebar { background: #1a3a5c; color: white; padding: 16px; width: 220px; }
+  .ui-sidebar-item { padding: 8px 12px; font-size: 13px; font-weight: bold; cursor: default; }
+  .ui-sidebar-item.active { background: rgba(255,255,255,0.15); border-left: 3px solid #f5a623; }
+  .ui-sidebar-item:hover { background: rgba(255,255,255,0.08); }
+  .ui-main { padding: 20px; flex: 1; }
+  .ui-main h3 { color: #1a3a5c; font-size: 20px; margin-top: 0; }
+  .ui-status-box { background: #e3f2fd; border: 1px solid #90caf9; padding: 12px 16px; border-radius: 4px; margin: 12px 0; }
+  .ui-btn { display: inline-block; background: #5c8db5; color: white; padding: 6px 16px; border-radius: 4px; font-size: 13px; cursor: default; }
+  .ui-btn-gold { background: #f5a623; }
+
+  .ui-tabs { display: flex; background: #f5f5f5; border-bottom: 2px solid #ddd; }
+  .ui-tab { padding: 10px 16px; font-size: 13px; font-weight: bold; color: #666; cursor: default; }
+  .ui-tab.active { background: #f5a623; color: white; border-radius: 4px 4px 0 0; }
+  .ui-tab-arrow { color: #ccc; padding: 10px 4px; }
+  .ui-form { padding: 20px; }
+  .ui-form-label { font-weight: bold; margin-top: 16px; font-size: 14px; }
+  .ui-form-label .required { color: red; }
+  .ui-radio { margin: 6px 0 6px 16px; font-size: 13px; }
+  .ui-radio input { margin-right: 6px; }
+  .ui-radio .rec { color: var(--positive); font-size: 12px; font-style: italic; }
+  .ui-radio .warn { color: var(--danger); font-size: 12px; font-style: italic; }
+  .ui-select { border: 1px solid #999; padding: 4px 8px; font-size: 13px; margin-top: 4px; }
+  .ui-link { color: #1565c0; text-decoration: underline; cursor: default; }
+  .ui-link-desc { color: #666; font-size: 12px; margin-left: 4px; }
+
+  .arrow-indicator {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 8px;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+  /* ===== STEP INSTRUCTION ===== */
+  .step-instruction {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .step-instruction ul {
+    margin: 8px 0 0;
+    padding-left: 20px;
+    list-style: disc;
+  }
+  .step-instruction li {
+    margin: 4px 0;
+    font-size: 14px;
+  }
+
+  /* ===== CALLOUT BOXES ===== */
+  .callout {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    border: 1px solid;
+  }
+  .callout-warning {
+    background: #FFFBEB;
+    border-color: #FDE68A;
+    color: #92400E;
+  }
+  .callout-danger {
+    background: #FEF2F2;
+    border-color: #FECACA;
+    color: #991B1B;
+  }
+  .callout-tip {
+    background: #F0FDF4;
+    border-color: #BBF7D0;
+    color: #166534;
+  }
+  .callout-info {
+    background: #EFF6FF;
+    border-color: #BFDBFE;
+    color: #1E40AF;
+  }
+  .callout-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+
+  /* ===== TABLE ===== */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .data-table th {
+    background: var(--accent);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .data-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) { background: var(--bg); }
+
+  /* ===== VIDEO SECTION ===== */
+  .video-section {
+    margin: 48px 0 0;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .video-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .video-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .video-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    transform: translateY(-1px);
+  }
+  .video-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .video-info { flex: 1; }
+  .video-title { font-weight: 600; font-size: 14px; color: var(--text); margin-bottom: 2px; }
+  .video-desc { font-size: 13px; color: var(--text-secondary); }
+  .video-link {
+    background: var(--accent);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .video-link:hover { background: #0b5a46; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    margin-top: 64px;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  /* ===== REVEAL ANIMATION ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .nav-bar { padding: 0 16px; }
+    .hero { padding: 40px 16px 32px; }
+    .main { padding: 0 16px; }
+    .hero-meta { flex-wrap: wrap; gap: 12px; }
+    .prep-list { flex-direction: column; }
+    .ui-legacy { flex-direction: column; }
+    .ui-sidebar { width: 100%; }
+    .ui-tabs { flex-wrap: wrap; }
+    .video-card { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-dot"></div>
+    MAP Growth Support Korea
+  </a>
+  <a class="nav-back" href="#">CS 가이드 목록 &rarr;</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      01 &mdash; 시작 가이드
+    </div>
+    <h1>학생 등록 <span>(로스터링)</span> 가이드</h1>
+    <p class="hero-desc">학생과 교사 정보를 MAP 플랫폼에 등록하는 과정입니다. 시험과 리포트의 기반이 되는 가장 중요한 첫 단계예요.</p>
+    <div class="hero-meta">
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        8단계 프로세스
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        약 15분 소요
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+        CSV 파일 필요
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- 안내 카드 -->
+  <div class="info-card reveal">
+    <div class="info-card-title">MAP Growth Support Korea에서 보내드린 파일</div>
+    <ul>
+      <li><strong>학생등록 파일양식.xlsx</strong> &mdash; 학생 명단 작성용 (첨부 파일)</li>
+      <li><strong>샘플 학생 ROSTERING.csv</strong> &mdash; 학생 로스터 작성 예시</li>
+      <li><strong>샘플 프로그램 ROSTERING.csv</strong> &mdash; 프로그램 참여 학생용 (함께 업로드)</li>
+      <li>위 양식에 학생 정보를 입력하여 회신해 주시면, 저희가 MAP 플랫폼에 등록하는 방법을 알려드립니다.</li>
+    </ul>
+  </div>
+
+  <!-- 준비물 -->
+  <div class="prep-section reveal">
+    <div class="section-label">준비물</div>
+    <div class="prep-list">
+      <div class="prep-item">
+        <div class="prep-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4"/><path d="M10 17l5-5-5-5"/><path d="M15 12H3"/></svg>
+        </div>
+        MAP 관리자 계정 (start.mapnwea.org)
+      </div>
+      <div class="prep-item">
+        <div class="prep-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        </div>
+        학생 명단 (이름, 생년월일, 학년)
+      </div>
+      <div class="prep-item">
+        <div class="prep-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><path d="M20 8v6"/><path d="M23 11h-6"/></svg>
+        </div>
+        담당 교사 정보
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== STEP 1 ===== -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">1</div>
+      <div class="step-title">MAP 플랫폼 로그인</div>
+    </div>
+    <div class="ui-mockup">
+      <div class="ui-header">
+        <div class="ui-logo">nwea</div>
+      </div>
+      <div class="ui-nav">
+        <div class="ui-nav-item">Rostering &#9662;</div>
+        <div class="ui-nav-item">MAP Growth &#9662;</div>
+        <div class="ui-nav-item">Professional Learning &#9662;</div>
+      </div>
+      <div class="ui-body">
+        <div class="ui-welcome">Welcome, [원장님 이름]</div>
+        <div class="ui-subtitle">Product News and Updates</div>
+        <div style="display: flex; gap: 12px;">
+          <div class="ui-card">
+            <div class="ui-card-icon">&#128202;</div>
+            <div class="ui-card-label">MAP GROWTH</div>
+          </div>
+          <div class="ui-card">
+            <div class="ui-card-icon">&#128202;</div>
+            <div class="ui-card-label">MAP GROWTH</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="step-instruction">
+      <strong>start.mapnwea.org</strong>에 접속하여 로그인합니다.
+    </div>
+  </div>
+
+  <!-- ===== STEP 2 ===== -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">2</div>
+      <div class="step-title">Rostering 메뉴 클릭</div>
+    </div>
+    <div class="ui-mockup">
+      <div class="ui-nav" style="position: relative;">
+        <div class="ui-nav-item active">Rostering &#9662; <span class="arrow-indicator">클릭</span></div>
+        <div class="ui-nav-item">MAP Growth &#9662;</div>
+        <div class="ui-nav-item">Professional Learning &#9662;</div>
+      </div>
+      <div class="ui-dropdown">
+        <div class="ui-dropdown-desc">Rostering allows you to manage students in the system.</div>
+        <div class="ui-dropdown-item">Manage Students &amp; Faculty</div>
+        <div class="ui-dropdown-item">MAP</div>
+        <div class="ui-dropdown-item" style="color: #0f4c81;">
+          Import Profiles/Rostering <span class="arrow-indicator">클릭</span>
+          <small>Roster student and staff user profile data.<br>Manage rostering data, check roster status,<br>and access error reports.</small>
+        </div>
+      </div>
+    </div>
+    <div class="step-instruction">
+      상단 메뉴에서 <strong>Rostering</strong> 클릭 &rarr; <strong>Import Profiles/Rostering</strong> 선택
+    </div>
+  </div>
+
+  <!-- ===== STEP 3 ===== -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">3</div>
+      <div class="step-title">Access NWEA Legacy Rostering</div>
+    </div>
+    <div class="ui-mockup">
+      <div class="ui-legacy">
+        <div class="ui-sidebar">
+          <div class="ui-sidebar-item active">IMPORT PROFILES / ROSTERING</div>
+          <div class="ui-sidebar-item">MANAGE USERS</div>
+          <div class="ui-sidebar-item">MANAGE STUDENTS</div>
+          <div class="ui-sidebar-item">MANAGE TEST SESSIONS</div>
+          <div class="ui-sidebar-item">MANAGE DATA PARTNERS</div>
+          <div class="ui-sidebar-item">VIEW REPORTS &#9662;</div>
+          <div class="ui-sidebar-item">MANAGE PREFERENCES &#9662;</div>
+        </div>
+        <div class="ui-main">
+          <h3>IMPORT PROFILE</h3>
+          <div style="font-weight: bold; margin-bottom: 8px;">Import Status</div>
+          <div class="ui-status-box">
+            Use NWEA Legacy Rostering to download NWEA roster templates.<br>
+            No imports are currently in progress.
+            <br><br>
+            <span class="ui-btn" style="cursor: default;">Access NWEA Legacy Rostering</span>
+            <span class="arrow-indicator">클릭</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="step-instruction">
+      Import Profile 화면에서 <strong>Access NWEA Legacy Rostering</strong> 버튼 클릭
+    </div>
+  </div>
+
+  <!-- ===== STEP 4 ===== -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">4</div>
+      <div class="step-title">Import 설정 및 파일 업로드</div>
+    </div>
+    <div class="ui-mockup">
+      <div class="ui-tabs">
+        <div class="ui-tab active">Set Up Import</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab">Preview and Confirm File</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab">Validate File Format</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab">Import Summary</div>
+      </div>
+      <div class="ui-form">
+        <div class="ui-form-label">Roster Type <span class="required">*</span></div>
+        <div class="ui-radio"><input type="radio" checked disabled> <strong>Standard</strong> (Schools, Instructors, Classes, and Students) <span class="arrow-indicator">선택</span></div>
+        <div class="ui-radio"><input type="radio" disabled> Additional Users (Add/Update only)</div>
+
+        <div class="ui-form-label">Term <span class="required">*</span></div>
+        <div><span class="ui-select">Spring 2025-2026 &#9662;</span></div>
+
+        <div class="ui-form-label">Add/Update or Overwrite data for selected term? <span class="required">*</span></div>
+        <div class="ui-radio"><input type="radio" checked disabled> <strong>Standard - Add/Update</strong> <span class="rec">Recommended</span> <span class="arrow-indicator">선택</span></div>
+        <div class="ui-radio"><input type="radio" disabled> Add/Update Students Only <span class="warn">Warning</span></div>
+        <div class="ui-radio"><input type="radio" disabled> Add/Update Instructors Only <span class="warn">Warning</span></div>
+
+        <div class="ui-form-label" style="margin-top: 24px;">Download Templates</div>
+        <div style="margin: 8px 0;">
+          <span class="ui-link">Download MAP Roster File Template</span><br>
+          <span class="ui-link-desc">Use this file to associate students with teachers and classes.</span>
+        </div>
+        <div style="margin: 8px 0;">
+          <span class="ui-link">Download MAP Programs File Template</span><br>
+          <span class="ui-link-desc">Use this optional file to associate students with programs.</span>
+        </div>
+
+        <div class="ui-form-label" style="margin-top: 20px;">Roster File <span class="required">*</span></div>
+        <div style="border: 1px dashed #999; padding: 16px; text-align: center; color: #666; border-radius: 4px; margin-top: 8px;">
+          <span class="ui-btn ui-btn-gold">Add...</span> <span class="arrow-indicator">학생 CSV 파일 업로드</span>
+        </div>
+
+        <div class="ui-form-label" style="margin-top: 20px;">Programs File</div>
+        <div style="border: 1px dashed #999; padding: 16px; text-align: center; color: #666; border-radius: 4px; margin-top: 8px;">
+          <span class="ui-btn ui-btn-gold">Add...</span> <span class="arrow-indicator">프로그램 CSV 함께 업로드</span>
+        </div>
+      </div>
+    </div>
+    <div class="step-instruction">
+      Import 설정:
+      <ul>
+        <li>Roster Type: <strong>Standard</strong> 선택</li>
+        <li>Term: <strong>현재 학기</strong> 확인 (기본값 유지)</li>
+        <li>Import 유형: <strong>Standard - Add/Update</strong> 선택 (권장)</li>
+        <li>Roster File에서 <strong>Add...</strong> 클릭하여 준비한 CSV 파일 업로드</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ===== STEP 5 ===== -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">5</div>
+      <div class="step-title">Preview and Confirm File (데이터 미리보기)</div>
+    </div>
+    <div class="ui-mockup">
+      <div class="ui-tabs">
+        <div class="ui-tab">Set Up Import</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab active">Preview and Confirm File</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab">Validate File Format</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab">Import Summary</div>
+      </div>
+      <div class="ui-form">
+        <div style="font-weight: bold; font-size: 16px; color: #1a3a5c; margin-bottom: 12px;">Preview Your File</div>
+        <div style="color: #666; font-size: 13px; margin-bottom: 16px;">아래는 업로드한 파일의 미리보기입니다. 데이터가 올바른지 확인하세요.</div>
+        <table style="font-size: 12px; width: 100%; border-collapse: collapse;">
+          <tr><th style="background: var(--accent); color: white; padding: 8px 12px; text-align: left;">School Name</th><th style="background: var(--accent); color: white; padding: 8px 12px; text-align: left;">Last Name</th><th style="background: var(--accent); color: white; padding: 8px 12px; text-align: left;">First Name</th><th style="background: var(--accent); color: white; padding: 8px 12px; text-align: left;">Grade</th><th style="background: var(--accent); color: white; padding: 8px 12px; text-align: left;">Class</th><th style="background: var(--accent); color: white; padding: 8px 12px; text-align: left;">Instructor</th></tr>
+          <tr><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">ABC School</td><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">Kim</td><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">Minjun</td><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">6</td><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">Class A</td><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">Park Jihye</td></tr>
+          <tr style="background: #f9f9f9;"><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">ABC School</td><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">Lee</td><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">Soyeon</td><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">6</td><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">Class A</td><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">Park Jihye</td></tr>
+          <tr><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">ABC School</td><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">Choi</td><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">Hyunwoo</td><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">5</td><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">Class B</td><td style="padding: 8px 12px; border-bottom: 1px solid #eee;">Kim Eunji</td></tr>
+          <tr style="background: #f9f9f9;"><td style="padding: 8px 12px;">ABC School</td><td style="padding: 8px 12px;">Park</td><td style="padding: 8px 12px;">Jiwoo</td><td style="padding: 8px 12px;">5</td><td style="padding: 8px 12px;">Class B</td><td style="padding: 8px 12px;">Kim Eunji</td></tr>
+        </table>
+        <div style="margin-top: 16px; padding: 12px; background: #F0FDF4; border: 1px solid #BBF7D0; border-radius: 8px; font-size: 13px; color: #166534;">
+          <strong>4 students</strong>, <strong>2 instructors</strong>, <strong>2 classes</strong>, <strong>1 school</strong> found in file.
+        </div>
+        <div style="margin-top: 16px; text-align: right;">
+          <span class="ui-btn" style="background: #999; margin-right: 8px;">Back</span>
+          <span class="ui-btn ui-btn-gold">Continue</span> <span class="arrow-indicator">클릭</span>
+        </div>
+      </div>
+    </div>
+    <div class="step-instruction">
+      업로드한 데이터가 표로 표시됩니다. <strong>학생 이름, 학년, 학급, 담당 교사</strong>가 맞는지 확인 &rarr; <strong>Continue</strong> 클릭
+    </div>
+    <div class="callout callout-warning">
+      <div class="callout-title">오류 발생 시</div>
+      여기서 오류가 나타나면 파일 형식에 문제가 있는 것입니다. <strong>07. 로스터링 오류해결 가이드</strong>를 참고하세요.
+    </div>
+  </div>
+
+  <!-- ===== STEP 6 ===== -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">6</div>
+      <div class="step-title">Validate File Format (파일 검증)</div>
+    </div>
+    <div class="ui-mockup">
+      <div class="ui-tabs">
+        <div class="ui-tab">Set Up Import</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab">Preview and Confirm File</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab active">Validate File Format</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab">Import Summary</div>
+      </div>
+      <div class="ui-form">
+        <div style="font-weight: bold; font-size: 16px; color: #1a3a5c; margin-bottom: 12px;">File Validation Results</div>
+        <div style="background: #F0FDF4; border: 2px solid #86EFAC; border-radius: 10px; padding: 24px; text-align: center; margin: 16px 0;">
+          <div style="font-size: 40px; margin-bottom: 8px;">&#10003;</div>
+          <div style="font-size: 18px; font-weight: bold; color: #166534;">Validation Passed!</div>
+          <div style="color: var(--text-secondary); font-size: 13px; margin-top: 4px;">No errors found in your file.</div>
+        </div>
+        <div style="background: var(--bg); padding: 12px 16px; border-radius: 8px; font-size: 13px;">
+          <strong>Summary:</strong><br>
+          Schools: 1 &nbsp;&middot;&nbsp; Instructors: 2 &nbsp;&middot;&nbsp; Classes: 2 &nbsp;&middot;&nbsp; Students: 4<br>
+          Errors: <strong style="color: var(--positive);">0</strong> &nbsp;&middot;&nbsp; Warnings: <strong style="color: var(--warning);">0</strong>
+        </div>
+        <div style="margin-top: 16px; text-align: right;">
+          <span class="ui-btn" style="background: #999; margin-right: 8px;">Back</span>
+          <span class="ui-btn ui-btn-gold">Import Data</span> <span class="arrow-indicator">클릭</span>
+        </div>
+      </div>
+    </div>
+    <div class="step-instruction">
+      검증 통과 시 초록색 <strong>Validation Passed!</strong> 표시. <strong>Import Data</strong> 클릭하여 최종 등록 실행
+    </div>
+  </div>
+
+  <!-- ===== STEP 7 ===== -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">7</div>
+      <div class="step-title">Import Summary (등록 완료!)</div>
+    </div>
+    <div class="ui-mockup">
+      <div class="ui-tabs">
+        <div class="ui-tab">Set Up Import</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab">Preview and Confirm File</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab">Validate File Format</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab active">Import Summary</div>
+      </div>
+      <div class="ui-form" style="text-align: center;">
+        <div style="width: 64px; height: 64px; background: #F0FDF4; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 16px auto; border: 2px solid #86EFAC;">
+          <span style="font-size: 28px; color: var(--positive);">&#10003;</span>
+        </div>
+        <div style="font-size: 20px; font-weight: bold; color: var(--positive); margin-bottom: 8px;">Import Complete!</div>
+        <div style="color: var(--text-secondary); font-size: 14px; margin-bottom: 20px;">학생 및 교사 등록이 완료되었습니다.</div>
+        <div style="background: var(--bg); padding: 16px; border-radius: 10px; text-align: left; display: inline-block; margin: 0 auto;">
+          <table style="font-size: 13px; margin: 0;">
+            <tr><td style="border: none; padding: 4px 20px 4px 0;"><strong>Schools Added:</strong></td><td style="border: none; color: var(--positive); font-weight: bold;">1</td></tr>
+            <tr><td style="border: none; padding: 4px 20px 4px 0;"><strong>Instructors Added:</strong></td><td style="border: none; color: var(--positive); font-weight: bold;">2</td></tr>
+            <tr><td style="border: none; padding: 4px 20px 4px 0;"><strong>Classes Added:</strong></td><td style="border: none; color: var(--positive); font-weight: bold;">2</td></tr>
+            <tr><td style="border: none; padding: 4px 20px 4px 0;"><strong>Students Added:</strong></td><td style="border: none; color: var(--positive); font-weight: bold;">4</td></tr>
+            <tr><td style="border: none; padding: 4px 20px 4px 0;"><strong>Errors:</strong></td><td style="border: none; color: var(--positive); font-weight: bold;">0</td></tr>
+          </table>
+        </div>
+        <div style="margin-top: 20px;">
+          <span class="ui-btn ui-btn-gold">Done</span>
+        </div>
+      </div>
+    </div>
+    <div class="step-instruction">
+      등록 완료! Students Added 숫자가 등록된 학생 수입니다. Errors가 0이면 정상 처리된 것입니다.
+    </div>
+    <div class="callout callout-tip">
+      <div class="callout-title">확인 방법</div>
+      Import 완료 후 <strong>Manage Students</strong> 메뉴에서 등록된 학생 목록을 확인할 수 있습니다.
+    </div>
+  </div>
+
+  <!-- ===== STEP 8 ===== -->
+  <div class="step-section reveal">
+    <div class="step-header">
+      <div class="step-num">8</div>
+      <div class="step-title">Import Profile 상태 확인 (정상 처리 중일 때)</div>
+    </div>
+    <div class="ui-mockup">
+      <!-- 헤더 -->
+      <div style="background: #f5f5f5; padding: 10px 20px; border-bottom: 1px solid #ddd; display: flex; justify-content: space-between; align-items: center;">
+        <div>
+          <span style="font-style: italic; color: #e67e22; font-weight: bold; font-size: 15px;">believe in</span><br>
+          <span style="font-style: italic; color: #999; font-size: 12px;">what's possible&#8482;</span>
+        </div>
+        <div style="font-size: 12px; color: #555;">Logged in as admin@academy.kr &nbsp;|&nbsp; <span style="color:#2980b9;">Home</span> &nbsp;|&nbsp; <span style="color:#2980b9;">Help</span></div>
+      </div>
+      <!-- 본문 -->
+      <div style="display: flex;">
+        <!-- 사이드바 -->
+        <div style="background: #1a5276; color: white; width: 180px; min-height: 200px; padding: 0; font-size: 12px; flex-shrink: 0;">
+          <div style="padding: 10px 14px; font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.1);">IMPORT PROFILES / ROSTERING</div>
+          <div style="padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.1);">MANAGE USERS</div>
+          <div style="padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.1);">MANAGE STUDENTS</div>
+          <div style="padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.1);">MANAGE TEST SESSIONS</div>
+        </div>
+        <!-- 메인 -->
+        <div style="flex: 1; padding: 24px; background: white;">
+          <div style="font-size: 20px; font-weight: bold; color: #1a5276; margin-bottom: 16px;">IMPORT PROFILE</div>
+          <!-- Import Status 박스 -->
+          <div style="border: 1px solid #5b8fbd; border-radius: 4px; overflow: hidden; margin-bottom: 20px;">
+            <div style="background: linear-gradient(to bottom, #d8e8f5, #c5ddf0); padding: 10px 16px; font-size: 14px; font-weight: bold; color: #1a3a5c; border-bottom: 1px solid #5b8fbd;">Import Status</div>
+            <div style="padding: 16px 20px; border: 2px dashed #5b8fbd; margin: 10px; border-radius: 4px; background: #f8fbff;">
+              <div style="font-weight: bold; color: #1a5276; font-size: 15px; margin-bottom: 10px;">Posting Valid Data in Progress</div>
+              <div style="color: #2e7d32; font-size: 13px; margin-bottom: 14px;">Valid data is being posted.</div>
+              <table style="font-size: 12px; margin: 0; width: auto;">
+                <tr><td style="border: none; padding: 3px 20px 3px 0; font-weight: bold;">Import Date:</td><td style="border: none; color: #555;">Mar 27 2026</td></tr>
+                <tr><td style="border: none; padding: 3px 20px 3px 0; font-weight: bold;">Roster File:</td><td style="border: none; color: #555;">ABC School 학생 ROSTERING.csv</td></tr>
+                <tr><td style="border: none; padding: 3px 20px 3px 0; font-weight: bold;">Programs File:</td><td style="border: none; color: #555;">ABC School 프로그램 ROSTERING.csv</td></tr>
+                <tr><td style="border: none; padding: 3px 20px 3px 0; font-weight: bold;">Initiated By:</td><td style="border: none; color: #555;">admin@academy.kr</td></tr>
+              </table>
+            </div>
+          </div>
+          <!-- Import Profile History -->
+          <div style="border: 1px solid #bbb; border-radius: 4px; overflow: hidden;">
+            <div style="background: linear-gradient(to bottom, #e0e0e0, #d0d0d0); padding: 10px 16px; font-size: 14px; font-weight: bold; color: #333; border-bottom: 1px solid #bbb;">Import Profile History</div>
+            <div style="padding: 14px 20px; font-size: 12px; color: #888;">이전 Import 기록이 여기에 표시됩니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="step-instruction">
+      Done 클릭 후 <strong>"Posting Valid Data in Progress"</strong> 화면이 보이면 <strong>정상</strong>입니다! 데이터가 서버에 반영되는 중이에요. 잠시 기다리면 Import Profile History에 결과가 기록됩니다.
+    </div>
+    <div class="callout callout-tip">
+      <div class="callout-title">정상 완료 체크리스트</div>
+      업로드 파일 이름이 정확히 표시되고, "Valid data is being posted" 메시지가 보이면 성공입니다. 오류가 있으면 빨간 메시지가 표시됩니다.
+    </div>
+  </div>
+
+  <!-- ===== 영상 가이드 ===== -->
+  <div class="video-section reveal">
+    <div class="section-label">참고 영상</div>
+    <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 4px;">영상 가이드</h2>
+    <p style="color: var(--text-secondary); font-size: 14px;">영상으로 보면 더 쉽습니다. Chrome 실시간 자막으로 한국어 자막도 지원됩니다.</p>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-icon">&#9654;</div>
+        <div class="video-info">
+          <div class="video-title">로스터 준비하기 (Prepare Your Roster)</div>
+          <div class="video-desc">템플릿 다운로드부터 Excel 작성법까지</div>
+        </div>
+        <a href="https://teach.mapnwea.org/assist/help_map/Content/AboutRostering/PrepareRoster.htm" target="_blank" class="video-link">영상 보기 &rarr;</a>
+      </div>
+      <div class="video-card">
+        <div class="video-icon">&#9654;</div>
+        <div class="video-info">
+          <div class="video-title">로스터 Import (Import Your Roster)</div>
+          <div class="video-desc">CSV 업로드, Preview, Validate, 완료까지 전 과정</div>
+        </div>
+        <a href="https://teach.mapnwea.org/assist/help_map/Content/AboutRostering/ImportRoster.htm" target="_blank" class="video-link">영상 보기 &rarr;</a>
+      </div>
+      <div class="video-card">
+        <div class="video-icon">&#9654;</div>
+        <div class="video-info">
+          <div class="video-title">MAP Growth 소개 영상</div>
+          <div class="video-desc">MAP Growth가 무엇인지, 전체 개요 안내</div>
+        </div>
+        <a href="https://www.youtube.com/watch?v=YmwrGV_aiRY" target="_blank" class="video-link">YouTube &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 부록: CSV 저장 주의사항 ===== -->
+  <div class="step-section reveal">
+    <div class="section-label">부록</div>
+    <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 16px;">CSV 저장 시 주의사항</h2>
+
+    <div class="callout callout-warning">
+      <div class="callout-title">CSV UTF-8로 저장하면 안 됩니다!</div>
+      Excel에서 저장할 때 반드시 <strong>"CSV(쉼표 구분)(*.csv)"</strong>를 선택하세요. "CSV UTF-8"은 오류를 유발합니다.
+    </div>
+
+    <div class="callout callout-warning">
+      <div class="callout-title">한국어 Windows 사용자</div>
+      CSV 구분자가 세미콜론(;)으로 설정되어 있을 수 있습니다.<br>
+      해결: 제어판 &rarr; 시계 및 국가 &rarr; 지역 &rarr; 추가 설정 &rarr; 목록 구분 기호를 <strong>,</strong>(쉼표)로, 소수점 기호를 <strong>.</strong>(마침표)로 변경 후 Excel 재시작
+    </div>
+  </div>
+
+  <!-- ===== 부록: Import 유형 비교 ===== -->
+  <div class="step-section reveal">
+    <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 16px;">Import 유형 비교</h2>
+    <table class="data-table">
+      <tr><th>유형</th><th>동작</th><th>사용 시기</th></tr>
+      <tr><td><strong>Add/Update</strong></td><td>신규 추가 + 기존 정보 업데이트</td><td>대부분의 경우</td></tr>
+      <tr><td><strong style="color: var(--danger);">Overwrite</strong></td><td>해당 학교의 기존 데이터를 <strong>모두 삭제</strong> 후 재등록</td><td>전면 수정 시에만</td></tr>
+      <tr><td>Students Only</td><td>학생만 추가 (학급 배정 없음)</td><td>긴급 학생 추가</td></tr>
+      <tr><td>Instructors Only</td><td>교사만 추가 (학급 배정 없음)</td><td>교사 계정 급하게 필요할 때</td></tr>
+    </table>
+
+    <div class="callout callout-danger">
+      <div class="callout-title">Overwrite 사용 시 반드시 주의하세요!</div>
+      Overwrite는 해당 학기의 <strong>기존 학생/교사 데이터를 모두 삭제</strong>한 후 새로 등록합니다.<br><br>
+      <strong>위험한 점:</strong><br>
+      &middot; 로스터 파일에 포함되지 않은 학생/교사는 해당 학기에서 삭제됩니다<br>
+      &middot; 삭제된 학생의 시험 결과 데이터가 리포트에서 누락될 수 있습니다<br>
+      &middot; 이전에 완료한 시험의 학급 배정이 초기화될 수 있습니다<br><br>
+      <strong>Overwrite를 사용해야 하는 경우:</strong><br>
+      &middot; 학년 배정이 대규모로 잘못된 경우<br>
+      &middot; 학기 초 전면 재구성이 필요한 경우<br><br>
+      <strong>반드시 전체 학생/교사가 포함된 완전한 파일로 실행하세요.</strong> 일부 학생만 포함된 파일로 Overwrite하면 나머지 학생이 모두 삭제됩니다!
+    </div>
+
+    <div class="callout callout-tip">
+      <div class="callout-title">팁</div>
+      대부분의 경우 <strong>Add/Update</strong>로 충분합니다. Overwrite가 필요한 상황인지 확실하지 않으시면 먼저 MAP Growth Support Korea에 문의해 주세요!
+    </div>
+
+    <div class="callout callout-tip">
+      한 기관에서 동시에 하나의 Import만 실행 가능합니다. 시험 성수기에는 최대 48시간 소요될 수 있습니다.
+    </div>
+
+    <div class="callout callout-info">
+      <div class="callout-title">등록이 어려우시면 저희가 대신 해드립니다!</div>
+      학생등록 파일양식에 명단을 작성하여 이메일로 보내주시면, MAP Growth Support Korea에서 직접 등록 처리해 드립니다.
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  MAP Growth Support Korea &nbsp;&middot;&nbsp; cs@mapgrowthsupportkorea.com &nbsp;&middot;&nbsp; 070-7623-2105<br>
+  본 자료는 NWEA MAP Help Center 공식 문서 기반으로 작성되었습니다.
+</footer>
+
+<!-- REVEAL ANIMATION -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

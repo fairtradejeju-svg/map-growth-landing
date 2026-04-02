@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>빠른 접속 URL 및 참고자료 — MAP Growth</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #0F6E56;
+    --accent-light: rgba(15,110,86,0.06);
+    --accent-mid: rgba(15,110,86,0.12);
+    --bg: #FAFAF9;
+    --surface: #FFFFFF;
+    --border: rgba(0,0,0,0.06);
+    --text: #0f172a;
+    --text-secondary: #64748b;
+    --text-tertiary: #94a3b8;
+    --positive: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== NAV ===== */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    background: rgba(250,250,249,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .nav-back {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.15s;
+  }
+  .nav-back:hover { background: var(--accent-light); color: var(--accent); }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(165deg, #FFFFFF 0%, #F5F9F7 40%, #F0F8F4 100%);
+    padding: clamp(48px, 8vw, 72px) 24px clamp(40px, 6vw, 56px);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(15,110,86,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: var(--accent-light);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .hero-badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .hero h1 {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-desc {
+    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+    color: var(--text-secondary);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .hero-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ===== MAIN CONTAINER ===== */
+  .main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ===== SECTION LABEL ===== */
+  .section-label {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--accent);
+    padding: 4px 12px;
+    background: var(--accent-light);
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+
+  /* ===== URL HIGHLIGHT CARDS ===== */
+  .url-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 32px 0;
+  }
+  .url-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .url-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transform: translateY(-2px);
+  }
+  .url-card-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+  }
+  .url-card-url {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: -0.01em;
+  }
+  .url-card-url a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .url-card-url a:hover {
+    text-decoration: underline;
+  }
+
+  /* ===== STEP SECTION ===== */
+  .step-section {
+    margin: 48px 0 0;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .step-section:first-of-type {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 40px;
+  }
+
+  /* ===== UI MOCKUP ===== */
+  .ui-mockup {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 16px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    background: var(--surface);
+  }
+  .ui-header { background: #2d3436; padding: 12px 20px; display: flex; align-items: center; gap: 8px; }
+  .ui-logo { color: #8bc34a; font-weight: bold; font-size: 18px; font-style: italic; }
+  .ui-body { padding: 20px; background: white; }
+
+  .login-form { max-width: 340px; margin: 0 auto; }
+  .login-input { width: 100%; padding: 10px 12px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; margin-top: 6px; box-sizing: border-box; background: #fff; }
+  .login-label { font-weight: bold; font-size: 13px; color: #333; display: block; margin-top: 14px; }
+  .login-btn { width: 100%; padding: 12px; background: var(--accent); color: white; border: none; border-radius: 4px; font-size: 15px; font-weight: bold; cursor: default; margin-top: 18px; }
+
+  .arrow-indicator {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 8px;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+  /* ===== STEP INSTRUCTION ===== */
+  .step-instruction {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .step-instruction ol {
+    margin: 8px 0 0;
+    padding-left: 20px;
+  }
+  .step-instruction li {
+    margin: 4px 0;
+    font-size: 14px;
+  }
+
+  /* ===== CALLOUT BOXES ===== */
+  .callout {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    border: 1px solid;
+  }
+  .callout-warning {
+    background: #FFFBEB;
+    border-color: #FDE68A;
+    color: #92400E;
+  }
+  .callout-danger {
+    background: #FEF2F2;
+    border-color: #FECACA;
+    color: #991B1B;
+  }
+  .callout-tip {
+    background: #F0FDF4;
+    border-color: #BBF7D0;
+    color: #166534;
+  }
+  .callout-info {
+    background: #EFF6FF;
+    border-color: #BFDBFE;
+    color: #1E40AF;
+  }
+  .callout-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+
+  /* ===== TABLE ===== */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .data-table th {
+    background: var(--accent);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .data-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) { background: var(--bg); }
+  .data-table a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .data-table a:hover { text-decoration: underline; }
+
+  /* ===== LINK CARD ===== */
+  .link-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .link-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .link-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    transform: translateY(-1px);
+  }
+  .link-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--accent-light);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .link-info { flex: 1; }
+  .link-title { font-weight: 600; font-size: 14px; color: var(--text); margin-bottom: 2px; }
+  .link-desc { font-size: 13px; color: var(--text-secondary); }
+  .link-action {
+    background: var(--accent);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .link-action:hover { background: #0b5a46; }
+
+  /* ===== CHROME SETTING MOCKUP ===== */
+  .chrome-setting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    gap: 12px;
+  }
+  .chrome-setting-label { font-size: 14px; color: #333; }
+  .chrome-toggle { width: 42px; height: 22px; border-radius: 11px; position: relative; display: inline-block; flex-shrink: 0; }
+  .chrome-toggle.on { background: #1a73e8; }
+  .chrome-toggle.off { background: #ccc; }
+  .chrome-toggle-knob { width: 18px; height: 18px; background: white; border-radius: 50%; position: absolute; top: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+  .chrome-toggle.on .chrome-toggle-knob { right: 2px; }
+  .chrome-toggle.off .chrome-toggle-knob { left: 2px; }
+
+  /* ===== SECTION H2 ===== */
+  .section-h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .section-desc {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+
+  /* ===== INFO CARD ===== */
+  .info-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin: 32px 0;
+  }
+  .info-card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .info-card-title::before {
+    content: '';
+    width: 4px;
+    height: 16px;
+    background: var(--accent);
+    border-radius: 2px;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    margin-top: 64px;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  /* ===== REVEAL ANIMATION ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .nav-bar { padding: 0 16px; }
+    .hero { padding: 40px 16px 32px; }
+    .main { padding: 0 16px; }
+    .hero-meta { flex-wrap: wrap; gap: 12px; }
+    .url-cards { grid-template-columns: 1fr; }
+    .link-card { flex-direction: column; text-align: center; }
+    .chrome-mockup-layout { flex-direction: column !important; }
+    .chrome-sidebar { width: 100% !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-dot"></div>
+    MAP Growth Support Korea
+  </a>
+  <a class="nav-back" href="#">CS 가이드 목록 &rarr;</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      08 &mdash; 부록
+    </div>
+    <h1>빠른 접속 <span>URL</span> 및 참고자료</h1>
+    <p class="hero-desc">MAP Growth 플랫폼의 주요 접속 주소, 역할별 권한, 한글 참고자료, 연락처를 한곳에 모았습니다.</p>
+    <div class="hero-meta">
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+        주요 URL 5개
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        역할 5종
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+        참고자료 모음
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- ===== 주요 접속 URL ===== -->
+  <div class="url-cards reveal">
+    <div class="url-card">
+      <div class="url-card-label">관리자 로그인</div>
+      <div class="url-card-url"><a href="https://start.mapnwea.org" target="_blank">start.mapnwea.org</a></div>
+    </div>
+    <div class="url-card">
+      <div class="url-card-label">학생 시험 접속</div>
+      <div class="url-card-url"><a href="https://test.mapnwea.org" target="_blank">test.mapnwea.org</a></div>
+    </div>
+  </div>
+
+  <!-- ===== 시각 가이드: 관리자 로그인 ===== -->
+  <div class="step-section reveal">
+    <div class="section-label">시각 가이드</div>
+    <h2 class="section-h2">관리자 로그인 화면</h2>
+    <p class="section-desc">start.mapnwea.org 접속 시 표시되는 로그인 화면입니다.</p>
+
+    <div class="ui-mockup">
+      <div style="background:#1a3a5c; padding:24px; text-align:center;">
+        <div style="color:#8bc34a; font-weight:bold; font-size:28px; font-style:italic; margin-bottom:4px;">nwea</div>
+        <div style="color:rgba(255,255,255,0.7); font-size:12px;">Partnering to help all kids learn</div>
+      </div>
+      <div class="ui-body" style="padding:30px; background:#f5f7fa;">
+        <div class="login-form">
+          <div style="text-align:center; font-weight:bold; color:#1a3a5c; font-size:16px; margin-bottom:16px;">Sign In to MAP Growth</div>
+          <label class="login-label">Username or Email <span class="arrow-indicator">입력</span></label>
+          <input class="login-input" type="text" value="admin@academy.kr" disabled>
+          <label class="login-label">Password <span class="arrow-indicator">입력</span></label>
+          <input class="login-input" type="password" value="••••••••" disabled>
+          <button class="login-btn">Sign In <span class="arrow-indicator">클릭</span></button>
+          <div style="text-align:center; margin-top:12px;">
+            <span style="color:#1565c0; font-size:13px; cursor:default;">Forgot Password?</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 시각 가이드: 학생 시험 접속 ===== -->
+  <div class="step-section reveal">
+    <h2 class="section-h2">학생 시험 접속 화면</h2>
+    <p class="section-desc">test.mapnwea.org 접속 시 표시되는 학생용 세션 입장 화면입니다.</p>
+
+    <div class="ui-mockup">
+      <div style="background:#0f4c81; padding:24px; text-align:center;">
+        <div style="color:#8bc34a; font-weight:bold; font-size:28px; font-style:italic; margin-bottom:4px;">nwea</div>
+        <div style="color:rgba(255,255,255,0.8); font-size:14px; font-weight:bold;">MAP Growth Test</div>
+      </div>
+      <div class="ui-body" style="padding:30px; background:#e8f0fe;">
+        <div class="login-form">
+          <div style="text-align:center; font-weight:bold; color:#0f4c81; font-size:16px; margin-bottom:16px;">Join a Testing Session</div>
+          <label class="login-label">Session Name <span class="arrow-indicator">입력</span></label>
+          <input class="login-input" type="text" value="READING-0330" disabled>
+          <label class="login-label">Password <span class="arrow-indicator">입력</span></label>
+          <input class="login-input" type="text" value="maple7" disabled>
+          <button class="login-btn" style="background:#4caf50;">Join Session <span class="arrow-indicator">클릭</span></button>
+          <div style="text-align:center; margin-top:12px; font-size:12px; color:#666;">
+            Session Name과 Password는 감독 선생님이 안내합니다.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 전체 URL 목록 ===== -->
+  <div class="step-section reveal">
+    <div class="section-label">URL 목록</div>
+    <h2 class="section-h2">주요 접속 URL 전체</h2>
+    <p class="section-desc">MAP Growth 관련 주요 웹사이트 주소입니다.</p>
+
+    <table class="data-table">
+      <tr><th>용도</th><th>URL</th></tr>
+      <tr><td>MAP 플랫폼 로그인 (관리자/교사)</td><td><a href="https://start.mapnwea.org" target="_blank">start.mapnwea.org</a></td></tr>
+      <tr><td>학생 시험 접속</td><td><a href="https://test.mapnwea.org" target="_blank">test.mapnwea.org</a></td></tr>
+      <tr><td>Help Center</td><td><a href="https://teach.mapnwea.org/assist/help_map/ApplicationHelp.htm" target="_blank">MAP Help Center</a></td></tr>
+      <tr><td>NWEA 기술지원</td><td><a href="https://nwea.force.com/nweaconnection/s/" target="_blank">NWEA Support</a></td></tr>
+      <tr><td>학생 연습시험</td><td><a href="https://studentresources.nwea.org" target="_blank">studentresources.nwea.org</a></td></tr>
+    </table>
+  </div>
+
+  <!-- ===== 역할과 권한 ===== -->
+  <div class="step-section reveal">
+    <div class="section-label">권한 안내</div>
+    <h2 class="section-h2">역할과 권한</h2>
+    <p class="section-desc">MAP Growth 플랫폼의 사용자 역할과 한국 학원에서의 대응 관계입니다.</p>
+
+    <table class="data-table">
+      <tr><th>역할</th><th>한국 학원 대응</th><th>주요 권한</th></tr>
+      <tr><td><strong>System Administrator</strong></td><td>원장 / IT 담당</td><td>모든 설정 접근, 사용자 관리</td></tr>
+      <tr><td><strong>Data Administrator</strong></td><td>원장 / 행정 담당</td><td>로스터 업로드, 학생/교사 데이터 관리</td></tr>
+      <tr><td><strong>District Assessment Coordinator</strong></td><td>원장 / 시험 총괄</td><td>시험 일정 설정, 전체 리포트 접근</td></tr>
+      <tr><td><strong>Proctor</strong></td><td>감독 선생님</td><td>시험 세션 생성/관리, 학생 확인</td></tr>
+      <tr><td><strong>Instructor</strong></td><td>담당 선생님</td><td>담당 학급 리포트 확인</td></tr>
+    </table>
+
+    <div class="callout callout-tip">
+      <div class="callout-title">한 사람에게 여러 역할 부여 가능</div>
+      소규모 학원에서는 원장이 System Admin + Data Admin + District Assessment Coordinator를 겸하는 것이 일반적입니다.
+    </div>
+  </div>
+
+  <!-- ===== 한글 버전 참고자료 ===== -->
+  <div class="step-section reveal">
+    <div class="section-label">한글 자료</div>
+    <h2 class="section-h2">한글 버전 참고자료</h2>
+    <p class="section-desc">MAP Growth Support Korea에서 번역한 한국어 가이드 문서입니다.</p>
+
+    <div class="link-grid">
+      <div class="link-card">
+        <div class="link-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+        </div>
+        <div class="link-info">
+          <div class="link-title">테스트 시작하기 (한글버전).pdf</div>
+          <div class="link-desc">시험 환경 설정 및 시작 방법</div>
+        </div>
+      </div>
+      <div class="link-card">
+        <div class="link-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+        </div>
+        <div class="link-info">
+          <div class="link-title">Testing Tips (한글버전).pdf</div>
+          <div class="link-desc">시험 진행 시 감독관 팁</div>
+        </div>
+      </div>
+      <div class="link-card">
+        <div class="link-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+        </div>
+        <div class="link-info">
+          <div class="link-title">MAP 패스워드 리셋팅 (한글버전).pdf</div>
+          <div class="link-desc">비밀번호 초기화 방법</div>
+        </div>
+      </div>
+      <div class="link-card">
+        <div class="link-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+        </div>
+        <div class="link-info">
+          <div class="link-title">MAP 시험 유형 설명 (한글버전).pdf</div>
+          <div class="link-desc">Reading, Math, Language Usage 등 시험 유형 안내</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 영문 원본 참고자료 ===== -->
+  <div class="step-section reveal">
+    <div class="section-label">영문 자료</div>
+    <h2 class="section-h2">주요 PDF 참고자료 (영문 원본)</h2>
+    <p class="section-desc">NWEA에서 제공하는 공식 영문 가이드 문서입니다.</p>
+
+    <table class="data-table">
+      <tr><th>문서</th><th>대상</th></tr>
+      <tr><td>Proctor Quick Start</td><td>감독관</td></tr>
+      <tr><td>Testing Tips</td><td>감독관</td></tr>
+      <tr><td>Proctor Guide</td><td>감독관</td></tr>
+      <tr><td>Students &amp; Staff Management</td><td>관리자</td></tr>
+      <tr><td>Assessment Coordination Guide</td><td>총괄 관리자</td></tr>
+      <tr><td>MAP Setup Checklist</td><td>총괄 관리자</td></tr>
+      <tr><td>System Requirements</td><td>IT 담당</td></tr>
+      <tr><td>Reports Summary</td><td>선생님</td></tr>
+    </table>
+  </div>
+
+  <!-- ===== 영상 한국어 자막 설정 ===== -->
+  <div class="step-section reveal">
+    <div class="section-label">자막 설정</div>
+    <h2 class="section-h2">영상 한국어 자막으로 보는 방법</h2>
+    <p class="section-desc">Chrome 브라우저의 실시간 번역 자막 기능으로 영어 영상을 한국어로 볼 수 있습니다.</p>
+
+    <!-- Chrome 설정 시각 가이드 -->
+    <div class="ui-mockup">
+      <!-- Chrome 브라우저 상단 바 -->
+      <div style="background:#dee1e6; padding:8px 16px; display:flex; align-items:center; gap:8px;">
+        <div style="display:flex; gap:6px;">
+          <div style="width:12px; height:12px; border-radius:50%; background:#e53935;"></div>
+          <div style="width:12px; height:12px; border-radius:50%; background:#f5a623;"></div>
+          <div style="width:12px; height:12px; border-radius:50%; background:#4caf50;"></div>
+        </div>
+        <div style="flex:1; background:white; border-radius:16px; padding:6px 14px; font-size:13px; color:#555;">
+          chrome://settings/accessibility
+        </div>
+        <div style="font-size:16px; color:#666;">&#8942;</div>
+      </div>
+      <div style="display:flex;" class="chrome-mockup-layout">
+        <!-- Chrome 설정 사이드바 -->
+        <div class="chrome-sidebar" style="background:#f5f5f5; width:200px; padding:16px; border-right:1px solid #e0e0e0;">
+          <div style="font-size:12px; color:#666; padding:6px 8px;">자동 완성 및 비밀번호</div>
+          <div style="font-size:12px; color:#666; padding:6px 8px;">개인 정보 보호 및 보안</div>
+          <div style="font-size:12px; color:#666; padding:6px 8px;">모양</div>
+          <div style="font-size:12px; color:#1565c0; padding:6px 8px; font-weight:bold; background:#e3f2fd; border-radius:4px;">
+            접근성 <span class="arrow-indicator">클릭</span>
+          </div>
+          <div style="font-size:12px; color:#666; padding:6px 8px;">언어</div>
+          <div style="font-size:12px; color:#666; padding:6px 8px;">다운로드</div>
+        </div>
+        <!-- 설정 본문 -->
+        <div style="flex:1; padding:20px;">
+          <div style="font-weight:bold; color:#1a1a1a; font-size:18px; margin-bottom:20px;">접근성</div>
+
+          <div class="chrome-setting">
+            <div>
+              <div class="chrome-setting-label"><strong>실시간 자막</strong></div>
+              <div style="font-size:12px; color:#666;">오디오에 자동 자막을 표시합니다</div>
+            </div>
+            <div class="chrome-toggle on" style="position:relative;">
+              <div class="chrome-toggle-knob"></div>
+            </div>
+            <span class="arrow-indicator">켜기</span>
+          </div>
+
+          <div class="chrome-setting" style="padding-left:40px;">
+            <div>
+              <div class="chrome-setting-label"><strong>번역</strong></div>
+              <div style="font-size:12px; color:#666;">자막을 다른 언어로 번역합니다</div>
+            </div>
+            <div class="chrome-toggle on" style="position:relative;">
+              <div class="chrome-toggle-knob"></div>
+            </div>
+            <span class="arrow-indicator">켜기</span>
+          </div>
+
+          <div class="chrome-setting" style="padding-left:40px;">
+            <div>
+              <div class="chrome-setting-label"><strong>번역 언어</strong></div>
+            </div>
+            <div style="border:1px solid #ccc; padding:4px 12px; border-radius:4px; font-size:13px;">
+              한국어 &#9662; <span class="arrow-indicator">선택</span>
+            </div>
+          </div>
+
+          <div style="margin-top:16px; background:#F0FDF4; padding:10px 14px; border-radius:6px; font-size:13px; color:#166534;">
+            설정 완료! 이제 영상 재생 시 하단에 한국어 자막이 실시간으로 표시됩니다.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-instruction">
+      <strong>Chrome 실시간 번역 자막 설정 (1회만)</strong>
+      <ol>
+        <li>Chrome 브라우저에서 영상 링크 클릭</li>
+        <li>주소 표시줄 오른쪽 &#8942; (더보기) &rarr; 설정 &rarr; 접근성</li>
+        <li>"실시간 자막" 켜기 &rarr; "번역" 토글도 켜기</li>
+        <li>번역 언어를 <strong>한국어</strong>로 설정</li>
+        <li>영상 재생 시 하단에 한국어 자막이 실시간 표시됩니다</li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- ===== 연락처 ===== -->
+  <div class="step-section reveal">
+    <div class="section-label">연락처</div>
+    <h2 class="section-h2">MAP Growth Support Korea 연락처</h2>
+    <p class="section-desc">문의 사항이 있으시면 언제든 연락해 주세요.</p>
+
+    <div class="link-grid">
+      <div class="link-card">
+        <div class="link-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="link-info">
+          <div class="link-title">이메일</div>
+          <div class="link-desc">cs@mapgrowthsupportkorea.com</div>
+        </div>
+      </div>
+      <div class="link-card">
+        <div class="link-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <div class="link-info">
+          <div class="link-title">회사전화</div>
+          <div class="link-desc">070-7623-2105</div>
+        </div>
+      </div>
+      <div class="link-card">
+        <div class="link-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+        </div>
+        <div class="link-info">
+          <div class="link-title">홈페이지</div>
+          <div class="link-desc"><a href="https://www.mapgrowthsupportkorea.com" target="_blank" style="color: var(--accent); text-decoration: none;">www.mapgrowthsupportkorea.com</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  MAP Growth Support Korea &nbsp;&middot;&nbsp; cs@mapgrowthsupportkorea.com &nbsp;&middot;&nbsp; 070-7623-2105<br>
+  본 자료는 NWEA MAP Help Center 공식 문서 기반으로 작성되었습니다.
+</footer>
+
+<!-- REVEAL ANIMATION -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

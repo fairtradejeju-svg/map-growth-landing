@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>로스터링 오류 해결 가이드 — MAP Growth</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #0F6E56;
+    --accent-light: rgba(15,110,86,0.06);
+    --accent-mid: rgba(15,110,86,0.12);
+    --bg: #FAFAF9;
+    --surface: #FFFFFF;
+    --border: rgba(0,0,0,0.06);
+    --text: #0f172a;
+    --text-secondary: #64748b;
+    --text-tertiary: #94a3b8;
+    --positive: #059669;
+    --warning: #d97706;
+    --danger: #dc2626;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== NAV ===== */
+  .nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    background: rgba(250,250,249,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 32px;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .nav-logo-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .nav-back {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.15s;
+  }
+  .nav-back:hover { background: var(--accent-light); color: var(--accent); }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: linear-gradient(165deg, #FFFFFF 0%, #F5F9F7 40%, #F0F8F4 100%);
+    padding: clamp(48px, 8vw, 72px) 24px clamp(40px, 6vw, 56px);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(15,110,86,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: var(--accent-light);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+  .hero-badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+  .hero h1 {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--text);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-desc {
+    font-size: clamp(0.95rem, 1.8vw, 1.05rem);
+    color: var(--text-secondary);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 24px;
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+  .hero-meta span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* ===== MAIN CONTAINER ===== */
+  .main {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ===== ERROR TYPE SECTION ===== */
+  .error-section {
+    margin: 48px 0 0;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .error-section:first-of-type {
+    border-top: none;
+    padding-top: 0;
+    margin-top: 40px;
+  }
+  .error-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .error-type-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 14px;
+    background: var(--danger);
+    color: white;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+  }
+  .error-type-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .error-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+  }
+
+  /* ===== PROBLEM / SOLUTION PAIR ===== */
+  .problem-solution {
+    margin: 16px 0;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .problem-box {
+    background: #FEF2F2;
+    border-bottom: 1px solid #FECACA;
+    padding: 14px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #991B1B;
+  }
+  .solution-box {
+    background: var(--surface);
+    padding: 14px 20px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  /* ===== UI MOCKUP ===== */
+  .ui-mockup {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 16px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    background: var(--surface);
+  }
+  .ui-header { background: #2d3436; padding: 12px 20px; display: flex; align-items: center; gap: 8px; }
+  .ui-logo { color: #8bc34a; font-weight: bold; font-size: 18px; font-style: italic; }
+  .ui-body { padding: 20px; background: white; }
+  .ui-tabs { display: flex; background: #f5f5f5; border-bottom: 2px solid #ddd; }
+  .ui-tab { padding: 10px 16px; font-size: 13px; font-weight: bold; color: #666; cursor: default; }
+  .ui-tab.active { background: #f5a623; color: white; border-radius: 4px 4px 0 0; }
+  .ui-tab-arrow { color: #ccc; padding: 10px 4px; }
+  .ui-btn { display: inline-block; background: #5c8db5; color: white; padding: 6px 16px; border-radius: 4px; font-size: 13px; cursor: default; }
+
+  .arrow-indicator {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 8px;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+  .error-box { background: #fde8e8; border: 2px solid #e53935; border-radius: 6px; padding: 14px 18px; margin: 8px 0; }
+  .error-icon { color: #e53935; font-weight: bold; margin-right: 6px; }
+  .error-row { background: #fff0f0; }
+  .preview-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .preview-table th { background: #455a64; color: white; padding: 6px 10px; text-align: left; font-size: 11px; }
+  .preview-table td { padding: 6px 10px; border-bottom: 1px solid #e0e0e0; }
+  .reconcile-option { border: 1px solid #ddd; border-radius: 6px; padding: 12px 16px; margin: 8px 0; cursor: default; }
+  .reconcile-option.selected { border-color: #1565c0; background: #e3f2fd; }
+  .reconcile-option.danger { border-color: #e53935; background: #fde8e8; }
+
+  /* ===== CALLOUT BOXES ===== */
+  .callout {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    font-size: 14px;
+    line-height: 1.7;
+    border: 1px solid;
+  }
+  .callout-warning {
+    background: #FFFBEB;
+    border-color: #FDE68A;
+    color: #92400E;
+  }
+  .callout-danger {
+    background: #FEF2F2;
+    border-color: #FECACA;
+    color: #991B1B;
+  }
+  .callout-tip {
+    background: #F0FDF4;
+    border-color: #BBF7D0;
+    color: #166534;
+  }
+  .callout-info {
+    background: #EFF6FF;
+    border-color: #BFDBFE;
+    color: #1E40AF;
+  }
+  .callout-title {
+    font-weight: 600;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+
+  /* ===== TABLE ===== */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .data-table th {
+    background: var(--accent);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 13px;
+  }
+  .data-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table tr:nth-child(even) { background: var(--bg); }
+
+  /* ===== SECTION LABEL ===== */
+  .section-label {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--accent);
+    padding: 4px 12px;
+    background: var(--accent-light);
+    border-radius: 100px;
+    margin-bottom: 16px;
+  }
+
+  /* ===== VIDEO SECTION ===== */
+  .video-section {
+    margin: 48px 0 0;
+    padding-top: 48px;
+    border-top: 1px solid var(--border);
+  }
+  .video-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .video-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    transition: box-shadow 0.2s, transform 0.15s;
+  }
+  .video-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+    transform: translateY(-1px);
+  }
+  .video-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, #ef4444, #f97316);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .video-info { flex: 1; }
+  .video-title { font-weight: 600; font-size: 14px; color: var(--text); margin-bottom: 2px; }
+  .video-desc { font-size: 13px; color: var(--text-secondary); }
+  .video-link {
+    background: var(--accent);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background 0.15s;
+  }
+  .video-link:hover { background: #0b5a46; }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    margin-top: 64px;
+    padding: 32px 24px;
+    border-top: 1px solid var(--border);
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+
+  /* ===== REVEAL ANIMATION ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .nav-bar { padding: 0 16px; }
+    .hero { padding: 40px 16px 32px; }
+    .main { padding: 0 16px; }
+    .hero-meta { flex-wrap: wrap; gap: 12px; }
+    .ui-tabs { flex-wrap: wrap; }
+    .video-card { flex-direction: column; text-align: center; }
+    .error-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-dot"></div>
+    MAP Growth Support Korea
+  </a>
+  <a class="nav-back" href="#">CS 가이드 목록 &rarr;</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      07 &mdash; 부록
+    </div>
+    <h1>로스터링 <span>오류 해결</span> 가이드</h1>
+    <p class="hero-desc">로스터 Import 시 발생할 수 있는 오류 유형과 해결 방법입니다. 오류 메시지별로 원인과 해결 방법을 안내합니다.</p>
+    <div class="hero-meta">
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        3가지 오류 유형
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        유형별 해결 방법
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+        CSV 파일 관련
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- ===== 오류 화면 예시 (UI Mockup) ===== -->
+  <div class="error-section reveal" style="border-top: none; padding-top: 0; margin-top: 40px;">
+    <div class="section-label">오류 화면 예시</div>
+    <h2 style="font-size: 18px; font-weight: 600; margin-bottom: 16px;">Import 시 에러 메시지</h2>
+
+    <div class="ui-mockup">
+      <div class="ui-header">
+        <div class="ui-logo">nwea</div>
+        <div style="color:#ccc; margin-left:auto; font-size:13px;">Legacy Rostering</div>
+      </div>
+      <div class="ui-tabs">
+        <div class="ui-tab active">Set Up Import</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab" style="color:#e53935; font-weight:bold;">Validate File Format</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab">Import Summary</div>
+      </div>
+      <div class="ui-body" style="padding:20px;">
+        <div class="error-box">
+          <div style="font-weight:bold; color:#c62828; font-size:15px; margin-bottom:8px;">
+            <span class="error-icon">&#10006;</span> We have encountered an error with your file.
+          </div>
+          <div style="font-size:13px; color:#555;">
+            The file you uploaded could not be processed. Please verify the following:<br>
+            <ul style="margin:8px 0; padding-left:20px; font-size:13px;">
+              <li>File is saved as <strong>CSV (Comma delimited)</strong>, not CSV UTF-8</li>
+              <li>Column headers match the NWEA template exactly</li>
+              <li>No extra rows or columns beyond the data range</li>
+            </ul>
+          </div>
+          <div style="margin-top:8px;">
+            <span class="ui-btn" style="background:#e53935;">Download Error Report</span>
+            <span class="ui-btn" style="background:#666; margin-left:8px;">Re-upload File</span> <span class="arrow-indicator">클릭</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 유형 1: Preview 오류 ===== -->
+  <div class="error-section reveal">
+    <div class="error-header">
+      <div class="error-type-badge">유형 1</div>
+      <div class="error-type-title">Preview 오류 &mdash; 파일 형식 문제</div>
+    </div>
+    <p class="error-desc">업로드 직후 "we have encountered an error with your file" 메시지가 나타남</p>
+
+    <table class="data-table">
+      <tr><th>원인</th><th>해결</th></tr>
+      <tr><td>CSV 형식이 잘못됨 (UTF-8로 저장)</td><td>Excel에서 <strong>CSV(쉼표 구분)</strong>으로 재저장</td></tr>
+      <tr><td>컬럼/헤더가 템플릿과 다름</td><td>NWEA 템플릿의 헤더 행을 복사하여 붙여넣기</td></tr>
+      <tr><td>불필요한 데이터가 포함됨</td><td>데이터 범위만 선택 &rarr; 새 템플릿에 붙여넣기</td></tr>
+      <tr><td>한국어 Windows에서 구분자가 세미콜론</td><td>제어판에서 목록 구분 기호를 <strong>쉼표(,)</strong>로 변경</td></tr>
+    </table>
+
+    <!-- Preview 단계 오류 UI -->
+    <div class="ui-mockup" style="margin-top: 24px;">
+      <div class="ui-tabs">
+        <div class="ui-tab">Set Up Import</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab active">Preview and Confirm File</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab">Validate File Format</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab">Import Summary</div>
+      </div>
+      <div class="ui-body" style="padding:16px;">
+        <div style="font-weight:bold; color:#1a3a5c; font-size:15px; margin-bottom:4px;">Preview Your Data</div>
+        <div style="font-size:13px; color:#666; margin-bottom:12px;">Review the data below. Rows with errors are highlighted in red.</div>
+        <div style="overflow-x:auto;">
+          <table class="preview-table">
+            <tr>
+              <th>Row</th>
+              <th>School Name</th>
+              <th>Instructor Last</th>
+              <th>Instructor First</th>
+              <th>Student Last</th>
+              <th>Student First</th>
+              <th>DOB</th>
+              <th>Grade</th>
+              <th>Status</th>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>ABC School</td>
+              <td>Kim</td>
+              <td>Jihye</td>
+              <td>Lee</td>
+              <td>Soyeon</td>
+              <td>03/15/2015</td>
+              <td>4</td>
+              <td style="color:#2e7d32; font-weight:bold;">OK</td>
+            </tr>
+            <tr class="error-row">
+              <td>3</td>
+              <td>ABC School</td>
+              <td>Kim</td>
+              <td>Jihye</td>
+              <td>Park</td>
+              <td>Jiwoo</td>
+              <td style="color:#e53935; font-weight:bold;">2015-03-20</td>
+              <td>4</td>
+              <td style="color:#e53935; font-weight:bold;">ERROR <span class="arrow-indicator">오류</span></td>
+            </tr>
+            <tr>
+              <td colspan="9" style="background:#fde8e8; color:#c62828; font-size:12px; padding:6px 10px;">
+                <span class="error-icon">&#10006;</span> Row 3: "Date of Birth must be a valid date" &mdash; <strong>MM/DD/YYYY</strong> 형식이어야 합니다
+              </td>
+            </tr>
+            <tr class="error-row">
+              <td>4</td>
+              <td>ABC School</td>
+              <td>Kim</td>
+              <td>Jihye</td>
+              <td>Choi</td>
+              <td></td>
+              <td>05/22/2014</td>
+              <td>5</td>
+              <td style="color:#e53935; font-weight:bold;">ERROR <span class="arrow-indicator">오류</span></td>
+            </tr>
+            <tr>
+              <td colspan="9" style="background:#fde8e8; color:#c62828; font-size:12px; padding:6px 10px;">
+                <span class="error-icon">&#10006;</span> Row 4: "Field cannot be empty" &mdash; <strong>Student First Name</strong> 필수 입력
+              </td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>ABC School</td>
+              <td>Kim</td>
+              <td>Jihye</td>
+              <td>Jung</td>
+              <td>Hyunwoo</td>
+              <td>01/10/2015</td>
+              <td>4</td>
+              <td style="color:#2e7d32; font-weight:bold;">OK</td>
+            </tr>
+          </table>
+        </div>
+        <div style="margin-top:12px; display:flex; gap:8px;">
+          <span class="ui-btn" style="background:#e53935;">Download Error Report</span> <span class="arrow-indicator">클릭</span>
+          <span class="ui-btn" style="background:#666;">Cancel Import</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 유형 2: File Format 오류 ===== -->
+  <div class="error-section reveal">
+    <div class="error-header">
+      <div class="error-type-badge">유형 2</div>
+      <div class="error-type-title">File Format 오류 &mdash; 데이터 내용 문제</div>
+    </div>
+
+    <table class="data-table">
+      <tr><th>오류 메시지</th><th>원인</th><th>해결</th></tr>
+      <tr>
+        <td>"XXX cannot be the same for more than one YYY"</td>
+        <td>서로 다른 사람이 같은 ID/사용자명 공유</td>
+        <td>Column Name, Row Number 확인 후 중복 제거</td>
+      </tr>
+      <tr>
+        <td>"Field cannot be empty"</td>
+        <td>필수 컬럼에 빈 값</td>
+        <td>해당 행과 열을 찾아 빠진 정보 입력</td>
+      </tr>
+      <tr>
+        <td>"Date of Birth must be a valid date"</td>
+        <td>날짜 형식 오류</td>
+        <td><strong>MM/DD/YYYY</strong> 형식으로 통일</td>
+      </tr>
+    </table>
+
+    <div class="callout callout-tip">
+      <div class="callout-title">팁</div>
+      오류가 많을 때는 해당 열을 필터링하여 문제 데이터만 골라 수정하면 빠릅니다.
+    </div>
+  </div>
+
+  <!-- ===== 유형 3: Reconcile 오류 ===== -->
+  <div class="error-section reveal">
+    <div class="error-header">
+      <div class="error-type-badge">유형 3</div>
+      <div class="error-type-title">Reconcile 오류 &mdash; 기존 데이터와 충돌</div>
+    </div>
+    <p class="error-desc">이전에 등록된 데이터와 현재 업로드 데이터가 일치하지 않을 때 발생합니다.</p>
+
+    <!-- Reconcile 화면 UI -->
+    <div class="ui-mockup">
+      <div class="ui-tabs">
+        <div class="ui-tab">Set Up Import</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab">Preview and Confirm</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab active" style="background:#e65100;">Reconcile</div>
+        <div class="ui-tab-arrow">&#9656;</div>
+        <div class="ui-tab">Import Summary</div>
+      </div>
+      <div class="ui-body" style="padding:20px;">
+        <div style="font-weight:bold; color:#1a3a5c; font-size:15px; margin-bottom:4px;">Reconcile Data Conflicts</div>
+        <div style="font-size:13px; color:#666; margin-bottom:16px;">
+          The following records in your file do not exactly match existing records in MAP. Please select how to resolve each conflict.
+        </div>
+
+        <!-- 충돌 1: 학교명 -->
+        <div style="background:#fff8e1; border:1px solid #ffcc02; border-radius:6px; padding:16px; margin-bottom:16px;">
+          <div style="font-weight:bold; color:#e65100; font-size:14px; margin-bottom:8px;">
+            &#9888; School Name Conflict
+          </div>
+          <div style="font-size:13px; color:#555; margin-bottom:12px;">
+            Incoming: <strong style="color:#e53935;">"ABC Schl"</strong> &nbsp; | &nbsp;
+            Existing in MAP: <strong style="color:#2e7d32;">"ABC School"</strong>
+          </div>
+          <div style="font-size:13px; font-weight:bold; color:#1a3a5c; margin-bottom:8px;">
+            Replace incoming "ABC Schl" with the following selection:
+          </div>
+          <div class="reconcile-option selected">
+            <input type="radio" checked disabled style="margin-right:8px;">
+            <strong>ABC School</strong> <span style="color:#666; font-size:12px;">(existing in MAP)</span>
+            <span class="arrow-indicator">선택</span>
+          </div>
+          <div class="reconcile-option">
+            <input type="radio" disabled style="margin-right:8px;">
+            <span style="color:#666;">Create new school "ABC Schl"</span>
+          </div>
+          <div class="reconcile-option danger">
+            <input type="radio" disabled style="margin-right:8px;">
+            <span style="color:#c62828;">Do not import incoming records</span>
+            <span style="font-size:11px; color:#c62828; margin-left:4px;">(선택 금지)</span>
+          </div>
+        </div>
+
+        <!-- 충돌 2: 학생 중복 -->
+        <div style="background:#fff8e1; border:1px solid #ffcc02; border-radius:6px; padding:16px; margin-bottom:16px;">
+          <div style="font-weight:bold; color:#e65100; font-size:14px; margin-bottom:8px;">
+            &#9888; Student Record Conflict
+          </div>
+          <div style="font-size:13px; color:#555; margin-bottom:12px;">
+            Incoming: <strong>"Park, Jiwoo (DOB: 03/20/2015)"</strong> matches multiple existing records
+          </div>
+          <div style="font-size:13px; font-weight:bold; color:#1a3a5c; margin-bottom:8px;">
+            Replace incoming record with the following selection:
+          </div>
+          <div class="reconcile-option selected">
+            <input type="radio" checked disabled style="margin-right:8px;">
+            <strong>Park, Jiwoo</strong> &mdash; ID: STU-00482, Grade 4, ABC School
+            <span class="arrow-indicator">선택</span>
+          </div>
+          <div class="reconcile-option">
+            <input type="radio" disabled style="margin-right:8px;">
+            <span style="color:#666;">Park, Jiwoo &mdash; ID: STU-01205, Grade 3, ABC School</span>
+          </div>
+          <div class="reconcile-option danger">
+            <input type="radio" disabled style="margin-right:8px;">
+            <span style="color:#c62828;">Import users without creating associations</span>
+            <span style="font-size:11px; color:#c62828; margin-left:4px;">(선택 금지)</span>
+          </div>
+        </div>
+
+        <div style="margin-top:12px;">
+          <span class="ui-btn" style="background:#2e7d32;">Continue Import</span> <span class="arrow-indicator">클릭</span>
+          <span class="ui-btn" style="background:#666; margin-left:8px;">Cancel</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 해결 방법 카드들 -->
+    <div class="problem-solution">
+      <div class="problem-box">학교명/학년 등 불일치</div>
+      <div class="solution-box">
+        예: 로스터에 "ABC Schl"인데 MAP에는 "ABC School"로 등록된 경우<br>
+        &rarr; <strong>"Replace incoming XX with the following selection"</strong>을 선택하여 MAP에 있는 기존 이름으로 매칭
+      </div>
+    </div>
+
+    <div class="problem-solution">
+      <div class="problem-box">교사/학생 중복</div>
+      <div class="solution-box">
+        같은 사람이 여러 레코드로 매칭될 때 발생<br>
+        &rarr; 올바른 기존 프로필을 선택하거나, 사용자명/이메일을 수정하여 해결
+      </div>
+    </div>
+
+    <div class="callout callout-danger">
+      <div class="callout-title">피해야 할 선택</div>
+      "Import users without creating associations" 또는 "Do not import incoming records"는 선택하지 마세요.<br>
+      학생/교사가 리포트에서 누락됩니다.
+    </div>
+  </div>
+
+  <!-- ===== 영상 가이드 ===== -->
+  <div class="video-section reveal">
+    <div class="section-label">참고 영상</div>
+    <h2 style="font-size: 20px; font-weight: 600; margin-bottom: 4px;">영상 가이드</h2>
+    <p style="color: var(--text-secondary); font-size: 14px;">영상으로 보면 더 쉽습니다. Chrome 실시간 자막으로 한국어 자막도 지원됩니다.</p>
+    <div class="video-grid">
+      <div class="video-card">
+        <div class="video-icon">&#9654;</div>
+        <div class="video-info">
+          <div class="video-title">로스터 준비하기 (Prepare Your Roster)</div>
+          <div class="video-desc">템플릿 작성법과 주의사항</div>
+        </div>
+        <a href="https://teach.mapnwea.org/assist/help_map/Content/AboutRostering/PrepareRoster.htm" target="_blank" class="video-link">영상 보기 &rarr;</a>
+      </div>
+      <div class="video-card">
+        <div class="video-icon">&#9654;</div>
+        <div class="video-info">
+          <div class="video-title">로스터 Import (Import Your Roster)</div>
+          <div class="video-desc">CSV 업로드와 오류 해결</div>
+        </div>
+        <a href="https://teach.mapnwea.org/assist/help_map/Content/AboutRostering/ImportRoster.htm" target="_blank" class="video-link">영상 보기 &rarr;</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  MAP Growth Support Korea &nbsp;&middot;&nbsp; cs@mapgrowthsupportkorea.com &nbsp;&middot;&nbsp; 070-7623-2105<br>
+  본 자료는 NWEA MAP Help Center 공식 문서 기반으로 작성되었습니다.
+</footer>
+
+<!-- REVEAL ANIMATION -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

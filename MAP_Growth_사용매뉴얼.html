@@ -3,2223 +3,450 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MAP Growth 사용 매뉴얼 | MAP Growth Support Korea</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>MAP Growth 사용 매뉴얼 — MAP Growth Support Korea</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --nwea-green: #00875a;
-  --nwea-green-dark: #006644;
-  --nwea-green-light: #e3fcef;
-  --nwea-teal: #0097a7;
-  --hmh-blue: #1a3a5c;
-  --hmh-blue-light: #e8f0fe;
-  --accent-orange: #ff8f00;
-  --accent-red: #d32f2f;
-  --bg: #fafbfc;
-  --surface: #ffffff;
-  --text: #1a1a2e;
-  --text-secondary: #5a6474;
-  --border: #e2e8f0;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 30px rgba(0,0,0,0.12);
-  --radius: 12px;
-  --radius-sm: 8px;
-}
+  :root {
+    --accent: #0F6E56;
+    --accent-light: rgba(15,110,86,0.06);
+    --accent-mid: rgba(15,110,86,0.12);
+    --bg: #FAFAF9;
+    --surface: #FFFFFF;
+    --border: rgba(0,0,0,0.06);
+    --text: #0f172a;
+    --text-secondary: #64748b;
+    --text-tertiary: #94a3b8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Noto Sans KR', 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+    -webkit-font-smoothing: antialiased;
+  }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+  /* NAV */
+  .nav-bar {
+    position: sticky; top: 0; z-index: 100;
+    height: 56px;
+    background: rgba(250,250,249,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; padding: 0 32px;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 600; font-size: 15px; color: var(--text); text-decoration: none;
+  }
+  .nav-logo-dot { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; }
+  .nav-links { margin-left: auto; display: flex; gap: 4px; }
+  .nav-links a {
+    padding: 8px 14px; color: var(--text-secondary); text-decoration: none;
+    font-size: 14px; font-weight: 500; border-radius: 8px; transition: all 0.15s;
+  }
+  .nav-links a:hover { background: var(--accent-light); color: var(--accent); }
 
-body {
-  font-family: 'Noto Sans KR', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
-  font-size: 15px;
-}
+  /* HERO */
+  .hero {
+    background: linear-gradient(165deg, #FFFFFF 0%, #F5F9F7 40%, #F0F8F4 100%);
+    padding: clamp(64px, 10vw, 100px) 24px clamp(48px, 8vw, 80px);
+    position: relative; overflow: hidden; text-align: center;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -40%; right: -20%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(15,110,86,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -30%; left: -15%;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(15,110,86,0.03) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 720px; margin: 0 auto; position: relative; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 16px; background: var(--accent-light); border-radius: 100px;
+    font-size: 13px; font-weight: 500; color: var(--accent); margin-bottom: 24px;
+  }
+  .hero-badge-dot {
+    width: 6px; height: 6px; background: var(--accent); border-radius: 50%;
+    animation: pulse 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .hero h1 {
+    font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 700; line-height: 1.25;
+    margin-bottom: 16px; letter-spacing: -0.02em;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero-desc {
+    font-size: clamp(1rem, 2vw, 1.125rem); color: var(--text-secondary);
+    max-width: 520px; margin: 0 auto 32px; line-height: 1.7;
+  }
+  .hero-meta {
+    display: flex; justify-content: center; gap: 24px;
+    font-size: 13px; color: var(--text-tertiary); flex-wrap: wrap;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
 
-/* ── SIDEBAR NAV ── */
-.sidebar {
-  position: fixed;
-  left: 0; top: 0; bottom: 0;
-  width: 280px;
-  background: var(--hmh-blue);
-  color: #fff;
-  overflow-y: auto;
-  z-index: 100;
-  transition: transform 0.3s ease;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255,255,255,0.2) transparent;
-}
-.sidebar::-webkit-scrollbar { width: 4px; }
-.sidebar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+  /* CONTAINER */
+  .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-.sidebar-header {
-  padding: 24px 20px 16px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-.sidebar-header .logo-area {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 6px;
-}
-.sidebar-header .logo-icon {
-  width: 36px; height: 36px;
-  background: var(--nwea-green);
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 900; font-size: 14px; color: #fff;
-}
-.sidebar-header h1 {
-  font-size: 16px; font-weight: 700; line-height: 1.3;
-}
-.sidebar-header .subtitle {
-  font-size: 11px; opacity: 0.6; margin-top: 4px;
-}
+  /* SECTION */
+  .section { padding: clamp(48px, 8vw, 80px) 24px; }
+  .section-label {
+    display: inline-block; font-size: 12px; letter-spacing: 1.5px;
+    text-transform: uppercase; font-weight: 600; color: var(--accent);
+    padding: 4px 12px; background: var(--accent-light); border-radius: 100px; margin-bottom: 16px;
+  }
+  .section-title {
+    font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 600;
+    margin-bottom: 8px; letter-spacing: -0.01em;
+  }
+  .section-desc { color: var(--text-secondary); font-size: 15px; margin-bottom: 40px; }
 
-.nav-section {
-  padding: 16px 0 8px;
-}
-.nav-section-title {
-  padding: 0 20px;
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  opacity: 0.4;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-.nav-item {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 20px;
-  cursor: pointer;
-  transition: all 0.15s;
-  font-size: 13.5px;
-  font-weight: 400;
-  color: rgba(255,255,255,0.75);
-  text-decoration: none;
-  border-left: 3px solid transparent;
-}
-.nav-item:hover {
-  background: rgba(255,255,255,0.06);
-  color: #fff;
-}
-.nav-item.active {
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-  font-weight: 500;
-  border-left-color: var(--nwea-green);
-}
-.nav-item .nav-icon {
-  width: 20px; text-align: center; font-size: 14px; flex-shrink: 0;
-}
-.nav-item .nav-num {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  opacity: 0.4;
-  margin-left: auto;
-}
+  /* CATEGORY GRID */
+  .cat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .cat-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+    padding: 32px 28px; cursor: pointer;
+    transition: box-shadow 0.25s, transform 0.25s, border-color 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .cat-card:hover {
+    box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+    transform: translateY(-4px); border-color: rgba(15,110,86,0.15);
+  }
+  .cat-card-icon {
+    width: 52px; height: 52px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 18px;
+  }
+  .cat-card-icon.roster { background: #E1F5EE; }
+  .cat-card-icon.test { background: #E0F2FE; }
+  .cat-card-icon.report { background: #FEF3C7; }
+  .cat-card-icon.appendix { background: #F1F0FB; }
+  .cat-card-title { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
+  .cat-card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 18px; }
+  .cat-card-links { list-style: none; }
+  .cat-card-links li {
+    border-top: 1px solid var(--border); padding: 10px 0;
+    display: flex; align-items: center; gap: 10px;
+    font-size: 14px; font-weight: 500; color: var(--text);
+    transition: color 0.15s; cursor: pointer;
+  }
+  .cat-card-links li:hover { color: var(--accent); }
+  .cat-card-links li:first-child { border-top: none; }
+  .link-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; background: var(--bg); border-radius: 6px;
+    font-size: 11px; font-weight: 600; color: var(--text-tertiary); flex-shrink: 0;
+  }
+  .cat-card-links li:hover .link-num { background: var(--accent-light); color: var(--accent); }
+  .link-arrow {
+    margin-left: auto; color: var(--text-tertiary); font-size: 14px;
+    opacity: 0; transform: translateX(-4px); transition: all 0.15s;
+  }
+  .cat-card-links li:hover .link-arrow { opacity: 1; transform: translateX(0); }
 
-/* ── MOBILE TOGGLE ── */
-.mobile-toggle {
-  display: none;
-  position: fixed;
-  top: 12px; left: 12px;
-  z-index: 200;
-  width: 44px; height: 44px;
-  background: var(--hmh-blue);
-  color: #fff;
-  border: none; border-radius: 10px;
-  font-size: 20px;
-  cursor: pointer;
-  box-shadow: var(--shadow-md);
-}
+  /* STATS */
+  .stats-row {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px; margin-top: 48px;
+  }
+  .stat-card {
+    text-align: center; padding: 24px 16px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  }
+  .stat-num { font-size: 2rem; font-weight: 700; color: var(--accent); line-height: 1.2; }
+  .stat-label { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
 
-/* ── MAIN CONTENT ── */
-.main {
-  margin-left: 280px;
-  min-height: 100vh;
-}
-.content-wrapper {
-  max-width: 860px;
-  margin: 0 auto;
-  padding: 40px 40px 80px;
-}
+  /* MODAL OVERLAY */
+  .modal-overlay {
+    display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+    z-index: 1000; justify-content: center; align-items: center;
+    padding: 24px; opacity: 0; transition: opacity 0.25s ease;
+  }
+  .modal-overlay.active { display: flex; opacity: 1; }
+  .modal-overlay.entering { opacity: 0; }
 
-/* ── HERO ── */
-.hero {
-  background: linear-gradient(135deg, var(--hmh-blue) 0%, #2a5a8c 50%, var(--nwea-green-dark) 100%);
-  color: #fff;
-  padding: 48px 40px;
-  border-radius: var(--radius);
-  margin-bottom: 40px;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -50%; right: -20%;
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, rgba(0,135,90,0.3) 0%, transparent 70%);
-  border-radius: 50%;
-}
-.hero-badge {
-  display: inline-block;
-  background: rgba(255,255,255,0.15);
-  padding: 4px 14px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
-  margin-bottom: 16px;
-  backdrop-filter: blur(4px);
-}
-.hero h2 {
-  font-size: 28px;
-  font-weight: 900;
-  line-height: 1.3;
-  margin-bottom: 12px;
-  position: relative;
-}
-.hero p {
-  font-size: 15px;
-  opacity: 0.85;
-  max-width: 580px;
-  line-height: 1.7;
-  position: relative;
-}
-.hero-meta {
-  margin-top: 20px;
-  display: flex; gap: 24px; flex-wrap: wrap;
-  font-size: 12px;
-  opacity: 0.6;
-  position: relative;
-}
+  .modal-container {
+    background: var(--bg); border-radius: 16px; width: 100%; max-width: 960px;
+    height: 90vh; display: flex; flex-direction: column;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.15);
+    transform: translateY(20px) scale(0.97); transition: transform 0.3s ease;
+    overflow: hidden;
+  }
+  .modal-overlay.active .modal-container { transform: translateY(0) scale(1); }
 
-/* ── SECTION ── */
-.section {
-  display: none;
-}
-.section.active {
-  display: block;
-  animation: fadeIn 0.3s ease;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+  .modal-header {
+    display: flex; align-items: center; padding: 16px 24px;
+    border-bottom: 1px solid var(--border); flex-shrink: 0; background: var(--surface);
+  }
+  .modal-title { font-size: 15px; font-weight: 600; flex: 1; }
+  .modal-close {
+    width: 36px; height: 36px; border: none; background: var(--bg);
+    border-radius: 8px; font-size: 18px; cursor: pointer; color: var(--text-secondary);
+    display: flex; align-items: center; justify-content: center; transition: all 0.15s;
+  }
+  .modal-close:hover { background: var(--accent-light); color: var(--accent); }
+  .modal-nav {
+    display: flex; gap: 8px; padding: 0 24px; overflow-x: auto;
+    flex-shrink: 0;
+  }
+  .modal-nav-btn {
+    padding: 6px 12px; border: none; background: none;
+    font-size: 13px; font-weight: 500; color: var(--text-secondary);
+    cursor: pointer; border-radius: 6px; transition: all 0.15s; white-space: nowrap;
+  }
+  .modal-nav-btn:hover { background: var(--accent-light); color: var(--accent); }
+  .modal-nav-btn.active { background: var(--accent); color: white; }
+  .modal-body { flex: 1; overflow: hidden; }
+  .modal-body iframe {
+    width: 100%; height: 100%; border: none; border-radius: 0 0 16px 16px;
+  }
 
-.section-title {
-  font-size: 24px;
-  font-weight: 900;
-  color: var(--hmh-blue);
-  margin-bottom: 8px;
-  display: flex; align-items: center; gap: 12px;
-}
-.section-title .title-icon {
-  width: 40px; height: 40px;
-  background: var(--nwea-green-light);
-  color: var(--nwea-green);
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px; flex-shrink: 0;
-}
-.section-desc {
-  color: var(--text-secondary);
-  margin-bottom: 32px;
-  font-size: 14px;
-}
+  /* FOOTER */
+  .footer {
+    padding: 40px 24px; border-top: 1px solid var(--border);
+    text-align: center; color: var(--text-tertiary); font-size: 13px; line-height: 1.8;
+  }
+  .footer a { color: var(--accent); text-decoration: none; }
 
-/* ── ROLE TABS ── */
-.role-tabs {
-  display: flex; gap: 8px;
-  margin-bottom: 24px;
-  flex-wrap: wrap;
-}
-.role-tab {
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  border: 1.5px solid var(--border);
-  background: var(--surface);
-  color: var(--text-secondary);
-  transition: all 0.2s;
-}
-.role-tab:hover { border-color: var(--nwea-green); color: var(--nwea-green); }
-.role-tab.active {
-  background: var(--nwea-green);
-  color: #fff;
-  border-color: var(--nwea-green);
-}
+  /* REVEAL */
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ── CARD ── */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px;
-  margin-bottom: 20px;
-  box-shadow: var(--shadow-sm);
-}
-.card-title {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--hmh-blue);
-  margin-bottom: 12px;
-  display: flex; align-items: center; gap: 8px;
-}
-.card-title .step-num {
-  width: 28px; height: 28px;
-  background: var(--nwea-green);
-  color: #fff;
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 700;
-  flex-shrink: 0;
-}
-
-/* ── STEPS ── */
-.step-list {
-  counter-reset: steps;
-  list-style: none;
-}
-.step-list li {
-  counter-increment: steps;
-  padding: 12px 0 12px 40px;
-  position: relative;
-  border-bottom: 1px solid var(--border);
-  font-size: 14px;
-}
-.step-list li:last-child { border-bottom: none; }
-.step-list li::before {
-  content: counter(steps);
-  position: absolute;
-  left: 0; top: 12px;
-  width: 26px; height: 26px;
-  background: var(--hmh-blue-light);
-  color: var(--hmh-blue);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 700;
-  font-family: 'JetBrains Mono', monospace;
-}
-
-/* ── ACCORDION ── */
-.accordion {
-  margin-bottom: 12px;
-}
-.accordion-trigger {
-  width: 100%;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 16px 20px;
-  display: flex; align-items: center; gap: 12px;
-  cursor: pointer;
-  font-size: 14.5px;
-  font-weight: 600;
-  color: var(--text);
-  transition: all 0.2s;
-  text-align: left;
-}
-.accordion-trigger:hover {
-  border-color: var(--nwea-green);
-  box-shadow: var(--shadow-sm);
-}
-.accordion-trigger .acc-icon {
-  width: 28px; height: 28px;
-  background: var(--nwea-green-light);
-  color: var(--nwea-green);
-  border-radius: 6px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px; flex-shrink: 0;
-}
-.accordion-trigger .arrow {
-  margin-left: auto;
-  transition: transform 0.2s;
-  opacity: 0.4;
-}
-.accordion-trigger.open .arrow { transform: rotate(180deg); }
-.accordion-trigger.open {
-  border-color: var(--nwea-green);
-  background: var(--nwea-green-light);
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.accordion-body {
-  display: none;
-  background: var(--surface);
-  border: 1px solid var(--nwea-green);
-  border-top: none;
-  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-  padding: 20px 24px;
-  font-size: 14px;
-  line-height: 1.8;
-}
-.accordion-body.open { display: block; animation: fadeIn 0.2s ease; }
-
-/* ── INLINE CODE ── */
-code, .code {
-  font-family: 'JetBrains Mono', monospace;
-  background: #f1f5f9;
-  padding: 2px 6px;
-  border-radius: 4px;
-  font-size: 12.5px;
-  color: var(--hmh-blue);
-}
-
-/* ── TIP / WARNING / URL BOXES ── */
-.tip-box {
-  padding: 16px 20px;
-  border-radius: var(--radius-sm);
-  margin: 16px 0;
-  font-size: 13.5px;
-  display: flex; gap: 10px; align-items: flex-start;
-}
-.tip-box.info {
-  background: #e8f4fd;
-  border-left: 3px solid var(--nwea-teal);
-  color: #0c5e7a;
-}
-.tip-box.warning {
-  background: #fff8e1;
-  border-left: 3px solid var(--accent-orange);
-  color: #8a6d00;
-}
-.tip-box.danger {
-  background: #fde8e8;
-  border-left: 3px solid var(--accent-red);
-  color: #8b1a1a;
-}
-.tip-box.success {
-  background: var(--nwea-green-light);
-  border-left: 3px solid var(--nwea-green);
-  color: var(--nwea-green-dark);
-}
-.tip-box .tip-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-
-/* ── URL LINK ── */
-.url-link {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: #f1f5f9;
-  padding: 6px 14px;
-  border-radius: 6px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  color: var(--nwea-teal);
-  text-decoration: none;
-  transition: all 0.15s;
-  word-break: break-all;
-}
-.url-link:hover { background: #e2e8f0; color: var(--nwea-green-dark); }
-
-/* ── TABLE ── */
-.info-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-  margin: 16px 0;
-  font-size: 13.5px;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-}
-.info-table th {
-  background: var(--hmh-blue);
-  color: #fff;
-  padding: 12px 16px;
-  text-align: left;
-  font-weight: 600;
-  font-size: 12.5px;
-}
-.info-table td {
-  padding: 10px 16px;
-  border-bottom: 1px solid var(--border);
-}
-.info-table tr:last-child td { border-bottom: none; }
-.info-table tr:nth-child(even) td { background: #fafbfc; }
-
-/* ── ROLE BADGE ── */
-.role-badge {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 12px;
-  font-size: 11px;
-  font-weight: 600;
-}
-.role-badge.admin { background: #ede7f6; color: #5e35b1; }
-.role-badge.proctor { background: #e8f5e9; color: #2e7d32; }
-.role-badge.teacher { background: #e3f2fd; color: #1565c0; }
-
-/* ── VIDEO LINK (HARMONIOUS) ── */
-.video-ref {
-  display: inline-flex; align-items: center; gap: 7px;
-  padding: 8px 16px;
-  background: var(--surface);
-  border: 1.5px solid var(--nwea-teal);
-  border-radius: 8px;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--nwea-teal) !important;
-  text-decoration: none;
-  transition: all 0.2s;
-  margin: 4px 0;
-}
-.video-ref:hover {
-  background: var(--nwea-teal);
-  color: #fff !important;
-  transform: translateY(-1px);
-  box-shadow: 0 3px 10px rgba(0,151,167,0.2);
-}
-
-/* ── VIDEO CARD (영상 요약 카드) ── */
-.video-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-left: 4px solid var(--nwea-teal);
-  border-radius: var(--radius-sm);
-  padding: 18px 22px;
-  margin: 10px 0;
-  position: relative;
-  transition: all 0.15s;
-}
-.video-card:hover {
-  box-shadow: var(--shadow-md);
-  border-left-color: var(--nwea-green);
-}
-.video-card::before { display: none; }
-.video-card::after {
-  content: '▶';
-  position: absolute;
-  top: 16px; right: 18px;
-  font-size: 22px;
-  color: var(--nwea-teal);
-  opacity: 0.12;
-}
-.video-card-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--hmh-blue);
-  margin-bottom: 6px;
-  display: flex; align-items: center; gap: 8px;
-  position: relative;
-}
-.video-card-title .vc-badge {
-  background: var(--nwea-teal);
-  color: #fff;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-}
-.video-card-summary {
-  font-size: 13px;
-  line-height: 1.7;
-  color: var(--text-secondary);
-  margin-bottom: 12px;
-  position: relative;
-}
-.video-card-summary li {
-  margin-left: 16px;
-  margin-bottom: 2px;
-}
-.video-card-link {
-  display: inline-flex; align-items: center; gap: 6px;
-  background: var(--nwea-teal);
-  color: #fff !important;
-  padding: 7px 14px;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: all 0.2s;
-  position: relative;
-}
-.video-card-link:hover { background: #00838f; transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,151,167,0.25); }
-
-/* ── VIDEO SECTION BANNER ── */
-.video-banner {
-  background: linear-gradient(135deg, var(--hmh-blue) 0%, #2a5a8c 100%);
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: var(--radius-sm);
-  margin-bottom: 14px;
-  display: flex; align-items: center; gap: 10px;
-  font-size: 13.5px;
-  font-weight: 600;
-}
-.video-banner .vb-icon {
-  font-size: 18px;
-}
-.video-banner a { color: #fff !important; }
-
-/* ── CHROME SUBTITLE TIP ── */
-.chrome-tip {
-  background: linear-gradient(135deg, #f0f7fa, #e0f2f1);
-  border: 1px solid #b2dfdb;
-  border-radius: var(--radius-sm);
-  padding: 16px 20px;
-  margin: 12px 0;
-  font-size: 13px;
-}
-.chrome-tip-title {
-  font-weight: 700;
-  font-size: 13.5px;
-  color: var(--nwea-teal);
-  margin-bottom: 8px;
-  display: flex; align-items: center; gap: 6px;
-}
-
-/* ── KEY SHORTCUT ── */
-.kbd {
-  display: inline-block;
-  padding: 2px 8px;
-  background: #f1f5f9;
-  border: 1px solid #d1d5db;
-  border-radius: 4px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 11.5px;
-  box-shadow: 0 1px 0 #d1d5db;
-}
-
-/* ── SEARCH BAR ── */
-.search-bar {
-  margin-bottom: 32px;
-}
-.search-input {
-  width: 100%;
-  padding: 14px 20px 14px 44px;
-  border: 1.5px solid var(--border);
-  border-radius: var(--radius);
-  font-size: 14px;
-  font-family: 'Noto Sans KR', sans-serif;
-  background: var(--surface) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='%239ca3af' viewBox='0 0 24 24'%3E%3Cpath d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' stroke='%239ca3af' stroke-width='2' fill='none'/%3E%3C/svg%3E") 16px center no-repeat;
-  transition: all 0.2s;
-  box-shadow: var(--shadow-sm);
-}
-.search-input:focus {
-  outline: none;
-  border-color: var(--nwea-green);
-  box-shadow: 0 0 0 3px rgba(0,135,90,0.1);
-}
-
-/* ── QUICK LINKS GRID ── */
-.quick-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 12px;
-  margin: 20px 0;
-}
-.quick-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 20px;
-  cursor: pointer;
-  transition: all 0.2s;
-  text-align: center;
-}
-.quick-card:hover {
-  border-color: var(--nwea-teal);
-  box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
-}
-.quick-card .qc-icon {
-  font-size: 28px;
-  margin-bottom: 8px;
-}
-.quick-card .qc-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--hmh-blue);
-}
-.quick-card .qc-desc {
-  font-size: 12px;
-  color: var(--text-secondary);
-  margin-top: 4px;
-}
-
-/* ── TROUBLESHOOTING CARD ── */
-.trouble-item {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 16px 20px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.trouble-item:hover { border-color: var(--nwea-teal); box-shadow: var(--shadow-sm); }
-.trouble-q {
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--hmh-blue);
-  display: flex; align-items: center; gap: 8px;
-}
-.trouble-a {
-  display: none;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-  font-size: 13.5px;
-  color: var(--text-secondary);
-  line-height: 1.8;
-}
-.trouble-item.open .trouble-a { display: block; animation: fadeIn 0.2s; }
-
-/* ── FOOTER ── */
-.footer {
-  text-align: center;
-  padding: 40px 20px;
-  color: var(--text-secondary);
-  font-size: 12px;
-  border-top: 1px solid var(--border);
-  margin-top: 40px;
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
-  .sidebar { transform: translateX(-100%); }
-  .sidebar.open { transform: translateX(0); }
-  .mobile-toggle { display: flex; align-items: center; justify-content: center; }
-  .main { margin-left: 0; }
-  .content-wrapper { padding: 60px 20px 60px; }
-  .hero { padding: 32px 24px; }
-  .hero h2 { font-size: 22px; }
-  .card { padding: 20px; }
-}
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-bar { padding: 0 16px; }
+    .nav-links { display: none; }
+    .hero { padding: 48px 16px 40px; }
+    .hero-meta { gap: 12px; }
+    .cat-grid { grid-template-columns: 1fr; }
+    .modal-container { max-width: 100%; height: 95vh; border-radius: 12px 12px 0 0; }
+    .modal-overlay { padding: 12px 0 0; align-items: flex-end; }
+    .modal-nav { padding: 0 16px; }
+  }
 </style>
 </head>
 <body>
 
-<!-- Mobile Toggle -->
-<button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
-
-<!-- Sidebar -->
-<nav class="sidebar" id="sidebar">
-  <div class="sidebar-header">
-    <div class="logo-area">
-      <div class="logo-icon">M</div>
-      <div>
-        <h1>MAP Growth</h1>
-        <div style="font-size:12px;opacity:0.7">사용 매뉴얼</div>
-      </div>
-    </div>
-    <div class="subtitle">MAP Growth Support Korea</div>
-  </div>
-
-  <div class="nav-section">
-    <div class="nav-section-title">시작하기</div>
-    <a class="nav-item active" data-section="home" onclick="showSection('home')">
-      <span class="nav-icon">🏠</span> 홈 · 전체 안내
-    </a>
-    <a class="nav-item" data-section="overview" onclick="showSection('overview')">
-      <span class="nav-icon">📋</span> MAP Growth 개요
-    </a>
-    <a class="nav-item" data-section="roles" onclick="showSection('roles')">
-      <span class="nav-icon">👤</span> 역할과 권한
-    </a>
-  </div>
-
-  <div class="nav-section">
-    <div class="nav-section-title">1. 로스터링</div>
-    <a class="nav-item" data-section="roster-overview" onclick="showSection('roster-overview')">
-      <span class="nav-icon">📝</span> 로스터링 개요 <span class="nav-num">1.0</span>
-    </a>
-    <a class="nav-item" data-section="roster-prepare" onclick="showSection('roster-prepare')">
-      <span class="nav-icon">📄</span> 로스터 준비 <span class="nav-num">1.1</span>
-    </a>
-    <a class="nav-item" data-section="roster-import" onclick="showSection('roster-import')">
-      <span class="nav-icon">📥</span> 로스터 가져오기 <span class="nav-num">1.2</span>
-    </a>
-    <a class="nav-item" data-section="roster-errors" onclick="showSection('roster-errors')">
-      <span class="nav-icon">⚠️</span> 오류 해결 <span class="nav-num">1.3</span>
-    </a>
-  </div>
-
-  <div class="nav-section">
-    <div class="nav-section-title">2. 시험 진행</div>
-    <a class="nav-item" data-section="test-setup" onclick="showSection('test-setup')">
-      <span class="nav-icon">⚙️</span> 시험 세션 만들기 <span class="nav-num">2.1</span>
-    </a>
-    <a class="nav-item" data-section="test-signin" onclick="showSection('test-signin')">
-      <span class="nav-icon">🔑</span> 학생 로그인 <span class="nav-num">2.2</span>
-    </a>
-    <a class="nav-item" data-section="test-during" onclick="showSection('test-during')">
-      <span class="nav-icon">▶️</span> 시험 중 관리 <span class="nav-num">2.3</span>
-    </a>
-    <a class="nav-item" data-section="test-end" onclick="showSection('test-end')">
-      <span class="nav-icon">🏁</span> 시험 종료 <span class="nav-num">2.4</span>
-    </a>
-  </div>
-
-  <div class="nav-section">
-    <div class="nav-section-title">3. 리포트</div>
-    <a class="nav-item" data-section="reports" onclick="showSection('reports')">
-      <span class="nav-icon">📊</span> 리포트 종류 <span class="nav-num">3.1</span>
-    </a>
-  </div>
-
-  <div class="nav-section">
-    <div class="nav-section-title">부록</div>
-    <a class="nav-item" data-section="troubleshoot" onclick="showSection('troubleshoot')">
-      <span class="nav-icon">🔧</span> 트러블슈팅
-    </a>
-    <a class="nav-item" data-section="shortcuts" onclick="showSection('shortcuts')">
-      <span class="nav-icon">⌨️</span> 단축키 · 참고자료
-    </a>
+<!-- NAV -->
+<nav class="nav-bar">
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-dot"></div>
+    MAP Growth Support Korea
+  </a>
+  <div class="nav-links">
+    <a href="#guides">매뉴얼</a>
+    <a href="https://www.mapgrowthsupportkorea.com" target="_blank">홈페이지</a>
+    <a href="mailto:cs@mapgrowthsupportkorea.com">문의</a>
   </div>
 </nav>
 
-<!-- Main Content -->
-<main class="main">
-<div class="content-wrapper">
-
-<!-- ═══════════════ HOME ═══════════════ -->
-<div class="section active" id="sec-home">
-  <div class="hero">
-    <span class="hero-badge">MAP Growth Support Korea</span>
-    <h2>MAP Growth 사용 매뉴얼</h2>
-    <p>한국 학원 및 교육기관을 위한 MAP Growth 플랫폼 운영 가이드입니다. 로스터링부터 시험 진행, 리포트 확인까지 단계별로 안내합니다.</p>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <div class="hero-badge-dot"></div>
+      NWEA Official Partner
+    </div>
+    <h1>MAP Growth <span>사용 매뉴얼</span></h1>
+    <p class="hero-desc">학생 등록부터 시험 진행, 리포트 확인까지. MAP Growth 플랫폼의 모든 과정을 단계별로 안내합니다.</p>
     <div class="hero-meta">
-      <span>📅 2025–2026학년도 기준</span>
-      <span>🌐 NWEA Help Center 기반</span>
-      <span>🇰🇷 한국어 매뉴얼</span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        9개 가이드
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg>
+        4개 카테고리
+      </span>
+      <span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        2026년 4월 업데이트
+      </span>
     </div>
   </div>
+</section>
 
-  <div class="search-bar">
-    <input type="text" class="search-input" placeholder="검색: 로스터링, 프록터, 리포트, 오류 해결..." id="searchInput" oninput="handleSearch(this.value)">
-  </div>
+<!-- GUIDE CATEGORIES -->
+<section class="section" id="guides">
+  <div class="container">
+    <div class="section-label reveal">가이드 목록</div>
+    <h2 class="section-title reveal">필요한 가이드를 선택하세요</h2>
+    <p class="section-desc reveal">카테고리를 클릭하면 상세 가이드가 열립니다.</p>
 
-  <div class="quick-grid">
-    <div class="quick-card" onclick="showSection('roster-overview')">
-      <div class="qc-icon">📝</div>
-      <div class="qc-title">1. 로스터링</div>
-      <div class="qc-desc">학생·교사 등록</div>
-    </div>
-    <div class="quick-card" onclick="showSection('test-setup')">
-      <div class="qc-icon">🖥️</div>
-      <div class="qc-title">2. 시험 진행</div>
-      <div class="qc-desc">Proctor 가이드</div>
-    </div>
-    <div class="quick-card" onclick="showSection('reports')">
-      <div class="qc-icon">📊</div>
-      <div class="qc-title">3. 리포트</div>
-      <div class="qc-desc">결과 확인·해석</div>
-    </div>
-    <div class="quick-card" onclick="showSection('troubleshoot')">
-      <div class="qc-icon">🔧</div>
-      <div class="qc-title">트러블슈팅</div>
-      <div class="qc-desc">문제 해결</div>
-    </div>
-  </div>
+    <div class="cat-grid">
 
-  <div class="card" style="margin-top:24px">
-    <div class="card-title">📌 빠른 접속 URL</div>
-    <table class="info-table">
-      <tr><th>용도</th><th>URL</th></tr>
-      <tr><td>MAP 플랫폼 로그인</td><td><a class="url-link" href="https://start.mapnwea.org" target="_blank">start.mapnwea.org</a></td></tr>
-      <tr><td>학생 시험 접속</td><td><a class="url-link" href="https://test.mapnwea.org" target="_blank">test.mapnwea.org</a></td></tr>
-      <tr><td>Help Center</td><td><a class="url-link" href="https://teach.mapnwea.org/assist/help_map/Content/MAPHelpCenter.htm" target="_blank">MAP Help Center</a></td></tr>
-      <tr><td>NWEA 기술지원</td><td><a class="url-link" href="https://connection.nwea.org/s/support" target="_blank">NWEA Support</a></td></tr>
-      <tr><td>학생 연습시험</td><td><a class="url-link" href="http://studentresources.nwea.org" target="_blank">studentresources.nwea.org</a></td></tr>
-    </table>
-  </div>
-</div>
+      <!-- 로스터링 -->
+      <div class="cat-card reveal">
+        <div class="cat-card-icon roster">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="cat-card-title">로스터링</div>
+        <div class="cat-card-desc">학생/교사 등록 및 오류 해결</div>
+        <ul class="cat-card-links">
+          <li onclick="openGuide('01. 학생 등록 (로스터링) 가이드.html', '01. 학생 등록 (로스터링) 가이드', 0)">
+            <span class="link-num">01</span> 학생 등록 (로스터링) 가이드 <span class="link-arrow">&rarr;</span>
+          </li>
+          <li onclick="openGuide('07. 로스터링 오류 해결.html', '07. 로스터링 오류 해결', 0)">
+            <span class="link-num">07</span> 로스터링 오류 해결 <span class="link-arrow">&rarr;</span>
+          </li>
+        </ul>
+      </div>
 
-<!-- ═══════════════ OVERVIEW ═══════════════ -->
-<div class="section" id="sec-overview">
-  <div class="section-title"><span class="title-icon">📋</span> MAP Growth 개요</div>
-  <div class="section-desc">MAP Growth가 무엇이고, 어떤 과정으로 운영되는지 전체 흐름을 안내합니다.</div>
-  <div class="video-banner" style="margin-bottom:20px">
-    <span class="vb-icon">▶️</span>
-    <span>영상으로 보기: <a href="https://www.youtube.com/watch?v=79h958Qd8sA" target="_blank" style="color:#fff;text-decoration:underline;margin-left:4px">MAP Introduction Video (YouTube)</a></span>
-  </div>
+      <!-- 시험 진행 -->
+      <div class="cat-card reveal">
+        <div class="cat-card-icon test">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>
+        </div>
+        <div class="cat-card-title">시험 진행</div>
+        <div class="cat-card-desc">세션 생성, 로그인, 관리, 종료</div>
+        <ul class="cat-card-links">
+          <li onclick="openGuide('02. 시험 세션 만들기 가이드.html', '02. 시험 세션 만들기', 1)">
+            <span class="link-num">02</span> 시험 세션 만들기 <span class="link-arrow">&rarr;</span>
+          </li>
+          <li onclick="openGuide('03. 학생 로그인 안내.html', '03. 학생 로그인 안내', 1)">
+            <span class="link-num">03</span> 학생 로그인 안내 <span class="link-arrow">&rarr;</span>
+          </li>
+          <li onclick="openGuide('04. 시험 중 관리 가이드.html', '04. 시험 중 관리', 1)">
+            <span class="link-num">04</span> 시험 중 관리 <span class="link-arrow">&rarr;</span>
+          </li>
+          <li onclick="openGuide('04-2. 시험 종료 가이드.html', '04-2. 시험 종료', 1)">
+            <span class="link-num">04-2</span> 시험 종료 <span class="link-arrow">&rarr;</span>
+          </li>
+        </ul>
+      </div>
 
-  <div class="card">
-    <div class="card-title">MAP Growth란?</div>
-    <p>MAP Growth는 NWEA(현 HMH 산하)가 개발한 컴퓨터 적응형(Computer-Adaptive) 학업성취도 평가입니다. K–12 학생의 Reading, Mathematics, Language Usage, General Science 영역을 측정하며, 학생 수준에 맞게 문제 난이도가 자동 조절됩니다.</p>
-    <div class="tip-box info">
-      <span class="tip-icon">💡</span>
-      <span>결과는 <strong>RIT 점수</strong>(Rasch Unit)로 표시되며, 학년에 무관한 동일 척도로 성장을 추적할 수 있습니다.</span>
-    </div>
-  </div>
+      <!-- 리포트 -->
+      <div class="cat-card reveal">
+        <div class="cat-card-icon report">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+        </div>
+        <div class="cat-card-title">리포트</div>
+        <div class="cat-card-desc">시험 결과 확인 및 분석</div>
+        <ul class="cat-card-links">
+          <li onclick="openGuide('06. 리포트 결과 확인 가이드.html', '06. 리포트 결과 확인', 2)">
+            <span class="link-num">06</span> 리포트 결과 확인 가이드 <span class="link-arrow">&rarr;</span>
+          </li>
+        </ul>
+      </div>
 
-  <div class="card">
-    <div class="card-title">운영 전체 흐름</div>
-    <ol class="step-list">
-      <li><strong>로스터링</strong> — 학생·교사 정보를 플랫폼에 등록 (매 시험 기간 전)</li>
-      <li><strong>시험 환경 설정</strong> — 기기 점검, 보안 브라우저 설치, 시험 일정 확인</li>
-      <li><strong>시험 진행</strong> — 감독관(Proctor)이 세션 생성 → 학생 로그인 → 시험 시작</li>
-      <li><strong>리포트 확인</strong> — 시험 완료 후 학생·학급·학교 레벨 리포트 분석</li>
-      <li><strong>교수 활용</strong> — 리포트 데이터 기반으로 학습 지도 및 학부모 상담</li>
-    </ol>
-  </div>
+      <!-- 부록 -->
+      <div class="cat-card reveal">
+        <div class="cat-card-icon appendix">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        </div>
+        <div class="cat-card-title">부록</div>
+        <div class="cat-card-desc">트러블슈팅, 빠른 참조</div>
+        <ul class="cat-card-links">
+          <li onclick="openGuide('05. 트러블슈팅 %26 문제 해결.html', '05. 트러블슈팅 & 문제 해결', 3)">
+            <span class="link-num">05</span> 트러블슈팅 & 문제 해결 <span class="link-arrow">&rarr;</span>
+          </li>
+          <li onclick="openGuide('08. 빠른 접속 참고자료.html', '08. 빠른 접속 참고자료', 3)">
+            <span class="link-num">08</span> 빠른 접속 참고자료 <span class="link-arrow">&rarr;</span>
+          </li>
+        </ul>
+      </div>
 
-  <div class="card">
-    <div class="card-title">시험 시기 (일반적 기준)</div>
-    <table class="info-table">
-      <tr><th>시기</th><th>명칭</th><th>목적</th></tr>
-      <tr><td>가을 (9–10월)</td><td>Fall Testing</td><td>기초선(Baseline) 측정</td></tr>
-      <tr><td>겨울 (1–2월)</td><td>Winter Testing</td><td>중간 진도 점검</td></tr>
-      <tr><td>봄 (4–6월)</td><td>Spring Testing</td><td>연간 성장 측정</td></tr>
-    </table>
-    <div class="tip-box info">
-      <span class="tip-icon">📌</span>
-      <span>한국 학원의 경우 시험 시기를 자체적으로 설정할 수 있습니다. 학원 일정에 맞추어 District Assessment Coordinator가 Testing Window를 조정합니다.</span>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════ ROLES ═══════════════ -->
-<div class="section" id="sec-roles">
-  <div class="section-title"><span class="title-icon">👤</span> 역할과 권한</div>
-  <div class="section-desc">MAP 플랫폼에서 각 사용자에게 부여되는 역할(Role)과 해당 권한을 설명합니다.</div>
-
-  <div class="card">
-    <table class="info-table">
-      <tr><th>역할</th><th>한국 학원 대응</th><th>주요 권한</th></tr>
-      <tr>
-        <td><span class="role-badge admin">System Administrator</span></td>
-        <td>원장 / IT 담당</td>
-        <td>모든 설정 접근, 사용자 관리, 시스템 환경설정</td>
-      </tr>
-      <tr>
-        <td><span class="role-badge admin">Data Administrator</span></td>
-        <td>원장 / 행정 담당</td>
-        <td>로스터 업로드, 학생·교사 데이터 관리</td>
-      </tr>
-      <tr>
-        <td><span class="role-badge admin">District Assessment Coordinator</span></td>
-        <td>원장 / 시험 총괄</td>
-        <td>시험 일정 설정, 시험 제한사항 관리, 전체 리포트 접근</td>
-      </tr>
-      <tr>
-        <td><span class="role-badge proctor">Proctor</span></td>
-        <td>감독 선생님</td>
-        <td>시험 세션 생성·관리, 학생 확인(Confirm), 일시정지/중단</td>
-      </tr>
-      <tr>
-        <td><span class="role-badge teacher">Instructor</span></td>
-        <td>담당 선생님</td>
-        <td>담당 학급 리포트 확인, 학생 개별 데이터 열람</td>
-      </tr>
-    </table>
-    <div class="tip-box info">
-      <span class="tip-icon">💡</span>
-      <span>한 사람에게 여러 역할을 부여할 수 있습니다. 소규모 학원에서는 원장이 System Admin + Data Admin + District Assessment Coordinator를 겸하는 것이 일반적입니다.</span>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════ ROSTER OVERVIEW ═══════════════ -->
-<div class="section" id="sec-roster-overview">
-  <div class="section-title"><span class="title-icon">📝</span> 1. 로스터링 개요</div>
-  <div class="section-desc">로스터링이란 학생과 교사 정보를 MAP 플랫폼에 등록하는 과정입니다. 시험과 리포트의 기반이 됩니다.</div>
-
-  <div class="card">
-    <div class="card-title">왜 로스터링이 중요한가?</div>
-    <p>로스터링은 단순히 이름을 등록하는 것이 아닙니다. <strong>학생이 어떤 학급에 속하고, 어떤 선생님이 그 학급을 담당하는지</strong>를 결정합니다. 이 구조가 정확해야 시험 후 리포트가 올바르게 출력됩니다.</p>
-    <div class="tip-box warning">
-      <span class="tip-icon">⚠️</span>
-      <span>로스터링이 잘못되면 리포트에서 학생이 누락되거나, 선생님이 본인 학급 데이터에 접근할 수 없는 문제가 발생합니다.</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">로스터링 방법 2가지</div>
-    <table class="info-table">
-      <tr><th>방법</th><th>설명</th><th>적합한 경우</th></tr>
-      <tr>
-        <td><strong>HMH Rostering Service (HRS)</strong></td>
-        <td>HMH 통합 로스터링 플랫폼. ClassLink/Clever 연동 지원</td>
-        <td>HMH 다른 제품도 사용하는 기관, 대규모 학교</td>
-      </tr>
-      <tr>
-        <td><strong>NWEA Legacy Rostering</strong></td>
-        <td>CSV 템플릿 기반 수동 업로드</td>
-        <td>한국 학원 대부분 (추천)</td>
-      </tr>
-    </table>
-    <div class="tip-box success">
-      <span class="tip-icon">✅</span>
-      <span>한국 학원은 대부분 <strong>NWEA Legacy Rostering</strong>을 사용합니다. 아래 가이드는 이 방식을 기준으로 설명합니다.</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">로스터링 전체 흐름</div>
-    <ol class="step-list">
-      <li>MAP 플랫폼에서 <strong>로스터 CSV 템플릿</strong>을 다운로드</li>
-      <li>Excel에서 학생·교사 정보를 템플릿에 입력</li>
-      <li>CSV(쉼표 구분) 형식으로 저장</li>
-      <li>MAP 플랫폼에 업로드 (Import)</li>
-      <li>오류가 있으면 수정 후 재업로드</li>
-    </ol>
-  </div>
-</div>
-
-<!-- ═══════════════ ROSTER PREPARE ═══════════════ -->
-<div class="section" id="sec-roster-prepare">
-  <div class="section-title"><span class="title-icon">📄</span> 1.1 로스터 준비</div>
-  <div class="section-desc"><span class="role-badge admin">Data Administrator</span> 역할이 필요합니다.</div>
-
-  <div class="card">
-    <div class="card-title"><span class="step-num">1</span> 템플릿 다운로드</div>
-    <ol class="step-list">
-      <li><a class="url-link" href="https://start.mapnwea.org" target="_blank">start.mapnwea.org</a>에 로그인</li>
-      <li>메인 메뉴에서 <strong>Rostering</strong> → <strong>Import Profiles/Rostering</strong> 클릭</li>
-      <li><strong>Access NWEA Legacy Rostering</strong> 선택</li>
-      <li><strong>Download Templates</strong> 섹션에서 템플릿 다운로드:
-        <br>• <strong>MAP Roster File Template</strong> — 메인 템플릿 (필수)
-        <br>• <strong>MAP Programs File Template</strong> — 프로그램 참여 학생용 (선택)
-      </li>
-    </ol>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="step-num">2</span> 템플릿 구성</div>
-    <p>다운로드한 Excel 파일에는 2개 탭이 있습니다:</p>
-    <table class="info-table">
-      <tr><th>탭 이름</th><th>용도</th><th>필수 여부</th></tr>
-      <tr>
-        <td><code>StandardRoster</code></td>
-        <td>학생, 담당교사, 학급 정보 입력</td>
-        <td>✅ 필수</td>
-      </tr>
-      <tr>
-        <td><code>Additional Users</code></td>
-        <td>관리자 등 추가 직원, 교사에게 추가 역할 부여</td>
-        <td>선택</td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="step-num">3</span> CSV 저장 시 주의사항</div>
-    <p>입력을 완료한 후 반드시 <strong>CSV(쉼표 구분)</strong> 형식으로 저장해야 합니다.</p>
-    <div class="tip-box danger">
-      <span class="tip-icon">🚨</span>
-      <span><strong>CSV UTF-8로 저장하면 안 됩니다!</strong> Excel에서 저장할 때 <code>CSV(쉼표 구분)(*.csv)</code>를 선택하세요. <code>CSV UTF-8</code>은 오류를 유발합니다.</span>
-    </div>
-    <div class="tip-box warning">
-      <span class="tip-icon">🌏</span>
-      <span><strong>한국 Windows 사용자 주의:</strong> 한국어 Windows에서는 CSV 구분자가 쉼표(,) 대신 세미콜론(;)으로 설정되어 있을 수 있습니다. <br>
-      <strong>해결:</strong> 제어판 → 시계 및 국가 → 지역 → 추가 설정 → <code>목록 구분 기호</code>를 <code>,</code>(쉼표)로, <code>소수점 기호</code>를 <code>.</code>(마침표)로 변경한 후 Excel을 재시작하세요.</span>
     </div>
 
-    <a class="video-ref" href="https://teach.mapnwea.org/impl/maptraining/RosterPrepare/story.html" target="_blank">▶ 인터랙티브 교육: Prepare Your Roster</a>
-    <br><a class="url-link" href="https://teach.mapnwea.org/assist/help_map/Content/MAPSetup/Roster/PrepareYourRoster.htm" target="_blank" style="margin-top:8px">📎 NWEA 원문 페이지</a>
-  </div>
-</div>
-
-<!-- ═══════════════ ROSTER IMPORT ═══════════════ -->
-<div class="section" id="sec-roster-import">
-  <div class="section-title"><span class="title-icon">📥</span> 1.2 로스터 가져오기 (Import)</div>
-  <div class="section-desc"><span class="role-badge admin">Data Administrator</span> 역할이 필요합니다.</div>
-  <div class="video-banner" style="margin-bottom:20px">
-    <span class="vb-icon">▶️</span>
-    <span>인터랙티브 교육: <a href="https://teach.mapnwea.org/impl/maptraining/RosterImport/story.html" target="_blank" style="color:#fff;text-decoration:underline;margin-left:4px">Import Your Roster 영상 가이드</a></span>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="step-num">1</span> Import 기본 절차</div>
-    <ol class="step-list">
-      <li><a class="url-link" href="https://start.mapnwea.org" target="_blank">start.mapnwea.org</a>에 로그인</li>
-      <li><strong>Rostering</strong> → <strong>Import Profiles/Rostering</strong> 선택</li>
-      <li><strong>Access NWEA Legacy Rostering</strong> 클릭</li>
-      <li>설정 확인:
-        <br>• Roster Type: <strong>Standard</strong>
-        <br>• Term: 현재 학기 (기본값 유지)
-        <br>• Import 유형: <strong>Standard — Add/Update</strong> (권장)
-      </li>
-      <li>준비한 CSV 파일 업로드</li>
-      <li>Preview에서 데이터 확인 → 문제 없으면 <strong>Import</strong> 실행</li>
-    </ol>
-  </div>
-
-  <div class="card">
-    <div class="card-title">Import 유형별 비교</div>
-    <table class="info-table">
-      <tr><th>유형</th><th>동작</th><th>사용 시기</th></tr>
-      <tr>
-        <td><strong>Add/Update</strong></td>
-        <td>신규 추가 + 기존 정보 업데이트</td>
-        <td>✅ 대부분의 경우 이것을 사용</td>
-      </tr>
-      <tr>
-        <td><strong>Overwrite</strong></td>
-        <td>해당 학교의 기존 데이터를 모두 삭제 후 재등록</td>
-        <td>⚠️ 학년 배정 오류 등 전면 수정 시에만</td>
-      </tr>
-      <tr>
-        <td><strong>Students Only</strong></td>
-        <td>학생 데이터만 추가 (학급 배정 없음)</td>
-        <td>긴급 학생 추가 시 (나중에 전체 import 필요)</td>
-      </tr>
-      <tr>
-        <td><strong>Instructors Only</strong></td>
-        <td>교사 데이터만 추가 (학급 배정 없음)</td>
-        <td>교사 계정 급하게 필요할 때</td>
-      </tr>
-    </table>
-    <div class="tip-box warning">
-      <span class="tip-icon">⚠️</span>
-      <span><strong>Overwrite 주의:</strong> 로스터 파일에 포함되지 않은 학생/교사는 해당 학기에서 삭제됩니다. 반드시 전체 데이터가 포함된 파일로 실행하세요.</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">⏱️ Import 타이밍 팁</div>
-    <div class="tip-box info">
-      <span class="tip-icon">📌</span>
-      <div>
-        <p>• 한 기관(District)에서 <strong>동시에 하나의 Import만</strong> 실행 가능</p>
-        <p>• 시험 성수기에는 대기열에 들어가 <strong>최대 48시간</strong> 소요될 수 있음</p>
-        <p>• 대용량 파일은 여러 개로 나누어 업로드 가능</p>
-        <p>• Import 진행 중에는 다른 사용자가 프로필을 수정하지 않도록 안내</p>
+    <!-- STATS -->
+    <div class="stats-row reveal">
+      <div class="stat-card">
+        <div class="stat-num">9</div>
+        <div class="stat-label">가이드 문서</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">40+</div>
+        <div class="stat-label">단계별 스크린샷</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">10+</div>
+        <div class="stat-label">영상 가이드</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">온라인 접근</div>
       </div>
     </div>
   </div>
-</div>
-
-<!-- ═══════════════ ROSTER ERRORS ═══════════════ -->
-<div class="section" id="sec-roster-errors">
-  <div class="section-title"><span class="title-icon">⚠️</span> 1.3 Import 오류 해결</div>
-  <div class="section-desc">로스터 Import 시 발생할 수 있는 오류 유형과 해결 방법입니다.</div>
-
-  <div class="accordion">
-    <button class="accordion-trigger" onclick="toggleAccordion(this)">
-      <span class="acc-icon">1️⃣</span> Preview 오류 — 파일 형식 문제
-      <span class="arrow">▼</span>
-    </button>
-    <div class="accordion-body">
-      <p><strong>증상:</strong> 업로드 직후 "we have encountered an error with your file" 메시지</p>
-      <table class="info-table">
-        <tr><th>원인</th><th>해결</th></tr>
-        <tr><td>CSV 형식이 잘못됨 (UTF-8로 저장)</td><td>Excel에서 <code>CSV(쉼표 구분)</code>으로 재저장</td></tr>
-        <tr><td>컬럼/헤더가 템플릿과 다름</td><td>NWEA 템플릿의 헤더 행을 복사하여 붙여넣기</td></tr>
-        <tr><td>불필요한 데이터가 포함됨</td><td>데이터 범위만 선택 → 새 템플릿에 붙여넣기</td></tr>
-        <tr><td>한국어 Windows에서 구분자가 세미콜론</td><td>제어판에서 목록 구분 기호를 쉼표로 변경</td></tr>
-      </table>
-    </div>
-  </div>
-
-  <div class="accordion">
-    <button class="accordion-trigger" onclick="toggleAccordion(this)">
-      <span class="acc-icon">2️⃣</span> File Format 오류 — 데이터 내용 문제
-      <span class="arrow">▼</span>
-    </button>
-    <div class="accordion-body">
-      <table class="info-table">
-        <tr><th>오류 메시지</th><th>원인</th><th>해결</th></tr>
-        <tr><td>"XXX cannot be the same for more than one YYY"</td><td>서로 다른 사람이 같은 ID/사용자명을 공유</td><td>오류 메시지의 Column Name, Row Number 확인 후 중복 제거</td></tr>
-        <tr><td>"Field cannot be empty"</td><td>필수 컬럼에 빈 값</td><td>해당 행과 열을 찾아 빠진 정보 입력</td></tr>
-        <tr><td>"Date of Birth must be a valid date"</td><td>날짜 형식 오류</td><td><code>MM/DD/YYYY</code> 형식으로 통일</td></tr>
-      </table>
-      <div class="tip-box info">
-        <span class="tip-icon">💡</span>
-        <span><strong>팁:</strong> 오류가 많을 때는 해당 열을 필터링하여 문제 데이터만 골라 수정하면 빠릅니다.</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="accordion">
-    <button class="accordion-trigger" onclick="toggleAccordion(this)">
-      <span class="acc-icon">3️⃣</span> Reconcile 오류 — 기존 데이터와 충돌
-      <span class="arrow">▼</span>
-    </button>
-    <div class="accordion-body">
-      <p>이전에 등록된 데이터와 현재 업로드 데이터가 일치하지 않을 때 발생합니다.</p>
-      <p><strong>학교명/학년 등 불일치:</strong></p>
-      <p>예: 로스터에 "Foxcroft Elem"인데 MAP에는 "Foxcroft Elementary"로 등록된 경우</p>
-      <p>→ <strong>"Replace incoming XX with the following selection"</strong>을 선택하여 MAP에 있는 기존 이름으로 매칭</p>
-
-      <p style="margin-top:16px"><strong>교사/학생 중복:</strong></p>
-      <p>같은 사람이 여러 레코드로 매칭될 때 발생</p>
-      <p>→ 올바른 기존 프로필을 선택하거나, 사용자명/이메일을 수정하여 해결</p>
-
-      <div class="tip-box danger">
-        <span class="tip-icon">🚫</span>
-        <span><strong>피해야 할 선택:</strong> "Import users without creating associations" 또는 "Do not import incoming records"는 선택하지 마세요. 학생/교사가 리포트에서 누락됩니다.</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════ TEST SETUP ═══════════════ -->
-<div class="section" id="sec-test-setup">
-  <div class="section-title"><span class="title-icon">⚙️</span> 2.1 시험 세션 만들기</div>
-  <div class="section-desc"><span class="role-badge proctor">Proctor</span> 역할이 필요합니다.</div>
-  <div class="video-banner" style="margin-bottom:20px">
-    <span class="vb-icon">▶️</span>
-    <span>영상으로 보기: <a href="https://vimeo.com/946381585" target="_blank" style="color:#fff;text-decoration:underline;margin-left:4px">MAP Growth 로그인 방법</a></span>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="step-num">1</span> 시험 세션 시작</div>
-    <ol class="step-list">
-      <li><a class="url-link" href="https://start.mapnwea.org" target="_blank">start.mapnwea.org</a>에 로그인</li>
-      <li><strong>MAP Growth</strong> 선택</li>
-      <li><strong>Manage Test Sessions</strong> 클릭</li>
-      <li>아래 3가지 옵션 중 선택하여 세션 생성</li>
-    </ol>
-  </div>
-
-  <div class="accordion">
-    <button class="accordion-trigger" onclick="toggleAccordion(this)">
-      <span class="acc-icon">🔍</span> Option 1 — Find Students to Test (학생 검색)
-      <span class="arrow">▼</span>
-    </button>
-    <div class="accordion-body">
-      <a class="video-ref" href="https://vimeo.com/946381762" target="_blank">▶ 영상: Find Students to Test</a>
-      <p>특정 학생 그룹을 미리 구성할 때 사용합니다.</p>
-      <ol class="step-list">
-        <li><strong>Find Students to Test</strong> 클릭</li>
-        <li>검색 조건(학교, 학년 등) 선택 → <strong>Search</strong></li>
-        <li>검색 결과에서 <strong>Add Students</strong></li>
-        <li>학생 수를 <strong>100명 이하</strong>로 유지 (너무 많으면 로그인 느려짐)</li>
-        <li>학생 선택 → <strong>Assign Test</strong>로 시험 배정</li>
-        <li>필요 시 <strong>Assign Accommodations</strong>로 편의사항 설정</li>
-        <li>나중에 시험할 경우 <strong>Save Session</strong>으로 저장</li>
-      </ol>
-      <div class="tip-box info">
-        <span class="tip-icon">💡</span>
-        <span><strong>세션 이름 팁:</strong> 공백, 특수문자, 대문자를 피하세요. 예: <code>jbmath72</code> (이니셜+과목+학년+반) 또는 <code>21eagle918</code> (교실+마스코트+날짜)</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="accordion">
-    <button class="accordion-trigger" onclick="toggleAccordion(this)">
-      <span class="acc-icon">👩‍🏫</span> Option 2 — Test My Class (내 학급 시험)
-      <span class="arrow">▼</span>
-    </button>
-    <div class="accordion-body">
-      <a class="video-ref" href="https://vimeo.com/935599864" target="_blank">▶ 영상: Test My Class</a>
-      <p>본인이 담당하는 학급을 바로 시험할 때 사용합니다.</p>
-      <ol class="step-list">
-        <li><strong>Test My Class</strong> 클릭</li>
-        <li>학급이 여러 개면 하나를 선택</li>
-        <li>Proctor 콘솔이 열리고 세션이 시작됨</li>
-        <li>학생 선택 → 시험 배정 및 편의사항 설정</li>
-      </ol>
-      <div class="tip-box warning">
-        <span class="tip-icon">⚠️</span>
-        <span>버튼이 작동하지 않으면: 해당 학기에 교사 프로필이 학급에 연결되지 않은 것입니다. 학원 관리자에게 로스터 확인을 요청하세요.</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="accordion">
-    <button class="accordion-trigger" onclick="toggleAccordion(this)">
-      <span class="acc-icon">📂</span> Option 3 — Use Saved Testing Session (저장된 세션)
-      <span class="arrow">▼</span>
-    </button>
-    <div class="accordion-body">
-      <p>이전에 저장해둔 세션을 불러와 시험을 진행합니다.</p>
-      <ol class="step-list">
-        <li><strong>Saved Testing Sessions</strong> 옆의 <strong>Show</strong> 클릭</li>
-        <li>다른 사람이 만든 세션을 보려면 <strong>Created By</strong> 필터 변경</li>
-        <li>세션 선택 → <strong>Test Now</strong></li>
-      </ol>
-      <div class="tip-box info">
-        <span class="tip-icon">📌</span>
-        <span>한 번에 <strong>하나의 세션만</strong> 실행할 수 있습니다. 이미 실행 중인 세션이 있으면 <strong>Return to Testing</strong>을 선택하세요.</span>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-title">▶️ 시험 배정 관련 영상</div>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;">
-      <a class="video-ref" href="https://vimeo.com/951383165" target="_blank">▶ 세션 편집 중 시험 배정</a>
-      <a class="video-ref" href="https://vimeo.com/951377050" target="_blank">▶ 활성 세션에서 시험 배정</a>
-    </div>
-  </div>
-
-</div>
-
-<!-- ═══════════════ TEST SIGNIN ═══════════════ -->
-<div class="section" id="sec-test-signin">
-  <div class="section-title"><span class="title-icon">🔑</span> 2.2 학생 로그인</div>
-  <div class="section-desc">학생이 시험에 접속하는 과정을 단계별로 안내합니다.</div>
-
-  <div class="card">
-    <div class="card-title"><span class="step-num">A</span> 학생 도착 전 — 감독관 준비</div>
-    <ol class="step-list">
-      <li>Proctor 콘솔에서 <strong>Test Students</strong> 페이지 확인</li>
-      <li>화면 상단의 <strong>Session Name</strong>과 <strong>Password</strong> 확인</li>
-      <li>세션 이름과 비밀번호를 칠판이나 화면에 표시</li>
-    </ol>
-    <div class="tip-box info">
-      <span class="tip-icon">📌</span>
-      <span>비밀번호는 세션을 시작할 때마다 새로 생성되며, 당일 밤에 만료됩니다.</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="step-num">B</span> 학생 로그인 절차</div>
-    <ol class="step-list">
-      <li>학생 기기에서 <strong>NWEA 보안 테스트 브라우저/앱</strong> 실행
-        <br>또는 브라우저에서 <a class="url-link" href="https://test.mapnwea.org" target="_blank">test.mapnwea.org</a> 접속</li>
-      <li>로그인 화면에서 <strong>Session Name</strong>과 <strong>Password</strong> 입력</li>
-      <li>학생 이름 확인 및 시험 선택 등 화면 안내에 따라 진행</li>
-    </ol>
-    <div class="tip-box success">
-      <span class="tip-icon">🎮</span>
-      <span><strong>연습 시험:</strong> 첫 시험 전에 학생들에게 연습 시험을 권장합니다. 로그인 화면에서 <strong>Try the Practice Test</strong> 선택 → Username/Password 모두 <code>grow</code> 입력</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title"><span class="step-num">C</span> 학생 확인 (Confirm)</div>
-    <a class="video-ref" href="https://vimeo.com/947191091" target="_blank" style="margin-bottom:12px;display:inline-flex">▶ 영상: 학생 Confirm 방법</a>
-    <ol class="step-list">
-      <li>학생이 로그인하면 Proctor 콘솔에 <strong>"To Be Confirmed"</strong> 상태로 표시</li>
-      <li><strong>Refresh Page</strong>를 눌러 상태 갱신</li>
-      <li><strong>Confirm</strong> 버튼으로 일괄 확인 (또는 개별 학생 선택 → Select Action → Confirm)</li>
-      <li>학생 화면에서 <strong>Start Test</strong> 클릭하면 시험 시작</li>
-    </ol>
-    <div class="tip-box warning">
-      <span class="tip-icon">💡</span>
-      <span>인터넷이 느린 경우, 학생들이 한꺼번에 시작하지 말고 <strong>몇 명씩 순차적으로</strong> 시작하게 하세요.</span>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════ TEST DURING ═══════════════ -->
-<div class="section" id="sec-test-during">
-  <div class="section-title"><span class="title-icon">▶️</span> 2.3 시험 중 관리</div>
-  <div class="section-desc">시험 진행 중 감독관이 알아야 할 조작과 대처 방법입니다.</div>
-  <div class="video-banner" style="margin-bottom:8px">
-    <span class="vb-icon">▶️</span>
-    <span>관련 영상 시리즈</span>
-  </div>
-  <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;">
-    <a class="video-ref" href="https://vimeo.com/947205993" target="_blank">▶ Pause & Resume</a>
-    <a class="video-ref" href="https://vimeo.com/948868350" target="_blank">▶ Suspend & Test Again</a>
-    <a class="video-ref" href="https://vimeo.com/948929077" target="_blank">▶ 시험 완료 (Completed)</a>
-    <a class="video-ref" href="https://vimeo.com/949712534" target="_blank">▶ Confirmed 멈춤 해결</a>
-  </div>
-
-  <div class="card">
-    <div class="card-title">일시정지 · 중단 · 종료</div>
-    <table class="info-table">
-      <tr><th>동작</th><th>지속시간</th><th>이후 조치</th><th>설명</th></tr>
-      <tr>
-        <td><strong>Pause</strong></td>
-        <td>최대 25분</td>
-        <td>Resume</td>
-        <td>같은 기기에서 재개. 25분 초과 시 자동으로 Suspend됨</td>
-      </tr>
-      <tr>
-        <td><strong>Suspend</strong></td>
-        <td>최대 28일</td>
-        <td>Test Again (당일)<br>Resume Test (다른 날)</td>
-        <td>다음 문제부터 이어서 진행. 14일 이내 재개 권장</td>
-      </tr>
-      <tr>
-        <td><strong>Terminate</strong></td>
-        <td>영구</td>
-        <td>시험 재배정 필요</td>
-        <td>🚨 모든 답안 삭제됨! 잘못된 시험 배정 시에만 사용</td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="card">
-    <div class="card-title">⚡ Rapid Guessing (빠른 추측) 알림</div>
-    <p>학생이 문제를 제대로 읽지 않고 빠르게 답을 선택하면 시험이 자동으로 일시정지되고, Proctor 콘솔에 알림이 표시됩니다.</p>
-    <ol class="step-list">
-      <li>Proctor 콘솔 상단의 <strong>Proctor PIN</strong> 확인</li>
-      <li>해당 학생에게 다가가서 신중히 답하도록 격려</li>
-      <li>학생 기기에서 PIN 입력 → 시험 재개</li>
-    </ol>
-    <div class="tip-box warning">
-      <span class="tip-icon">⚠️</span>
-      <span>반복적으로 Rapid Guessing이 발생하면 (3회 일시정지) 해당 학생의 시험을 <strong>Suspend</strong>하고 다른 날 다시 진행하는 것을 권장합니다.</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">🎙️ 시험 전 학생 안내 스크립트</div>
-    <div style="background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:16px;font-size:13.5px;line-height:1.9;">
-      <p>이 시험에서 최선을 다해주세요. 여러분이 무엇을 잘하고, 어디를 더 도와줄 수 있는지 알기 위한 시험입니다.</p>
-      <p><strong>시간제한은 없으니</strong> 각 문제를 천천히 읽고 답해주세요.</p>
-      <p>쉬운 문제도 있고, 어려운 문제도 있습니다. 모든 답을 알 필요는 없어요.</p>
-      <p>확실하지 않은 문제는 분명히 틀린 답을 먼저 제외하고, 나머지에서 선택하세요.</p>
-      <p>다음 문제로 넘어가면 <strong>이전 문제로 돌아갈 수 없으니</strong> 신중하게 답하세요.</p>
-      <p>시험 중 문제가 생기면 손을 들어주세요.</p>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════ TEST END ═══════════════ -->
-<div class="section" id="sec-test-end">
-  <div class="section-title"><span class="title-icon">🏁</span> 2.4 시험 종료</div>
-  <div class="section-desc">시험 세션을 마무리하는 절차입니다.</div>
-
-  <div class="card">
-    <div class="card-title">전체 종료</div>
-    <ol class="step-list">
-      <li>Proctor 콘솔에서 <strong>End Testing Session</strong> 클릭</li>
-      <li>아직 시험 중인 학생이 있으면 해당 시험은 Suspend 처리된다는 안내 확인 → <strong>Yes</strong></li>
-      <li>선택:
-        <br>• <strong>Save and Exit</strong> — 같은 학생 그룹으로 나중에 다시 시험할 경우
-        <br>• <strong>Delete Session</strong> — 다른 그룹을 구성할 경우 (시험 결과에는 영향 없음)
-      </li>
-      <li>학생 기기에서 브라우저/앱 종료:
-        <br>• PC/Mac: 상단 <strong>X</strong> 버튼
-        <br>• iPad: <strong>홈</strong> 버튼
-        <br>• Chromebook: <strong>X</strong> 또는 <span class="kbd">Shift</span>+<span class="kbd">Alt</span>+<span class="kbd">K</span>
-      </li>
-    </ol>
-    <div class="tip-box info">
-      <span class="tip-icon">📌</span>
-      <span>매일 밤 모든 세션은 <strong>자동 종료</strong>됩니다. 미완료 시험은 Suspend 상태가 됩니다.</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">한 학생의 시험만 교체</div>
-    <ol class="step-list">
-      <li>학생 선택 → <strong>Test Again</strong></li>
-      <li><strong>Assign Test</strong>로 새 시험 배정</li>
-      <li>학생에게 같은 세션 이름과 비밀번호로 다시 로그인 안내</li>
-    </ol>
-  </div>
-</div>
-
-<!-- ═══════════════ REPORTS ═══════════════ -->
-<div class="section" id="sec-reports">
-  <div class="section-title"><span class="title-icon">📊</span> 3. 리포트 종류와 활용</div>
-  <div class="section-desc">MAP Growth에서 제공하는 리포트 유형을 레벨별로 정리했습니다.</div>
-
-  <div class="card">
-    <div class="card-title">📌 학생 레벨 리포트</div>
-    <p><span class="role-badge teacher">Instructor</span> 이상 접근 가능</p>
-    <a class="video-ref" href="https://teach.mapnwea.org/impl/maptraining/UsingStudentProfile/story.html" target="_blank" style="margin:8px 0;display:inline-flex">▶ 인터랙티브 교육: Student Profile 리포트</a>
-    <table class="info-table">
-      <tr><th>리포트</th><th>주요 데이터</th><th>활용</th></tr>
-      <tr>
-        <td><strong>Student Profile</strong></td>
-        <td>학생의 모든 데이터 종합</td>
-        <td>개별 상담, 성장 목표 설정</td>
-      </tr>
-      <tr>
-        <td><strong>Student Progress</strong></td>
-        <td>전체 학기의 진행 추이</td>
-        <td>학부모 상담, 성장 소통</td>
-      </tr>
-      <tr>
-        <td><strong>Family Report</strong></td>
-        <td>학부모용 간소화 리포트</td>
-        <td>학부모 안내문 배포</td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="card">
-    <div class="card-title">📌 학급 레벨 리포트</div>
-    <p><span class="role-badge teacher">Instructor</span> 이상 접근 가능</p>
-    <a class="video-ref" href="https://vimeo.com/163747823" target="_blank" style="margin:8px 0;display:inline-flex">▶ 영상: Achievement Status & Growth 리포트</a>
-    <table class="info-table">
-      <tr><th>리포트</th><th>주요 데이터</th><th>활용</th></tr>
-      <tr>
-        <td><strong>Achievement Status & Growth</strong></td>
-        <td>성장 예측, 사분면 차트</td>
-        <td>성장 계획 수립, 시각화</td>
-      </tr>
-      <tr>
-        <td><strong>Class Profile</strong></td>
-        <td>학급 전체 성적 + Norms 비교</td>
-        <td>현재 학급 수준 분석</td>
-      </tr>
-      <tr>
-        <td><strong>Learning Continuum</strong></td>
-        <td>학습 진술문 (Learning Statements)</td>
-        <td>교수 내용 탐색, 수업 계획</td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="card">
-    <div class="card-title">📌 학교/기관 레벨 리포트</div>
-    <p><span class="role-badge admin">Administrator</span> 이상 접근 가능</p>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin:8px 0;">
-      <a class="video-ref" href="https://vimeo.com/98390816" target="_blank">▶ District Summary</a>
-      <a class="video-ref" href="https://vimeo.com/99885285" target="_blank">▶ Projected Proficiency</a>
-      <a class="video-ref" href="https://vimeo.com/99885290" target="_blank">▶ Student Growth Summary</a>
-    </div>
-    <table class="info-table">
-      <tr><th>리포트</th><th>주요 데이터</th><th>활용</th></tr>
-      <tr>
-        <td><strong>Grade Report</strong></td>
-        <td>학년별 성적 + Norms</td>
-        <td>학년별 수준 분석</td>
-      </tr>
-      <tr>
-        <td><strong>District/School Profile</strong></td>
-        <td>기관 전체 인터랙티브 데이터</td>
-        <td>전체 현황 파악</td>
-      </tr>
-      <tr>
-        <td><strong>Student Growth Summary</strong></td>
-        <td>Norms 대비 성장 집계</td>
-        <td>커리큘럼 효과성 평가</td>
-      </tr>
-      <tr>
-        <td><strong>Projected Proficiency</strong></td>
-        <td>주 시험/SAT 예측 성적</td>
-        <td>입시 준비 지원</td>
-      </tr>
-      <tr>
-        <td><strong>Data Export</strong></td>
-        <td>CSV로 전체 데이터 내보내기</td>
-        <td>커스텀 분석, 외부 도구 연동</td>
-      </tr>
-    </table>
-  </div>
-
-  <div class="card">
-    <div class="card-title">📎 리포트 관련 인쇄물</div>
-    <p>NWEA에서 제공하는 PDF 가이드:</p>
-    <p style="margin-top:8px">
-      <a class="url-link" href="https://teach.mapnwea.org/impl/QRM2_MAP_Reports_Summary_QuickRef.pdf" target="_blank">📄 Reports Summary (PDF)</a>
-    </p>
-    <p style="margin-top:8px">
-      <a class="url-link" href="https://teach.mapnwea.org/impl/PGM2_MAP_Reports_Reference.pdf" target="_blank">📄 MAP Reports Reference (PDF)</a>
-    </p>
-  </div>
-</div>
-
-<!-- ═══════════════ TROUBLESHOOT ═══════════════ -->
-<div class="section" id="sec-troubleshoot">
-  <div class="section-title"><span class="title-icon">🔧</span> 트러블슈팅</div>
-  <div class="section-desc">시험 중 자주 발생하는 문제와 해결 방법을 모았습니다. 클릭하면 답이 열립니다.</div>
-
-  <div class="trouble-item" onclick="this.classList.toggle('open')">
-    <div class="trouble-q">❓ 학생이 로그인했는데 목록에 안 보여요</div>
-    <div class="trouble-a">
-      학생의 상태를 확인하세요:
-      <br>• <strong>Confirmed 상태:</strong> Select Action → <strong>Do Not Confirm</strong> 선택 후 다시 확인
-      <br>• <strong>Testing 상태:</strong> Select Action → <strong>Suspend</strong> → 이후 <strong>Test Again</strong>
-      <br>• <strong>Suspended 상태:</strong> Select Action → <strong>Test Again</strong>
-      <br>→ 학생에게 다시 로그인하라고 안내한 후 Confirm 진행
-    </div>
-  </div>
-
-  <div class="trouble-item" onclick="this.classList.toggle('open')">
-    <div class="trouble-q">❓ 잘못된 시험이 배정되었어요</div>
-    <div class="trouble-a">
-      <strong>아직 시험 시작 전 (To Be Confirmed):</strong> Select Action → Do Not Confirm → Assign Test로 재배정
-      <br><strong>이미 시험 중 (Testing):</strong> Select Action → Suspend (나중에 그 시험을 볼 수도 있으면) 또는 Terminate (그 시험을 완전히 취소) → Test Again → 올바른 시험 재배정
-      <br>⚠️ Terminate는 모든 답안을 삭제하므로 신중하게 사용하세요.
-    </div>
-  </div>
-
-  <div class="trouble-item" onclick="this.classList.toggle('open')">
-    <div class="trouble-q">❓ 문제 화면이 하얗게 나와요 (Blank Screen)</div>
-    <div class="trouble-a">
-      1. Proctor 콘솔에서 해당 학생 선택 → Select Action → <strong>Suspend</strong>
-      <br>2. 학생 기기에서 테스트 브라우저 완전 종료
-      <br>3. Proctor 콘솔에서 해당 학생 → Select Action → <strong>Test Again</strong>
-      <br>4. 학생이 다시 로그인하면 중단된 곳부터 이어서 진행됩니다
-    </div>
-  </div>
-
-  <div class="trouble-item" onclick="this.classList.toggle('open')">
-    <div class="trouble-q">❓ 시험이 너무 느려요</div>
-    <div class="trouble-a">
-      학생 기기에서 <strong>Reset</strong> 버튼을 클릭하거나, 키보드로 <span class="kbd">F5</span> (PC) 또는 <span class="kbd">Cmd</span>+<span class="kbd">R</span> (Mac)을 눌러 화면을 새로고침하세요.
-    </div>
-  </div>
-
-  <div class="trouble-item" onclick="this.classList.toggle('open')">
-    <div class="trouble-q">❓ 결함이 있는 문제를 건너뛰고 싶어요</div>
-    <div class="trouble-a">
-      1. Proctor 콘솔에서 해당 학생 선택 → Select Action → <strong>Pause</strong>
-      <br>2. 다시 학생 선택 → Select Action → <strong>Resume</strong>
-      <br>3. 학생이 Resume을 누르면 새 문제가 표시됩니다
-      <br><br>
-      <strong>문제 자체를 신고하려면:</strong>
-      <br>1. Proctor 콘솔에서 <strong>Proctor PIN</strong> 확인
-      <br>2. 학생 기기에서 <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">P</span> 입력
-      <br>3. PIN 입력 후 문제 상황 설명 → <strong>Resume Test</strong>
-    </div>
-  </div>
-
-  <div class="trouble-item" onclick="this.classList.toggle('open')">
-    <div class="trouble-q">❓ "Students are Ineligible to Test" 메시지가 나와요</div>
-    <div class="trouble-a">
-      시험이 <strong>"학기당 1회"(Once Per Term)</strong>로 제한되어 있을 수 있습니다. District Assessment Coordinator에게 시험 제한 설정 확인을 요청하세요.
-    </div>
-  </div>
-
-  <div class="trouble-item" onclick="this.classList.toggle('open')">
-    <div class="trouble-q">❓ 중단(Suspend)된 시험을 이어서 보려면?</div>
-    <div class="trouble-a">
-      <strong>같은 날, 같은 세션:</strong> 해당 학생 선택 → Select Action → <strong>Test Again</strong>
-      <br><br>
-      <strong>다른 날:</strong>
-      <br>1. 저장된 세션을 다시 열거나 새 세션 생성
-      <br>2. Find Students to Test → <strong>Test History Search</strong> 탭
-      <br>3. 학교, 시험 등 필터 설정 → Search
-      <br>4. 학생 추가 → 시험 배정 → Test Now
-      <br>5. 확인(Confirm) 시 <strong>Resume Test</strong> 선택
-      <br><br>
-      ⏰ 14일 이내에 재개하는 것을 권장합니다 (최대 28일 가능).
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════ SHORTCUTS ═══════════════ -->
-<div class="section" id="sec-shortcuts">
-  <div class="section-title"><span class="title-icon">⌨️</span> 단축키 · 참고자료</div>
-  <div class="section-desc">시험 중 유용한 단축키와 주요 참고 문서 목록입니다.</div>
-
-  <div class="card">
-    <div class="card-title">⌨️ Proctor 단축키</div>
-    <table class="info-table">
-      <tr><th>동작</th><th>PC</th><th>Mac</th><th>Chromebook</th></tr>
-      <tr><td>화면 새로고침</td><td><span class="kbd">F5</span></td><td><span class="kbd">Cmd</span>+<span class="kbd">R</span></td><td>—</td></tr>
-      <tr><td>학생 기기 개입 (Interrupt)</td><td colspan="3"><span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">P</span> 또는 <span class="kbd">Ctrl</span>+<span class="kbd">Shift</span>+<span class="kbd">L</span></td></tr>
-      <tr><td>보안 브라우저 종료</td><td>상단 <strong>X</strong></td><td>상단 <strong>X</strong></td><td><span class="kbd">Shift</span>+<span class="kbd">Alt</span>+<span class="kbd">K</span></td></tr>
-      <tr><td>브라우저 버전 확인</td><td><span class="kbd">Ctrl</span>+<span class="kbd">Alt</span>+<span class="kbd">V</span></td><td>—</td><td>—</td></tr>
-    </table>
-  </div>
-
-  <div class="card">
-    <div class="card-title">📎 주요 PDF 참고자료</div>
-    <table class="info-table">
-      <tr><th>문서</th><th>대상</th></tr>
-      <tr><td><a class="url-link" href="https://teach.mapnwea.org/impl/ProctorQuickStart.pdf" target="_blank">📄 Proctor Quick Start</a></td><td>감독관</td></tr>
-      <tr><td><a class="url-link" href="https://teach.mapnwea.org/impl/ProctorTestingTips.pdf" target="_blank">📄 Testing Tips</a></td><td>감독관</td></tr>
-      <tr><td><a class="url-link" href="https://teach.mapnwea.org/impl/ProctorGuide.pdf" target="_blank">📄 Proctor Guide</a></td><td>감독관</td></tr>
-      <tr><td><a class="url-link" href="https://teach.mapnwea.org/impl/StudentsStaffManagementGuide.pdf" target="_blank">📄 Students & Staff Management</a></td><td>관리자</td></tr>
-      <tr><td><a class="url-link" href="https://teach.mapnwea.org/impl/PGM2_MAP_Assessment_Coordination_Guide.pdf" target="_blank">📄 Assessment Coordination Guide</a></td><td>총괄 관리자</td></tr>
-      <tr><td><a class="url-link" href="https://teach.mapnwea.org/impl/SetupChecklistQuickRef.pdf" target="_blank">📄 MAP Setup Checklist</a></td><td>총괄 관리자</td></tr>
-      <tr><td><a class="url-link" href="https://teach.mapnwea.org/impl/QRM2_System_Requirements_QuickRef.pdf" target="_blank">📄 System Requirements</a></td><td>IT 담당</td></tr>
-      <tr><td><a class="url-link" href="https://teach.mapnwea.org/impl/QRM2_MAP_Reports_Summary_QuickRef.pdf" target="_blank">📄 Reports Summary</a></td><td>선생님</td></tr>
-    </table>
-  </div>
-
-  <div class="card">
-    <div class="card-title">🎬 영상 튜토리얼 인덱스</div>
-    <p style="margin-bottom:12px">NWEA Help Center의 영상 튜토리얼 전체 목록:</p>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;">
-      <a class="video-ref" href="https://teach.mapnwea.org/assist/help_map/Content/AboutMAP/VideoBrowse/VideoTutorials.htm" target="_blank">📺 Video Tutorials Home</a>
-      <a class="video-ref" href="https://vimeo.com/showcase/11254943" target="_blank">📺 Vimeo 전체 재생목록</a>
-    </div>
-
-    <!-- Chrome 자막 번역 안내 -->
-    <div class="chrome-tip">
-      <div class="chrome-tip-title">🌐 영상을 한국어 자막으로 보는 방법 (Chrome 브라우저)</div>
-      <p>NWEA 영상은 영어로 제공되지만, Chrome의 실시간 번역 자막 기능으로 한국어로 볼 수 있습니다:</p>
-      <ol style="margin:8px 0 0 20px;line-height:2;">
-        <li><strong>Chrome 브라우저</strong>에서 영상 링크 클릭</li>
-        <li>주소 표시줄 오른쪽의 <strong>⋮ (더보기)</strong> → <strong>설정</strong> → <strong>접근성</strong></li>
-        <li><strong>"실시간 자막"</strong> 켜기 → <strong>"번역"</strong> 토글도 켜기</li>
-        <li>번역 언어를 <strong>한국어</strong>로 설정</li>
-        <li>영상을 재생하면 화면 하단에 <strong>한국어 자막이 실시간으로</strong> 표시됩니다</li>
-      </ol>
-      <p style="margin-top:8px;font-size:12px;color:#5a6474;">💡 한 번 설정하면 이후 모든 영상에 자동 적용됩니다. Chrome 103 이상 버전에서 지원됩니다.</p>
-    </div>
-  </div>
-
-  <!-- ── 영상별 한글 요약 카드 ── -->
-  <div class="card" style="padding:0;border:none;background:transparent;box-shadow:none;">
-    <div class="video-banner"><span class="vb-icon">🎬</span> Proctor 영상 시리즈 — 한글 요약 + 영상 링크</div>
-
-    <div class="video-card">
-      <div class="video-card-title"><span class="vc-badge">STEP 1</span> MAP Growth 로그인</div>
-      <div class="video-card-summary">
-        MAP 관리 플랫폼(start.mapnwea.org)에 접속하여 로그인하는 방법을 안내합니다. 로그인 후 MAP Growth를 선택하고 Manage Test Sessions 메뉴로 이동하는 과정까지 보여줍니다.
-      </div>
-      <a class="video-card-link" href="https://vimeo.com/946381585" target="_blank">▶ 영상 보기</a>
-    </div>
-
-    <div class="video-card">
-      <div class="video-card-title"><span class="vc-badge">STEP 2a</span> Find Students to Test — 학생 검색</div>
-      <div class="video-card-summary">
-        학교·학년·반 등 조건으로 학생을 검색하여 시험 세션에 추가하는 방법입니다. 학생 수는 100명 이하로 유지하고, 세션 이름은 공백 없이 짧게 만드는 팁도 포함됩니다.
-      </div>
-      <a class="video-card-link" href="https://vimeo.com/946381762" target="_blank">▶ 영상 보기</a>
-    </div>
-
-    <div class="video-card">
-      <div class="video-card-title"><span class="vc-badge">STEP 2b</span> Test My Class — 내 학급 시험</div>
-      <div class="video-card-summary">
-        본인이 담당하는 학급을 바로 시험하는 가장 빠른 방법입니다. Test My Class 버튼 하나로 Proctor 콘솔이 바로 열리고, 학생들에게 시험을 배정할 수 있습니다.
-      </div>
-      <a class="video-card-link" href="https://vimeo.com/935599864" target="_blank">▶ 영상 보기</a>
-    </div>
-
-    <div class="video-card">
-      <div class="video-card-title"><span class="vc-badge">STEP 3a</span> 시험/편의사항 배정 (세션 편집 중)</div>
-      <div class="video-card-summary">
-        시험 세션을 만들거나 편집하는 단계에서 학생에게 시험(예: Growth Math 6+)과 편의사항(Text-to-Speech 등)을 배정하는 방법을 보여줍니다.
-      </div>
-      <a class="video-card-link" href="https://vimeo.com/951383165" target="_blank">▶ 영상 보기</a>
-    </div>
-
-    <div class="video-card">
-      <div class="video-card-title"><span class="vc-badge">STEP 3b</span> 시험/편의사항 배정 (활성 세션)</div>
-      <div class="video-card-summary">
-        이미 시험이 시작된 활성 세션에서 추가 학생에게 시험을 배정하거나, 편의사항을 변경하는 방법입니다. 시험 시작 전에만 변경 가능하다는 점에 유의하세요.
-      </div>
-      <a class="video-card-link" href="https://vimeo.com/951377050" target="_blank">▶ 영상 보기</a>
-    </div>
-
-    <div class="video-card">
-      <div class="video-card-title"><span class="vc-badge">STEP 4</span> 학생 Confirm (확인)</div>
-      <div class="video-card-summary">
-        학생이 로그인하면 Proctor 콘솔에 "To Be Confirmed" 상태로 표시됩니다. Refresh Page → Confirm 버튼으로 학생을 확인하면 학생이 Start Test를 눌러 시험을 시작할 수 있습니다.
-      </div>
-      <a class="video-card-link" href="https://vimeo.com/947191091" target="_blank">▶ 영상 보기</a>
-    </div>
-
-    <div class="video-card">
-      <div class="video-card-title"><span class="vc-badge">STEP 5</span> Pause & Resume (일시정지/재개)</div>
-      <div class="video-card-summary">
-        시험 중 일시정지가 필요할 때 Pause를 사용합니다. 최대 25분간 유지되며, 같은 기기에서만 Resume 가능합니다. 25분 초과 시 자동으로 Suspend 상태로 전환됩니다.
-      </div>
-      <a class="video-card-link" href="https://vimeo.com/947205993" target="_blank">▶ 영상 보기</a>
-    </div>
-
-    <div class="video-card">
-      <div class="video-card-title"><span class="vc-badge">STEP 6</span> Suspend & Test Again (중단/재시험)</div>
-      <div class="video-card-summary">
-        장기 중단이 필요할 때 Suspend를 사용합니다. 최대 28일(14일 권장) 내에 Test Again으로 이어서 진행할 수 있습니다. 다른 기기, 다른 세션에서도 재개 가능합니다.
-      </div>
-      <a class="video-card-link" href="https://vimeo.com/948868350" target="_blank">▶ 영상 보기</a>
-    </div>
-
-    <div class="video-card">
-      <div class="video-card-title"><span class="vc-badge">STEP 7</span> 시험 완료 (Completed)</div>
-      <div class="video-card-summary">
-        학생이 모든 문제에 답하면 "Completed" 상태가 됩니다. 완료된 학생에게 추가 시험을 배정하려면 Test Again → Assign Test로 새 시험을 지정합니다.
-      </div>
-      <a class="video-card-link" href="https://vimeo.com/948929077" target="_blank">▶ 영상 보기</a>
-    </div>
-
-    <div class="video-card">
-      <div class="video-card-title"><span class="vc-badge">문제해결</span> Confirmed 상태 멈춤</div>
-      <div class="video-card-summary">
-        학생이 Confirmed 상태에서 멈춰 시험이 시작되지 않는 경우의 해결 방법입니다. 네트워크 문제나 브라우저 이슈가 원인일 수 있으며, Do Not Confirm → 재로그인 → 재확인으로 해결합니다.
-      </div>
-      <a class="video-card-link" href="https://vimeo.com/949712534" target="_blank">▶ 영상 보기</a>
-    </div>
-  </div>
-</div>
+</section>
 
 <!-- FOOTER -->
-<div class="footer">
-  <p><strong>MAP Growth Support Korea</strong></p>
-  <p>본 매뉴얼은 NWEA MAP Help Center의 공식 문서를 기반으로 한국 학원 환경에 맞게 재구성한 안내 자료입니다.</p>
-  <p style="margin-top:8px">출처: <a href="https://teach.mapnwea.org/assist/help_map/Content/MAPHelpCenter.htm" target="_blank" style="color:var(--nwea-teal)">NWEA MAP Help Center</a> | 2025–2026학년도 기준</p>
-</div>
+<footer class="footer">
+  MAP Growth Support Korea &middot; <a href="mailto:cs@mapgrowthsupportkorea.com">cs@mapgrowthsupportkorea.com</a> &middot; 070-7623-2105<br>
+  본 자료는 NWEA MAP Help Center 공식 문서 기반으로 작성되었습니다.
+</footer>
 
-</div><!-- end content-wrapper -->
-</main>
-
-<script>
-// Section navigation
-function showSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById('sec-' + id).classList.add('active');
-  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-  document.querySelector(`.nav-item[data-section="${id}"]`).classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  // Close mobile sidebar
-  document.getElementById('sidebar').classList.remove('open');
-}
-
-// Accordion
-function toggleAccordion(trigger) {
-  const body = trigger.nextElementSibling;
-  const isOpen = trigger.classList.contains('open');
-  trigger.classList.toggle('open');
-  body.classList.toggle('open');
-}
-
-// Mobile sidebar
-function toggleSidebar() {
-  document.getElementById('sidebar').classList.toggle('open');
-}
-
-// Simple search
-function handleSearch(query) {
-  if (!query.trim()) return;
-  const q = query.toLowerCase();
-  const sectionMap = {
-    '로스터': 'roster-overview', 'roster': 'roster-overview', '등록': 'roster-overview', '학생등록': 'roster-overview',
-    '템플릿': 'roster-prepare', 'csv': 'roster-prepare', '준비': 'roster-prepare',
-    'import': 'roster-import', '가져오기': 'roster-import', '업로드': 'roster-import',
-    '오류': 'roster-errors', 'error': 'roster-errors', '에러': 'roster-errors',
-    '시험': 'test-setup', 'test': 'test-setup', '프록터': 'test-setup', 'proctor': 'test-setup', '세션': 'test-setup',
-    '로그인': 'test-signin', 'login': 'test-signin', 'signin': 'test-signin', '접속': 'test-signin',
-    'pause': 'test-during', 'suspend': 'test-during', '일시정지': 'test-during', '중단': 'test-during',
-    '종료': 'test-end', 'end': 'test-end',
-    '리포트': 'reports', 'report': 'reports', '결과': 'reports', '성적': 'reports',
-    '문제': 'troubleshoot', '해결': 'troubleshoot', '트러블': 'troubleshoot',
-    '단축키': 'shortcuts', 'shortcut': 'shortcuts', 'pdf': 'shortcuts', '영상': 'shortcuts',
-    '역할': 'roles', 'role': 'roles', '권한': 'roles',
-    '개요': 'overview', 'rit': 'overview',
-  };
-  for (const [key, section] of Object.entries(sectionMap)) {
-    if (q.includes(key)) {
-      showSection(section);
-      document.getElementById('searchInput').value = '';
-      return;
-    }
-  }
-}
-
-// Enter key for search
-document.getElementById('searchInput').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') handleSearch(this.value);
-});
-</script>
-
-<!-- ═══════════════ CHATBOT STYLES ═══════════════ -->
-<style>
-/* ── CHATBOT FAB ── */
-.chat-fab {
-  position: fixed;
-  bottom: 24px; right: 24px;
-  width: 58px; height: 58px;
-  background: linear-gradient(135deg, var(--nwea-green), var(--nwea-green-dark));
-  color: #fff;
-  border: none; border-radius: 50%;
-  font-size: 26px;
-  cursor: pointer;
-  box-shadow: 0 4px 20px rgba(0,135,90,0.4);
-  z-index: 1000;
-  transition: all 0.3s;
-  display: flex; align-items: center; justify-content: center;
-}
-.chat-fab:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(0,135,90,0.5); }
-.chat-fab.open { display: none; }
-
-/* ── CHATBOT PANEL ── */
-.chat-panel {
-  position: fixed;
-  bottom: 24px; right: 24px;
-  width: 400px; height: 580px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  box-shadow: 0 12px 48px rgba(0,0,0,0.18);
-  z-index: 1001;
-  display: none;
-  flex-direction: column;
-  overflow: hidden;
-  animation: chatSlideUp 0.3s ease;
-}
-.chat-panel.open { display: flex; }
-@keyframes chatSlideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* Header */
-.chat-header {
-  background: linear-gradient(135deg, var(--hmh-blue), #2a5a8c);
-  color: #fff;
-  padding: 16px 18px;
-  display: flex; align-items: center; gap: 10px;
-  flex-shrink: 0;
-}
-.chat-header-icon {
-  width: 36px; height: 36px;
-  background: rgba(255,255,255,0.15);
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 18px;
-}
-.chat-header-text h3 { font-size: 14px; font-weight: 700; }
-.chat-header-text p { font-size: 11px; opacity: 0.7; margin-top: 2px; }
-.chat-close {
-  margin-left: auto;
-  background: rgba(255,255,255,0.15);
-  border: none; border-radius: 8px;
-  color: #fff; width: 32px; height: 32px;
-  cursor: pointer; font-size: 16px;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.15s;
-}
-.chat-close:hover { background: rgba(255,255,255,0.25); }
-
-/* Messages */
-.chat-messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  scrollbar-width: thin;
-  scrollbar-color: #e2e8f0 transparent;
-}
-.chat-messages::-webkit-scrollbar { width: 4px; }
-.chat-messages::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 2px; }
-
-.chat-msg {
-  max-width: 85%;
-  padding: 10px 14px;
-  border-radius: 14px;
-  font-size: 13.5px;
-  line-height: 1.7;
-  word-break: break-word;
-}
-.chat-msg.bot {
-  background: #f1f5f9;
-  color: var(--text);
-  align-self: flex-start;
-  border-bottom-left-radius: 4px;
-}
-.chat-msg.user {
-  background: var(--nwea-green);
-  color: #fff;
-  align-self: flex-end;
-  border-bottom-right-radius: 4px;
-}
-.chat-msg.bot a {
-  color: var(--nwea-teal);
-  text-decoration: underline;
-}
-
-/* Typing indicator */
-.chat-typing {
-  display: none;
-  align-self: flex-start;
-  padding: 10px 16px;
-  background: #f1f5f9;
-  border-radius: 14px;
-  border-bottom-left-radius: 4px;
-}
-.chat-typing.show { display: flex; gap: 4px; align-items: center; }
-.chat-typing span {
-  width: 7px; height: 7px;
-  background: #94a3b8;
-  border-radius: 50%;
-  animation: typingBounce 1.2s infinite;
-}
-.chat-typing span:nth-child(2) { animation-delay: 0.15s; }
-.chat-typing span:nth-child(3) { animation-delay: 0.3s; }
-@keyframes typingBounce {
-  0%, 60%, 100% { transform: translateY(0); }
-  30% { transform: translateY(-6px); }
-}
-
-/* FAQ quick buttons */
-.chat-faq {
-  padding: 10px 16px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  border-top: 1px solid var(--border);
-  flex-shrink: 0;
-  background: #fafbfc;
-}
-.faq-btn {
-  padding: 6px 12px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  font-size: 12px;
-  font-family: 'Noto Sans KR', sans-serif;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
-}
-.faq-btn:hover {
-  border-color: var(--nwea-green);
-  color: var(--nwea-green);
-  background: var(--nwea-green-light);
-}
-
-/* Input area */
-.chat-input-area {
-  padding: 12px 14px;
-  border-top: 1px solid var(--border);
-  display: flex; gap: 8px;
-  flex-shrink: 0;
-  background: var(--surface);
-}
-.chat-input {
-  flex: 1;
-  padding: 10px 14px;
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  font-size: 13.5px;
-  font-family: 'Noto Sans KR', sans-serif;
-  outline: none;
-  transition: border-color 0.15s;
-}
-.chat-input:focus { border-color: var(--nwea-green); }
-.chat-send {
-  width: 40px; height: 40px;
-  background: var(--nwea-green);
-  color: #fff;
-  border: none; border-radius: 10px;
-  cursor: pointer;
-  font-size: 16px;
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.15s;
-  flex-shrink: 0;
-}
-.chat-send:hover { background: var(--nwea-green-dark); }
-.chat-send:disabled { background: #94a3b8; cursor: not-allowed; }
-
-/* Mobile responsive */
-@media (max-width: 480px) {
-  .chat-panel {
-    width: calc(100% - 16px);
-    height: calc(100% - 80px);
-    bottom: 8px; right: 8px;
-    border-radius: 12px;
-  }
-}
-</style>
-
-<!-- ═══════════════ CHATBOT HTML ═══════════════ -->
-<button class="chat-fab" id="chatFab" onclick="openChat()">💬</button>
-
-<div class="chat-panel" id="chatPanel">
-  <div class="chat-header">
-    <div class="chat-header-icon">🤖</div>
-    <div class="chat-header-text">
-      <h3>MAP Growth 도우미</h3>
-      <p>무엇이든 물어보세요 (한국어)</p>
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal-container" onclick="event.stopPropagation()">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">가이드</div>
+      <button class="modal-close" onclick="closeModalDirect()" title="닫기">&times;</button>
     </div>
-    <button class="chat-close" onclick="closeChat()">✕</button>
-  </div>
-
-  <div class="chat-messages" id="chatMessages">
-    <div class="chat-msg bot">안녕하세요! MAP Growth 사용에 관해 궁금한 점이 있으면 편하게 질문해 주세요. 😊<br><br>아래 자주 묻는 질문 버튼을 누르거나, 직접 입력해도 됩니다.</div>
-  </div>
-
-  <div class="chat-typing" id="chatTyping">
-    <span></span><span></span><span></span>
-  </div>
-
-  <div class="chat-faq" id="chatFaq">
-    <button class="faq-btn" onclick="askFaq(this)">로스터링 방법</button>
-    <button class="faq-btn" onclick="askFaq(this)">시험 세션 만들기</button>
-    <button class="faq-btn" onclick="askFaq(this)">학생 로그인 절차</button>
-    <button class="faq-btn" onclick="askFaq(this)">Suspend vs Terminate</button>
-    <button class="faq-btn" onclick="askFaq(this)">CSV 오류 해결</button>
-    <button class="faq-btn" onclick="askFaq(this)">리포트 종류</button>
-    <button class="faq-btn" onclick="askFaq(this)">Rapid Guessing 대처</button>
-    <button class="faq-btn" onclick="askFaq(this)">빠른 접속 URL</button>
-  </div>
-
-  <div class="chat-input-area">
-    <input type="text" class="chat-input" id="chatInput" placeholder="질문을 입력하세요..." onkeydown="if(event.key==='Enter')sendChat()">
-    <button class="chat-send" id="chatSendBtn" onclick="sendChat()">➤</button>
+    <div class="modal-body">
+      <iframe id="modalFrame" src="about:blank"></iframe>
+    </div>
   </div>
 </div>
 
-<!-- ═══════════════ CHATBOT SCRIPT ═══════════════ -->
 <script>
-const SYSTEM_PROMPT = `당신은 "MAP Growth 도우미"입니다. 한국 학원과 교육기관에서 MAP Growth 플랫폼을 사용하는 관리자, 선생님, 감독관을 돕는 전문 챗봇입니다.
-
-## 핵심 규칙
-- 반드시 한국어로 답변합니다.
-- MAP Growth 사용에 관한 질문에만 답변합니다. 관련 없는 질문은 정중히 거절합니다.
-- 답변은 간결하고 실용적으로. 3~5문장 내로 핵심만 전달합니다.
-- 구체적인 단계가 필요하면 번호 매긴 순서로 안내합니다.
-- URL이 필요하면 실제 URL을 포함합니다.
-
-## MAP Growth 핵심 지식
-
-### 주요 URL
-- 관리자 로그인: https://start.mapnwea.org
-- 학생 시험 접속: https://test.mapnwea.org
-- Help Center: https://teach.mapnwea.org/assist/help_map/Content/MAPHelpCenter.htm
-- 기술지원: https://connection.nwea.org/s/support
-- 학생 연습시험: http://studentresources.nwea.org (ID/PW 모두 grow)
-
-### 역할(Role)
-- System Administrator: 모든 설정, 사용자 관리
-- Data Administrator: 로스터 업로드, 학생/교사 데이터 관리
-- District Assessment Coordinator: 시험 일정, 전체 리포트
-- Proctor (감독관): 시험 세션 생성/관리, 학생 확인
-- Instructor (선생님): 담당 학급 리포트 확인
-- 한 사람이 여러 역할 겸임 가능. 소규모 학원에서는 원장이 Admin 역할들을 겸함.
-
-### 로스터링 (학생/교사 등록)
-- 2가지 방법: HMH Rostering Service(HRS) 또는 NWEA Legacy Rostering
-- 한국 학원은 대부분 NWEA Legacy Rostering (CSV 템플릿 기반) 사용
-- 절차: start.mapnwea.org 로그인 → Rostering → Import Profiles/Rostering → Access NWEA Legacy Rostering → 템플릿 다운로드
-- 템플릿: StandardRoster 탭 (학생/교사/학급, 필수)과 Additional Users 탭 (추가 직원, 선택)
-- CSV 저장 주의: 반드시 "CSV(쉼표 구분)"으로 저장. CSV UTF-8은 오류 유발!
-- 한국어 Windows: 제어판 → 시계 및 국가 → 지역 → 추가 설정 → 목록 구분 기호를 ,(쉼표)로, 소수점을 .(마침표)로 변경 후 Excel 재시작
-- Import 유형: Add/Update(권장), Overwrite(전면 교체, 주의), Students Only, Instructors Only
-- 한 기관에서 동시에 하나의 Import만 가능. 성수기 최대 48시간 대기.
-
-### Import 오류 유형
-1. Preview 오류: CSV 형식 문제 → 올바른 CSV 형식으로 재저장
-2. File Format 오류: 중복 ID, 빈 필수 필드, 잘못된 날짜 형식 → 해당 행/열 수정
-3. Reconcile 오류: 기존 데이터와 불일치 → "Replace incoming XX" 선택으로 매칭. "Import without associations"이나 "Do not import"는 절대 선택 금지.
-
-### 시험 진행 (Proctor)
-- 세션 생성 3가지 옵션:
-  1. Find Students to Test: 학생 검색으로 그룹 구성 (학생 100명 이하 권장)
-  2. Test My Class: 내 학급 바로 시험
-  3. Use Saved Testing Session: 저장된 세션 불러오기
-- 세션 이름 규칙: 공백, 특수문자, 대문자 피하기. 예: jbmath72
-- 한 번에 하나의 세션만 실행 가능
-
-### 학생 로그인
-1. 감독관: Proctor 콘솔에서 Session Name + Password 확인 (매번 새로 생성, 당일 만료)
-2. 학생: NWEA 보안 브라우저/앱 또는 test.mapnwea.org 접속 → Session Name/Password 입력
-3. 감독관: Proctor 콘솔에서 Refresh → "To Be Confirmed" 학생 → Confirm → 학생이 Start Test
-4. 인터넷 느릴 시 학생들 순차 시작 권장
-
-### 시험 중 제어
-- Pause: 최대 25분, 같은 기기에서 Resume. 25분 초과 시 자동 Suspend
-- Suspend: 최대 28일 (14일 이내 재개 권장), 다음 문제부터 이어서
-- Terminate: 영구, 모든 답안 삭제! 잘못된 시험 배정 시에만 사용
-
-### Rapid Guessing
-- 학생이 문제를 너무 빠르게 답하면 자동 일시정지
-- 감독관: Proctor PIN 확인 → 학생에게 격려 → 학생 기기에서 PIN 입력으로 재개
-- 반복 시 Suspend 후 다른 날 재시험 권장
-
-### 시험 종료
-- End Testing Session → Save and Exit(같은 그룹 재사용) 또는 Delete Session(다른 그룹)
-- 매일 밤 모든 세션 자동 종료, 미완료 시험은 Suspend
-
-### 단축키
-- 화면 새로고침: F5 (PC), Cmd+R (Mac)
-- 학생 기기 개입: Ctrl+Shift+P 또는 Ctrl+Shift+L
-- 보안 브라우저 종료: X (PC/Mac), Shift+Alt+K (Chromebook)
-
-### 리포트
-- 학생 레벨: Student Profile(종합), Student Progress(추이), Family Report(학부모용)
-- 학급 레벨: Achievement Status & Growth(성장 예측), Class Profile(학급 분석), Learning Continuum(학습 진술문)
-- 기관 레벨: Grade Report, District/School Profile, Student Growth Summary, Projected Proficiency, Data Export
-
-### 트러블슈팅
-- 학생 목록 안 보임: 상태 확인 → Do Not Confirm 또는 Suspend → Test Again → 재로그인
-- 화면 빈 화면: Suspend → 브라우저 종료 → Test Again → 재로그인
-- 느린 시험: Reset 버튼 또는 F5
-- 결함 문제 건너뛰기: Pause → Resume (새 문제 표시)
-- 문제 신고: Ctrl+Shift+P → PIN 입력 → 문제 설명 → Resume Test
-- "Ineligible to Test": Once Per Term 제한 → Assessment Coordinator에게 문의
-- 중단된 시험 재개: 같은 날 → Test Again / 다른 날 → Find Students to Test → Test History Search → Resume Test
-
-### 영상 튜토리얼 (Vimeo)
-- 전체 시리즈: https://vimeo.com/showcase/11254943
-- MAP 로그인: https://vimeo.com/946381585
-- Find Students: https://vimeo.com/946381762
-- Test My Class: https://vimeo.com/935599864
-- 시험 배정(편집 중): https://vimeo.com/951383165
-- 시험 배정(활성 세션): https://vimeo.com/951377050
-- 학생 Confirm: https://vimeo.com/947191091
-- Pause & Resume: https://vimeo.com/947205993
-- Suspend & Test Again: https://vimeo.com/948868350
-- 시험 완료: https://vimeo.com/948929077
-- Confirmed 상태 멈춤: https://vimeo.com/949712534`;
-
-let chatHistory = [];
-
-function openChat() {
-  document.getElementById('chatFab').classList.add('open');
-  document.getElementById('chatPanel').classList.add('open');
-  document.getElementById('chatInput').focus();
-}
-function closeChat() {
-  document.getElementById('chatFab').classList.remove('open');
-  document.getElementById('chatPanel').classList.remove('open');
-}
-
-function addMessage(text, role) {
-  const msgDiv = document.createElement('div');
-  msgDiv.className = 'chat-msg ' + role;
-  // Convert URLs to links and newlines to <br>
-  let html = text
-    .replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    .replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank">$1</a>')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\n/g, '<br>');
-  msgDiv.innerHTML = html;
-  document.getElementById('chatMessages').appendChild(msgDiv);
-  scrollChat();
-}
-
-function scrollChat() {
-  const msgs = document.getElementById('chatMessages');
-  msgs.scrollTop = msgs.scrollHeight;
-}
-
-function showTyping(show) {
-  document.getElementById('chatTyping').classList.toggle('show', show);
-  if (show) scrollChat();
-}
-
-function askFaq(btn) {
-  const q = btn.textContent;
-  sendMessage(q);
-}
-
-function sendChat() {
-  const input = document.getElementById('chatInput');
-  const text = input.value.trim();
-  if (!text) return;
-  input.value = '';
-  sendMessage(text);
-}
-
-async function sendMessage(text) {
-  addMessage(text, 'user');
-  chatHistory.push({ role: 'user', content: text });
-
-  const sendBtn = document.getElementById('chatSendBtn');
-  sendBtn.disabled = true;
-  showTyping(true);
-
-  try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: SYSTEM_PROMPT,
-        messages: chatHistory.slice(-10) // Keep last 10 messages for context
-      })
+  // Reveal animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
     });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    const data = await response.json();
-    const reply = data.content
-      .filter(item => item.type === 'text')
-      .map(item => item.text)
-      .join('\n');
+  // Guide base path - same folder
+  const basePath = 'guides/';
 
-    showTyping(false);
+  // Modal
+  const modal = document.getElementById('modal');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalFrame = document.getElementById('modalFrame');
 
-    if (reply) {
-      addMessage(reply, 'bot');
-      chatHistory.push({ role: 'assistant', content: reply });
-    } else {
-      addMessage('죄송합니다. 답변을 생성하지 못했습니다. 다시 시도해 주세요.', 'bot');
-    }
-  } catch (err) {
-    showTyping(false);
-    console.error('Chat API error:', err);
-    addMessage('연결 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.', 'bot');
+  function openGuide(file, title, catIdx) {
+    modalTitle.textContent = title;
+    modalFrame.src = basePath + file;
+    modal.classList.add('entering');
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => { modal.classList.remove('entering'); });
+    });
   }
 
-  sendBtn.disabled = false;
-  document.getElementById('chatInput').focus();
-}
+  function closeModal(e) {
+    if (e.target === modal) closeModalDirect();
+  }
+  function closeModalDirect() {
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    setTimeout(() => { modalFrame.src = 'about:blank'; }, 300);
+  }
+
+  // ESC key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) closeModalDirect();
+  });
 </script>
+
 </body>
 </html>
