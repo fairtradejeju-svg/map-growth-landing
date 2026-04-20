@@ -433,6 +433,7 @@
 
     /* ===== MENU ===== */
     .viz-menu { position: fixed; top: 16px; right: 16px; z-index: 9999; }
+    @media (max-width: 768px) { .viz-menu { display: none !important; } }
     .viz-menu-toggle {
       width: 40px; height: 40px; border-radius: 10px;
       background: var(--surface); border: 1px solid var(--border);
