@@ -157,9 +157,10 @@
     .nav-cta-btn:hover { background: #0D5C48; }
 
     /* Mobile nav */
-    .nav-mobile-toggle { display: none; background: none; border: none; color: var(--text); cursor: pointer; padding: 8px; }
+    .nav-mobile-toggle { display: none; background: none; border: none; color: var(--text); cursor: pointer; padding: 8px; border-radius: 6px; transition: background 0.15s; }
+    .nav-mobile-toggle:hover { background: var(--surface-hover); }
     @media (max-width: 768px) {
-      .nav-links { display: none; position: absolute; top: 56px; left: 0; right: 0; flex-direction: column; background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px; gap: 2px; }
+      .nav-links { display: none; position: absolute; top: 56px; left: 0; right: 0; flex-direction: column; background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px; gap: 2px; z-index: 99; box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
       .nav-links.open { display: flex; }
       .nav-mobile-toggle { display: flex; align-items: center; justify-content: center; }
     }
@@ -1115,6 +1116,22 @@
     });
 
     function onThemeChange() {}
+
+    // === Close mobile nav when clicking outside ===
+    document.addEventListener('click', function(e) {
+      var nav = document.querySelector('.nav-links');
+      var toggle = document.querySelector('.nav-mobile-toggle');
+      if (nav && toggle && nav.classList.contains('open') && !nav.contains(e.target) && !toggle.contains(e.target)) {
+        nav.classList.remove('open');
+      }
+    });
+
+    // === Close mobile nav on Escape key ===
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelector('.nav-links').classList.remove('open');
+      }
+    });
   </script>
 </body>
 </html>
