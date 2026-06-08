@@ -1,0 +1,8 @@
+# 내부·비공개 파일 — 공개 저장소(GitHub Pages)에 올리지 않음
+# apps-script: cs@ 발송 비밀키(SEND_TOKEN) 포함 — 절대 공개 금지
+apps-script/
+docs/
+design.md
+test-ai-map.html
+*.bak
+.DS_Store
