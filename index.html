@@ -1071,99 +1071,6 @@
           </div>
         </div>
 
-        <!-- 목업 분석 UI (블러 처리) -->
-        <div class="analyzer-mockup-wrap">
-          <div class="analyzer-mockup">
-            <!-- 입력 패널 -->
-            <div class="mockup-input-panel">
-              <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:14px;">리포트 업로드</div>
-              <div class="mockup-upload-zone">
-                <div class="mockup-upload-icon">
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
-                </div>
-                <div style="font-size:13px;color:var(--text-secondary);margin-top:8px;">PDF 파일을 드래그하거나 클릭</div>
-                <div style="font-size:11px;color:var(--text-secondary);opacity:.6;margin-top:4px;">MAP Growth Reading / Math / Language</div>
-              </div>
-              <div style="margin-top:16px;">
-                <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:8px;">분석 옵션</div>
-                <div style="display:flex;flex-direction:column;gap:8px;">
-                  <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);">
-                    <div style="width:16px;height:16px;border-radius:4px;background:#0F6E56;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                    </div>
-                    학년 대비 수준 분석
-                  </div>
-                  <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);">
-                    <div style="width:16px;height:16px;border-radius:4px;background:#0F6E56;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
-                    </div>
-                    SAT 점수 예측
-                  </div>
-                  <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);">
-                    <div style="width:16px;height:16px;border-radius:4px;background:rgba(15,110,86,.15);flex-shrink:0;"></div>
-                    Lexile 도서 추천
-                  </div>
-                </div>
-              </div>
-              <div style="margin-top:20px;padding:10px 16px;background:#0F6E56;border-radius:8px;text-align:center;font-size:13px;font-weight:600;color:#fff;">분석 시작</div>
-              <div class="mockup-progress-bar"><div class="mockup-progress-fill"></div></div>
-            </div>
-
-            <!-- 결과 패널 -->
-            <div class="mockup-result-panel">
-              <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:14px;">분석 결과 — Reading</div>
-              <div style="display:flex;align-items:flex-end;gap:16px;margin-bottom:18px;">
-                <div>
-                  <div class="mockup-rit-label">RIT Score</div>
-                  <div class="mockup-rit-value">224</div>
-                </div>
-                <div style="flex:1;">
-                  <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-secondary);margin-bottom:4px;"><span>학년 기준 185</span><span>최상위 250</span></div>
-                  <div class="mockup-gauge-track"><div class="mockup-gauge-fill" style="width:68%;"></div></div>
-                  <div class="mockup-gauge-labels"><span>K</span><span>3학년</span><span>6학년</span><span>9학년</span><span>12학년</span></div>
-                </div>
-                <div class="mockup-percentile-badge">73rd<br><span style="font-size:9px;font-weight:400;">percentile</span></div>
-              </div>
-              <div class="mockup-skills">
-                <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:10px;">영역별 역량</div>
-                <div class="mockup-skill-row">
-                  <div class="mockup-skill-name">Literary Text</div>
-                  <div class="mockup-skill-bar"><div class="mockup-skill-fill" style="width:78%;"></div></div>
-                  <div class="mockup-skill-pct">78%</div>
-                </div>
-                <div class="mockup-skill-row">
-                  <div class="mockup-skill-name">Informational</div>
-                  <div class="mockup-skill-bar"><div class="mockup-skill-fill" style="width:65%;"></div></div>
-                  <div class="mockup-skill-pct">65%</div>
-                </div>
-                <div class="mockup-skill-row">
-                  <div class="mockup-skill-name">Vocabulary</div>
-                  <div class="mockup-skill-bar"><div class="mockup-skill-fill" style="width:81%;"></div></div>
-                  <div class="mockup-skill-pct">81%</div>
-                </div>
-              </div>
-              <div class="mockup-footer-stats">
-                <div style="text-align:center;">
-                  <div class="mockup-stat-label">Lexile 지수</div>
-                  <div class="mockup-stat-val">980L</div>
-                </div>
-                <div style="text-align:center;">
-                  <div class="mockup-stat-label">예측 SAT</div>
-                  <div class="mockup-stat-val">1,340</div>
-                </div>
-                <div style="text-align:center;">
-                  <div class="mockup-stat-label">성장 (+RIT)</div>
-                  <div class="mockup-stat-val">+12</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- 분석 화면 예시 라벨 -->
-          <div class="mockup-coming-badge">
-            실제 분석 화면 예시
-          </div>
-        </div>
-
         <!-- AI MAP 분석 신청 폼 -->
         <div style="text-align:center;margin:48px auto 0;max-width:560px;">
           <h3 style="font-size:1.4rem;color:#0F172A;margin-bottom:8px;">지금 무료로 분석받아 보세요</h3>
@@ -1278,17 +1185,40 @@
         })();
         </script>
 
-        <!-- 샘플 리포트 CTA 박스 -->
-        <!-- 샘플 리포트 PDF 다운로드 -->
-        <div class="sample-report-box">
-          <div class="sample-text">
-            <h3>실제 분석 결과가 궁금하신가요?</h3>
-            <p>MAP Growth Reading 테스트 결과를 AI가 분석한 샘플을 확인해 보세요. 학생 요약, 영역별 분석, 맞춤 도서 추천까지 한눈에 볼 수 있습니다.</p>
+        <!-- 실제 분석 리포트 샘플 (과목별 3종) -->
+        <style>
+          .smp-wrap{max-width:720px;margin:52px auto 0;text-align:center;}
+          .smp-grid{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:24px;}
+          .smp-card{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1;min-width:180px;padding:26px 20px;background:#fff;border:1px solid #E2E8F0;border-radius:14px;text-decoration:none;transition:.18s;box-shadow:0 4px 16px rgba(15,23,42,.04);}
+          .smp-card:hover{border-color:#0F6E56;transform:translateY(-3px);box-shadow:0 10px 28px rgba(15,110,86,.12);text-decoration:none;}
+          .smp-ico{color:#0F6E56;margin-bottom:4px;display:flex;}
+          .smp-subj{font-size:1.05rem;font-weight:700;color:#0F172A;}
+          .smp-desc{font-size:.82rem;color:#64748B;}
+          .smp-open{font-size:.78rem;color:#0F6E56;font-weight:600;margin-top:4px;}
+        </style>
+        <div class="smp-wrap">
+          <h3 style="font-size:1.35rem;color:#0F172A;margin-bottom:8px;">실제 분석 리포트 샘플</h3>
+          <p style="color:#64748B;font-size:0.92rem;line-height:1.7;">AI가 분석한 실제 리포트를 과목별로 확인해 보세요.<br>학년 대비 수준, 영역별 강·약점, 추천 학습 방향까지 한눈에 볼 수 있어요.</p>
+          <div class="smp-grid">
+            <a class="smp-card" href="sample/sample-reading.html" target="_blank" rel="noopener">
+              <span class="smp-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+              <span class="smp-subj">Reading</span>
+              <span class="smp-desc">읽기 진단 리포트</span>
+              <span class="smp-open">샘플 열기 &rarr;</span>
+            </a>
+            <a class="smp-card" href="sample/sample-language.html" target="_blank" rel="noopener">
+              <span class="smp-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg></span>
+              <span class="smp-subj">Language</span>
+              <span class="smp-desc">언어·문법 진단 리포트</span>
+              <span class="smp-open">샘플 열기 &rarr;</span>
+            </a>
+            <a class="smp-card" href="sample/sample-math.html" target="_blank" rel="noopener">
+              <span class="smp-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="14" y1="18" x2="16" y2="18"/></svg></span>
+              <span class="smp-subj">Math</span>
+              <span class="smp-desc">수학 진단 리포트</span>
+              <span class="smp-open">샘플 열기 &rarr;</span>
+            </a>
           </div>
-          <a href="정샘플-_리포트샘플.pdf" class="sample-report-btn" target="_blank" download>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            샘플 리포트 다운로드
-          </a>
         </div>
 
         <div class="analyzer-features">
