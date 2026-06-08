@@ -1169,6 +1169,9 @@
           <h3 style="font-size:1.4rem;color:#0F172A;margin-bottom:8px;">지금 무료로 분석받아 보세요</h3>
           <p style="color:#64748B;font-size:0.95rem;line-height:1.7;">이메일과 MAP 결과지만 있으면 됩니다. 학생 정보는 결과지에서 확인해 분석해 드려요.</p>
         </div>
+        <div style="max-width:560px;margin:16px auto 0;padding:13px 18px;background:#FFF7ED;border:1px solid #FED7AA;border-radius:10px;color:#9A3412;font-size:0.83rem;line-height:1.6;text-align:center;">
+          현재 <strong>파일럿(시범 운영) 기간</strong>이에요. 분석 결과에 일부 오차나 회신 지연이 있을 수 있는 점 너그러이 양해 부탁드립니다.
+        </div>
         <style>
           .aim-form{max-width:560px;margin:24px auto 0;background:#fff;border:1px solid #E2E8F0;border-radius:16px;padding:36px 32px;box-shadow:0 10px 34px rgba(15,23,42,.06);text-align:left;}
           .aim-field{margin-bottom:20px;}
@@ -1218,8 +1221,8 @@
             <label class="aim-drop" id="aimDrop" for="aimFile">
               <span class="aim-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>
               <span class="aim-main" id="aimFileMain">클릭해서 파일 선택</span>
-              <span class="aim-sub" id="aimFileSub">MAP 결과지 PDF 또는 사진 · 여러 장도 올릴 수 있어요</span>
-              <input type="file" id="aimFile" accept="application/pdf,image/*" multiple required>
+              <span class="aim-sub" id="aimFileSub">한 학생의 MAP 결과지 1건 (PDF 또는 사진)</span>
+              <input type="file" id="aimFile" accept="application/pdf,image/*" required>
             </label>
           </div>
           <div class="aim-consent">
@@ -1232,7 +1235,7 @@
             <div class="aim-hint">분석 리포트를 받으실 이메일 주소예요.</div>
           </div>
           <button type="submit" class="aim-submit">분석 신청하기</button>
-          <div class="aim-foot">현재 무료 체험으로 제공됩니다. 이메일 1개당 1회 분석되며, 신청 후 1~2 영업일 내 메일로 보내드려요.</div>
+          <div class="aim-foot">현재 무료 체험으로 제공됩니다. 한 번에 한 학생의 결과지만 올려주세요. 이메일 1개당 1회 분석되며, 신청 후 1~2 영업일 내 메일로 보내드려요.</div>
         </form>
 
         <div class="aim-success" id="aimSuccess">
@@ -1250,7 +1253,7 @@
           var fMain=document.getElementById('aimFileMain'),fSub=document.getElementById('aimFileSub');
           fileEl.addEventListener('change',function(){
             var fs=fileEl.files;
-            if(!fs.length){fMain.textContent='클릭해서 파일 선택';fSub.textContent='MAP 결과지 PDF 또는 사진 · 여러 장도 올릴 수 있어요';return;}
+            if(!fs.length){fMain.textContent='클릭해서 파일 선택';fSub.textContent='한 학생의 MAP 결과지 1건 (PDF 또는 사진)';return;}
             var mb=0;for(var i=0;i<fs.length;i++)mb+=fs[i].size;mb=(mb/1048576).toFixed(1);
             if(fs.length===1){fMain.textContent=fs[0].name;fSub.textContent=mb+' MB · 첨부되었습니다';}
             else{fMain.textContent=fs.length+'개 파일 선택됨';fSub.textContent=mb+' MB · '+fs.length+'장 첨부되었습니다';}
