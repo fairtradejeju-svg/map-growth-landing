@@ -1090,6 +1090,7 @@
           .aim-hint{font-size:.8rem;color:#94A3B8;margin-top:6px;}
           .aim-drop{display:flex;flex-direction:column;align-items:center;gap:3px;padding:30px 18px;border:2px dashed #CBD5E1;border-radius:12px;cursor:pointer;text-align:center;transition:.18s;background:#F8FAFC;}
           .aim-drop:hover{border-color:#0F6E56;background:rgba(15,110,86,.04);}
+          .aim-drop.drag{border-color:#0F6E56;background:rgba(15,110,86,.09);}
           .aim-drop .aim-ico{color:#0F6E56;margin-bottom:4px;display:flex;}
           .aim-drop .aim-main{font-size:.92rem;font-weight:600;color:#0F172A;}
           .aim-drop .aim-sub{font-size:.8rem;color:#94A3B8;}
@@ -1127,7 +1128,7 @@
             <label>MAP 결과지<span class="aim-req">*</span><span class="aim-opt">PDF 또는 사진</span></label>
             <label class="aim-drop" id="aimDrop" for="aimFile">
               <span class="aim-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>
-              <span class="aim-main" id="aimFileMain">클릭해서 파일 선택</span>
+              <span class="aim-main" id="aimFileMain">클릭하거나 파일을 끌어다 놓기</span>
               <span class="aim-sub" id="aimFileSub">한 학생의 MAP 결과지 1건 (PDF 또는 사진)</span>
               <input type="file" id="aimFile" accept="application/pdf,image/*" required>
             </label>
@@ -1160,10 +1161,17 @@
           var fMain=document.getElementById('aimFileMain'),fSub=document.getElementById('aimFileSub');
           fileEl.addEventListener('change',function(){
             var fs=fileEl.files;
-            if(!fs.length){fMain.textContent='클릭해서 파일 선택';fSub.textContent='한 학생의 MAP 결과지 1건 (PDF 또는 사진)';return;}
-            var mb=0;for(var i=0;i<fs.length;i++)mb+=fs[i].size;mb=(mb/1048576).toFixed(1);
-            if(fs.length===1){fMain.textContent=fs[0].name;fSub.textContent=mb+' MB · 첨부되었습니다';}
-            else{fMain.textContent=fs.length+'개 파일 선택됨';fSub.textContent=mb+' MB · '+fs.length+'장 첨부되었습니다';}
+            if(!fs.length){fMain.textContent='클릭하거나 파일을 끌어다 놓기';fSub.textContent='한 학생의 MAP 결과지 1건 (PDF 또는 사진)';return;}
+            var f=fs[0];var mb=(f.size/1048576).toFixed(1);
+            fMain.textContent=f.name;fSub.textContent=mb+' MB · 첨부되었습니다';
+          });
+          var dropZone=document.getElementById('aimDrop');
+          ['dragenter','dragover'].forEach(function(ev){dropZone.addEventListener(ev,function(e){e.preventDefault();e.stopPropagation();dropZone.classList.add('drag');});});
+          ['dragleave','dragend'].forEach(function(ev){dropZone.addEventListener(ev,function(e){e.preventDefault();e.stopPropagation();dropZone.classList.remove('drag');});});
+          dropZone.addEventListener('drop',function(e){
+            e.preventDefault();e.stopPropagation();dropZone.classList.remove('drag');
+            var files=e.dataTransfer&&e.dataTransfer.files;
+            if(files&&files.length){var dt=new DataTransfer();dt.items.add(files[0]);fileEl.files=dt.files;fileEl.dispatchEvent(new Event('change'));}
           });
           function toB64(f){return new Promise(function(res){var r=new FileReader();r.onload=function(){res(r.result.split(',')[1]);};r.readAsDataURL(f);});}
           form.addEventListener('submit',async function(e){
