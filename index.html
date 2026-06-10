@@ -3,11 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MAP Growth Support Korea</title>
+  <title>MAP Growth Support Korea — 글로벌 표준 영어 진단</title>
+  <meta name="description" content="전 세계 170개국이 쓰는 글로벌 표준 영어 진단 MAP Growth. NWEA 공식 한국 유통사가 도입·운영부터 AI 리포트 분석, 전국 공인 응시 센터 안내까지 지원합니다.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MAP Growth Support Korea — 글로벌 표준 영어 진단">
+  <meta property="og:description" content="우리 아이의 진짜 영어 실력, 세계 기준으로 확인하세요. 전국 17개 NWEA 공인 응시 센터, 한국어 AI 리포트 분석.">
+  <meta property="og:url" content="https://www.mapgrowthsupportkorea.com/">
+  <meta property="og:image" content="https://www.mapgrowthsupportkorea.com/images/og.png">
+  <meta property="og:locale" content="ko_KR">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MAP Growth Support Korea — 글로벌 표준 영어 진단">
+  <meta name="twitter:description" content="우리 아이의 진짜 영어 실력, 세계 기준으로 확인하세요.">
+  <meta name="twitter:image" content="https://www.mapgrowthsupportkorea.com/images/og.png">
+  <link rel="canonical" href="https://www.mapgrowthsupportkorea.com/">
+  <link rel="icon" type="image/png" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root { interpolate-size: allow-keywords; }
@@ -95,7 +108,7 @@
     }
     .hero-cta {
       display: inline-flex; align-items: center; gap: 8px;
-      margin-top: 32px; padding: 14px 32px;
+      margin-top: 32px; margin-left: 12px; padding: 14px 32px;
       background: #0F6E56; color: #fff; border: none; border-radius: 8px;
       font-size: 1rem; font-weight: 600; cursor: pointer;
       transition: background 0.2s, transform 0.2s;
@@ -112,17 +125,17 @@
     .hero-sub-cta:hover { background: rgba(15,110,86,0.05); color: #0D5C48; border-color: #0D5C48; text-decoration: none; }
     .hero-report-cta {
       display: inline-flex; align-items: center; gap: 8px;
-      margin-top: 32px; margin-left: 16px; padding: 14px 32px;
-      background: linear-gradient(135deg, #F59E0B, #D97706); color: #fff; border: none; border-radius: 8px;
+      margin-top: 32px; padding: 14px 32px;
+      background: #0F6E56; color: #fff; border: none; border-radius: 8px;
       font-size: 1rem; font-weight: 700; cursor: pointer;
       transition: all 0.2s; text-decoration: none;
-      box-shadow: 0 4px 14px rgba(245,158,11,0.35);
-      animation: pulse-glow 2s ease-in-out infinite;
+      box-shadow: 0 4px 14px rgba(15,110,86,0.30);
+      animation: pulse-glow 2.4s ease-in-out infinite;
     }
-    .hero-report-cta:hover { background: linear-gradient(135deg, #D97706, #B45309); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(245,158,11,0.45); text-decoration: none; }
+    .hero-report-cta:hover { background: #0A5A47; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(15,110,86,0.42); text-decoration: none; }
     @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 4px 14px rgba(245,158,11,0.35); }
-      50% { box-shadow: 0 4px 24px rgba(245,158,11,0.55); }
+      0%, 100% { box-shadow: 0 4px 14px rgba(15,110,86,0.30); }
+      50% { box-shadow: 0 4px 24px rgba(15,110,86,0.50); }
     }
 
     /* ===== NAV BAR ===== */
@@ -697,13 +710,13 @@
     @media (max-width: 375px) {
       body { overflow-x: hidden; }
       .service-grid, .why-grid, .faq-grid, .analyzer-features { grid-template-columns: 1fr; }
-      .hero-sub-cta, .hero-report-cta { margin-left: 0; margin-top: 12px; display: flex; }
+      .hero-cta, .hero-sub-cta, .hero-report-cta { margin-left: 0; margin-top: 12px; display: flex; }
       .sample-report-box { flex-direction: column; text-align: center; padding: 20px; }
       .sample-report-btn { width: 100%; justify-content: center; }
     }
     @media (max-width: 768px) {
       .hero-ctas { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
-      .hero-sub-cta, .hero-report-cta { margin-left: 0; }
+      .hero-cta, .hero-sub-cta, .hero-report-cta { margin-left: 0; }
       .sample-report-box { flex-direction: column; text-align: center; }
       .sample-report-btn { width: 100%; justify-content: center; }
       /* viz-menu를 왼쪽으로 옮겨 햄버거 버튼과 겹치지 않게 */
@@ -713,18 +726,6 @@
 </head>
 <body>
   <a href="#main-content" class="skip-link" onfocus="this.style.cssText='position:fixed;left:16px;top:16px;z-index:10000;padding:8px 16px;background:var(--accent);color:white;text-decoration:none;border-radius:4px;'" onblur="this.style.cssText='position:absolute;left:-9999px;'">Skip to content</a>
-
-  <!-- MENU -->
-  <div class="viz-menu">
-    <button class="viz-menu-toggle" onclick="toggleMenu()" aria-label="Menu">
-      <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/></svg>
-    </button>
-    <div class="viz-menu-dropdown" id="vizMenuDropdown">
-      <button onclick="cycleTheme()"><span id="themeIcon">☀️</span><span id="themeLabel">Light</span></button>
-      <button onclick="downloadImage()"><span>📥</span><span>PNG 다운로드</span></button>
-      <button onclick="window.print()"><span>🖨️</span><span>인쇄 / PDF</span></button>
-    </div>
-  </div>
 
   <!-- NAV -->
   <nav class="nav-bar" role="banner">
@@ -761,13 +762,13 @@
         <h1 class="animate delay-1">우리 아이의 진짜 실력,<br><span class="em">세계 기준</span>으로 확인하세요</h1>
         <p class="animate delay-2">MAP Growth 테스트 도입부터 운영, 전문 리포트 분석까지.<br>학원과 학교의 영어 교육을 데이터로 지원합니다.</p>
         <div class="hero-ctas animate delay-3">
-          <a href="#contact" class="hero-cta">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            무료 상담 신청
+          <a href="정샘플-_리포트샘플.pdf" class="hero-report-cta" download rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            우리 아이 리포트, 샘플로 미리 보기
           </a>
-          <a href="#analyzer" class="hero-report-cta">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-            우리 아이 MAP 리포트 분석하기
+          <a href="#contact" class="hero-cta">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            도입 문의 (학원·학교)
           </a>
           <a href="#intro" class="hero-sub-cta">MAP Growth 알아보기 ↓</a>
         </div>
@@ -1071,162 +1072,111 @@
           </div>
         </div>
 
-        <!-- AI MAP 분석 신청 폼 -->
-        <div style="text-align:center;margin:48px auto 0;max-width:560px;">
-          <h3 style="font-size:1.4rem;color:#0F172A;margin-bottom:8px;">지금 무료로 분석받아 보세요</h3>
-          <p style="color:#64748B;font-size:0.95rem;line-height:1.7;">이메일과 MAP 결과지만 있으면 됩니다. 학생 정보는 결과지에서 확인해 분석해 드려요.</p>
+        <!-- 목업 분석 UI (블러 처리) -->
+        <div class="analyzer-mockup-wrap">
+          <div class="analyzer-mockup">
+            <!-- 입력 패널 -->
+            <div class="mockup-input-panel">
+              <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:14px;">리포트 업로드</div>
+              <div class="mockup-upload-zone">
+                <div class="mockup-upload-icon">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+                </div>
+                <div style="font-size:13px;color:var(--text-secondary);margin-top:8px;">PDF 파일을 드래그하거나 클릭</div>
+                <div style="font-size:11px;color:var(--text-secondary);opacity:.6;margin-top:4px;">MAP Growth Reading / Math / Language</div>
+              </div>
+              <div style="margin-top:16px;">
+                <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:8px;">분석 옵션</div>
+                <div style="display:flex;flex-direction:column;gap:8px;">
+                  <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);">
+                    <div style="width:16px;height:16px;border-radius:4px;background:#0F6E56;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    학년 대비 수준 분석
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);">
+                    <div style="width:16px;height:16px;border-radius:4px;background:#0F6E56;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                    </div>
+                    SAT 점수 예측
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text);">
+                    <div style="width:16px;height:16px;border-radius:4px;background:rgba(15,110,86,.15);flex-shrink:0;"></div>
+                    Lexile 도서 추천
+                  </div>
+                </div>
+              </div>
+              <div style="margin-top:20px;padding:10px 16px;background:#0F6E56;border-radius:8px;text-align:center;font-size:13px;font-weight:600;color:#fff;">분석 시작</div>
+              <div class="mockup-progress-bar"><div class="mockup-progress-fill"></div></div>
+            </div>
+
+            <!-- 결과 패널 -->
+            <div class="mockup-result-panel">
+              <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:14px;">분석 결과 — Reading</div>
+              <div style="display:flex;align-items:flex-end;gap:16px;margin-bottom:18px;">
+                <div>
+                  <div class="mockup-rit-label">RIT Score</div>
+                  <div class="mockup-rit-value">224</div>
+                </div>
+                <div style="flex:1;">
+                  <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--text-secondary);margin-bottom:4px;"><span>학년 기준 185</span><span>최상위 250</span></div>
+                  <div class="mockup-gauge-track"><div class="mockup-gauge-fill" style="width:68%;"></div></div>
+                  <div class="mockup-gauge-labels"><span>K</span><span>3학년</span><span>6학년</span><span>9학년</span><span>12학년</span></div>
+                </div>
+                <div class="mockup-percentile-badge">73rd<br><span style="font-size:9px;font-weight:400;">percentile</span></div>
+              </div>
+              <div class="mockup-skills">
+                <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:10px;">영역별 역량</div>
+                <div class="mockup-skill-row">
+                  <div class="mockup-skill-name">Literary Text</div>
+                  <div class="mockup-skill-bar"><div class="mockup-skill-fill" style="width:78%;"></div></div>
+                  <div class="mockup-skill-pct">78%</div>
+                </div>
+                <div class="mockup-skill-row">
+                  <div class="mockup-skill-name">Informational</div>
+                  <div class="mockup-skill-bar"><div class="mockup-skill-fill" style="width:65%;"></div></div>
+                  <div class="mockup-skill-pct">65%</div>
+                </div>
+                <div class="mockup-skill-row">
+                  <div class="mockup-skill-name">Vocabulary</div>
+                  <div class="mockup-skill-bar"><div class="mockup-skill-fill" style="width:81%;"></div></div>
+                  <div class="mockup-skill-pct">81%</div>
+                </div>
+              </div>
+              <div class="mockup-footer-stats">
+                <div style="text-align:center;">
+                  <div class="mockup-stat-label">Lexile 지수</div>
+                  <div class="mockup-stat-val">980L</div>
+                </div>
+                <div style="text-align:center;">
+                  <div class="mockup-stat-label">예측 SAT</div>
+                  <div class="mockup-stat-val">1,340</div>
+                </div>
+                <div style="text-align:center;">
+                  <div class="mockup-stat-label">성장 (+RIT)</div>
+                  <div class="mockup-stat-val">+12</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 준비중 배지 오버레이 -->
+          <div class="mockup-coming-badge">
+            <div class="coming-pulse-dot"></div>
+            시스템 고도화 중 &nbsp;·&nbsp; 곧 오픈
+          </div>
         </div>
-        <div style="max-width:560px;margin:16px auto 0;padding:13px 18px;background:#FFF7ED;border:1px solid #FED7AA;border-radius:10px;color:#9A3412;font-size:0.83rem;line-height:1.6;text-align:center;">
-          현재 <strong>파일럿(시범 운영) 기간</strong>이에요. 분석 결과에 일부 오차나 회신 지연이 있을 수 있는 점 너그러이 양해 부탁드립니다.
-        </div>
-        <style>
-          .aim-form{max-width:560px;margin:24px auto 0;background:#fff;border:1px solid #E2E8F0;border-radius:16px;padding:36px 32px;box-shadow:0 10px 34px rgba(15,23,42,.06);text-align:left;}
-          .aim-field{margin-bottom:20px;}
-          .aim-field>label{display:block;font-size:.9rem;font-weight:600;color:#0F172A;margin-bottom:8px;}
-          .aim-req{color:#0F6E56;margin-left:3px;}
-          .aim-opt{font-size:.78rem;font-weight:500;color:#94A3B8;margin-left:7px;}
-          .aim-field select,.aim-field input[type=email]{width:100%;padding:13px 14px;border:1px solid #CBD5E1;border-radius:10px;font-size:.95rem;color:#0F172A;background:#fff;font-family:inherit;-webkit-appearance:none;appearance:none;box-sizing:border-box;}
-          .aim-field select:focus,.aim-field input:focus{outline:none;border-color:#0F6E56;box-shadow:0 0 0 3px rgba(15,110,86,.12);}
-          .aim-hint{font-size:.8rem;color:#94A3B8;margin-top:6px;}
-          .aim-drop{display:flex;flex-direction:column;align-items:center;gap:3px;padding:30px 18px;border:2px dashed #CBD5E1;border-radius:12px;cursor:pointer;text-align:center;transition:.18s;background:#F8FAFC;}
-          .aim-drop:hover{border-color:#0F6E56;background:rgba(15,110,86,.04);}
-          .aim-drop.drag{border-color:#0F6E56;background:rgba(15,110,86,.09);}
-          .aim-drop .aim-ico{color:#0F6E56;margin-bottom:4px;display:flex;}
-          .aim-drop .aim-main{font-size:.92rem;font-weight:600;color:#0F172A;}
-          .aim-drop .aim-sub{font-size:.8rem;color:#94A3B8;}
-          .aim-drop input[type=file]{display:none;}
-          .aim-consent{display:flex;gap:10px;align-items:flex-start;margin:4px 0 20px;}
-          .aim-consent input{margin-top:3px;width:16px;height:16px;accent-color:#0F6E56;flex-shrink:0;}
-          .aim-consent label{font-size:.82rem;color:#64748B;line-height:1.65;font-weight:400;}
-          .aim-submit{width:100%;padding:15px;background:#0F6E56;color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;font-family:inherit;transition:.18s;}
-          .aim-submit:hover{background:#0C5A46;}
-          .aim-submit:disabled{opacity:.55;cursor:default;}
-          .aim-foot{font-size:.78rem;color:#94A3B8;line-height:1.7;margin-top:16px;text-align:center;}
-          .aim-success{display:none;max-width:560px;margin:24px auto 0;background:#fff;border:1px solid #E2E8F0;border-radius:16px;padding:46px 32px;text-align:center;box-shadow:0 10px 34px rgba(15,23,42,.06);}
-          .aim-success.on{display:block;}
-          .aim-success .aim-check{width:60px;height:60px;margin:0 auto 18px;background:rgba(15,110,86,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#0F6E56;}
-          .aim-success h3{font-size:1.25rem;color:#0F172A;margin-bottom:10px;}
-          .aim-success p{color:#64748B;font-size:.92rem;line-height:1.7;}
-          .aim-recap{margin-top:22px;text-align:left;background:#F8FAFC;border-radius:10px;padding:14px 18px;}
-          .aim-recap div{display:flex;justify-content:space-between;font-size:.88rem;padding:5px 0;}
-          .aim-recap .rk{color:#94A3B8;}.aim-recap .rv{color:#0F172A;font-weight:600;}
-        </style>
 
-        <form class="aim-form" id="aimApplyForm" novalidate>
-          <div class="aim-field">
-            <label for="aimSource">어떻게 알고 오셨나요?<span class="aim-opt">선택</span></label>
-            <select id="aimSource">
-              <option value="">선택해 주세요</option>
-              <option>검색 (네이버 / 구글)</option>
-              <option>학원 추천</option>
-              <option>지인 소개</option>
-              <option>SNS / 블로그</option>
-              <option>기타</option>
-            </select>
+        <!-- 샘플 리포트 CTA 박스 -->
+        <!-- 샘플 리포트 PDF 다운로드 -->
+        <div class="sample-report-box">
+          <div class="sample-text">
+            <h3>실제 분석 결과가 궁금하신가요?</h3>
+            <p>MAP Growth Reading 테스트 결과를 AI가 분석한 샘플을 확인해 보세요. 학생 요약, 영역별 분석, 맞춤 도서 추천까지 한눈에 볼 수 있습니다.</p>
           </div>
-          <div class="aim-field">
-            <label>MAP 결과지<span class="aim-req">*</span><span class="aim-opt">PDF 또는 사진</span></label>
-            <label class="aim-drop" id="aimDrop" for="aimFile">
-              <span class="aim-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span>
-              <span class="aim-main" id="aimFileMain">클릭하거나 파일을 끌어다 놓기</span>
-              <span class="aim-sub" id="aimFileSub">한 학생의 MAP 결과지 1건 (PDF 또는 사진)</span>
-              <input type="file" id="aimFile" accept="application/pdf,image/*" required>
-            </label>
-          </div>
-          <div class="aim-consent">
-            <input type="checkbox" id="aimAgree" required>
-            <label for="aimAgree">분석 리포트 제공을 위한 개인정보(이메일, MAP 결과지에 포함된 학생 학습 정보) 수집·이용에 동의합니다. 수집된 정보는 분석 및 회신 목적으로만 사용되며, 발송 후 1년간 보관 후 파기됩니다.</label>
-          </div>
-          <div class="aim-field">
-            <label for="aimEmail">이메일<span class="aim-req">*</span></label>
-            <input type="email" id="aimEmail" placeholder="example@email.com" required>
-            <div class="aim-hint">분석 리포트를 받으실 이메일 주소예요.</div>
-          </div>
-          <button type="submit" class="aim-submit">분석 신청하기</button>
-          <div class="aim-foot">현재 무료 체험으로 제공됩니다. 한 번에 한 학생의 결과지만 올려주세요. 이메일 1개당 1회 분석되며, 신청 후 1~2 영업일 내 메일로 보내드려요.</div>
-        </form>
-
-        <div class="aim-success" id="aimSuccess">
-          <div class="aim-check"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg></div>
-          <h3>신청이 접수되었습니다</h3>
-          <p>입력하신 이메일로 1~2 영업일 내에 한국어 분석 리포트를 보내드릴게요.<br>메일이 보이지 않으면 스팸함도 확인해 주세요.</p>
-          <div class="aim-recap" id="aimRecap"></div>
-        </div>
-
-        <script>
-        (function(){
-          var URL_='https://script.google.com/macros/s/AKfycbwcVhQ70faTgyma8RaVRUOKE1MLDgc6JprjvcmI8FY5RDcpKnEd6M8DIL_WPmunG4xeZA/exec';
-          var form=document.getElementById('aimApplyForm');
-          var fileEl=document.getElementById('aimFile');
-          var fMain=document.getElementById('aimFileMain'),fSub=document.getElementById('aimFileSub');
-          fileEl.addEventListener('change',function(){
-            var fs=fileEl.files;
-            if(!fs.length){fMain.textContent='클릭하거나 파일을 끌어다 놓기';fSub.textContent='한 학생의 MAP 결과지 1건 (PDF 또는 사진)';return;}
-            var f=fs[0];var mb=(f.size/1048576).toFixed(1);
-            fMain.textContent=f.name;fSub.textContent=mb+' MB · 첨부되었습니다';
-          });
-          var dropZone=document.getElementById('aimDrop');
-          ['dragenter','dragover'].forEach(function(ev){dropZone.addEventListener(ev,function(e){e.preventDefault();e.stopPropagation();dropZone.classList.add('drag');});});
-          ['dragleave','dragend'].forEach(function(ev){dropZone.addEventListener(ev,function(e){e.preventDefault();e.stopPropagation();dropZone.classList.remove('drag');});});
-          dropZone.addEventListener('drop',function(e){
-            e.preventDefault();e.stopPropagation();dropZone.classList.remove('drag');
-            var files=e.dataTransfer&&e.dataTransfer.files;
-            if(files&&files.length){var dt=new DataTransfer();dt.items.add(files[0]);fileEl.files=dt.files;fileEl.dispatchEvent(new Event('change'));}
-          });
-          function toB64(f){return new Promise(function(res){var r=new FileReader();r.onload=function(){res(r.result.split(',')[1]);};r.readAsDataURL(f);});}
-          form.addEventListener('submit',async function(e){
-            e.preventDefault();
-            var em=document.getElementById('aimEmail');
-            if(!em.value||!em.checkValidity()){em.focus();return;}
-            if(!fileEl.files.length){document.getElementById('aimDrop').scrollIntoView({behavior:'smooth',block:'center'});return;}
-            if(!document.getElementById('aimAgree').checked){document.getElementById('aimAgree').focus();return;}
-            var fs=fileEl.files,label=fs.length===1?fs[0].name:fs.length+'개 파일';
-            var btn=form.querySelector('.aim-submit');btn.disabled=true;btn.textContent='전송 중...';
-            try{
-              var enc=[];for(var i=0;i<fs.length;i++)enc.push({name:fs[i].name,mimeType:fs[i].type,base64:await toB64(fs[i])});
-              await fetch(URL_,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({email:em.value,source:document.getElementById('aimSource').value,files:enc})});
-            }catch(err){}
-            document.getElementById('aimRecap').innerHTML='<div><span class="rk">이메일</span><span class="rv">'+em.value+'</span></div><div><span class="rk">첨부 파일</span><span class="rv">'+label+'</span></div>';
-            form.style.display='none';
-            var sc=document.getElementById('aimSuccess');sc.classList.add('on');sc.scrollIntoView({behavior:'smooth',block:'center'});
-          });
-        })();
-        </script>
-
-        <!-- 실제 분석 리포트 샘플 (과목별 3종) -->
-        <style>
-          .smp-wrap{max-width:720px;margin:52px auto 0;text-align:center;}
-          .smp-grid{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:24px;}
-          .smp-card{display:flex;flex-direction:column;align-items:center;gap:5px;flex:1;min-width:180px;padding:26px 20px;background:#fff;border:1px solid #E2E8F0;border-radius:14px;text-decoration:none;transition:.18s;box-shadow:0 4px 16px rgba(15,23,42,.04);}
-          .smp-card:hover{border-color:#0F6E56;transform:translateY(-3px);box-shadow:0 10px 28px rgba(15,110,86,.12);text-decoration:none;}
-          .smp-ico{color:#0F6E56;margin-bottom:4px;display:flex;}
-          .smp-subj{font-size:1.05rem;font-weight:700;color:#0F172A;}
-          .smp-desc{font-size:.82rem;color:#64748B;}
-          .smp-open{font-size:.78rem;color:#0F6E56;font-weight:600;margin-top:4px;}
-        </style>
-        <div class="smp-wrap">
-          <h3 style="font-size:1.35rem;color:#0F172A;margin-bottom:8px;">실제 분석 리포트 샘플</h3>
-          <p style="color:#64748B;font-size:0.92rem;line-height:1.7;">AI가 분석한 실제 리포트를 과목별로 확인해 보세요.<br>학년 대비 수준, 영역별 강·약점, 추천 학습 방향까지 한눈에 볼 수 있어요.</p>
-          <div class="smp-grid">
-            <a class="smp-card" href="sample/sample-reading.html" target="_blank" rel="noopener">
-              <span class="smp-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
-              <span class="smp-subj">Reading</span>
-              <span class="smp-desc">읽기 진단 리포트</span>
-              <span class="smp-open">샘플 열기 &rarr;</span>
-            </a>
-            <a class="smp-card" href="sample/sample-language.html" target="_blank" rel="noopener">
-              <span class="smp-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7V4h16v3"/><path d="M9 20h6"/><path d="M12 4v16"/></svg></span>
-              <span class="smp-subj">Language</span>
-              <span class="smp-desc">언어·문법 진단 리포트</span>
-              <span class="smp-open">샘플 열기 &rarr;</span>
-            </a>
-            <a class="smp-card" href="sample/sample-math.html" target="_blank" rel="noopener">
-              <span class="smp-ico"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="14" y1="18" x2="16" y2="18"/></svg></span>
-              <span class="smp-subj">Math</span>
-              <span class="smp-desc">수학 진단 리포트</span>
-              <span class="smp-open">샘플 열기 &rarr;</span>
-            </a>
-          </div>
+          <a href="정샘플-_리포트샘플.pdf" class="sample-report-btn" target="_blank" rel="noopener" download>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            샘플 리포트 다운로드
+          </a>
         </div>
 
         <div class="analyzer-features">
@@ -1424,13 +1374,13 @@
         <h2>MAP Growth, 함께 시작하세요</h2>
         <p>도입이 처음이셔도 괜찮습니다. 궁금한 점을 편하게 물어보세요.</p>
         <div class="cta-buttons">
-          <a href="https://pf.kakao.com/_xoMxeT" target="_blank" class="cta-primary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            카카오톡으로 문의하기
-          </a>
-          <a href="mailto:cs@mapgrowthsupportkorea.com" class="cta-secondary">
+          <a href="mailto:cs@mapgrowthsupportkorea.com?subject=MAP%20Growth%20도입%20문의" class="cta-primary">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            이메일 문의
+            이메일로 도입 문의하기
+          </a>
+          <a href="https://pf.kakao.com/_cAmIn" target="_blank" rel="noopener noreferrer" class="cta-secondary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            카카오톡 문의
           </a>
         </div>
         <p style="margin-top:24px;font-size:13px;color:var(--text-secondary);">
@@ -1460,37 +1410,8 @@
   </footer>
 
   <script>
-    // === Menu ===
-    function toggleMenu() {
-      var dropdown = document.getElementById('vizMenuDropdown');
-      if (dropdown) dropdown.classList.toggle('open');
-    }
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.viz-menu')) {
-        var dropdown = document.getElementById('vizMenuDropdown');
-        if (dropdown) dropdown.classList.remove('open');
-      }
-    });
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        var dropdown = document.getElementById('vizMenuDropdown');
-        if (dropdown) dropdown.classList.remove('open');
-      }
-    });
-
-    // === Theme ===
-    var savedTheme = localStorage.getItem('viz-theme');
-    var currentTheme = savedTheme || 'light';
-    function applyTheme(t) {
-      document.documentElement.className = 'theme-' + t;
-      document.getElementById('themeIcon').textContent = t === 'dark' ? '🌙' : '☀️';
-      document.getElementById('themeLabel').textContent = t === 'dark' ? 'Dark' : 'Light';
-      localStorage.setItem('viz-theme', t);
-      currentTheme = t;
-      if (typeof onThemeChange === 'function') onThemeChange();
-    }
-    function cycleTheme() { applyTheme(currentTheme === 'dark' ? 'light' : 'dark'); }
-    applyTheme(currentTheme);
+    // === Theme (라이트 고정 — 공개 사이트) ===
+    document.documentElement.className = 'theme-light';
 
     // === Scroll Reveal ===
     document.querySelectorAll('[data-reveal]').forEach(function(el) { el.classList.add('reveal'); });
@@ -1521,17 +1442,6 @@
       cObs.observe(counterEl);
     }
 
-    // === Download PNG ===
-    async function downloadImage() {
-      var menu = document.querySelector('.viz-menu');
-      menu.style.display = 'none';
-      try {
-        var url = await htmlToImage.toPng(document.body, { quality: 1, pixelRatio: 2, filter: function(n) { return !n.classList || !n.classList.contains('viz-menu'); } });
-        var a = document.createElement('a'); a.href = url;
-        a.download = 'map-growth-support-korea.png'; a.click();
-      } catch(e) { console.error('Download failed:', e); }
-      menu.style.display = '';
-    }
 
     // === Slideshow ===
     var T = 11, c = 0, playing = false, timer = null;
