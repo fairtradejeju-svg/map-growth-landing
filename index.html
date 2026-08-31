@@ -639,6 +639,38 @@
     }
     .cta-secondary:hover { background: var(--surface-hover); text-decoration: none; }
 
+    /* ===== HERO 파트너 배지 2단 · 목적별 3칸 ===== */
+    .hero-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+    .hero-partner-badge.alt { border-color: rgba(15,23,42,0.14); background: rgba(15,23,42,0.03); }
+    .hero-partner-badge.alt .badge-dot { background: #94A3B8; }
+    .hero-lead { font-weight: 600; color: #0D5C48; }
+    .hero-pick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin-top: 32px; max-width: 920px; }
+    .hero-pick .pick-card {
+      display: block; background: #fff; border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 11px; padding: 20px 20px 17px; text-decoration: none;
+      transition: border-color .18s, box-shadow .18s, transform .18s;
+    }
+    .hero-pick .pick-card:hover { border-color: rgba(15,110,86,0.45); box-shadow: 0 10px 28px rgba(15,110,86,0.12); transform: translateY(-2px); text-decoration: none; }
+    .hero-pick .pick-card.lead { border-color: rgba(15,110,86,0.45); box-shadow: 0 8px 26px rgba(15,110,86,0.10); }
+    .pick-who { display: block; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.9px; text-transform: uppercase; color: #0F6E56; }
+    .pick-title { display: block; font-size: 16px; font-weight: 600; color: #0F172A; margin: 9px 0 5px; letter-spacing: -0.02em; }
+    .pick-desc { display: block; font-size: 12.8px; color: #64748B; line-height: 1.55; }
+    .pick-go { display: inline-block; font-size: 12.5px; font-weight: 600; color: #0F6E56; margin-top: 13px; }
+    @media (max-width: 860px) { .hero-pick { grid-template-columns: 1fr; max-width: 420px; } }
+
+    /* ===== RESOURCES (교재 · 자료실) ===== */
+    .res-section { padding: clamp(48px, 8vw, 80px) 0; background: var(--bg); }
+    .res-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 13px; margin-top: 28px; }
+    .res-card { background: var(--surface); border: 1px solid var(--border); border-radius: 11px; padding: 19px 18px; }
+    a.res-card { display: block; text-decoration: none; transition: border-color .18s, box-shadow .18s, transform .18s; }
+    a.res-card:hover { border-color: rgba(15,110,86,0.45); box-shadow: 0 10px 26px rgba(15,110,86,0.10); transform: translateY(-2px); text-decoration: none; }
+    .res-card-lead { border-color: rgba(15,110,86,0.4); background: linear-gradient(180deg, #F4FBF8, #FFFFFF); }
+    .res-ic { width: 34px; height: 34px; border-radius: 8px; background: rgba(15,110,86,0.075); color: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 13px; }
+    .res-card h3 { font-size: 14.5px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 5px; }
+    .res-card p { font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; }
+    .res-dl { display: inline-block; margin-top: 13px; font-size: 12.5px; font-weight: 600; color: var(--accent); }
+    .res-foot { margin-top: 20px; font-size: 12.5px; color: var(--text-secondary); }
+
     /* ===== FOOTER ===== */
     .site-footer {
       border-top: 1px solid var(--border); padding: 40px 0;
@@ -741,6 +773,7 @@
         <a href="#intro" class="active">MAP Growth 소개</a>
         <a href="#services">서비스</a>
         <a href="#analyzer">리포트 분석</a>
+        <a href="#resources">교재 자료</a>
         <a href="teacher-guide.html">교사 가이드</a>
         <a href="MAP_Growth_사용매뉴얼.html">사용 매뉴얼</a>
         <a href="#contact" class="nav-cta-btn">문의하기</a>
@@ -754,23 +787,38 @@
     <section class="hero">
       <div class="container">
         <div class="animate">
-          <div class="hero-partner-badge">
-            <span class="badge-dot"></span>
-            <span><span class="badge-text">NWEA</span> 공식 MAP Growth 한국 유통사</span>
+          <div class="hero-badges">
+            <div class="hero-partner-badge">
+              <span class="badge-dot"></span>
+              <span><span class="badge-text">NWEA</span> 공식 MAP Growth 한국 유통사</span>
+            </div>
+            <div class="hero-partner-badge alt">
+              <span class="badge-dot"></span>
+              <span><span class="badge-text">HMH</span> Into Reading · 천재교과서 ELT 파트너</span>
+            </div>
           </div>
         </div>
         <h1 class="animate delay-1">우리 아이의 진짜 실력,<br><span class="em">세계 기준</span>으로 확인하세요</h1>
-        <p class="animate delay-2">MAP Growth 테스트 도입부터 운영, 전문 리포트 분석까지.<br>학원과 학교의 영어 교육을 데이터로 지원합니다.</p>
-        <div class="hero-ctas animate delay-3">
-          <a href="#samples" class="hero-report-cta">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-            우리 아이 리포트, 샘플로 미리 보기
+        <p class="animate delay-2"><span class="hero-lead">Into Reading으로 배우고, MAP Growth로 증명합니다.</span><br>미국 교과서 수업부터 국제 표준 진단, 전문 리포트 분석까지 한 곳에서.</p>
+        <div class="hero-pick animate delay-3">
+          <a href="#samples" class="pick-card lead">
+            <span class="pick-who">Parents</span>
+            <span class="pick-title">우리 아이 리포트 샘플</span>
+            <span class="pick-desc">아이 실력이 어떻게 나오는지 실제 리포트로 먼저 확인</span>
+            <span class="pick-go">샘플 보기</span>
           </a>
-          <a href="#contact" class="hero-cta">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            도입 문의 (학원·학교)
+          <a href="#contact" class="pick-card">
+            <span class="pick-who">Academy</span>
+            <span class="pick-title">도입 문의 (학원·학교)</span>
+            <span class="pick-desc">테스트 도입·운영·정산까지 절차 안내</span>
+            <span class="pick-go">문의하기</span>
           </a>
-          <a href="#intro" class="hero-sub-cta">MAP Growth 알아보기 ↓</a>
+          <a href="#resources" class="pick-card">
+            <span class="pick-who">Teachers</span>
+            <span class="pick-title">교재 · 리소스 다운로드</span>
+            <span class="pick-desc">Into Reading 워크북 · 브로슈어 · 도입 안내서</span>
+            <span class="pick-go">자료 받기</span>
+          </a>
         </div>
       </div>
     </section>
@@ -1257,6 +1305,48 @@
       </div>
     </section>
 
+    <!-- 교재 · 자료실 -->
+    <section class="res-section" id="resources" data-reveal>
+      <div class="container">
+        <span class="section-label">Resources</span>
+        <h2 class="section-title">교재 · 자료실</h2>
+        <p class="section-desc">Into Reading(천재교과서 ELT)과 MAP Growth 관련 자료를 신청 없이 바로 받아보실 수 있습니다.</p>
+        <div class="res-grid">
+          <a href="into-reading-workbooks.html" class="res-card res-card-lead">
+            <div class="res-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+            <h3>Into Reading 워크북 · G1~G5</h3>
+            <p>학년별 10개 모듈, 워크북과 답지 PDF를 지금 바로 내려받기</p>
+            <span class="res-dl">워크북 받기</span>
+          </a>
+          <div class="res-card">
+            <div class="res-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
+            <h3>Into Reading V3 브로슈어</h3>
+            <p>교재 구성 · 디지털 학습 · MAP 연계를 담은 20페이지 소개서</p>
+            <span class="res-dl">준비 중</span>
+          </div>
+          <div class="res-card">
+            <div class="res-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></div>
+            <h3>보카 보강본 샘플</h3>
+            <p>단어 6유형 반복 학습본. 워크북과 함께 쓰는 보조 교재</p>
+            <span class="res-dl">준비 중</span>
+          </div>
+          <div class="res-card">
+            <div class="res-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+            <h3>MAP Growth 도입 절차 안내서</h3>
+            <p>신청부터 시험 운영 · 리포트까지 10단계 정리</p>
+            <span class="res-dl">준비 중</span>
+          </div>
+          <div class="res-card">
+            <div class="res-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+            <h3>교재 소개 자료</h3>
+            <p>학년별 구성표와 수업 운영 예시</p>
+            <span class="res-dl">준비 중</span>
+          </div>
+        </div>
+        <p class="res-foot">워크북은 지금 받으실 수 있고, 나머지 자료는 순차적으로 추가됩니다.</p>
+      </div>
+    </section>
+
     <!-- MAP 공인인증시험센터 -->
     <section class="center-section" id="centers" data-reveal>
       <div class="container">
@@ -1446,6 +1536,7 @@
       <div class="footer-links">
         <a href="#intro">MAP 소개</a>
         <a href="#services">서비스</a>
+        <a href="#resources">교재 자료</a>
         <a href="teacher-guide.html">교사 가이드</a>
         <a href="MAP_Growth_사용매뉴얼.html">사용 매뉴얼</a>
         <a href="#analyzer">리포트 분석</a>
