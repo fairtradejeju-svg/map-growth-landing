@@ -87,8 +87,8 @@ a{text-decoration:none;color:inherit}
     <h1>Into Reading 보카 보강본</h1>
     <p>모듈에 나오는 단어를 여섯 가지 유형으로 반복해서 익히는 보강 워크북입니다. 뜻 고르기 · 빈칸 채우기 · 동의어와 반의어 · 지문 속 추론 · 자연스러운 표현 · 이야기 빈칸으로 한 단어를 여러 각도에서 다룹니다.</p>
     <div class="meta">
-      <span>Grade <b>2</b></span>
-      <span><b>10</b>개 모듈 · <b>1,342</b>단어</span>
+      <span>Grade <b>1</b> · <b>2</b></span>
+      <span>학년별 <b>10</b>개 모듈 · <b>2,072</b>단어</span>
       <span>유형 <b>6</b>종 · 워크북 · 답지 <b>PDF</b></span>
     </div>
   </div>
@@ -106,7 +106,8 @@ a{text-decoration:none;color:inherit}
 </div>
 
 <script>
-  var GRADES = ['G2'];
+  var GRADES = ['G1','G2'];
+  var HINT = {G1:'Grade 1 보카 보강본 10개 모듈 · 초등 1~3학년 · 워크북 82~88쪽 / 답지 6쪽', G2:'Grade 2 보카 보강본 10개 모듈 · 초등 2~4학년 · 워크북 146~160쪽 / 답지 6쪽'};
   var COLORS = [
     {c:'#B73680',s:'#F7E1EE'}, {c:'#2C9DCB',s:'#DDF1F8'}, {c:'#7DB72F',s:'#E8F3D5'},
     {c:'#F58A1F',s:'#FCE9D3'}, {c:'#7C5CBF',s:'#E9E2F6'}, {c:'#0E9C8E',s:'#D6F1EE'},
@@ -135,7 +136,7 @@ a{text-decoration:none;color:inherit}
         '</div>';
       grid.appendChild(card);
     }
-    document.getElementById('gradeHint').textContent = grade.replace('G','Grade ') + ' 보카 보강본 10개 모듈 · 워크북 146~160쪽 / 답지 6쪽';
+    document.getElementById('gradeHint').textContent = HINT[grade];
     var btns = document.querySelectorAll('.grade-tabs button');
     for(var i=0;i<btns.length;i++){ btns[i].classList.toggle('active', btns[i].dataset.g === grade); }
   }
@@ -148,7 +149,8 @@ a{text-decoration:none;color:inherit}
       b.onclick = function(){ render(g); };
       tabs.appendChild(b);
     });
-    render('G2');
+    var q = location.hash.replace('#','').toUpperCase();
+    render(GRADES.indexOf(q) >= 0 ? q : 'G1');
   })();
 </script>
 </body>
