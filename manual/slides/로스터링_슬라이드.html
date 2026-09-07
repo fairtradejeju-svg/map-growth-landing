@@ -1,0 +1,641 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MAP Growth 학생 등록(로스터링) 안내</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;color:#fff;overflow:hidden;height:100vh}
+
+/* 상단 */
+.top{position:fixed;left:0;right:0;top:0;height:74px;display:flex;align-items:center;
+  padding:0 34px;border-bottom:1px solid rgba(255,255,255,.09);background:#0f1c33;z-index:20}
+.top .ttl{font-size:19px;font-weight:700;letter-spacing:-.01em}
+.top .ttl i{font-style:normal;color:#C9A961;margin-right:10px;font-size:14px;letter-spacing:.16em}
+.top .cnt{margin-left:auto;font-size:15px;color:#8d9bb5;letter-spacing:.06em}
+.top .cnt b{color:#C9A961;font-size:19px;font-weight:700}
+
+/* 무대 */
+.stage{position:fixed;left:0;right:0;top:74px;bottom:132px;display:flex;align-items:center;justify-content:center}
+.screen{width:1916px;height:930px;transform-origin:center center;background:#fff;border-radius:6px;
+  box-shadow:0 22px 60px rgba(0,0,0,.5);position:relative;overflow:hidden;flex:none}
+
+/* 하단 */
+.bot{position:fixed;left:0;right:0;bottom:0;height:132px;background:#0f1c33;
+  border-top:1px solid rgba(255,255,255,.09);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;z-index:20}
+.cap{font-size:18px;color:#d5deec;font-weight:300;text-align:center;padding:0 30px;line-height:1.5}
+.cap b{color:#C9A961;font-weight:600}
+.ctl{display:flex;align-items:center;gap:20px}
+.nav{background:none;border:1px solid rgba(201,169,97,.5);color:#C9A961;font-family:inherit;font-size:15px;
+  padding:9px 22px;border-radius:3px;cursor:pointer;letter-spacing:.02em}
+.nav:hover{background:rgba(201,169,97,.12)}
+.nav:disabled{opacity:.28;cursor:default}
+.dots{display:flex;gap:9px}
+.dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;transition:.15s}
+.dots i.on{background:#C9A961;transform:scale(1.25)}
+
+/* ===== NWEA 화면 재현 ===== */
+.sc{position:absolute;inset:0;background:#fff;font-family:Verdana,'Malgun Gothic',sans-serif;color:#222;display:none}
+.sc.on{display:block}
+.hd{height:74px;border-bottom:1px solid #e2e2e2;position:relative;background:#fff}
+.logo{position:absolute;left:46px;top:22px;font-family:Arial;font-size:31px;font-weight:700;color:#231f20;letter-spacing:-1px}
+.logo .tag{font-size:9px;font-weight:400;color:#555;letter-spacing:0;line-height:1.25;display:inline-block;vertical-align:6px;margin-left:6px}
+.bars{position:absolute;left:47px;top:55px;display:flex;width:158px;height:4px}
+.bars i{flex:1}
+.bars i:nth-child(1){background:#f5a800}.bars i:nth-child(2){background:#e5006d}
+.bars i:nth-child(3){background:#00a3ad}.bars i:nth-child(4){background:#0077c8}
+.who{position:absolute;right:52px;top:24px;font-size:12.5px;color:#333}
+.gnav{position:absolute;right:52px;top:50px;font-size:12.5px;color:#1a6a9e}
+.gnav span{margin:0 7px}
+.side{position:absolute;left:47px;top:130px;width:362px;height:735px;background:#257898;padding:22px 0}
+.side a{display:block;color:#fff;font-size:13px;font-weight:700;letter-spacing:.4px;padding:11px 26px;border-bottom:1px solid #4a92ac}
+.side a i{float:right;font-style:normal;opacity:.85}
+.main{position:absolute;left:437px;top:130px;width:1433px;height:735px;border:1px solid #d9d9d9;border-radius:8px;background:#fff;padding:24px 30px}
+.ptitle{font-size:20px;color:#1a5f83;letter-spacing:.02em;margin-bottom:16px}
+.tabs{display:flex;margin-bottom:18px}
+.tab{background:#eee;border:1px solid #d5d5d5;font-size:12px;color:#444;padding:7px 16px;margin-right:-1px}
+.tab.on{background:#f6c344;border-color:#dda92c;font-weight:700}
+.req{color:#c00;font-size:12px;margin-bottom:10px}
+.lab{font-size:13.5px;font-weight:700;color:#222;margin:15px 0 7px}
+.lab sup{color:#c00}
+.lab a{color:#1a6a9e;font-weight:400;font-size:12.5px;margin-left:10px}
+.rdo{font-size:12.5px;color:#222;margin:5px 0;display:flex;align-items:center;width:604px}
+.rdo b{width:13px;height:13px;border:1px solid #999;border-radius:50%;margin-right:9px;position:relative;background:#fff;flex:none}
+.rdo.sel b:after{content:'';position:absolute;left:3px;top:3px;width:5px;height:5px;border-radius:50%;background:#1a6a9e}
+.rdo span{color:#888;font-size:11px;margin-left:8px;white-space:nowrap}
+.rdo .warn{color:#c07000}
+.sel2{width:186px;height:27px;border:1px solid #999;font-size:12.5px;padding:5px 6px;background:#fff;position:relative}
+.sel2:after{content:'';position:absolute;right:8px;top:11px;border:5px solid transparent;border-top-color:#555}
+.dl{color:#1a6a9e;font-size:13px;font-weight:700;text-decoration:underline;display:block;margin-top:12px}
+.dlx{font-size:12px;color:#444;margin-top:3px}
+.box{border:1px solid #cfcfcf;width:660px;margin-top:8px}
+.box .bt{border-bottom:1px solid #cfcfcf;padding:10px 14px}
+.btn{display:inline-block;background:linear-gradient(#fdfdfd,#dcdcdc);border:1px solid #a8a8a8;border-radius:3px;font-size:12px;padding:5px 20px;color:#333}
+.box .bb{height:58px}
+.info{border:1px solid #cfcfcf;margin-top:14px}
+.info .ih{font-size:12.5px;font-weight:700;padding:9px 14px;border-bottom:1px solid #cfcfcf}
+.info .ir{font-size:12.5px;color:#444;padding:9px 14px;background:#eef7f7}
+.dash{border-top:1px dashed #bbb;margin:18px 0 14px}
+.go{display:inline-block;background:linear-gradient(#7fb4cd,#4d8fae);border:1px solid #3f7d9b;color:#fff;font-weight:700;border-radius:3px;font-size:12.5px;padding:7px 22px}
+.gh{display:inline-block;background:linear-gradient(#fdfdfd,#dcdcdc);border:1px solid #a8a8a8;color:#333;border-radius:3px;font-size:12.5px;padding:7px 18px;margin-left:8px}
+.stat{border:1px dashed #9dbfd0;background:#eef7fb;padding:20px 24px;margin-top:6px}
+.stat h4{font-size:14.5px;color:#1a5f83;margin-bottom:14px}
+.stat p{font-size:12px;color:#555;margin-bottom:14px}
+.kv{font-size:12.5px;line-height:1.85}
+.kv b{display:inline-block;width:118px;color:#222}
+.kv span{color:#666}
+.hist{border:1px solid #cfcfcf;background:linear-gradient(#fbfbfb,#efefef);padding:11px 16px;font-size:13.5px;font-weight:700;color:#333;margin-top:18px;border-radius:3px}
+.hist i{float:right;font-style:normal;font-size:12px;color:#555}
+.warnbar{font-size:16px;font-weight:700;color:#333;display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.warnbar em{font-style:normal;background:#f0ad2e;color:#fff;width:26px;height:26px;border-radius:4px;
+  display:flex;align-items:center;justify-content:center;font-size:17px}
+.steps{font-size:12.5px;color:#333;line-height:1.95;margin:0 0 16px 20px}
+.tb{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px}
+.tb th{text-align:left;font-weight:700;padding:7px 9px;border-bottom:1px solid #c8c8c8;color:#222;font-size:11.5px}
+.tb td{padding:7px 9px;border-bottom:1px solid #e6e6e6;color:#444}
+.tb tr:nth-child(even) td{background:#f2f8f8}
+.tb .gray{color:#888}
+.hint{font-size:12.5px;color:#333;margin:16px 0 8px}
+.err{color:#c00;font-weight:700;font-size:13.5px}
+.sub2{font-size:13px;color:#1a5f83;font-weight:700;border-bottom:1px solid #c9dbe4;padding-bottom:5px;margin:18px 0 8px}
+
+/* 윈도우 파일창 */
+.win{position:absolute;left:690px;top:150px;width:1000px;height:430px;background:#f7f8fa;border:1px solid #b9bfc9;
+  border-radius:7px;box-shadow:0 18px 44px rgba(0,0,0,.3);font-size:13px;color:#222;overflow:hidden}
+.win .wt{height:38px;background:#eef0f4;border-bottom:1px solid #dcdfe6;display:flex;align-items:center;padding:0 14px;font-size:12.5px;color:#444}
+.win .wb{display:flex;height:calc(100% - 78px)}
+.win .wl{width:210px;border-right:1px solid #e2e5ea;padding:12px 0;font-size:12.5px}
+.win .wl div{padding:6px 18px;color:#333}
+.win .wr{flex:1;padding:8px 0}
+.win .wr .rh{display:flex;font-size:11.5px;color:#666;padding:0 16px 7px;border-bottom:1px solid #e2e5ea}
+.win .wr .rh span:first-child{flex:1}
+.win .wr .rw{display:flex;font-size:12.5px;padding:6px 16px}
+.win .wr .rw span:first-child{flex:1}
+.win .wr .rw.on{background:#cfe6f7}
+.win .wf{height:40px;border-top:1px solid #e2e5ea;display:flex;align-items:center;padding:0 14px;gap:10px;background:#f2f3f6}
+.win .wf .fi{flex:1;height:24px;border:1px solid #a9b0bb;background:#fff;font-size:12px;padding:3px 7px;color:#333}
+.win .wf .fb{background:linear-gradient(#fdfdfd,#e4e4e4);border:1px solid #a8a8a8;border-radius:3px;font-size:12px;padding:4px 16px}
+
+/* nwea.org 홈 */
+.home .topbar{height:44px;background:#fff;border-bottom:1px solid #e6e6e6;position:relative}
+.home .mnu{position:absolute;left:0;right:0;top:74px;height:48px;background:#3a3a3c;display:flex;align-items:center;padding:0 46px;gap:34px}
+.home .mnu a{color:#fff;font-size:14px;font-weight:600}
+.home .mnu a.on{color:#fff;border-bottom:3px solid #fff;padding-bottom:12px}
+.home .drop{position:absolute;left:0;right:0;top:122px;background:#fff;border-bottom:1px solid #e2e2e2;padding:34px 46px 40px;box-shadow:0 12px 26px rgba(0,0,0,.08)}
+.home .drop .d1{font-size:13px;color:#444;margin-bottom:26px}
+.home .drop .d2{font-size:14.5px;font-weight:700;color:#222;margin-bottom:6px}
+.home .drop .line{border-top:1px solid #e0e0e0;margin:12px 0 20px;width:900px}
+.home .cols{display:flex;gap:64px}
+.home .cols .c{width:330px}
+.home .cols .c a{font-size:13.5px;color:#1a6a9e;text-decoration:underline;font-weight:600}
+.home .cols .c p{font-size:11.5px;color:#666;margin-top:7px;line-height:1.6}
+.home .band{position:absolute;left:0;right:0;top:96px;height:34px;background:#eef7fb;display:flex;align-items:center;
+  justify-content:center;font-size:12.5px;color:#1a5f83}
+
+/* 클릭 표시 */
+.hl{position:relative;display:block;width:fit-content;outline:2.5px solid #C9A961;outline-offset:4px;border-radius:3px;box-shadow:0 0 0 8px rgba(201,169,97,.13)}
+.hl.ib{display:inline-block}
+.hl.bad{outline-color:#c0392b;box-shadow:0 0 0 8px rgba(192,57,43,.10)}
+.hl>.num{position:absolute;z-index:6;border:2px solid #fff;left:-49px;top:50%;transform:translateY(-50%);width:33px;height:33px;border-radius:50%;
+  background:#1A2B4A;color:#C9A961;font-family:'Malgun Gothic';font-size:15px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,.28)}
+.hl>.tip{position:absolute;left:calc(100% + 30px);top:50%;transform:translateY(-50%);
+  background:#1A2B4A;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;font-weight:400;
+  padding:11px 17px;border-radius:4px;white-space:nowrap;box-shadow:0 5px 16px rgba(0,0,0,.2);line-height:1.35}
+.hl>.tip b{color:#C9A961;font-weight:700}
+.hl>.tip:after{content:'';position:absolute;left:-7px;top:calc(50% - 7px);border:7px solid transparent;border-right-color:#1A2B4A}
+.hl.bad>.tip{background:#8e2a20}
+.hl.bad>.tip:after{border-right-color:#8e2a20}
+.hl.bad>.tip b{color:#ffd7d0}
+.up{top:calc(50% - 23px)!important}
+.dn{top:calc(50% + 23px)!important}
+.note{position:absolute;background:#1A2B4A;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;
+  padding:12px 18px;border-radius:4px;line-height:1.45;box-shadow:0 5px 16px rgba(0,0,0,.2)}
+.note b{color:#C9A961}
+.note.warnbox{background:#8e2a20}
+.note.warnbox b{color:#ffd7d0}
+</style></head><body>
+
+<div class="top">
+  <div class="ttl"><i>MAP GROWTH</i>학생 등록 · 로스터링</div>
+  <div class="cnt"><b id="cur">1</b> / <span id="tot">10</span></div>
+</div>
+
+<div class="stage"><div class="screen" id="screen">
+
+<!-- 0 -->
+<div class="sc on home">
+  <div class="hd">
+    <div class="logo">nwea<span class="tag">believe in<br>what is possible</span></div>
+    <div class="bars"><i></i><i></i><i></i><i></i></div>
+    <div class="who">Logged in as sample@mapcenter.co.kr</div>
+    <div class="gnav"><span>Home</span>|<span>Help</span>|<span>Contact</span>|<span>Logout</span></div>
+  </div>
+  <div class="mnu">
+    <span class="hl ib" style="outline-offset:9px"><a>Rostering &#9662;</a>
+      <span class="tip" style="left:calc(100% + 500px);top:calc(50% + 4px)">먼저 위쪽 <b>Rostering</b> 을 누릅니다</span></span>
+    <a>MAP Growth &#9662;</a><a>Professional Learning &#9662;</a>
+  </div>
+  <div class="band" style="top:122px">Roster for Summer and Fall 2026 &nbsp;·&nbsp; Follow these steps to ensure successful rostering for NWEA and HMH products</div>
+  <div style="position:absolute;left:0;right:0;top:190px;bottom:0;background:#f2f2f2;padding:34px 46px">
+    <div style="display:flex;gap:22px">
+      <div style="flex:1;background:#fff;border:1px solid #e2e2e2;padding:20px 22px;height:150px">
+        <div style="font-size:10px;color:#888;letter-spacing:.1em;border-bottom:2px solid #f5a800;display:inline-block;padding-bottom:3px">NWEA</div>
+        <div style="font-size:14.5px;font-weight:700;color:#222;margin-top:14px;line-height:1.45">Roster for Summer and Fall 2026</div>
+        <div style="font-size:11.5px;color:#888;margin-top:14px">4 min read</div></div>
+      <div style="flex:1;background:#fff;border:1px solid #e2e2e2;padding:20px 22px;height:150px">
+        <div style="font-size:10px;color:#888;letter-spacing:.1em;border-bottom:2px solid #f5a800;display:inline-block;padding-bottom:3px">NWEA</div>
+        <div style="font-size:14.5px;font-weight:700;color:#222;margin-top:14px;line-height:1.45">Updated Technical Requirements</div>
+        <div style="font-size:11.5px;color:#888;margin-top:14px">4 min read</div></div>
+      <div style="flex:1;background:#fff;border:1px solid #e2e2e2;padding:20px 22px;height:150px">
+        <div style="font-size:10px;color:#888;letter-spacing:.1em;border-bottom:2px solid #00a3ad;display:inline-block;padding-bottom:3px">MAP GROWTH</div>
+        <div style="font-size:14.5px;font-weight:700;color:#222;margin-top:14px;line-height:1.45">Start with the essentials: Ready to Test Toolkit</div>
+        <div style="font-size:11.5px;color:#888;margin-top:14px">5 min read</div></div>
+      <div style="flex:1;background:#fff;border:1px solid #e2e2e2;padding:20px 22px;height:150px">
+        <div style="font-size:10px;color:#888;letter-spacing:.1em;border-bottom:2px solid #00a3ad;display:inline-block;padding-bottom:3px">MAP GROWTH</div>
+        <div style="font-size:14.5px;font-weight:700;color:#222;margin-top:14px;line-height:1.45">Linking Studies: Planned Research</div>
+        <div style="font-size:11.5px;color:#888;margin-top:14px">5 min read</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 1 -->
+<div class="sc home">
+  <div class="hd">
+    <div class="logo">nwea<span class="tag">believe in<br>what is possible</span></div>
+    <div class="bars"><i></i><i></i><i></i><i></i></div>
+    <div class="who">Logged in as sample@mapcenter.co.kr</div>
+    <div class="gnav"><span>Home</span>|<span>Help</span>|<span>Contact</span>|<span>Logout</span></div>
+  </div>
+  <div class="mnu"><a class="on">Rostering &#9652;</a><a>MAP Growth &#9662;</a><a>Professional Learning &#9662;</a></div>
+  <div class="drop" style="top:122px">
+    <div class="d1">Rostering allows you to manage students in the system and ensure they are assigned to the appropriate groups for testing and reports.</div>
+    <div class="d2">Manage Students &amp; Faculty</div>
+    <div class="d2" style="font-size:13px;margin-top:16px">MAP</div>
+    <div class="line"></div>
+    <div class="cols">
+      <div class="c">
+        <span class="hl ib"><a>Import Profiles/Rostering</a>
+          <span class="tip">여기를 누르면 <b>학생 등록 화면</b>으로 갑니다</span></span>
+        <p>Roster student and staff user profile data. Manage rostering data, check roster status, and access error reports.</p>
+      </div>
+      <div class="c"><a>Manage Students</a>
+        <p>Search for, create, or modify student profiles; reassign or exclude test events; merge duplicates.</p></div>
+      <div class="c"><a>Manage Users</a>
+        <p>Create, search, modify, or inactivate educator user profiles.</p></div>
+    </div>
+  </div>
+  <div style="position:absolute;left:0;right:0;top:520px;bottom:0;background:#f2f2f2;padding:34px 46px">
+    <div style="display:flex;gap:22px">
+      <div style="flex:1;background:#fff;border:1px solid #e2e2e2;padding:20px 22px;height:150px">
+        <div style="font-size:10px;color:#888;letter-spacing:.1em;border-bottom:2px solid #f5a800;display:inline-block;padding-bottom:3px">NWEA</div>
+        <div style="font-size:14.5px;font-weight:700;color:#222;margin-top:14px;line-height:1.45">Roster for Summer and Fall 2026</div>
+        <div style="font-size:11.5px;color:#888;margin-top:14px">4 min read</div></div>
+      <div style="flex:1;background:#fff;border:1px solid #e2e2e2;padding:20px 22px;height:150px">
+        <div style="font-size:10px;color:#888;letter-spacing:.1em;border-bottom:2px solid #f5a800;display:inline-block;padding-bottom:3px">NWEA</div>
+        <div style="font-size:14.5px;font-weight:700;color:#222;margin-top:14px;line-height:1.45">Updated Technical Requirements</div>
+        <div style="font-size:11.5px;color:#888;margin-top:14px">4 min read</div></div>
+      <div style="flex:1;background:#fff;border:1px solid #e2e2e2;padding:20px 22px;height:150px">
+        <div style="font-size:10px;color:#888;letter-spacing:.1em;border-bottom:2px solid #00a3ad;display:inline-block;padding-bottom:3px">MAP GROWTH</div>
+        <div style="font-size:14.5px;font-weight:700;color:#222;margin-top:14px;line-height:1.45">Start with the essentials: Ready to Test Toolkit</div>
+        <div style="font-size:11.5px;color:#888;margin-top:14px">5 min read</div></div>
+      <div style="flex:1;background:#fff;border:1px solid #e2e2e2;padding:20px 22px;height:150px">
+        <div style="font-size:10px;color:#888;letter-spacing:.1em;border-bottom:2px solid #00a3ad;display:inline-block;padding-bottom:3px">MAP GROWTH</div>
+        <div style="font-size:14.5px;font-weight:700;color:#222;margin-top:14px;line-height:1.45">Linking Studies: Planned Research</div>
+        <div style="font-size:11.5px;color:#888;margin-top:14px">5 min read</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 2 -->
+<div class="sc">
+  <div class="hd"><div class="logo">nwea<span class="tag">believe in<br>what is possible</span></div>
+    <div class="bars"><i></i><i></i><i></i><i></i></div>
+    <div class="who">Logged in as sample@mapcenter.co.kr</div>
+    <div class="gnav"><span>Home</span>|<span>Help</span>|<span>Contact</span>|<span>Logout</span></div></div>
+  <div class="side"><a>IMPORT PROFILES / ROSTERING</a><a>MANAGE USERS</a><a>MANAGE STUDENTS</a>
+    <a>MANAGE TEST SESSIONS</a><a>MANAGE DATA PARTNERS</a><a>VIEW REPORTS <i>&#9662;</i></a><a>MANAGE PREFERENCES <i>&#9662;</i></a></div>
+  <div class="main">
+    <div class="tabs"><div class="tab on">Set Up Import</div><div class="tab">Preview and Confirm File</div>
+      <div class="tab">Validate File Format</div><div class="tab">Import Summary</div><div class="tab">Reconcile Errors</div></div>
+    <div class="req">* = Required</div>
+    <div class="lab">Roster Type <sup>*</sup> <a>Help me choose</a></div>
+    <div class="rdo sel"><b></b>Standard <span>(Schools, Instructors, Classes, and Students)</span></div>
+    <div class="rdo"><b></b>Additional Users <span>(Add/Update only)</span></div>
+    <div class="lab">Term <sup>*</sup></div>
+    <div class="hl"><div class="sel2">Fall 2026-2027</div>
+      <div class="num">2</div><div class="tip">응시할 <b>학기</b>를 고릅니다 · 가을 시즌이면 Fall</div></div>
+    <div class="lab">Add/Update or Overwrite data for selected term? <sup>*</sup></div>
+    <div class="hl"><div class="rdo sel"><b></b>Standard - Add/Update <span>Recommended (Add to or Update existing data)</span></div>
+      <div class="num">3</div><div class="tip up"><b>Standard - Add/Update</b> 기존 학생은 그대로 두고 새 학생만 더해집니다</div></div>
+    <div class="hl bad" style="margin-top:6px"><div class="rdo"><b></b>Standard - Overwrite <span class="warn">Warning (This will replace all existing data for the term.)</span></div>
+      <div class="tip dn"><b>Overwrite는 누르지 마세요</b> 기존 자료가 통째로 지워집니다</div></div>
+    <div class="rdo" style="margin-top:8px"><b></b>Add/Update Students Only <span class="warn">Warning (Only student related data will be imported.)</span></div>
+    <div class="rdo"><b></b>Add/Update Instructors Only <span class="warn">Warning (Only instructor related data will be imported.)</span></div>
+    <div class="lab" style="margin-top:18px">Download Templates</div>
+    <a class="dl">Download MAP Roster File Template</a>
+    <div class="dlx">Use this file to associate students with teachers and classes. Also use it to roster additional users, like faculty.</div>
+    <div class="dlx" style="margin-top:24px;color:#888">양식이 필요하면 위 링크에서 내려받아 채운 뒤 올리면 됩니다.</div>
+  </div>
+</div>
+
+<!-- 3 -->
+<div class="sc">
+  <div class="hd"><div class="logo">nwea<span class="tag">believe in<br>what is possible</span></div>
+    <div class="bars"><i></i><i></i><i></i><i></i></div>
+    <div class="who">Logged in as sample@mapcenter.co.kr</div>
+    <div class="gnav"><span>Home</span>|<span>Help</span>|<span>Contact</span>|<span>Logout</span></div></div>
+  <div class="side"><a>IMPORT PROFILES / ROSTERING</a><a>MANAGE USERS</a><a>MANAGE STUDENTS</a>
+    <a>MANAGE TEST SESSIONS</a><a>MANAGE DATA PARTNERS</a><a>VIEW REPORTS <i>&#9662;</i></a><a>MANAGE PREFERENCES <i>&#9662;</i></a></div>
+  <div class="main">
+    <div class="tabs"><div class="tab on">Set Up Import</div><div class="tab">Preview and Confirm File</div>
+      <div class="tab">Validate File Format</div><div class="tab">Import Summary</div><div class="tab">Reconcile Errors</div></div>
+    <div class="lab" style="margin-top:250px">Roster File <sup>*</sup></div>
+    <div class="box"><div class="bt"><span class="hl ib"><span class="btn">Add...</span>
+      <span class="num">1</span></span></div><div class="bb"></div></div>
+    <div class="lab">Programs File</div>
+    <div class="box"><div class="bt"><span class="btn">Add...</span></div><div class="bb"></div></div>
+  </div>
+  <div class="win">
+    <div class="wt">파일 열기</div>
+    <div class="wb">
+      <div class="wl"><div>홈</div><div>바탕 화면</div><div>다운로드</div><div>문서</div><div>사진</div></div>
+      <div class="wr">
+        <div class="rh"><span>이름</span><span style="width:190px">수정한 날짜</span><span style="width:120px">유형</span></div>
+        <div class="rw on"><span>샘플영어학원 학생 ROSTERING_전체.csv</span><span style="width:190px">2026-09-06 오후 3:17</span><span style="width:120px">CSV 파일</span></div>
+        <div class="rw"><span>샘플영어학원 프로그램 ROSTERING_전체.csv</span><span style="width:190px">2026-09-06 오후 3:17</span><span style="width:120px">CSV 파일</span></div>
+        <div class="rw"><span>MAP 로스터 양식.csv</span><span style="width:190px">2026-09-01 오전 9:40</span><span style="width:120px">CSV 파일</span></div>
+      </div>
+    </div>
+    <div class="wf"><span style="font-size:12px">파일 이름</span><span class="fi">샘플영어학원 학생 ROSTERING_전체.csv</span><span class="fb">열기</span><span class="fb">취소</span></div>
+  </div>
+  <div class="note" style="left:700px;top:640px;width:700px">
+    <b>학생 명단 파일</b>을 고르고 열기<br><span style="font-size:15px;color:#c4cfe0">
+    Programs File도 같은 방식으로 한 번 더 올립니다</span></div>
+</div>
+
+<!-- 4 -->
+<div class="sc">
+  <div class="hd"><div class="logo">nwea<span class="tag">believe in<br>what is possible</span></div>
+    <div class="bars"><i></i><i></i><i></i><i></i></div>
+    <div class="who">Logged in as sample@mapcenter.co.kr</div>
+    <div class="gnav"><span>Home</span>|<span>Help</span>|<span>Contact</span>|<span>Logout</span></div></div>
+  <div class="side"><a>IMPORT PROFILES / ROSTERING</a><a>MANAGE USERS</a><a>MANAGE STUDENTS</a>
+    <a>MANAGE TEST SESSIONS</a><a>MANAGE DATA PARTNERS</a><a>VIEW REPORTS <i>&#9662;</i></a><a>MANAGE PREFERENCES <i>&#9662;</i></a></div>
+  <div class="main">
+    <div class="tabs"><div class="tab on">Set Up Import</div><div class="tab">Preview and Confirm File</div>
+      <div class="tab">Validate File Format</div><div class="tab">Import Summary</div><div class="tab">Reconcile Errors</div></div>
+    <div class="lab">Roster File <sup>*</sup></div>
+    <div class="box"><div class="bt"><span class="btn">Add...</span></div><div class="bb"></div></div>
+    <div class="info"><div class="ih">Uploaded Files Info</div><div class="ir">샘플영어학원 학생 ROSTERING_전체.csv</div></div>
+    <div style="margin-top:9px"><span class="btn">Remove File</span></div>
+    <div class="lab">Programs File</div>
+    <div class="box"><div class="bt"><span class="btn">Add...</span></div><div class="bb"></div></div>
+    <div class="info"><div class="ih">Uploaded Files Info</div><div class="ir">샘플영어학원 프로그램 ROSTERING_전체.csv</div></div>
+    <div style="margin-top:9px"><span class="btn">Remove File</span></div>
+    <div class="dash"></div>
+    <span class="hl ib"><span class="go">Next</span>
+      <span class="num">1</span><span class="tip" style="left:calc(100% + 150px)">두 파일이 다 올라온 걸 확인하고 <b>Next</b></span></span><span class="gh">Cancel Import</span>
+  </div>
+  <div class="note" style="left:1180px;top:250px;width:560px">올린 파일 이름이 <b>여기</b>에 뜹니다<br>
+    <span style="font-size:15px;color:#c4cfe0">잘못 올렸으면 Remove File 로 지우고 다시 올리세요</span></div>
+</div>
+
+<!-- 5 -->
+<div class="sc">
+  <div class="hd"><div class="logo">nwea<span class="tag">believe in<br>what is possible</span></div>
+    <div class="bars"><i></i><i></i><i></i><i></i></div>
+    <div class="who">Logged in as sample@mapcenter.co.kr</div>
+    <div class="gnav"><span>Home</span>|<span>Help</span>|<span>Contact</span>|<span>Logout</span></div></div>
+  <div class="side"><a>IMPORT PROFILES / ROSTERING</a><a>MANAGE USERS</a><a>MANAGE STUDENTS</a>
+    <a>MANAGE TEST SESSIONS</a><a>MANAGE DATA PARTNERS</a><a>VIEW REPORTS <i>&#9662;</i></a><a>MANAGE PREFERENCES <i>&#9662;</i></a></div>
+  <div class="main">
+    <div class="ptitle">IMPORT PROFILE</div>
+    <div class="sub2">Import Status</div>
+    <div class="stat">
+      <h4>File Format Validation in Progress</h4>
+      <p>Validating element 1 of 51.</p>
+      <div class="kv">
+        <div><b>Import Date:</b><span>Sep 6 2026</span></div>
+        <div><b>Roster File:</b><span>샘플영어학원 학생 ROSTERING_전체.csv</span></div>
+        <div><b>Programs File:</b><span>샘플영어학원 프로그램 ROSTERING_전체.csv</span></div>
+        <div><b>Initiated By:</b><span>sample@mapcenter.co.kr</span></div>
+      </div>
+      <div style="margin-top:14px"><a style="color:#1a6a9e;font-size:12.5px;text-decoration:underline">Cancel Import</a></div>
+    </div>
+    <div class="hist">Import Profile History <i>Show &#9656;</i></div>
+  </div>
+  <div class="note" style="left:520px;top:560px;width:760px">파일 형식을 검사하는 중입니다<br>
+    <span style="font-size:15px;color:#c4cfe0">명단 규모에 따라 1~3분 걸립니다. 이 창을 닫지 말고 기다려 주세요</span></div>
+</div>
+
+<!-- 6b -->
+<div class="sc">
+  <div class="hd">
+    <div class="logo">nwea<span class="tag">believe in<br>what is possible</span></div>
+    <div class="bars"><i></i><i></i><i></i><i></i></div>
+    <div class="who">Logged in as sample@mapcenter.co.kr</div>
+    <div class="gnav"><span>Home</span>|<span>Help</span>|<span>Contact</span>|<span>Logout</span></div>
+  </div>
+  <div class="side"><a>IMPORT PROFILES / ROSTERING</a><a>MANAGE USERS</a><a>MANAGE STUDENTS</a>
+    <a>MANAGE TEST SESSIONS</a><a>MANAGE DATA PARTNERS</a><a>VIEW REPORTS <i>&#9662;</i></a><a>MANAGE PREFERENCES <i>&#9662;</i></a></div>
+  <div class="main">
+    <div class="ptitle">IMPORT SUMMARY</div>
+    <div class="tabs"><div class="tab">Set Up Import</div><div class="tab">Preview and Confirm File</div>
+      <div class="tab">Validate File Format</div><div class="tab on">Import Summary</div><div class="tab">Reconcile Errors</div></div>
+    <div class="kv" style="margin:16px 0 20px">
+      <div><b>Import Date:</b><span>Sep 6 2026</span></div>
+      <div><b>Roster Type:</b><span>Complete, add / update existing data for selected term</span></div>
+      <div><b>Term:</b><span>Fall 2026-2027</span></div>
+      <div><b>Roster File:</b><span>샘플영어학원 학생 ROSTERING_전체.csv</span></div>
+    </div>
+    <div class="sub2">Import Summary</div>
+    <table class="tb" style="width:900px">
+      <tr><th style="width:430px">Records</th><th style="width:150px">Students</th><th style="width:150px">Instructors</th><th>Programs</th></tr>
+      <tr><td class="gray">Records imported from source file(s)</td><td>12</td><td>1</td><td>1</td></tr>
+      <tr><td class="gray">Records already posted</td><td>0</td><td>0</td><td></td></tr>
+      <tr><td class="gray">Total records ready to post</td><td>12</td><td>1</td><td></td></tr>
+      <tr><td class="gray">New records to add</td><td>2</td><td>0</td><td></td></tr>
+      <tr><td class="gray">Existing records to update</td><td>10</td><td>1</td><td></td></tr>
+    </table>
+    <div style="font-size:13px;font-weight:700;color:#222;margin:20px 0 6px">Errors</div>
+    <table class="tb" style="width:900px;margin-top:0">
+      <tr><td class="gray" style="width:430px">Total errors to reconcile</td><td style="width:150px"><span class="hl ib" style="outline-offset:6px"><b style="font-size:14px;color:#1a7a3c">0</b>
+        <span class="tip" style="left:calc(100% + 60px)">여기가 <b>0</b> 이면 손볼 게 없습니다</span></span></td><td></td><td></td></tr>
+    </table>
+    <div style="margin-top:24px"><span class="hl ib"><span class="go">Post Valid Records</span>
+      <span class="num">1</span><span class="tip">바로 <b>Post Valid Records</b> 를 누르면 끝입니다</span></span></div>
+  </div>
+  <div class="note" style="left:1080px;top:690px;width:660px"><b>대부분 이 화면으로 끝납니다</b><br>
+    <span style="font-size:15px;color:#c4cfe0">오류가 0건이면 다음 장면들은 볼 필요 없어요</span></div>
+</div>
+
+<!-- 6 -->
+<div class="sc">
+  <div class="hd"><div class="logo">nwea<span class="tag">believe in<br>what is possible</span></div>
+    <div class="bars"><i></i><i></i><i></i><i></i></div>
+    <div class="who">Logged in as sample@mapcenter.co.kr</div>
+    <div class="gnav"><span>Home</span>|<span>Help</span>|<span>Contact</span>|<span>Logout</span></div></div>
+  <div class="side"><a>IMPORT PROFILES / ROSTERING</a><a>MANAGE USERS</a><a>MANAGE STUDENTS</a>
+    <a>MANAGE TEST SESSIONS</a><a>MANAGE DATA PARTNERS</a><a>VIEW REPORTS <i>&#9662;</i></a><a>MANAGE PREFERENCES <i>&#9662;</i></a></div>
+  <div class="main">
+    <div class="ptitle">IMPORT PROFILE</div>
+    <div class="sub2">Import Status</div>
+    <div class="stat">
+      <h4 style="color:#8a5a00">Data Validated With Errors</h4>
+      <p>Reconcilable errors were found and must be corrected. For specific steps to address this issue, click <a style="color:#1a6a9e;text-decoration:underline">here</a>.</p>
+      <div class="kv">
+        <div><b>Import Date:</b><span>Sep 6 2026</span></div>
+        <div><b>Roster File:</b><span>샘플영어학원 학생 ROSTERING_전체.csv</span></div>
+        <div><b>Programs File:</b><span>샘플영어학원 프로그램 ROSTERING_전체.csv</span></div>
+        <div><b>Initiated By:</b><span>sample@mapcenter.co.kr</span></div>
+      </div>
+      <div style="margin-top:16px">
+        <span class="hl ib"><span class="go">Review Import Summary</span>
+          <span class="num">1</span><span class="tip">여기를 눌러 무엇이 걸렸는지 봅니다</span></span>
+        <span style="margin-left:14px"><a style="color:#1a6a9e;font-size:12.5px;text-decoration:underline">Cancel Import</a></span>
+      </div>
+    </div>
+    <div class="hist">Import Profile History <i>Show &#9656;</i></div>
+  </div>
+  <div class="note warnbox" style="left:520px;top:600px;width:840px"><b>오류가 있다고 놀라지 마세요</b><br>
+    <span style="font-size:15px;color:#f0cdc7">대부분 이름이 비슷한 학생이 이미 있어서 생깁니다. 다음 화면에서 골라주면 끝납니다</span></div>
+</div>
+
+<!-- 7 -->
+<div class="sc">
+  <div class="hd"><div class="logo">nwea<span class="tag">believe in<br>what is possible</span></div>
+    <div class="bars"><i></i><i></i><i></i><i></i></div>
+    <div class="who">Logged in as sample@mapcenter.co.kr</div>
+    <div class="gnav"><span>Home</span>|<span>Help</span>|<span>Contact</span>|<span>Logout</span></div></div>
+  <div class="side"><a>IMPORT PROFILES / ROSTERING</a><a>MANAGE USERS</a><a>MANAGE STUDENTS</a>
+    <a>MANAGE TEST SESSIONS</a><a>MANAGE DATA PARTNERS</a><a>VIEW REPORTS <i>&#9662;</i></a><a>MANAGE PREFERENCES <i>&#9662;</i></a></div>
+  <div class="main">
+    <div class="tabs"><div class="tab">Set Up Import</div><div class="tab">Preview and Confirm File</div>
+      <div class="tab">Validate File Format</div><div class="tab">Import Summary</div><div class="tab on">Reconcile Errors</div></div>
+    <div class="warnbar"><em>!</em>Review errors to reconcile before posting records.</div>
+    <div style="font-size:13px;font-weight:700;margin-bottom:6px">Troubleshooting Steps:</div>
+    <ol class="steps">
+      <li>Click on a Group Error or Individual Error to correct the remaining errors.</li>
+      <li>Select an option on the error page to reconcile each error.</li>
+      <li>We recommend reconciling all errors before posting records.</li>
+      <li>Click "Return to Import Summary" once all errors are reconciled.</li>
+    </ol>
+    <div class="hint">Group Errors must be reconciled before records can be posted to the system.</div>
+    <table class="tb" style="width:1290px">
+      <tr><th style="width:600px">Group Errors</th><th style="width:340px">Errors Remaining</th><th>Errors Reconciled</th></tr>
+      <tr><td class="gray">School Errors</td><td>0</td><td>0</td></tr>
+      <tr><td class="gray">Ethnic Group Errors</td><td>0</td><td>0</td></tr>
+      <tr><td class="gray">Grade Errors</td><td>0</td><td>0</td></tr>
+      <tr><td class="gray">Program Errors</td><td>0</td><td>0</td></tr>
+    </table>
+    <div class="hint" style="margin-top:22px">We recommend reconciling all Individual Errors to ensure all records are posted to the system.</div>
+    <table class="tb" style="width:1290px">
+      <tr><th style="width:600px">Individual Errors</th><th style="width:340px">Errors Remaining</th><th>Errors Reconciled</th></tr>
+      <tr><td class="gray">Instructor Errors</td><td>0</td><td>0</td></tr>
+      <tr><td><span class="hl ib"><span style="color:#1a6a9e;text-decoration:underline;font-weight:700">Student Errors</span>
+        <span class="num">1</span><span class="tip" style="left:calc(100% + 700px)">파란 글씨를 눌러 하나씩 정리합니다</span></span></td><td>2</td><td>0</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- 8 -->
+<div class="sc">
+  <div class="hd"><div class="logo">nwea<span class="tag">believe in<br>what is possible</span></div>
+    <div class="bars"><i></i><i></i><i></i><i></i></div>
+    <div class="who">Logged in as sample@mapcenter.co.kr</div>
+    <div class="gnav"><span>Home</span>|<span>Help</span>|<span>Contact</span>|<span>Logout</span></div></div>
+  <div class="side"><a>IMPORT PROFILES / ROSTERING</a><a>MANAGE USERS</a><a>MANAGE STUDENTS</a>
+    <a>MANAGE TEST SESSIONS</a><a>MANAGE DATA PARTNERS</a><a>VIEW REPORTS <i>&#9662;</i></a><a>MANAGE PREFERENCES <i>&#9662;</i></a></div>
+  <div class="main" style="padding-top:20px">
+    <div class="err">Student Error 1 of 2: <span style="color:#333;font-weight:400">No exact match for student but one or more candidate matches found.</span></div>
+    <div class="sub2">Record to Import</div>
+    <table class="tb" style="width:1290px">
+      <tr><th>Last Name</th><th>First Name</th><th>Date of Birth</th><th>Student ID</th><th>Gender</th><th>Grade</th></tr>
+      <tr><td>HONG</td><td>Gildong</td><td>Mar 4 2017</td><td>sample015</td><td>MALE</td><td>3</td></tr>
+    </table>
+    <div class="sub2">Error Reconciliation</div>
+    <div style="font-size:12.5px;margin-bottom:10px">Choose one of the following four options:</div>
+    <div class="rdo sel" style="width:auto"><b></b>Do not reconcile at this time</div>
+    <div class="hl" style="margin-top:8px"><div class="rdo" style="width:auto"><b></b>Update the following selected student with the incoming record:</div>
+      <div class="num">1</div><div class="tip" style="left:calc(100% + 420px)">같은 학생이면 <b>아래 목록에서 그 학생을 선택</b></div></div>
+    <div style="font-size:11.5px;color:#666;margin:10px 0 4px">3 matches found</div>
+    <table class="tb" style="width:1290px">
+      <tr><th style="width:44px"></th><th>Last Name</th><th>First Name</th><th>Date of Birth</th><th>Student ID</th><th>Gender</th><th>Profile Created On</th></tr>
+      <tr><td>&#9675;</td><td>HONG</td><td>Gildong</td><td>Mar 4 2017</td><td>sample015</td><td>MALE</td><td>Feb 7 2025</td></tr>
+      <tr><td>&#9675;</td><td>HONG</td><td>Gil Dong</td><td>Mar 4 2017</td><td>sample203</td><td>MALE</td><td>Mar 25 2025</td></tr>
+      <tr><td>&#9675;</td><td>Hong</td><td>Gildong</td><td>Jan 21 2018</td><td>sample118</td><td>MALE</td><td>Jun 13 2025</td></tr>
+    </table>
+    <div class="hl" style="margin-top:14px"><div class="rdo" style="width:auto"><b></b>Create a new student profile for this student</div>
+      <div class="num">2</div><div class="tip" style="left:calc(100% + 560px)">처음 등록하는 학생이면 <b>이쪽</b></div></div>
+    <div class="rdo" style="margin-top:6px;width:auto"><b></b>Do not import incoming records that contain this student</div>
+    <div style="margin-top:20px"><span class="go">Save and Next</span><span class="gh">Return to Error Summary</span></div>
+  </div>
+  <div class="note" style="left:1100px;top:770px;width:680px">헷갈리면 <b>Do not reconcile at this time</b> 으로 두고 넘어가도 됩니다<br>
+    <span style="font-size:15px;color:#c4cfe0">그 학생만 등록이 미뤄지고 나머지는 그대로 올라갑니다</span></div>
+</div>
+
+<!-- 9 -->
+<div class="sc">
+  <div class="hd"><div class="logo">nwea<span class="tag">believe in<br>what is possible</span></div>
+    <div class="bars"><i></i><i></i><i></i><i></i></div>
+    <div class="who">Logged in as sample@mapcenter.co.kr</div>
+    <div class="gnav"><span>Home</span>|<span>Help</span>|<span>Contact</span>|<span>Logout</span></div></div>
+  <div class="side"><a>IMPORT PROFILES / ROSTERING</a><a>MANAGE USERS</a><a>MANAGE STUDENTS</a>
+    <a>MANAGE TEST SESSIONS</a><a>MANAGE DATA PARTNERS</a><a>VIEW REPORTS <i>&#9662;</i></a><a>MANAGE PREFERENCES <i>&#9662;</i></a></div>
+  <div class="main">
+    <div class="ptitle">IMPORT SUMMARY</div>
+    <div class="tabs"><div class="tab">Set Up Import</div><div class="tab">Preview and Confirm File</div>
+      <div class="tab">Validate File Format</div><div class="tab on">Import Summary</div><div class="tab">Reconcile Errors</div></div>
+    <div class="kv" style="margin:16px 0 20px">
+      <div><b>Import Date:</b><span>Sep 6 2026</span></div>
+      <div><b>Roster Type:</b><span>Complete, add / update existing data for selected term</span></div>
+      <div><b>Term:</b><span>Fall 2026-2027</span></div>
+      <div><b>Roster File:</b><span>샘플영어학원 학생 ROSTERING_전체.csv</span></div>
+    </div>
+    <div class="sub2">Import Summary</div>
+    <table class="tb" style="width:900px">
+      <tr><th style="width:430px">Records</th><th style="width:150px">Students</th><th style="width:150px">Instructors</th><th>Programs</th></tr>
+      <tr><td class="gray">Records imported from source file(s)</td><td>12</td><td>1</td><td>1</td></tr>
+      <tr><td class="gray">Records already posted</td><td>0</td><td>0</td><td></td></tr>
+      <tr><td class="gray">Total records ready to post</td><td>12</td><td>1</td><td></td></tr>
+      <tr><td class="gray">New records to add</td><td>2</td><td>0</td><td></td></tr>
+      <tr><td class="gray">Existing records to update</td><td>10</td><td>1</td><td></td></tr>
+    </table>
+    <div style="margin-top:20px"><span class="hl ib"><span class="go">Post Valid Records</span>
+      <span class="num">2</span><span class="tip">확인했으면 <b>Post Valid Records</b> 로 등록을 마칩니다</span></span></div>
+  </div>
+  <div class="note" style="left:1080px;top:690px;width:640px"><b>숫자를 꼭 확인하세요</b><br>
+    <span style="font-size:15px;color:#c4cfe0">새로 등록 2명 + 정보 갱신 10명 = 총 12명.<br>보낸 명단 인원과 맞는지 대조합니다</span></div>
+</div>
+
+<!-- 10 -->
+<div class="sc">
+  <div class="hd"><div class="logo">nwea<span class="tag">believe in<br>what is possible</span></div>
+    <div class="bars"><i></i><i></i><i></i><i></i></div>
+    <div class="who">Logged in as sample@mapcenter.co.kr</div>
+    <div class="gnav"><span>Home</span>|<span>Help</span>|<span>Contact</span>|<span>Logout</span></div></div>
+  <div class="side"><a>IMPORT PROFILES / ROSTERING</a><a>MANAGE USERS</a>
+    <a><span class="hl ib" style="outline-offset:6px">MANAGE STUDENTS<span class="tip" style="left:calc(100% + 130px);font-weight:400">등록이 끝나면 여기서 학생 목록을 확인합니다</span></span></a>
+    <a>MANAGE TEST SESSIONS</a><a>MANAGE DATA PARTNERS</a><a>VIEW REPORTS <i>&#9662;</i></a><a>MANAGE PREFERENCES <i>&#9662;</i></a></div>
+  <div class="main">
+    <div class="ptitle">IMPORT PROFILE</div>
+    <div class="sub2">Import Status</div>
+    <div class="stat">
+      <h4>Posting Valid Data in Progress</h4>
+      <p>Valid data is being posted.</p>
+      <div class="kv">
+        <div><b>Import Date:</b><span>Sep 6 2026</span></div>
+        <div><b>Roster File:</b><span>샘플영어학원 학생 ROSTERING_전체.csv</span></div>
+        <div><b>Programs File:</b><span>샘플영어학원 프로그램 ROSTERING_전체.csv</span></div>
+        <div><b>Initiated By:</b><span>sample@mapcenter.co.kr</span></div>
+      </div>
+    </div>
+    <div class="hist">Import Profile History <i>Show &#9656;</i></div>
+  </div>
+</div>
+
+</div></div>
+
+<div class="bot">
+  <div class="cap" id="cap"></div>
+  <div class="ctl">
+    <button class="nav" id="prev">&#8592; 이전</button>
+    <div class="dots" id="dots"></div>
+    <button class="nav" id="next">다음 &#8594;</button>
+  </div>
+</div>
+
+<script>
+var caps = [
+ "NWEA 홈 화면입니다. 위쪽 <b>Rostering</b> 을 누릅니다",
+ "펼쳐진 목록에서 <b>Import Profiles / Rostering</b> 으로 들어갑니다",
+ "학기를 고르고, 등록 방식은 <b>Standard - Add/Update</b>. Overwrite는 절대 누르지 않습니다",
+ "<b>Roster File</b> 의 Add 를 눌러 학생 명단 파일을 올립니다. Programs File 도 같은 방식으로",
+ "두 파일이 다 올라온 걸 눈으로 확인하고 <b>Next</b>",
+ "파일 형식 검사가 진행됩니다. <b>1~3분</b> 걸리니 창을 닫지 말고 기다립니다",
+ "<b>여기서 끝나는 경우가 대부분입니다</b> — 오류 0건이면 바로 Post Valid Records",
+ "<b>여기부터는 오류가 있을 때만</b> 봅니다. Review Import Summary 를 누릅니다",
+ "Group Errors 는 0건, <b>Student Errors</b> 2건. 파란 글씨를 눌러 들어갑니다",
+ "이름·생일이 비슷한 학생이 이미 있는 경우입니다. 같은 학생이면 고르고, 처음이면 새로 만듭니다",
+ "오류를 다 정리하면 총 12명 확인 후 <b>Post Valid Records</b>",
+ "등록이 반영됩니다. 끝나면 <b>Manage Students</b> 에서 학생 목록을 확인하세요"
+];
+var scs = document.querySelectorAll('.sc'), i = 0, n = scs.length;
+var dots = document.getElementById('dots');
+for (var k = 0; k < n; k++) {
+  var d = document.createElement('i');
+  d.dataset.k = k;
+  d.onclick = function(){ go(+this.dataset.k); };
+  dots.appendChild(d);
+}
+document.getElementById('tot').textContent = n;
+function go(k){
+  if (k < 0 || k >= n) return;
+  scs[i].classList.remove('on'); i = k; scs[i].classList.add('on');
+  document.getElementById('cur').textContent = i + 1;
+  document.getElementById('cap').innerHTML = caps[i];
+  document.getElementById('prev').disabled = (i === 0);
+  document.getElementById('next').disabled = (i === n - 1);
+  var ds = dots.children;
+  for (var j = 0; j < ds.length; j++) ds[j].className = (j === i ? 'on' : '');
+}
+document.getElementById('prev').onclick = function(){ go(i - 1); };
+document.getElementById('next').onclick = function(){ go(i + 1); };
+document.addEventListener('keydown', function(e){
+  if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { go(i + 1); e.preventDefault(); }
+  if (e.key === 'ArrowLeft' || e.key === 'PageUp') { go(i - 1); e.preventDefault(); }
+});
+var sx = 0;
+document.addEventListener('touchstart', function(e){ sx = e.touches[0].clientX; }, {passive:true});
+document.addEventListener('touchend', function(e){
+  var dx = e.changedTouches[0].clientX - sx;
+  if (dx < -55) go(i + 1); else if (dx > 55) go(i - 1);
+}, {passive:true});
+function fit(){
+  var st = document.querySelector('.stage');
+  var s = Math.min((st.clientWidth - 56) / 1916, (st.clientHeight - 34) / 930);
+  document.getElementById('screen').style.transform = 'scale(' + s + ')';
+}
+window.addEventListener('resize', fit);
+fit(); go(0);
+</script>
+</body></html>
