@@ -161,8 +161,43 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
 
 <div class="stage"><div class="screen" id="screen">
 
+<!-- login -->
+<div class="sc on">
+<div style="position:absolute;inset:0;background:#fff;font-family:Arial,'Malgun Gothic',sans-serif">
+  <div style="position:absolute;left:0;top:0;width:600px;height:930px;background:#d7f0ea"></div>
+  <svg style="position:absolute;left:110px;top:230px" width="400" height="420" viewBox="0 0 400 420" fill="none" stroke="#1f3b4d" stroke-width="3" stroke-linecap="round">
+    <rect x="60" y="80" width="250" height="170" rx="8" fill="#fff"/>
+    <rect x="60" y="80" width="250" height="26" rx="8" fill="#1f3b4d" stroke="none"/>
+    <rect x="95" y="200" width="22" height="36" fill="#1f3b4d" stroke="none"/><rect x="130" y="170" width="22" height="66" fill="#1f3b4d" stroke="none"/>
+    <rect x="165" y="185" width="22" height="51" fill="#1f3b4d" stroke="none"/><rect x="200" y="140" width="22" height="96" fill="#1f3b4d" stroke="none"/>
+    <rect x="235" y="120" width="22" height="116" fill="#1f3b4d" stroke="none"/>
+    <path d="M160 250v40h50v-40"/><path d="M135 300h100"/>
+    <circle cx="330" cy="70" r="8"/><circle cx="352" cy="40" r="6"/><circle cx="300" cy="42" r="6"/><path d="M330 62l22-22M330 62l-30-20"/>
+    <circle cx="90" cy="330" r="22" fill="#fff"/><path d="M60 420c0-40 20-60 30-60s30 20 30 60"/>
+    <rect x="20" y="40" width="34" height="34" rx="4" fill="#fff"/><path d="M28 50h18M28 58h18M28 66h18"/>
+    <path d="M330 300l40 20-40 20z" fill="#fff"/>
+  </svg>
+  <div style="position:absolute;left:600px;right:0;top:0;bottom:0">
+    <div style="text-align:center;padding-top:40px;font-size:38px;font-weight:900;letter-spacing:-.04em;color:#1f3b4d">nwea</div>
+    <div style="width:560px;margin:60px auto 0">
+      <div style="font-size:20px;font-weight:700;color:#222">Welcome! Enter your email.</div>
+      <div style="font-size:12.5px;color:#444;margin-top:8px"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#1a6a9e;color:#fff;font-size:10px;text-align:center;line-height:14px;margin-right:6px">i</span>Required fields are marked with an asterisk (*).</div>
+      <div style="font-size:12.5px;font-weight:700;color:#222;margin-top:34px">Email <span style="color:#c0392b">*</span></div>
+      <span class="hl" style="display:block;width:560px;margin-top:6px;outline-offset:6px">
+        <span style="display:block;height:44px;border:1px solid #767676;border-radius:3px;background:#fff;font-size:15px;color:#222;padding:11px 12px;font-family:Arial">sample@mapcenter.co.kr</span>
+        <span class="num">1</span><span class="tip" style="left:calc(100% + 40px)">받으신 <b>계정 이메일</b>을 넣습니다</span></span>
+      <div style="text-align:right;margin-top:16px"><span class="hl ib" style="outline-offset:6px"><span style="display:inline-block;background:#1a6a9e;color:#fff;font-size:13.5px;font-weight:700;padding:9px 22px;border-radius:3px">Continue</span>
+        <span class="num">2</span><span class="tip" style="left:auto;right:calc(100% + 40px)"><b>Continue</b> 를 누르면 다음 화면에서 <b>비밀번호</b>를 넣습니다</span></span></div>
+    </div>
+    <div style="position:absolute;left:0;right:0;bottom:120px;text-align:center;font-size:12px;color:#1a6a9e;text-decoration:underline">Sign in as Internal HMH User</div>
+    <div style="position:absolute;left:0;right:0;bottom:84px;text-align:center;font-size:12px;color:#1a6a9e;text-decoration:underline">Check System Status &#8599; &nbsp;&nbsp;&nbsp; Get Support &#8599;</div>
+  </div>
+  <div class="note" style="left:640px;top:560px;width:1080px">인터넷 주소창에 <b>teach.mapnwea.org</b> 를 넣으면 이 화면이 뜹니다<br>
+    <span style="font-size:15px;color:#c4cfe0">이메일 → Continue → 비밀번호 → Sign In 순서 · 비밀번호를 잊으면 비밀번호 화면의 Forgot password 로 다시 받습니다</span></div>
+</div></div>
+
 <!-- 0 -->
-<div class="sc on home">
+<div class="sc home">
   <div class="hd">
     <div class="logo">nwea<span class="tag">believe in<br>what is possible</span></div>
     <div class="bars"><i></i><i></i><i></i><i></i></div>
@@ -586,6 +621,7 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
 
 <script>
 var caps = [
+ "인터넷에서 <b>teach.mapnwea.org</b> 로 들어가 계정 이메일을 넣고 <b>Continue</b> · 다음 화면에서 비밀번호를 넣습니다",
  "NWEA 홈 화면입니다. 위쪽 <b>Rostering</b> 을 누릅니다",
  "펼쳐진 목록에서 <b>Import Profiles / Rostering</b> 으로 들어갑니다",
  "학기를 고르고, 등록 방식은 <b>Standard - Add/Update</b>. Overwrite는 절대 누르지 않습니다",
