@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>처음 만나는 파닉스 리더스 · MAP Growth Support Korea</title>
+<meta name="description" content="Spring Into Reading 48권, Let's Grow 24권, Chant Readers 96권. 세 시리즈 168권의 구성과 활동을 학부모용으로 정리했습니다.">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green:#0F6E56; --green-deep:#0D5C48;
+  --ink:#0F172A; --ink-sub:#64748B; --ink-light:#94A3B8;
+  --bg:#FAFAF9; --surface:#FFFFFF; --border:rgba(0,0,0,0.08);
+  --font-base:'Noto Sans KR','Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-num:'Inter','Noto Sans KR',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-base);background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+h1,h2,h3{letter-spacing:-.02em;word-break:keep-all}
+p,dd,dt,span{word-break:keep-all}
+
+/* 상단 바 (MAP 홈과 연결) */
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 26px;background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20}
+.brand{display:flex;align-items:center;gap:9px;font-size:14px;font-weight:700;letter-spacing:-.02em}
+.brand .mk{font-family:var(--font-num);font-size:12px;font-weight:600;color:#fff;background:var(--green);padding:4px 8px;border-radius:5px;letter-spacing:.5px}
+.back{font-size:13px;font-weight:600;color:var(--green);display:inline-flex;align-items:center;gap:6px}
+.back svg{width:15px;height:15px}
+
+/* 히어로 — 홈페이지 B안(옅은 그린) */
+.hero{background:linear-gradient(165deg,#FFFFFF 0%,#F5F9F7 40%,#F0F8F4 100%);border-bottom:1px solid var(--border);padding:clamp(44px,7vw,68px) 26px clamp(38px,6vw,56px)}
+.hero .in{max-width:1000px;margin:0 auto}
+.eyebrow{display:inline-block;font-family:var(--font-num);font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);background:rgba(15,110,86,.06);border:1px solid rgba(15,110,86,.15);border-radius:100px;padding:4px 13px}
+.hero h1{color:var(--ink);font-size:clamp(1.85rem,4.4vw,2.75rem);font-weight:700;line-height:1.2;margin:16px 0 14px}
+.hero h1 .em{color:var(--green);font-family:var(--font-num);font-feature-settings:'tnum';letter-spacing:-.03em}
+.hero p{color:var(--ink-sub);font-size:clamp(.95rem,1.6vw,1.05rem);line-height:1.8;max-width:640px}
+.hero .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.hero .meta span{font-size:13px;color:var(--ink-sub);background:rgba(255,255,255,.72);border:1px solid var(--border);border-radius:100px;padding:6px 14px}
+.hero .meta b{font-family:var(--font-num);font-feature-settings:'tnum';color:var(--green-deep);font-weight:600}
+
+/* 본문 */
+.wrap{max-width:1000px;margin:0 auto;padding:34px 26px 24px}
+
+/* 시리즈 카드 */
+.series{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:26px 28px 24px;margin-bottom:16px;transition:border-color .18s,box-shadow .18s}
+.series:hover{border-color:rgba(15,110,86,.35);box-shadow:0 10px 26px rgba(15,110,86,.07)}
+.sh{display:flex;align-items:baseline;gap:11px;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;font-family:var(--font-num);font-size:11.5px;font-weight:600;letter-spacing:.6px;padding:4px 10px;border-radius:100px;color:#fff}
+.b-sir{background:#E8698B}.b-lg{background:#3E9B5F}.b-cr{background:#B33A2E}
+.sh h2{font-size:clamp(1.15rem,2.4vw,1.4rem);font-weight:700}
+.sh .cnt{font-family:var(--font-num);font-feature-settings:'tnum';font-size:13.5px;font-weight:600;color:var(--green-deep)}
+.sh .pub{font-size:12.5px;color:var(--ink-light);margin-left:auto}
+.slead{color:var(--ink-sub);font-size:14.5px;line-height:1.8;margin-top:12px;max-width:720px}
+.rows{margin-top:18px;border-top:1px solid var(--border)}
+.row{display:grid;grid-template-columns:78px minmax(0,1fr);gap:16px;padding:11px 2px;border-bottom:1px solid var(--border)}
+.row dt{font-size:12.5px;font-weight:600;color:var(--ink-sub);padding-top:2px}
+.row dd{font-size:14px;color:var(--ink);line-height:1.75}
+.row dd b{font-weight:600;color:var(--green-deep)}
+.row dd .num{font-family:var(--font-num);font-feature-settings:'tnum'}
+
+/* 캐릭터 띠 (Chant Readers) */
+.chars{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+.ch{background:#F5F9F7;border:1px solid var(--border);border-radius:10px;padding:14px 10px 13px;text-align:center}
+.ch svg{width:100%;height:76px;display:block;margin:0 auto}
+.ch .nm{font-weight:600;font-size:13.5px;margin-top:10px;letter-spacing:-.01em}
+.ch .lv{font-family:var(--font-num);font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--green);margin-top:4px}
+.ch .do{font-size:12.5px;color:var(--ink-sub);margin-top:2px}
+
+/* 액션 */
+.acts{margin-top:20px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:14.5px;font-weight:600;padding:12px 24px;border-radius:8px;background:var(--green);color:#fff;border:1px solid var(--green);transition:background .18s,transform .18s,border-color .18s}
+.btn:hover{background:var(--green-deep);border-color:var(--green-deep);transform:translateY(-1px)}
+.btn svg{width:15px;height:15px}
+.btn-ghost{background:transparent;color:var(--green);border:1px solid var(--green);padding:10px 20px;font-size:13.5px}
+.btn-ghost:hover{background:rgba(15,110,86,.05);color:var(--green-deep);border-color:var(--green-deep)}
+.acts .note{font-size:12.5px;color:var(--ink-sub)}
+
+/* 하단 안내 */
+.notice{max-width:1000px;margin:0 auto;padding:0 26px 60px}
+.notice-in{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--green);border-radius:12px;padding:24px 26px;display:flex;gap:24px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.notice h3{font-size:15.5px;font-weight:600;margin-bottom:7px}
+.notice p{font-size:13.5px;color:var(--ink-sub);line-height:1.75;max-width:560px}
+.notice a.mail{color:var(--green);font-weight:600;font-family:var(--font-num)}
+
+.foot{max-width:1000px;margin:0 auto;padding:24px 26px 34px;border-top:1px solid var(--border);font-size:12.5px;color:var(--ink-light);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+
+@media(max-width:760px){
+  .chars{grid-template-columns:repeat(2,1fr)}
+  .sh .pub{margin-left:0;width:100%}
+}
+@media(max-width:560px){
+  .topbar{padding:12px 16px}
+  .brand{font-size:12.5px;gap:7px}
+  .hero{padding:34px 16px 30px}
+  .wrap{padding:24px 16px 16px}
+  .series{padding:20px 18px 18px}
+  .row{grid-template-columns:1fr;gap:2px;padding:10px 0}
+  .notice{padding:0 16px 46px}
+  .notice-in{padding:20px 18px}
+  .foot{padding:20px 16px 30px}
+  .btn{width:100%;justify-content:center}
+  .acts .note{width:100%}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <a href="index.html" class="brand"><span class="mk">MAP</span> MAP Growth Support Korea</a>
+  <a href="index.html" class="back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    홈으로
+  </a>
+</div>
+
+<section class="hero">
+  <div class="in">
+    <span class="eyebrow">세 시리즈 168권 · 학부모 안내</span>
+    <h1>처음 만나는 파닉스 리더스</h1>
+    <p>영어책을 처음 펼치는 아이부터 스스로 읽고 말하는 아이까지, 단계에 맞춰 고르실 수 있게 세 시리즈를 준비했어요. 모든 책은 태블릿·컴퓨터·휴대폰에서 링크 하나로 열리고, 따로 설치할 프로그램은 없어요.</p>
+    <div class="meta">
+      <span>시리즈 <b>3</b>종 · 전체 <b>168</b>권</span>
+      <span>태블릿 · 컴퓨터 · 휴대폰</span>
+      <span>설치 프로그램 없음</span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+
+  <div class="series">
+    <div class="sh">
+      <span class="badge b-sir">SIR</span>
+      <h2>Spring Into Reading</h2>
+      <span class="cnt">48권</span>
+      <span class="pub">Highlights</span>
+    </div>
+    <p class="slead">한 권을 처음부터 끝까지 따라가면 듣기 · 읽기 · 쓰기가 한 바퀴 도는 구성이에요. 알파벳과 소리를 익히는 단계부터 짧은 이야기를 스스로 읽는 단계까지 이어집니다.</p>
+    <dl class="rows">
+      <div class="row"><dt>구성</dt><dd><span class="num">레벨 4단계 × 각 12권 = 48권</span></dd></div>
+      <div class="row"><dt>대상</dt><dd>파닉스를 시작한 아이부터 짧은 이야기를 혼자 읽는 아이까지</dd></div>
+      <div class="row"><dt>활동</dt><dd>한 권에 <b>18단계 활동</b> — 파닉스, 따라 쓰기, 북리포트까지 한 흐름으로 이어져요</dd></div>
+    </dl>
+    <div class="acts">
+      <a class="btn" href="https://sir-workbook.vercel.app/" target="_blank" rel="noopener">책장 열기</a>
+      <span class="note">48권을 레벨별로 볼 수 있어요</span>
+    </div>
+  </div>
+
+  <div class="series">
+    <div class="sh">
+      <span class="badge b-lg">LG</span>
+      <h2>Let's Grow</h2>
+      <span class="cnt">24권</span>
+    </div>
+    <p class="slead">Spring Into Reading 다음 단계로 이어지는 시리즈예요. 새싹 정원을 모티브로 한 화면에서, 자란 만큼 더 긴 문장을 읽게 됩니다.</p>
+    <dl class="rows">
+      <div class="row"><dt>구성</dt><dd><span class="num">24권 (1~12권 · 13~24권 두 묶음)</span></dd></div>
+      <div class="row"><dt>대상</dt><dd>Spring Into Reading을 마쳤거나, 다음 단계로 넘어갈 준비가 된 아이</dd></div>
+      <div class="row"><dt>활동</dt><dd>새싹 정원 화면 구성 · <b>원어민 음성 내장</b>으로 아이 혼자서도 소리를 확인해요</dd></div>
+    </dl>
+    <div class="acts">
+      <a class="btn" href="https://sir-workbook.vercel.app/lg" target="_blank" rel="noopener">책장 열기</a>
+      <span class="note">24권을 한 화면에서 골라요</span>
+    </div>
+  </div>
+
+  <div class="series">
+    <div class="sh">
+      <span class="badge b-cr">CR</span>
+      <h2>Chant Readers</h2>
+      <span class="cnt">96권</span>
+      <span class="pub">Red Chair Press</span>
+    </div>
+    <p class="slead">같은 주제를 이야기책과 지식책 두 갈래로 읽는 시리즈예요. 레벨마다 안내하는 캐릭터와 활동이 달라서, 레벨이 오를 때마다 아이가 하는 일이 듣기에서 말하기로 옮겨 갑니다.</p>
+    <dl class="rows">
+      <div class="row"><dt>구성</dt><dd><span class="num">레벨 4단계 × 각 24권 = 96권.</span> 레벨마다 <b>이야기책 12권 + 지식책 12권</b></dd></div>
+      <div class="row"><dt>대상</dt><dd>듣고 따라 하는 단계(레벨 1)부터 자기 말로 이야기하는 단계(레벨 4)까지</dd></div>
+      <div class="row"><dt>활동</dt><dd>한 권에 <b>12활동</b> · 원어민 음성 내장 · 표지로 들어가 따라 쓰기, 내 목소리 녹음 저장, 다 읽으면 독서 인증서</dd></div>
+    </dl>
+    <div class="chars">
+      <div class="ch"><svg viewBox="0 0 240 210" xmlns="http://www.w3.org/2000/svg"><ellipse cx="120" cy="200" rx="86" ry="8" fill="rgba(90,50,30,.14)"/><path d="M52 64 q0 -34 68 -34 q68 0 68 34 l0 76 q0 12 -12 12 l-8 0 l0 -50 q0 -30 -48 -30 q-48 0 -48 30 l0 50 l-8 0 q-12 0 -12 -12 z" fill="#C94436"/><path d="M52 64 q0 -34 68 -34 q68 0 68 34 l0 20 q-20 -18 -68 -18 q-48 0 -68 18 z" fill="#D95445"/><rect x="72" y="92" width="96" height="58" rx="16" fill="#E8654F"/><path d="M44 118 q-16 2 -16 18 q0 16 16 18 l8 0 l0 -36 z" fill="#B33A2E"/><path d="M196 118 q16 2 16 18 q0 16 -16 18 l-8 0 l0 -36 z" fill="#B33A2E"/><rect x="52" y="150" width="136" height="26" rx="13" fill="#C94436"/><rect x="64" y="176" width="14" height="18" rx="6" fill="#8B5E2A"/><rect x="162" y="176" width="14" height="18" rx="6" fill="#8B5E2A"/><ellipse cx="98" cy="112" rx="7" ry="8.4" fill="#fff"/><circle cx="99.5" cy="113.5" r="4.2" fill="#3A2A22"/><circle cx="98" cy="111" r="1.5" fill="#fff"/><ellipse cx="142" cy="112" rx="7" ry="8.4" fill="#fff"/><circle cx="143.5" cy="113.5" r="4.2" fill="#3A2A22"/><circle cx="142" cy="111" r="1.5" fill="#fff"/><path d="M111 128 q9 7.4 18 0" stroke="#8A2A20" stroke-width="4" fill="none" stroke-linecap="round"/><circle cx="84" cy="126" r="6.4" fill="#F49E9E" opacity=".65"/><circle cx="156" cy="126" r="6.4" fill="#F49E9E" opacity=".65"/><g transform="translate(150,44) rotate(14)"><rect width="44" height="34" rx="5" fill="#F5C518"/><path d="M22 0 v34" stroke="#E8B400" stroke-width="3"/><path d="M6 9 h10 M6 16 h10 M28 9 h10 M28 16 h10" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></g></svg><div class="nm">레디</div><div class="lv">Level 1</div><div class="do">듣기</div></div>
+      <div class="ch"><svg viewBox="0 0 240 220" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="lyCone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFDC9B" stop-opacity=".92"/><stop offset="1" stop-color="#FFDC9B" stop-opacity="0"/></linearGradient><linearGradient id="lyShade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F7C267"/><stop offset="1" stop-color="#D98515"/></linearGradient></defs><ellipse cx="120" cy="196" rx="96" ry="13" fill="#2E2115" opacity=".13"/><path d="M74 138 L26 194 H214 L166 138 Z" fill="url(#lyCone)"/><rect x="30" y="190" width="180" height="11" rx="5.5" fill="#2E2115"/><rect x="36" y="190" width="168" height="4" rx="2" fill="#4A3823"/><rect x="112" y="140" width="16" height="46" rx="8" fill="#6B4F2C"/><ellipse cx="120" cy="188" rx="30" ry="8" fill="#4A3823"/><rect x="115" y="12" width="10" height="22" rx="5" fill="#B0700F"/><circle cx="120" cy="12" r="7.5" fill="#D98515"/><ellipse cx="120" cy="36" rx="30" ry="8" fill="#D98515"/><path d="M92 34 h56 q9 0 12 8 l20 88 q3 10 -8 10 H88 q-11 0 -8 -10 l20 -88 q3 -8 12 -8 z" fill="url(#lyShade)"/><path d="M92 34 h56 q9 0 12 8 l5 22 q-45 -12 -90 0 l5 -22 q3 -8 12 -8 z" fill="#F9CF84" opacity=".75"/><ellipse cx="120" cy="132" rx="46" ry="11" fill="#FFEFC4"/><ellipse cx="120" cy="132" rx="30" ry="7" fill="#FFF9E6"/><ellipse cx="104" cy="88" rx="8.4" ry="10" fill="#FFFDF6"/><circle cx="105.6" cy="89.6" r="4.8" fill="#3A2A16"/><circle cx="103.6" cy="86.8" r="1.8" fill="#fff"/><ellipse cx="136" cy="88" rx="8.4" ry="10" fill="#FFFDF6"/><circle cx="137.6" cy="89.6" r="4.8" fill="#3A2A16"/><circle cx="135.6" cy="86.8" r="1.8" fill="#fff"/><path d="M110 106 q10 9 20 0" stroke="#8A5410" stroke-width="4.4" fill="none" stroke-linecap="round"/><circle cx="88" cy="102" r="7" fill="#F0906B" opacity=".45"/><circle cx="152" cy="102" r="7" fill="#F0906B" opacity=".45"/><path d="M188 52 l3.6 9 9 3.6 -9 3.6 -3.6 9 -3.6 -9 -9 -3.6 9 -3.6 z" fill="#F2A93B" opacity=".85"/><path d="M46 74 l2.8 7 7 2.8 -7 2.8 -2.8 7 -2.8 -7 -7 -2.8 7 -2.8 z" fill="#F2A93B" opacity=".7"/><path d="M206 108 l2.2 5.6 5.6 2.2 -5.6 2.2 -2.2 5.6 -2.2 -5.6 -5.6 -2.2 5.6 -2.2 z" fill="#D98515" opacity=".6"/></svg><div class="nm">램피</div><div class="lv">Level 2</div><div class="do">놀이</div></div>
+      <div class="ch"><svg viewBox="0 0 240 220" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="bbCover" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4A8AD0"/><stop offset="1" stop-color="#2F6FB5"/></linearGradient><linearGradient id="bbPage" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#EFF6FD"/></linearGradient></defs><ellipse cx="120" cy="200" rx="90" ry="12" fill="#1E4470" opacity=".13"/><ellipse cx="97" cy="189" rx="16" ry="8.5" fill="#1E4470"/><ellipse cx="143" cy="189" rx="16" ry="8.5" fill="#1E4470"/><path d="M120 60 C92 40 50 34 16 42 L16 162 C50 154 92 160 120 180 Z" fill="#1E4470"/><path d="M120 60 C148 40 190 34 224 42 L224 162 C190 154 148 160 120 180 Z" fill="#1E4470"/><path d="M120 66 C94 48 54 42 22 49 L22 157 C54 150 94 156 120 173 Z" fill="url(#bbCover)"/><path d="M120 66 C146 48 186 42 218 49 L218 157 C186 150 146 156 120 173 Z" fill="url(#bbCover)"/><path d="M30 60 C58 55 86 61 108 71" stroke="#D8B26A" stroke-width="3" fill="none" opacity=".9" stroke-linecap="round"/><path d="M132 71 C154 61 182 55 210 60" stroke="#D8B26A" stroke-width="3" fill="none" opacity=".9" stroke-linecap="round"/><path d="M119 74 C96 59 60 54 32 60 L32 148 C60 142 96 147 119 162 Z" fill="url(#bbPage)"/><path d="M121 74 C144 59 180 54 208 60 L208 148 C180 142 144 147 121 162 Z" fill="url(#bbPage)"/><path d="M44 74 C62 71 80 74 96 81" stroke="#DCEAF7" stroke-width="3.6" fill="none" stroke-linecap="round"/><path d="M44 140 C62 137 80 140 96 147" stroke="#DCEAF7" stroke-width="3.6" fill="none" stroke-linecap="round"/><path d="M144 81 C160 74 178 71 196 74" stroke="#DCEAF7" stroke-width="3.6" fill="none" stroke-linecap="round"/><path d="M144 147 C160 140 178 137 196 140" stroke="#DCEAF7" stroke-width="3.6" fill="none" stroke-linecap="round"/><path d="M120 72 L120 165" stroke="#CFE0F1" stroke-width="5" stroke-linecap="round" opacity=".85"/><path d="M172 42 h20 v88 l-10 -11 -10 11 Z" fill="#D8B26A"/><path d="M172 42 h20 v11 h-20 z" fill="#BE9548"/><ellipse cx="96" cy="106" rx="9.2" ry="11" fill="#FFFFFF"/><circle cx="97.4" cy="107.6" r="5.2" fill="#1E4470"/><circle cx="95.2" cy="104.6" r="1.9" fill="#fff"/><ellipse cx="144" cy="106" rx="9.2" ry="11" fill="#FFFFFF"/><circle cx="145.4" cy="107.6" r="5.2" fill="#1E4470"/><circle cx="143.2" cy="104.6" r="1.9" fill="#fff"/><path d="M106 126 q14 13 28 0" stroke="#1E4470" stroke-width="4.6" fill="none" stroke-linecap="round"/><circle cx="76" cy="122" r="7.5" fill="#EF8F76" opacity=".42"/><circle cx="164" cy="122" r="7.5" fill="#EF8F76" opacity=".42"/><path d="M40 28 l3.4 8.6 8.6 3.4 -8.6 3.4 -3.4 8.6 -3.4 -8.6 -8.6 -3.4 8.6 -3.4 z" fill="#D8B26A" opacity=".85"/><path d="M212 88 l2.6 6.6 6.6 2.6 -6.6 2.6 -2.6 6.6 -2.6 -6.6 -6.6 -2.6 6.6 -2.6 z" fill="#D8B26A" opacity=".7"/><path d="M22 122 l2.2 5.6 5.6 2.2 -5.6 2.2 -2.2 5.6 -2.2 -5.6 -5.6 -2.2 5.6 -2.2 z" fill="#4A8AD0" opacity=".6"/></svg><div class="nm">북비</div><div class="lv">Level 3</div><div class="do">읽기</div></div>
+      <div class="ch"><svg viewBox="0 0 240 220" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="myHead" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4FC08E"/><stop offset="1" stop-color="#2E9E6B"/></linearGradient><linearGradient id="myGrip" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#175B3C"/><stop offset=".45" stop-color="#2B8A5E"/><stop offset="1" stop-color="#145236"/></linearGradient></defs><ellipse cx="120" cy="205" rx="76" ry="11" fill="#1B6B47" opacity=".13"/><path d="M152 194 C192 198 214 180 210 155 C207 134 187 128 178 140" stroke="#1B6B47" stroke-width="7" fill="none" stroke-linecap="round" opacity=".5"/><rect x="99" y="126" width="42" height="66" rx="17" fill="url(#myGrip)"/><rect x="107" y="139" width="8" height="40" rx="4" fill="#FFFFFF" opacity=".2"/><rect x="91" y="176" width="58" height="20" rx="10" fill="#1B6B47"/><rect x="92" y="118" width="56" height="17" rx="8.5" fill="#E0B252"/><rect x="92" y="118" width="56" height="6" rx="3" fill="#F0CE8A"/><path d="M120 18 C161 18 189 51 189 92 C189 118 168 133 120 133 C72 133 51 118 51 92 C51 51 79 18 120 18 Z" fill="#1B6B47"/><path d="M120 25 C157 25 183 55 183 92 C183 114 163 127 120 127 C77 127 57 114 57 92 C57 55 83 25 120 25 Z" fill="url(#myHead)"/><g stroke="#1B6B47" stroke-width="3.4" opacity=".2" stroke-linecap="round" fill="none"><path d="M74 48 C96 38 144 38 166 48"/><path d="M64 63 C94 51 146 51 176 63"/></g><ellipse cx="99" cy="90" rx="12.2" ry="14.2" fill="#FFFFFF"/><circle cx="100.6" cy="92" r="6.7" fill="#123F2B"/><circle cx="97.6" cy="88.2" r="2.5" fill="#fff"/><ellipse cx="141" cy="90" rx="12.2" ry="14.2" fill="#FFFFFF"/><circle cx="142.6" cy="92" r="6.7" fill="#123F2B"/><circle cx="139.6" cy="88.2" r="2.5" fill="#fff"/><path d="M104 110 q16 14 32 0" stroke="#123F2B" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="75" cy="107" r="8.2" fill="#F2A05C" opacity=".42"/><circle cx="165" cy="107" r="8.2" fill="#F2A05C" opacity=".42"/><g stroke="#E0B252" stroke-width="4.4" fill="none" stroke-linecap="round" opacity=".8"><path d="M28 72 C20 84 20 100 28 112"/><path d="M212 72 C220 84 220 100 212 112"/></g><path d="M38 30 l3.4 8.6 8.6 3.4 -8.6 3.4 -3.4 8.6 -3.4 -8.6 -8.6 -3.4 8.6 -3.4 z" fill="#E0B252" opacity=".85"/><path d="M204 42 l2.6 6.6 6.6 2.6 -6.6 2.6 -2.6 6.6 -2.6 -6.6 -6.6 -2.6 6.6 -2.6 z" fill="#E0B252" opacity=".65"/><path d="M26 148 l2.2 5.6 5.6 2.2 -5.6 2.2 -2.2 5.6 -2.2 -5.6 -5.6 -2.2 5.6 -2.2 z" fill="#2E9E6B" opacity=".55"/></svg><div class="nm">마이코</div><div class="lv">Level 4</div><div class="do">말하기</div></div>
+    </div>
+    <div class="acts">
+      <a class="btn" href="https://sir-workbook.vercel.app/cr" target="_blank" rel="noopener">책장 열기</a>
+      <span class="note">레벨 4개 로비에서 96권을 골라요</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="notice">
+  <div class="notice-in">
+    <div>
+      <h3>선생님 · 학원용 리더스 교실</h3>
+      <p>선생님·학원용 리더스 교실은 학원을 통해 이용하실 수 있어요. 문의: <a class="mail" href="mailto:cs@mapgrowthsupportkorea.com">cs@mapgrowthsupportkorea.com</a></p>
+    </div>
+    <a class="btn btn-ghost" href="resources/readers/readers-series-intro.pdf" download>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      PDF로 내려받기
+    </a>
+  </div>
+</div>
+
+<div class="foot">
+  <span>Spring Into Reading(Highlights) · Let's Grow · Chant Readers(Red Chair Press)</span>
+  <span>MAP Growth Support Korea</span>
+</div>
+
+</body>
+</html>

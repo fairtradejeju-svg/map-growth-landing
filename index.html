@@ -663,14 +663,15 @@
     .res-section { padding: clamp(48px, 8vw, 80px) 0; background: var(--bg); }
     .res-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(215px, 1fr)); gap: 13px; margin-top: 28px; }
     .res-card { background: var(--surface); border: 1px solid var(--border); border-radius: 11px; padding: 19px 18px; }
-    a.res-card { display: block; text-decoration: none; transition: border-color .18s, box-shadow .18s, transform .18s; }
+    a.res-card { display: flex; flex-direction: column; text-decoration: none; transition: border-color .18s, box-shadow .18s, transform .18s; }
+    a.res-card .res-dl { margin-top: auto; padding-top: 13px; }
     a.res-card:hover { border-color: rgba(15,110,86,0.45); box-shadow: 0 10px 26px rgba(15,110,86,0.10); transform: translateY(-2px); text-decoration: none; }
     .res-card-lead { border-color: rgba(15,110,86,0.4); background: linear-gradient(180deg, #F4FBF8, #FFFFFF); }
     .res-ic { width: 34px; height: 34px; border-radius: 8px; background: rgba(15,110,86,0.075); color: var(--accent); display: flex; align-items: center; justify-content: center; margin-bottom: 13px; }
     .res-card h3 { font-size: 14.5px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 5px; }
     .res-card p { font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; }
     .res-dl { display: inline-block; margin-top: 13px; font-size: 12.5px; font-weight: 600; color: var(--accent); }
-    .res-foot { margin-top: 20px; font-size: 12.5px; color: var(--text-secondary); }
+    .res-foot { margin-top: 24px; font-size: 12.5px; color: var(--text-secondary); }
 
     /* ===== FOOTER ===== */
     .site-footer {
@@ -755,6 +756,7 @@
       /* viz-menu를 왼쪽으로 옮겨 햄버거 버튼과 겹치지 않게 */
       .viz-menu { top: 12px; right: auto; left: 16px; z-index: 9000; }
     }
+      .res-card p{word-break:keep-all}
   </style>
 </head>
 <body>
@@ -1318,6 +1320,12 @@
             <h3>Into Reading 워크북 · G1~G5</h3>
             <p>학년별 10개 모듈, 워크북과 답지 PDF를 지금 바로 내려받기</p>
             <span class="res-dl">워크북 받기</span>
+          </a>
+          <a href="readers-series.html" class="res-card">
+            <div class="res-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h6a3 3 0 0 1 3 3v11a2 2 0 0 0-2-2H4z"/><path d="M20 5h-6a3 3 0 0 0-3 3v11a2 2 0 0 1 2-2h7z"/></svg></div>
+            <h3>처음 만나는 파닉스 리더스</h3>
+            <p>학부모용 · 세 시리즈 168권 안내</p>
+            <span class="res-dl">자세히 보기</span>
           </a>
           <a href="resources/into-reading-brochure.pdf" class="res-card" download>
             <div class="res-ic"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg></div>
