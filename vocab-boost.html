@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Into Reading 보카 보강본 · MAP Growth Support Korea</title>
-<meta name="description" content="Into Reading 보카 보강본 — 모듈별 단어를 여섯 가지 유형으로 반복 훈련하는 워크북과 답지.">
+<title>Into Reading 단어 워크시트 · MAP Growth Support Korea</title>
+<meta name="description" content="Into Reading 단어 워크시트 — 모듈별 단어를 여섯 가지 유형으로 반복 훈련하는 워크시트와 답지.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Noto+Sans+KR:wght@400;500;700&family=Inter:wght@500;600&display=swap" rel="stylesheet">
@@ -83,13 +83,13 @@ a{text-decoration:none;color:inherit}
 
 <section class="ir-hero">
   <div class="in">
-    <div class="ir-eyebrow">Vocabulary Boost</div>
-    <h1>Into Reading 보카 보강본</h1>
-    <p>모듈에 나오는 단어를 여섯 가지 유형으로 반복해서 익히는 보강 워크북입니다. 뜻 고르기 · 빈칸 채우기 · 동의어와 반의어 · 지문 속 추론 · 자연스러운 표현 · 이야기 빈칸으로 한 단어를 여러 각도에서 다룹니다.</p>
+    <div class="ir-eyebrow">Vocabulary Worksheets</div>
+    <h1>Into Reading 단어 워크시트</h1>
+    <p>모듈에 나오는 단어를 여섯 가지 유형으로 반복해서 익히는 단어 워크시트입니다. 뜻 고르기 · 빈칸 채우기 · 동의어와 반의어 · 지문 속 추론 · 자연스러운 표현 · 이야기 빈칸으로 한 단어를 여러 각도에서 다룹니다.</p>
     <div class="meta">
       <span>Grade <b>1</b> · <b>2</b></span>
       <span>학년별 <b>10</b>개 모듈 · <b>2,072</b>단어</span>
-      <span>유형 <b>6</b>종 · 워크북 · 답지 <b>PDF</b></span>
+      <span>유형 <b>6</b>종 · 워크시트 · 답지 <b>PDF</b></span>
     </div>
   </div>
 </section>
@@ -107,7 +107,7 @@ a{text-decoration:none;color:inherit}
 
 <script>
   var GRADES = ['G1','G2'];
-  var HINT = {G1:'Grade 1 보카 보강본 10개 모듈 · 초등 1~3학년 · 워크북 82~88쪽 / 답지 6쪽', G2:'Grade 2 보카 보강본 10개 모듈 · 초등 2~4학년 · 워크북 146~160쪽 / 답지 6쪽'};
+  var HINT = {G1:'Grade 1 단어 워크시트 10개 모듈 · 초등 1~3학년 · 워크북 82~88쪽 / 답지 6쪽', G2:'Grade 2 단어 워크시트 10개 모듈 · 초등 2~4학년 · 워크북 146~160쪽 / 답지 6쪽'};
   var COLORS = [
     {c:'#B73680',s:'#F7E1EE'}, {c:'#2C9DCB',s:'#DDF1F8'}, {c:'#7DB72F',s:'#E8F3D5'},
     {c:'#F58A1F',s:'#FCE9D3'}, {c:'#7C5CBF',s:'#E9E2F6'}, {c:'#0E9C8E',s:'#D6F1EE'},
@@ -128,10 +128,10 @@ a{text-decoration:none;color:inherit}
       card.innerHTML =
         '<div class="mod-top">'+
           '<div class="mod-num">'+m+'</div>'+
-          '<div class="mod-title">Module '+m+'<small>'+grade.replace("G","Grade ")+' · 보카 보강본 + 답지</small></div>'+
+          '<div class="mod-title">Module '+m+'<small>'+grade.replace("G","Grade ")+' · 단어 워크시트 + 답지</small></div>'+
         '</div>'+
         '<div class="mod-dl">'+
-          '<a class="wb" href="'+wb+'" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>워크북</a>'+
+          '<a class="wb" href="'+wb+'" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>워크시트</a>'+
           '<a class="an" href="'+an+'" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>답지</a>'+
         '</div>';
       grid.appendChild(card);
