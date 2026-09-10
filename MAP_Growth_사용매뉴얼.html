@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MAP Growth 사용 매뉴얼 — MAP Growth Support Korea</title>
-<meta name="description" content="학생 등록부터 시험 진행, 결과 확인, 리포트 출력까지. 화면을 그대로 따라하는 MAP Growth 사용 매뉴얼 4편.">
+<meta name="description" content="학생 등록부터 시험 진행, 결과 확인, 리포트 출력까지. 화면을 그대로 따라하는 MAP Growth 사용 매뉴얼 6편.">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -63,9 +63,9 @@
   .flow-inner {
     background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
     box-shadow: 0 6px 24px rgba(15,23,42,0.06);
-    display: grid; grid-template-columns: repeat(4, 1fr); overflow: hidden;
+    display: grid; grid-template-columns: repeat(6, 1fr); overflow: hidden;
   }
-  .flow a { display: flex; align-items: center; gap: 12px; padding: 16px 18px; text-decoration: none; border-right: 1px solid var(--border); transition: background .15s; min-width: 0; }
+  .flow a { display: flex; align-items: center; gap: 10px; padding: 14px 12px; text-decoration: none; border-right: 1px solid var(--border); transition: background .15s; min-width: 0; }
   .flow a:last-child { border-right: none; }
   .flow a:hover { background: var(--accent-light); }
   .flow .n { width: 30px; height: 30px; border-radius: 50%; background: var(--accent); color: #fff; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -164,53 +164,54 @@
   <div class="hero-inner">
     <div class="hero-badge"><div class="hero-badge-dot"></div>NWEA Official Partner</div>
     <h1>MAP Growth <span>사용 매뉴얼</span></h1>
-    <p class="hero-desc">학생 등록부터 시험 진행, 결과 확인, 리포트 출력까지 <b>실제 화면 그대로</b> 따라하면 됩니다. 편마다 영상으로 보거나, 한 장씩 넘겨보거나, 글로 읽을 수 있어요.</p>
+    <p class="hero-desc">로그인부터 학생 등록, 시험 진행, 결과 확인, 리포트 출력, 학생 화면까지 <b>실제 화면 그대로</b> 따라하면 됩니다. 편마다 영상으로 보거나, 한 장씩 넘겨보거나, 글로 읽을 수 있어요.</p>
     <div class="hero-meta">
-      <span>따라하기 4편</span>
+      <span>따라하기 6편</span>
       <span>영상 · 한 장씩 · 글</span>
-      <span>2026년 9월 업데이트</span>
+      <span>2026년 9월 10일 업데이트</span>
     </div>
   </div>
 </section>
 
 <div class="flow">
   <div class="flow-inner">
-    <a href="#ep01"><span class="n">1</span><span class="t">학생 등록<small>로스터링</small></span></a>
-    <a href="#ep02"><span class="n">2</span><span class="t">시험 세션 만들고 진행<small>Testing Session</small></span></a>
-    <a href="#ep03"><span class="n">3</span><span class="t">시험 결과 보기<small>Class · Student Profile</small></span></a>
-    <a href="#ep04"><span class="n">4</span><span class="t">Student Progress<small>PDF 리포트 뽑기</small></span></a>
+    <a href="#ep01"><span class="n">1</span><span class="t">로그인과 접속<small>비밀번호 재설정</small></span></a>
+    <a href="#ep02"><span class="n">2</span><span class="t">학생 등록<small>로스터링</small></span></a>
+    <a href="#ep03"><span class="n">3</span><span class="t">시험 세션 진행<small>Testing Session</small></span></a>
+    <a href="#ep04"><span class="n">4</span><span class="t">시험 결과 보기<small>Class · Student Profile</small></span></a>
+    <a href="#ep05"><span class="n">5</span><span class="t">Student Progress<small>PDF 리포트 출력하기</small></span></a>
+    <a href="#ep06"><span class="n">6</span><span class="t">학생 로그인<small>시험 화면</small></span></a>
   </div>
 </div>
 
 <section class="section" id="episodes">
   <div class="container">
     <div class="section-label">순서대로 따라하기</div>
-    <h2 class="section-title">처음부터 끝까지, 4편</h2>
+    <h2 class="section-title">처음부터 끝까지, 6편</h2>
     <p class="section-desc">화면 속 학원명과 학생 이름은 모두 샘플입니다. 노란 테두리와 번호가 눌러야 할 곳, 빨간 표시는 누르면 안 되는 곳이에요.</p>
 
     <!-- 01 -->
     <article class="ep" id="ep01">
       <div class="ep-grid">
         <div class="ep-media">
-          <video controls preload="metadata" playsinline poster="manual/thumb/01.jpg" src="manual/video/01_학생등록_로스터링.mp4"></video>
+          <video controls preload="metadata" playsinline poster="manual/thumb/01.jpg" src="manual/video/01_로그인_접속.mp4"></video>
         </div>
         <div class="ep-body">
-          <div class="ep-kicker"><span class="n">EP 01</span><i>13장</i><i>·</i><i>2분 01초</i></div>
-          <h3>학생 등록 (로스터링)</h3>
-          <p class="ep-desc">학생 명단 파일을 올리고, 오류가 있으면 고친 뒤 등록을 마칩니다. 오류가 없으면 바로 등록해도 됩니다.</p>
+          <div class="ep-kicker"><span class="n">EP 01</span><i>6장</i><i>·</i><i>1분 01초</i></div>
+          <h3>로그인과 접속</h3>
+          <p class="ep-desc">teach.mapnwea.org 에 들어가 계정 이메일과 비밀번호로 로그인합니다. 비밀번호를 잊었을 때 다시 만드는 방법까지 담았습니다.</p>
           <ul class="steps">
-            <li><span class="k">1</span><span><b>teach.mapnwea.org</b> 에 이메일·비밀번호로 로그인 → 위쪽 <b>Rostering</b> 메뉴</span></li>
-            <li><span class="k">2</span><span>Import Profiles / Rostering 에서 명단 파일을 올립니다</span></li>
-            <li><span class="k">3</span><span>오류가 있으면 파일을 고쳐 다시 올리고, 없으면 <b>Post Valid Records</b> 로 등록 완료</span></li>
-            <li class="warn"><span class="k">!</span><span>계정을 새로 만들면 기존 응시 기록이 넘어오지 않습니다</span></li>
+            <li><span class="k">1</span><span>주소창에 <b>teach.mapnwea.org</b> → 계정 이메일 → <b>Continue</b></span></li>
+            <li><span class="k">2</span><span>비밀번호 → <b>Sign in</b></span></li>
+            <li><span class="k">3</span><span>잊었으면 <b>Forgot Password?</b> → 메일의 Reset password → 새 비밀번호(8자 이상, 대·소문자·숫자·특수문자)</span></li>
+            <li class="warn"><span class="k">!</span><span>재설정 메일은 스팸함에 들어가기도 하고, 링크는 48시간만 유효합니다</span></li>
           </ul>
           <div class="ways">
-            <button class="btn primary" onclick="openSlides('manual/slides/로스터링_슬라이드.html','01 학생 등록 (로스터링)')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>한 장씩 넘겨보기</button>
-            <a class="btn" href="manual/video/01_학생등록_로스터링.mp4" target="_blank">영상 새 창에서 보기</a>
+            <button class="btn primary" onclick="openSlides('manual/slides/01_로그인_슬라이드.html','01 로그인과 접속')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>한 장씩 넘겨보기</button>
+            <a class="btn" href="manual/video/01_로그인_접속.mp4" target="_blank">영상 새 창에서 보기</a>
           </div>
           <div class="docs">글로 보기:
-            <a onclick="openDoc('01. 학생 등록 (로스터링) 가이드.html','01. 학생 등록 (로스터링) 가이드')">학생 등록 가이드</a>
-            <a onclick="openDoc('07. 로스터링 오류 해결.html','07. 로스터링 오류 해결')">오류가 났을 때</a>
+            <a onclick="openDoc('08. 빠른 접속 참고자료.html','08. 빠른 접속 참고자료')">접속 주소 모음</a>
           </div>
         </div>
       </div>
@@ -220,27 +221,25 @@
     <article class="ep" id="ep02">
       <div class="ep-grid">
         <div class="ep-media">
-          <video controls preload="metadata" playsinline poster="manual/thumb/02.jpg" src="manual/video/02_시험세션_만들고_진행하기.mp4"></video>
+          <video controls preload="metadata" playsinline poster="manual/thumb/02.jpg" src="manual/video/02_학생등록_로스터링.mp4"></video>
         </div>
         <div class="ep-body">
-          <div class="ep-kicker"><span class="n">EP 02</span><i>12장</i><i>·</i><i>1분 51초</i></div>
-          <h3>시험 세션 만들고 진행하기</h3>
-          <p class="ep-desc">시험 볼 학생을 담고 시험 종류를 지정해 세션을 엽니다. 시험이 끝나면 세션을 닫습니다.</p>
+          <div class="ep-kicker"><span class="n">EP 02</span><i>12장</i><i>·</i><i>1분 50초</i></div>
+          <h3>학생 등록 (로스터링)</h3>
+          <p class="ep-desc">학생 명단 파일을 올리고, 오류가 있으면 고친 뒤 등록을 마칩니다. 오류가 없으면 바로 등록해도 됩니다.</p>
           <ul class="steps">
-            <li><span class="k">1</span><span>로그인 → 위쪽 <b>MAP Growth</b> → <b>Manage Test Sessions</b> → <b>Find Students to Test</b>, 학교명 확인</span></li>
-            <li><span class="k">2</span><span>찾은 학생을 <b>Add Students</b> 로 담고 <b>Select Test</b> 에서 시험 지정</span></li>
-            <li><span class="k">3</span><span><b>Test Now</b> → 세션 이름·비밀번호를 학생에게 알려줍니다</span></li>
-            <li class="warn"><span class="k">!</span><span>K-2 · 2-5 · 6+ 학년대를 잘못 고르면 안 됩니다</span></li>
+            <li><span class="k">1</span><span>로그인 뒤 첫 화면 위쪽 <b>Rostering</b> → Import Profiles / Rostering</span></li>
+            <li><span class="k">2</span><span>학기 선택, <b>Standard - Add/Update</b>, 명단 파일 Add</span></li>
+            <li><span class="k">3</span><span>오류가 있으면 파일을 고쳐 다시 올리고, 없으면 <b>Post Valid Records</b> 로 등록 완료</span></li>
+            <li class="warn"><span class="k">!</span><span>계정을 새로 만들면 기존 응시 기록이 넘어오지 않습니다</span></li>
           </ul>
           <div class="ways">
-            <button class="btn primary" onclick="openSlides('manual/slides/02_시험세션_슬라이드.html','02 시험 세션 만들고 진행하기')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>한 장씩 넘겨보기</button>
-            <a class="btn" href="manual/video/02_시험세션_만들고_진행하기.mp4" target="_blank">영상 새 창에서 보기</a>
+            <button class="btn primary" onclick="openSlides('manual/slides/02_로스터링_슬라이드.html','02 학생 등록 (로스터링)')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>한 장씩 넘겨보기</button>
+            <a class="btn" href="manual/video/02_학생등록_로스터링.mp4" target="_blank">영상 새 창에서 보기</a>
           </div>
           <div class="docs">글로 보기:
-            <a onclick="openDoc('02. 시험 세션 만들기 가이드.html','02. 시험 세션 만들기')">세션 만들기</a>
-            <a onclick="openDoc('03. 학생 로그인 안내.html','03. 학생 로그인 안내')">학생 로그인 화면</a>
-            <a onclick="openDoc('04. 시험 중 관리 가이드.html','04. 시험 중 관리')">시험 중 관리</a>
-            <a onclick="openDoc('04-2. 시험 종료 가이드.html','04-2. 시험 종료')">시험 종료</a>
+            <a onclick="openDoc('01. 학생 등록 (로스터링) 가이드.html','01. 학생 등록 (로스터링) 가이드')">학생 등록 가이드</a>
+            <a onclick="openDoc('07. 로스터링 오류 해결.html','07. 로스터링 오류 해결')">오류가 났을 때</a>
           </div>
         </div>
       </div>
@@ -250,23 +249,26 @@
     <article class="ep" id="ep03">
       <div class="ep-grid">
         <div class="ep-media">
-          <video controls preload="metadata" playsinline poster="manual/thumb/03.jpg" src="manual/video/03_시험결과_보기.mp4"></video>
+          <video controls preload="metadata" playsinline poster="manual/thumb/03.jpg" src="manual/video/03_시험세션_만들고_진행하기.mp4"></video>
         </div>
         <div class="ep-body">
-          <div class="ep-kicker"><span class="n">EP 03</span><i>11장</i><i>·</i><i>1분 37초</i></div>
-          <h3>시험 결과 보기</h3>
-          <p class="ep-desc">반 전체 결과와 학생 한 명의 결과를 화면에서 바로 확인합니다.</p>
+          <div class="ep-kicker"><span class="n">EP 03</span><i>12장</i><i>·</i><i>1분 48초</i></div>
+          <h3>시험 세션 만들고 진행하기</h3>
+          <p class="ep-desc">시험 볼 학생을 담고 시험 종류를 지정해 세션을 엽니다. 시험이 끝나면 세션을 닫습니다.</p>
           <ul class="steps">
-            <li><span class="k">1</span><span>로그인 → 위쪽 <b>MAP Growth</b> → 리포트 종류를 고릅니다</span></li>
-            <li><span class="k">2</span><span><b>Class Profile</b> — 반 전체의 RIT 점수와 영역별 결과</span></li>
-            <li><span class="k">3</span><span><b>Student Profile</b> — 학생 한 명, 과목 탭을 눌러 바꿔 봅니다</span></li>
+            <li><span class="k">1</span><span>위쪽 <b>MAP Growth</b> → <b>Manage Test Sessions</b> → <b>Find Students to Test</b>, 학교명 확인</span></li>
+            <li><span class="k">2</span><span>찾은 학생을 <b>Add Students</b> 로 담고 <b>Select Test</b> 에서 시험 지정</span></li>
+            <li><span class="k">3</span><span><b>Test Now</b> → 세션 이름·비밀번호를 학생에게 알려줍니다</span></li>
+            <li class="warn"><span class="k">!</span><span>K-2 · 2-5 · 6+ 학년대를 잘못 고르면 안 됩니다</span></li>
           </ul>
           <div class="ways">
-            <button class="btn primary" onclick="openSlides('manual/slides/03_결과보기_슬라이드.html','03 시험 결과 보기')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>한 장씩 넘겨보기</button>
-            <a class="btn" href="manual/video/03_시험결과_보기.mp4" target="_blank">영상 새 창에서 보기</a>
+            <button class="btn primary" onclick="openSlides('manual/slides/03_시험세션_슬라이드.html','03 시험 세션 만들고 진행하기')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>한 장씩 넘겨보기</button>
+            <a class="btn" href="manual/video/03_시험세션_만들고_진행하기.mp4" target="_blank">영상 새 창에서 보기</a>
           </div>
           <div class="docs">글로 보기:
-            <a onclick="openDoc('06. 리포트 결과 확인 가이드.html','06. 리포트 결과 확인')">리포트 결과 확인 가이드</a>
+            <a onclick="openDoc('02. 시험 세션 만들기 가이드.html','02. 시험 세션 만들기')">세션 만들기</a>
+            <a onclick="openDoc('04. 시험 중 관리 가이드.html','04. 시험 중 관리')">시험 중 관리</a>
+            <a onclick="openDoc('04-2. 시험 종료 가이드.html','04-2. 시험 종료')">시험 종료</a>
           </div>
         </div>
       </div>
@@ -276,24 +278,78 @@
     <article class="ep" id="ep04">
       <div class="ep-grid">
         <div class="ep-media">
-          <video controls preload="metadata" playsinline poster="manual/thumb/04.jpg" src="manual/video/04_StudentProgress_뽑기.mp4"></video>
+          <video controls preload="metadata" playsinline poster="manual/thumb/04.jpg" src="manual/video/04_시험결과_보기.mp4"></video>
         </div>
         <div class="ep-body">
-          <div class="ep-kicker"><span class="n">EP 04</span><i>10장</i><i>·</i><i>1분 34초</i></div>
-          <h3>Student Progress Report 뽑기</h3>
-          <p class="ep-desc">학생별 성장 리포트를 PDF 로 한꺼번에 내려받습니다. 학부모에게 전달할 때 씁니다.</p>
+          <div class="ep-kicker"><span class="n">EP 04</span><i>11장</i><i>·</i><i>1분 34초</i></div>
+          <h3>시험 결과 보기</h3>
+          <p class="ep-desc">반 전체 결과와 학생 한 명의 결과를 화면에서 바로 확인합니다.</p>
           <ul class="steps">
-            <li><span class="k">1</span><span>로그인 → 위쪽 <b>MAP Growth</b> → 오른쪽 아래 <b>Other Reports</b> → <b>Student Progress</b> → Term</span></li>
-            <li><span class="k">2</span><span>School 은 <b>이름 글씨를 클릭</b> (체크박스는 여러 학원을 합칠 때)</span></li>
-            <li><span class="k">3</span><span>Instructor → 학생 체크 → <b>Create PDF Report</b></span></li>
-            <li><span class="k">4</span><span><b>Reports Queue</b> 에서 ZIP 내려받기 (14일 뒤 삭제)</span></li>
+            <li><span class="k">1</span><span>위쪽 <b>MAP Growth</b> → 리포트 종류를 고릅니다</span></li>
+            <li><span class="k">2</span><span><b>Class Profile</b> — 반 전체의 RIT 점수와 영역별 결과</span></li>
+            <li><span class="k">3</span><span><b>Student Profile</b> — 학생 한 명, 과목 탭을 눌러 바꿔 봅니다</span></li>
           </ul>
           <div class="ways">
-            <button class="btn primary" onclick="openSlides('manual/slides/04_StudentProgress_슬라이드.html','04 Student Progress Report 뽑기')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>한 장씩 넘겨보기</button>
-            <a class="btn" href="manual/video/04_StudentProgress_뽑기.mp4" target="_blank">영상 새 창에서 보기</a>
+            <button class="btn primary" onclick="openSlides('manual/slides/04_결과보기_슬라이드.html','04 시험 결과 보기')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>한 장씩 넘겨보기</button>
+            <a class="btn" href="manual/video/04_시험결과_보기.mp4" target="_blank">영상 새 창에서 보기</a>
           </div>
           <div class="docs">글로 보기:
             <a onclick="openDoc('06. 리포트 결과 확인 가이드.html','06. 리포트 결과 확인')">리포트 결과 확인 가이드</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05 -->
+    <article class="ep" id="ep05">
+      <div class="ep-grid">
+        <div class="ep-media">
+          <video controls preload="metadata" playsinline poster="manual/thumb/05.jpg" src="manual/video/05_StudentProgress_출력하기.mp4"></video>
+        </div>
+        <div class="ep-body">
+          <div class="ep-kicker"><span class="n">EP 05</span><i>11장</i><i>·</i><i>1분 41초</i></div>
+          <h3>Student Progress Report 출력하기</h3>
+          <p class="ep-desc">학생별 성장 리포트를 PDF 로 한꺼번에 내려받고, 받은 성적표를 읽는 법까지 봅니다.</p>
+          <ul class="steps">
+            <li><span class="k">1</span><span>위쪽 <b>MAP Growth</b> → 오른쪽 아래 <b>Other Reports</b> → <b>Student Progress</b> → Term</span></li>
+            <li><span class="k">2</span><span>School 은 <b>이름 글씨를 클릭</b> (체크박스는 여러 학원을 합칠 때)</span></li>
+            <li><span class="k">3</span><span>Instructor → 학생 체크 → <b>Create PDF Report</b></span></li>
+            <li><span class="k">4</span><span><b>Reports Queue</b> 에서 ZIP 내려받기 (14일 뒤 삭제) · 성적표의 RIT·백분위 읽는 법</span></li>
+          </ul>
+          <div class="ways">
+            <button class="btn primary" onclick="openSlides('manual/slides/05_StudentProgress_슬라이드.html','05 Student Progress Report 출력하기')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>한 장씩 넘겨보기</button>
+            <a class="btn" href="manual/video/05_StudentProgress_출력하기.mp4" target="_blank">영상 새 창에서 보기</a>
+          </div>
+          <div class="docs">글로 보기:
+            <a onclick="openDoc('06. 리포트 결과 확인 가이드.html','06. 리포트 결과 확인')">리포트 결과 확인 가이드</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06 -->
+    <article class="ep" id="ep06">
+      <div class="ep-grid">
+        <div class="ep-media">
+          <video controls preload="metadata" playsinline poster="manual/thumb/06.jpg" src="manual/video/06_학생로그인.mp4"></video>
+        </div>
+        <div class="ep-body">
+          <div class="ep-kicker"><span class="n">EP 06</span><i>8장</i><i>·</i><i>1분 16초</i></div>
+          <h3>학생 로그인</h3>
+          <p class="ep-desc">학생 화면에서 세션에 들어가 시험을 시작하기까지. 실제 학생 화면 그대로입니다.</p>
+          <ul class="steps">
+            <li><span class="k">1</span><span><b>test.mapnwea.org</b> · 팝업이 막히면 주소창 끝 표시를 눌러 항상 허용</span></li>
+            <li><span class="k">2</span><span><b>Session Name</b> · <b>Password</b> → 이름 고르기 → Next</span></li>
+            <li><span class="k">3</span><span>Is this correct? 에서 시험 종류 확인 → <b>Yes</b> → 선생님 Confirm 대기</span></li>
+            <li><span class="k">4</span><span>확인되면 화살표 → 시험 시작</span></li>
+            <li class="warn"><span class="k">!</span><span>시험 중 창을 닫거나 다른 탭으로 가지 않습니다</span></li>
+          </ul>
+          <div class="ways">
+            <button class="btn primary" onclick="openSlides('manual/slides/06_학생로그인_슬라이드.html','06 학생 로그인')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>한 장씩 넘겨보기</button>
+            <a class="btn" href="manual/video/06_학생로그인.mp4" target="_blank">영상 새 창에서 보기</a>
+          </div>
+          <div class="docs">글로 보기:
+            <a onclick="openDoc('03. 학생 로그인 안내.html','03. 학생 로그인 안내')">학생 로그인 안내</a>
           </div>
         </div>
       </div>

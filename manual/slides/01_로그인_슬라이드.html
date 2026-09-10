@@ -1,0 +1,227 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>로그인과 접속</title><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;color:#fff;overflow:hidden;height:100vh}
+.top{position:fixed;left:0;right:0;top:0;height:74px;display:flex;align-items:center;
+  padding:0 34px;border-bottom:1px solid rgba(255,255,255,.09);background:#0f1c33;z-index:20}
+.top .ttl{font-size:19px;font-weight:700;letter-spacing:-.01em}
+.top .ttl i{font-style:normal;color:#C9A961;margin-right:10px;font-size:14px;letter-spacing:.16em}
+.top .cnt{margin-left:auto;font-size:15px;color:#8d9bb5;letter-spacing:.06em}
+.top .cnt b{color:#C9A961;font-size:19px;font-weight:700}
+.stage{position:fixed;left:0;right:0;top:74px;bottom:132px;display:flex;align-items:center;justify-content:center}
+.screen{width:1916px;height:930px;transform-origin:center center;background:#fff;border-radius:6px;
+  box-shadow:0 22px 60px rgba(0,0,0,.5);position:relative;overflow:hidden;flex:none}
+.bot{position:fixed;left:0;right:0;bottom:0;height:132px;background:#0f1c33;
+  border-top:1px solid rgba(255,255,255,.09);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;z-index:20}
+.cap{font-size:18px;color:#d5deec;font-weight:300;text-align:center;padding:0 30px;line-height:1.5}
+.cap b{color:#C9A961;font-weight:600}
+.ctl{display:flex;align-items:center;gap:20px}
+.nav{background:none;border:1px solid rgba(201,169,97,.5);color:#C9A961;font-family:inherit;font-size:15px;
+  padding:9px 22px;border-radius:3px;cursor:pointer;letter-spacing:.02em}
+.nav:hover{background:rgba(201,169,97,.12)}
+.nav:disabled{opacity:.28;cursor:default}
+.dots{display:flex;gap:9px}
+.dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;transition:.15s}
+.dots i.on{background:#C9A961;transform:scale(1.25)}
+
+/* NWEA 화면 재현 */
+.sc{position:absolute;inset:0;background:#fff;font-family:Verdana,'Malgun Gothic',sans-serif;color:#222;display:none}
+.sc.on{display:block}
+.hd{height:74px;border-bottom:1px solid #e2e2e2;position:relative;background:#fff}
+.logo{position:absolute;left:46px;top:22px;font-family:Arial;font-size:31px;font-weight:700;color:#231f20;letter-spacing:-1px}
+.logo .tag{font-size:9px;font-weight:400;color:#555;letter-spacing:0;line-height:1.25;display:inline-block;vertical-align:6px;margin-left:6px}
+.bars{position:absolute;left:47px;top:55px;display:flex;width:158px;height:4px}
+.bars i{flex:1}
+.bars i:nth-child(1){background:#f5a800}.bars i:nth-child(2){background:#e5006d}
+.bars i:nth-child(3){background:#00a3ad}.bars i:nth-child(4){background:#0077c8}
+.who{position:absolute;right:52px;top:24px;font-size:12.5px;color:#333}
+.gnav{position:absolute;right:52px;top:50px;font-size:12.5px;color:#1a6a9e}
+.gnav span{margin:0 7px}
+.side{position:absolute;left:47px;top:130px;width:362px;height:735px;background:#257898;padding:22px 0}
+.side a{display:block;color:#fff;font-size:13px;font-weight:700;letter-spacing:.4px;padding:11px 26px;border-bottom:1px solid #4a92ac}
+.side a i{float:right;font-style:normal;opacity:.85}
+.side a.sub{font-size:12px;font-weight:400;padding-left:44px;background:rgba(0,0,0,.10);border-bottom-color:#3d88a2}
+.main{position:absolute;left:437px;top:130px;width:1433px;height:735px;border:1px solid #d9d9d9;border-radius:8px;background:#fff;padding:24px 30px}
+.ptitle{font-size:20px;color:#1a5f83;letter-spacing:.02em;margin-bottom:16px}
+.tabs{display:flex;margin-bottom:18px}
+.tab{background:#eee;border:1px solid #d5d5d5;font-size:12px;color:#444;padding:7px 16px;margin-right:-1px}
+.tab.on{background:#f6c344;border-color:#dda92c;font-weight:700}
+.lab{font-size:13.5px;font-weight:700;color:#222;margin:15px 0 7px}
+.lab sup{color:#c00}
+.rdo{font-size:12.5px;color:#222;margin:5px 0;display:flex;align-items:center}
+.rdo b{width:13px;height:13px;border:1px solid #999;border-radius:50%;margin-right:9px;position:relative;background:#fff;flex:none}
+.rdo.sel b:after{content:'';position:absolute;left:3px;top:3px;width:5px;height:5px;border-radius:50%;background:#1a6a9e}
+.rdo span{color:#888;font-size:11px;margin-left:8px;white-space:nowrap}
+.chk{width:13px;height:13px;border:1px solid #999;background:#fff;display:inline-block;position:relative;vertical-align:-2px}
+.chk.on{background:#1a6a9e;border-color:#1a6a9e}
+.chk.on:after{content:'';position:absolute;left:3px;top:0px;width:4px;height:8px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(42deg)}
+.sel2{width:186px;height:27px;border:1px solid #999;font-size:12.5px;padding:5px 6px;background:#fff;position:relative;display:inline-block}
+.sel2:after{content:'';position:absolute;right:8px;top:11px;border:5px solid transparent;border-top-color:#555}
+.btn{display:inline-block;background:linear-gradient(#fdfdfd,#dcdcdc);border:1px solid #a8a8a8;border-radius:3px;font-size:12px;padding:5px 20px;color:#333}
+.go{display:inline-block;background:linear-gradient(#7fb4cd,#4d8fae);border:1px solid #3f7d9b;color:#fff;font-weight:700;border-radius:3px;font-size:12.5px;padding:7px 22px}
+.gh{display:inline-block;background:linear-gradient(#fdfdfd,#dcdcdc);border:1px solid #a8a8a8;color:#333;border-radius:3px;font-size:12.5px;padding:7px 18px;margin-left:8px}
+.stat{border:1px dashed #9dbfd0;background:#eef7fb;padding:20px 24px;margin-top:6px}
+.stat h4{font-size:14.5px;color:#1a5f83;margin-bottom:14px}
+.kv{font-size:12.5px;line-height:1.85}
+.kv b{display:inline-block;width:130px;color:#222}
+.kv span{color:#666}
+.tb{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px}
+.tb th{text-align:left;font-weight:700;padding:7px 9px;border-bottom:1px solid #c8c8c8;color:#222;font-size:11.5px}
+.tb td{padding:7px 9px;border-bottom:1px solid #e6e6e6;color:#444}
+.tb tr:nth-child(even) td{background:#f2f8f8}
+.tb .gray{color:#888}
+.sub2{font-size:13px;color:#1a5f83;font-weight:700;border-bottom:1px solid #c9dbe4;padding-bottom:5px;margin:18px 0 8px}
+.panel{border:1px solid #d9d9d9;border-radius:5px;padding:16px 20px;margin-top:14px}
+.panel h5{font-size:13px;color:#1a5f83;font-weight:700;margin-bottom:10px}
+.pill{display:inline-block;border-radius:11px;color:#fff;font-size:11px;font-weight:700;padding:3px 11px}
+.pill.b{background:#1f6fa8}.pill.g{background:#4caf72}.pill.y{background:#e8c25a;color:#5a4a10}
+.pill.o{background:#ef8b5a}.pill.r{background:#b8353a}
+
+/* MAP 리포트 화면(연두 헤더) */
+.mhd{height:62px;background:#fff;border-bottom:1px solid #e2e2e2;position:relative}
+.mlogo{position:absolute;left:44px;top:16px;font-family:Arial;font-size:26px;font-weight:700;color:#5c9a3a;letter-spacing:-1px}
+.mbar{position:absolute;left:0;right:0;top:60px;height:4px;display:flex}
+.mbar i{flex:1}
+.mbar i:nth-child(1){background:#f5a800}.mbar i:nth-child(2){background:#e5006d}
+.mbar i:nth-child(3){background:#00a3ad}.mbar i:nth-child(4){background:#0077c8}
+.rtabs{position:absolute;left:0;right:0;top:64px;height:46px;background:#3a3a3c;display:flex;align-items:center;padding:0 46px;gap:34px}
+.rtabs a{color:#fff;font-size:13.5px;font-weight:600;letter-spacing:.03em}
+.rtabs a.on{border-bottom:3px solid #fff;padding-bottom:12px}
+.rbody{position:absolute;left:0;right:0;top:110px;bottom:0;background:#f5f6f7;padding:34px 46px}
+.rcard{background:#fff;border:1px solid #e0e0e0;border-radius:4px;padding:20px 24px;margin-bottom:14px}
+.rcard h4{font-size:15px;color:#1a6a9e;font-weight:700;margin-bottom:6px}
+.rcard p{font-size:12.5px;color:#555;line-height:1.6}
+
+/* 윈도우 파일창 */
+.win{position:absolute;left:690px;top:150px;width:1000px;height:430px;background:#f7f8fa;border:1px solid #b9bfc9;
+  border-radius:7px;box-shadow:0 18px 44px rgba(0,0,0,.3);font-size:13px;color:#222;overflow:hidden}
+.win .wt{height:38px;background:#eef0f4;border-bottom:1px solid #dcdfe6;display:flex;align-items:center;padding:0 14px;font-size:12.5px;color:#444}
+.win .wb{display:flex;height:calc(100% - 78px)}
+.win .wl{width:210px;border-right:1px solid #e2e5ea;padding:12px 0;font-size:12.5px}
+.win .wl div{padding:6px 18px;color:#333}
+.win .wr{flex:1;padding:8px 0}
+.win .wr .rh{display:flex;font-size:11.5px;color:#666;padding:0 16px 7px;border-bottom:1px solid #e2e5ea}
+.win .wr .rh span:first-child{flex:1}
+.win .wr .rw{display:flex;font-size:12.5px;padding:6px 16px}
+.win .wr .rw span:first-child{flex:1}
+.win .wr .rw.on{background:#cfe6f7}
+.win .wf{height:40px;border-top:1px solid #e2e5ea;display:flex;align-items:center;padding:0 14px;gap:10px;background:#f2f3f6}
+.win .wf .fi{flex:1;height:24px;border:1px solid #a9b0bb;background:#fff;font-size:12px;padding:3px 7px;color:#333}
+.win .wf .fb{background:linear-gradient(#fdfdfd,#e4e4e4);border:1px solid #a8a8a8;border-radius:3px;font-size:12px;padding:4px 16px}
+
+/* 모달 */
+.modal{position:absolute;left:50%;top:150px;transform:translateX(-50%);width:840px;background:#fff;
+  border:1px solid #9db6c4;border-radius:4px;box-shadow:0 20px 50px rgba(0,0,0,.35);overflow:hidden}
+.modal .mt{background:#2b7fa8;color:#fff;font-size:13.5px;font-weight:700;padding:11px 18px}
+.modal .mb{padding:20px 24px;font-size:12.5px;color:#333;line-height:1.7}
+.dim{position:absolute;inset:0;background:rgba(255,255,255,.62)}
+
+/* 리포트 생성기 화면 */
+.gen{position:absolute;inset:0;background:#F5F6FA;font-family:'Malgun Gothic',sans-serif}
+.gen .gh2{height:96px;background:#1B2A4A;display:flex;align-items:center;padding:0 54px}
+.gen .gh2 .t{font-size:24px;font-weight:700;color:#fff;letter-spacing:-.01em}
+.gen .gh2 .t em{font-style:normal;color:#C9A96E;font-size:14px;display:block;font-weight:400;letter-spacing:.1em;margin-bottom:5px}
+.gen .gh2 .badge{margin-left:auto;font-size:13px;color:#9aa7c0;border:1px solid #33456b;padding:6px 14px;border-radius:3px}
+.gen .body{padding:40px 54px}
+.gen .steps3{display:flex;gap:20px;margin-bottom:30px}
+.gen .st{flex:1;background:#fff;border:1px solid #E2E5EE;border-radius:6px;padding:26px 28px;position:relative}
+.gen .st.act{border-color:#C9A96E;box-shadow:0 5px 18px rgba(27,42,74,.09)}
+.gen .st .n{width:30px;height:30px;border-radius:50%;background:#EEF0F6;color:#5A6178;font-size:14px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.gen .st.act .n{background:#1B2A4A;color:#C9A96E}
+.gen .st h3{font-size:17px;color:#1B2A4A;font-weight:700;margin-bottom:7px}
+.gen .st p{font-size:13px;color:#5A6178;line-height:1.6}
+.gen .drop{background:#fff;border:2px dashed #C9CFDE;border-radius:8px;height:250px;display:flex;
+  flex-direction:column;align-items:center;justify-content:center;gap:12px}
+.gen .drop .big{font-size:20px;color:#1B2A4A;font-weight:700}
+.gen .drop .small{font-size:13.5px;color:#7A8296}
+.gen .drop .pick{background:#1B2A4A;color:#fff;font-size:14px;padding:11px 30px;border-radius:4px;margin-top:6px}
+.gen .stat3{display:flex;gap:20px;margin-top:26px}
+.gen .stat3 div{flex:1;background:#fff;border:1px solid #E2E5EE;border-radius:6px;padding:20px 24px}
+.gen .stat3 .k{font-size:12.5px;color:#7A8296;margin-bottom:8px}
+.gen .stat3 .v{font-size:27px;color:#1B2A4A;font-weight:700}
+.gen .stat3 .v em{font-style:normal;font-size:14px;color:#7A8296;font-weight:400;margin-left:4px}
+.gen table.dt{width:100%;border-collapse:collapse;background:#fff;font-size:13px}
+.gen table.dt th{background:#F0F2F7;color:#1B2A4A;font-weight:700;text-align:left;padding:11px 13px;border-bottom:1px solid #E2E5EE;font-size:12.5px}
+.gen table.dt td{padding:10px 13px;border-bottom:1px solid #EEF0F6;color:#3D4457}
+.gen .bar{height:12px;background:#EEF0F6;border-radius:6px;overflow:hidden;margin-top:12px}
+.gen .bar i{display:block;height:100%;background:#C9A96E}
+.gen .gbtn{background:#1B2A4A;color:#fff;font-size:15px;font-weight:700;padding:13px 40px;border-radius:4px;display:inline-block}
+.gen .gbtn.ghost{background:#fff;color:#1B2A4A;border:1px solid #C9CFDE;font-weight:400}
+.gen .cards2{display:flex;gap:20px;margin-top:26px}
+.gen .cards2 div{flex:1;background:#fff;border:1px solid #E2E5EE;border-radius:6px;padding:24px 26px}
+.gen .cards2 h4{font-size:16px;color:#1B2A4A;font-weight:700;margin-bottom:7px}
+.gen .cards2 p{font-size:13px;color:#5A6178;line-height:1.6}
+
+/* 바탕화면 */
+.desk{position:absolute;inset:0;background:linear-gradient(160deg,#2e4a6b,#16283f)}
+.desk .ico{position:absolute;width:96px;text-align:center;color:#fff;font-size:12.5px;line-height:1.35;text-shadow:0 1px 3px rgba(0,0,0,.6)}
+.desk .ico b{display:block;width:58px;height:58px;margin:0 auto 7px;border-radius:9px;background:#1B2A4A;
+  border:1px solid #3a4d74;color:#C9A96E;font-size:20px;font-weight:700;line-height:58px}
+.cmd{position:absolute;left:560px;top:300px;width:760px;height:300px;background:#0c0c0c;border-radius:5px;
+  box-shadow:0 20px 50px rgba(0,0,0,.55);padding:16px 20px;font-family:Consolas,monospace;font-size:14px;color:#cfcfcf;line-height:1.7}
+.cmd .ttl2{color:#9a9a9a;font-size:12.5px;margin-bottom:10px}
+
+/* 클릭 표시 */
+.hl{position:relative;display:block;width:fit-content;outline:2.5px solid #C9A961;outline-offset:4px;border-radius:3px;box-shadow:0 0 0 8px rgba(201,169,97,.13)}
+.hl.ib{display:inline-block}
+.hl.bad{outline-color:#c0392b;box-shadow:0 0 0 8px rgba(192,57,43,.10)}
+.hl>.num{position:absolute;z-index:6;border:2px solid #fff;left:-49px;top:50%;transform:translateY(-50%);width:33px;height:33px;border-radius:50%;
+  background:#1A2B4A;color:#C9A961;font-family:'Malgun Gothic';font-size:15px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,.28)}
+.hl>.tip{position:absolute;left:calc(100% + 30px);top:50%;transform:translateY(-50%);
+  background:#1A2B4A;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;font-weight:400;
+  padding:11px 17px;border-radius:4px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.15);line-height:1.35;z-index:7}
+.hl>.tip b{color:#C9A961;font-weight:700}
+.hl>.tip:after{content:'';position:absolute;left:-7px;top:calc(50% - 7px);border:7px solid transparent;border-right-color:#1A2B4A}
+.hl.bad>.tip{background:#8e2a20}
+.hl.bad>.tip:after{border-right-color:#8e2a20}
+.hl.bad>.tip b{color:#ffd7d0}
+.up{top:calc(50% - 23px)!important}
+.dn{top:calc(50% + 23px)!important}
+.note{position:absolute;background:#1A2B4A;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;
+  padding:14px 18px;border-radius:4px;line-height:1.6;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:7}
+.note b{color:#E5C77A;font-weight:700}
+.note.warnbox{background:#8e2a20}
+.note.warnbox b{color:#ffd7d0}
+.note.okbox{background:#1d5c37}
+.note.okbox b{color:#b9e5c9}
+</style></head><body><div class="top"><div class="ttl"><i>MAP GROWTH 사용 매뉴얼</i>로그인과 접속</div><div class="cnt"><b id="cur">1</b> / <span id="tot"></span></div></div><div class="stage"><div class="screen" id="screen"><div class="sc on"><img src="캡처/login1.png" style="position:absolute;left:0;top:0;width:1916px;height:930px"><span class="hl" style="position:absolute;left:1406px;top:231px;width:485px;height:40px;display:block;outline-offset:6px;"><span class="num">1</span><span class="tip" style="left:auto;right:calc(100% + 72px)">받으신 <b>계정 이메일</b>을 넣습니다</span></span><span class="hl" style="position:absolute;left:1784px;top:288px;width:108px;height:32px;display:block;outline-offset:6px;"><span class="num">2</span><span class="tip" style="left:auto;right:calc(100% + 72px)"><b>Continue</b></span></span><div class="note" style="left:120px;top:720px;width:1100px">인터넷 주소창에 <b>teach.mapnwea.org</b> 를 넣으면 이 화면이 뜹니다 (start.mapnwea.org 도 같은 곳)<br><span style="font-size:15px;color:#c4cfe0">계정 이메일은 계정 만들 때 등록한 주소 · 크롬 브라우저를 쓰세요</span></div></div>
+<div class="sc"><img src="캡처/login2.png" style="position:absolute;left:0;top:0;width:1916px;height:930px"><span class="hl" style="position:absolute;left:1406px;top:303px;width:485px;height:40px;display:block;outline-offset:6px;"><span class="num">1</span><span class="tip" style="left:auto;right:calc(100% + 72px)"><b>비밀번호</b>를 넣습니다</span></span><span class="hl" style="position:absolute;left:1801px;top:407px;width:91px;height:32px;display:block;outline-offset:6px;"><span class="num">2</span><span class="tip" style="left:auto;right:calc(100% + 72px)"><b>Sign in</b></span></span><div class="note" style="left:120px;top:720px;width:1100px">비밀번호를 잊었으면 비밀번호 칸 아래 <b>Forgot Password?</b><br><span style="font-size:15px;color:#c4cfe0">재설정 방법은 01편 학생 등록 영상 앞부분에 있습니다</span></div></div>
+<div class="sc"><img src="캡처/login2.png" style="position:absolute;left:0;top:0;width:1916px;height:930px"><span class="hl" style="position:absolute;left:1790px;top:367px;width:102px;height:24px;display:block;outline-offset:6px;"><span class="num">1</span><span class="tip" style="left:auto;right:calc(100% + 72px)">비밀번호를 잊었을 때 <b>Forgot Password?</b></span></span><div class="note" style="left:120px;top:720px;width:1100px">처음 받은 계정도 이 방법으로 <b>비밀번호를 만듭니다</b><br><span style="font-size:15px;color:#c4cfe0">계정 이메일만 알면 됩니다 · 이메일을 모르면 MAP Growth Support Korea 로 문의</span></div></div>
+<div class="sc"><img src="캡처/login3_reset.png" style="position:absolute;left:0;top:0;width:1916px;height:930px"><span class="hl" style="position:absolute;left:1406px;top:241px;width:485px;height:40px;display:block;outline-offset:6px;"><span class="num">1</span><span class="tip" style="left:auto;right:calc(100% + 72px)">계정 <b>이메일</b>을 넣습니다</span></span><span class="hl" style="position:absolute;left:1798px;top:298px;width:94px;height:32px;display:block;outline-offset:6px;"><span class="num">2</span><span class="tip" style="left:auto;right:calc(100% + 72px)"><b>Submit</b></span></span><div class="note" style="left:120px;top:720px;width:1100px">잠시 뒤 NWEA 에서 <b>Password reset</b> 메일이 옵니다<br><span style="font-size:15px;color:#c4cfe0">몇 분 걸릴 수 있고 <b>스팸함</b>으로 들어가기도 합니다 · 안 오면 스팸함부터 확인</span></div></div>
+<div class="sc"><img src="캡처/login3_reset.png" style="position:absolute;left:0;top:0;width:1916px;height:930px"><div style="position:absolute;left:1380px;top:0;width:536px;height:930px;background:#fff"></div><div style="position:absolute;left:1405px;top:0;width:487px;font-family:Arial,'Malgun Gothic',sans-serif;color:#222"><div style="text-align:center;padding-top:22px;font-size:34px;font-weight:900;letter-spacing:-.05em;color:#1f3b4d">nwea</div>
+  <div style="font-size:19px;font-weight:700;margin-top:52px">Check your email</div>
+  <div style="font-size:12.5px;color:#333;margin-top:12px;line-height:1.6">If an account exists for <b>sample@mapcenter.co.kr</b>, you will get an email with instructions on resetting your password. If it doesn't arrive, be sure to check your spam folder.</div>
+  <div style="margin-top:34px;text-align:right"><span style="display:inline-block;background:#1a6a9e;color:#fff;font-size:12.5px;font-weight:700;padding:8px 18px;border-radius:3px">Continue to log in</span></div></div><div style="position:absolute;left:1405px;width:487px;top:828px;text-align:center;font-size:12px;color:#1a6a9e;text-decoration:underline">Sign in as Internal HMH User</div><div style="position:absolute;left:1405px;width:487px;top:883px;text-align:center;font-size:12px;color:#1a6a9e;text-decoration:underline">Check System Status &#8599; &nbsp;&nbsp;&nbsp; Get Support &#8599;</div><div style="position:absolute;left:150px;top:90px;width:1060px;height:600px;background:#fff;border:1px solid #c9c9c9;box-shadow:0 10px 30px rgba(0,0,0,.25);font-family:Arial,'Malgun Gothic';overflow:hidden"><div style="height:44px;background:#f6f8fc;border-bottom:1px solid #e0e0e0;display:flex;align-items:center;padding:0 18px;font-size:13px;color:#444">받은편지함 &nbsp;&#8250;&nbsp; <b>NWEA - Password reset request</b></div><div style="padding:22px 30px;font-size:12.5px;color:#444"><b style="color:#222">NWEA</b> &lt;noreply@nwea.org&gt; &nbsp;·&nbsp; 나에게</div><div style="margin:0 30px;border-top:4px solid #f5a800;border-image:linear-gradient(90deg,#f5a800 40%,#e5006d 40%,#e5006d 70%,#00a3ad 70%) 1;padding:18px 26px 0;"><div style="font-size:30px;font-weight:900;letter-spacing:-.05em;color:#1f3b4d">nwea</div><div style="font-size:13px;color:#222;margin-top:18px"><b>Hi Sample,</b></div><div style="font-size:12.5px;color:#333;margin-top:10px;line-height:1.7;width:900px">We've received a request for a password reset on your NWEA account. You can reset your password by clicking the button below. <b>The link will be active for 48 hours.</b> After that, you'll need to submit a new request to reset your password.</div><div style="margin-top:18px"><span class="hl ib" style="outline-offset:8px"><span style="display:inline-block;background:#1a6a9e;color:#fff;font-size:13px;font-weight:700;padding:9px 20px;border-radius:3px">Reset password</span><span class="num">1</span><span class="tip">메일 안의 <b>Reset password</b> 를 누릅니다 · <b>48시간</b> 안에</span></span></div><div style="font-size:11.5px;color:#777;margin-top:18px;line-height:1.6">If you need help or believe you received this email in error, you can contact Support. (Please don't reply to this message; it's automated.)</div></div></div><div class="note" style="left:150px;top:720px;width:1060px">메일이 안 보이면 <b>스팸함</b> · 보낸 사람은 NWEA · 48시간이 지나면 다시 Forgot Password 부터</div></div>
+<div class="sc"><img src="캡처/login3_reset.png" style="position:absolute;left:0;top:0;width:1916px;height:930px"><div style="position:absolute;left:1380px;top:0;width:536px;height:930px;background:#fff"></div><div style="position:absolute;left:1405px;top:0;width:487px;font-family:Arial,'Malgun Gothic',sans-serif;color:#222"><div style="text-align:center;padding-top:22px;font-size:34px;font-weight:900;letter-spacing:-.05em;color:#1f3b4d">nwea</div>
+  <div style="font-size:19px;font-weight:700;margin-top:52px">Create your new password</div>
+  <div style="font-size:12.5px;color:#333;margin-top:8px;line-height:1.6">Follow the directions below to make sure it's secure.</div>
+  <div style="font-size:12.5px;font-weight:700;margin-top:24px">Password <span style="color:#c0392b">*</span></div>
+  <div style="height:40px;border:1px solid #767676;border-radius:3px;margin-top:6px;padding:11px 12px;font-size:15px;letter-spacing:.2em">&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;</div>
+  <div style="font-size:11.5px;color:#444;margin-top:10px;line-height:1.7">Passwords must:<br>&#9711; Contain at least 8 characters<br>&#9711; Have 1 uppercase &amp; 1 lowercase letter, 1 special character, and 1 number<br>&#9711; Match</div>
+  <div style="font-size:12.5px;font-weight:700;margin-top:16px">Re-enter your password <span style="color:#c0392b">*</span></div>
+  <div style="height:40px;border:1px solid #767676;border-radius:3px;margin-top:6px;padding:11px 12px;font-size:15px;letter-spacing:.2em">&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;</div>
+  <div style="margin-top:22px;text-align:right"><span class="hl ib" style="outline-offset:6px"><span style="display:inline-block;background:#1a6a9e;color:#fff;font-size:12.5px;font-weight:700;padding:8px 18px;border-radius:3px">Create password</span>
+    <span class="num">1</span><span class="tip" style="left:auto;right:calc(100% + 72px)">같은 비밀번호를 두 번 넣고 <b>Create password</b></span></span></div></div><div style="position:absolute;left:1405px;width:487px;top:828px;text-align:center;font-size:12px;color:#1a6a9e;text-decoration:underline">Sign in as Internal HMH User</div><div style="position:absolute;left:1405px;width:487px;top:883px;text-align:center;font-size:12px;color:#1a6a9e;text-decoration:underline">Check System Status &#8599; &nbsp;&nbsp;&nbsp; Get Support &#8599;</div><div class="note" style="left:120px;top:690px;width:1100px"><b>8자 이상</b> · 대문자 1개 · 소문자 1개 · 숫자 1개 · 특수문자(! @ # 등) 1개가 모두 들어가야 합니다<br><span style="font-size:15px;color:#c4cfe0">끝나면 Continue to log in 으로 다시 로그인 · 예) Map2026!go</span></div></div></div></div><div class="bot"><div class="cap" id="cap"></div><div class="ctl"><button class="nav" id="prev">&#8592; 이전</button><div class="dots" id="dots"></div><button class="nav" id="next">다음 &#8594;</button></div></div><script>var caps=["인터넷 주소창에 <b>teach.mapnwea.org</b> 를 넣고, 계정 이메일을 적은 뒤 <b>Continue</b>", "비밀번호를 넣고 <b>Sign in</b> · 잊었으면 아래 <b>Forgot Password?</b>", "비밀번호를 잊었을 때는 비밀번호 화면의 <b>Forgot Password?</b> 를 누릅니다", "계정 이메일을 넣고 <b>Submit</b> · NWEA 에서 재설정 메일이 옵니다 (스팸함도 확인)", "메일 안의 <b>Reset password</b> 를 48시간 안에 누릅니다", "새 비밀번호를 두 번 넣고 <b>Create password</b> · 8자 이상, 대·소문자·숫자·특수문자 포함"];
+var scs=document.querySelectorAll('.sc'),i=0,n=scs.length;
+var dots=document.getElementById('dots');
+for(var k=0;k<n;k++){var d=document.createElement('i');d.dataset.k=k;d.onclick=function(){go(+this.dataset.k)};dots.appendChild(d)}
+document.getElementById('tot').textContent=n;
+function go(k){if(k<0||k>=n)return;scs[i].classList.remove('on');i=k;scs[i].classList.add('on');
+ document.getElementById('cur').textContent=i+1;document.getElementById('cap').innerHTML=caps[i];
+ document.getElementById('prev').disabled=(i===0);document.getElementById('next').disabled=(i===n-1);
+ var ds=dots.children;for(var j=0;j<ds.length;j++)ds[j].className=(j===i?'on':'')}
+document.getElementById('prev').onclick=function(){go(i-1)};
+document.getElementById('next').onclick=function(){go(i+1)};
+document.addEventListener('keydown',function(e){
+ if(e.key==='ArrowRight'||e.key===' '||e.key==='PageDown'){go(i+1);e.preventDefault()}
+ if(e.key==='ArrowLeft'||e.key==='PageUp'){go(i-1);e.preventDefault()}});
+var sx=0;
+document.addEventListener('touchstart',function(e){sx=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;
+ if(dx<-55)go(i+1);else if(dx>55)go(i-1)},{passive:true});
+function fit(){var st=document.querySelector('.stage');
+ var s=Math.min((st.clientWidth-56)/1916,(st.clientHeight-34)/930);
+ document.getElementById('screen').style.transform='scale('+s+')'}
+window.addEventListener('resize',fit);fit();go(0);
+</script></body></html>

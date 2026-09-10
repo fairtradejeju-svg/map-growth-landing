@@ -139,7 +139,7 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
   display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,.28)}
 .hl>.tip{position:absolute;left:calc(100% + 30px);top:50%;transform:translateY(-50%);
   background:#1A2B4A;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;font-weight:400;
-  padding:11px 17px;border-radius:4px;white-space:nowrap;box-shadow:0 5px 16px rgba(0,0,0,.2);line-height:1.35}
+  padding:11px 17px;border-radius:4px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.15);line-height:1.35}
 .hl>.tip b{color:#C9A961;font-weight:700}
 .hl>.tip:after{content:'';position:absolute;left:-7px;top:calc(50% - 7px);border:7px solid transparent;border-right-color:#1A2B4A}
 .hl.bad>.tip{background:#8e2a20}
@@ -148,8 +148,8 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
 .up{top:calc(50% - 23px)!important}
 .dn{top:calc(50% + 23px)!important}
 .note{position:absolute;background:#1A2B4A;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;
-  padding:12px 18px;border-radius:4px;line-height:1.45;box-shadow:0 5px 16px rgba(0,0,0,.2)}
-.note b{color:#C9A961}
+  padding:14px 18px;border-radius:4px;line-height:1.6;box-shadow:0 4px 12px rgba(0,0,0,.15)}
+.note b{color:#E5C77A;font-weight:700}
 .note.warnbox{background:#8e2a20}
 .note.warnbox b{color:#ffd7d0}
 </style></head><body>
@@ -161,43 +161,8 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
 
 <div class="stage"><div class="screen" id="screen">
 
-<!-- login -->
-<div class="sc on">
-<div style="position:absolute;inset:0;background:#fff;font-family:Arial,'Malgun Gothic',sans-serif">
-  <div style="position:absolute;left:0;top:0;width:600px;height:930px;background:#d7f0ea"></div>
-  <svg style="position:absolute;left:110px;top:230px" width="400" height="420" viewBox="0 0 400 420" fill="none" stroke="#1f3b4d" stroke-width="3" stroke-linecap="round">
-    <rect x="60" y="80" width="250" height="170" rx="8" fill="#fff"/>
-    <rect x="60" y="80" width="250" height="26" rx="8" fill="#1f3b4d" stroke="none"/>
-    <rect x="95" y="200" width="22" height="36" fill="#1f3b4d" stroke="none"/><rect x="130" y="170" width="22" height="66" fill="#1f3b4d" stroke="none"/>
-    <rect x="165" y="185" width="22" height="51" fill="#1f3b4d" stroke="none"/><rect x="200" y="140" width="22" height="96" fill="#1f3b4d" stroke="none"/>
-    <rect x="235" y="120" width="22" height="116" fill="#1f3b4d" stroke="none"/>
-    <path d="M160 250v40h50v-40"/><path d="M135 300h100"/>
-    <circle cx="330" cy="70" r="8"/><circle cx="352" cy="40" r="6"/><circle cx="300" cy="42" r="6"/><path d="M330 62l22-22M330 62l-30-20"/>
-    <circle cx="90" cy="330" r="22" fill="#fff"/><path d="M60 420c0-40 20-60 30-60s30 20 30 60"/>
-    <rect x="20" y="40" width="34" height="34" rx="4" fill="#fff"/><path d="M28 50h18M28 58h18M28 66h18"/>
-    <path d="M330 300l40 20-40 20z" fill="#fff"/>
-  </svg>
-  <div style="position:absolute;left:600px;right:0;top:0;bottom:0">
-    <div style="text-align:center;padding-top:40px;font-size:38px;font-weight:900;letter-spacing:-.04em;color:#1f3b4d">nwea</div>
-    <div style="width:560px;margin:60px auto 0">
-      <div style="font-size:20px;font-weight:700;color:#222">Welcome! Enter your email.</div>
-      <div style="font-size:12.5px;color:#444;margin-top:8px"><span style="display:inline-block;width:14px;height:14px;border-radius:50%;background:#1a6a9e;color:#fff;font-size:10px;text-align:center;line-height:14px;margin-right:6px">i</span>Required fields are marked with an asterisk (*).</div>
-      <div style="font-size:12.5px;font-weight:700;color:#222;margin-top:34px">Email <span style="color:#c0392b">*</span></div>
-      <span class="hl" style="display:block;width:560px;margin-top:6px;outline-offset:6px">
-        <span style="display:block;height:44px;border:1px solid #767676;border-radius:3px;background:#fff;font-size:15px;color:#222;padding:11px 12px;font-family:Arial">sample@mapcenter.co.kr</span>
-        <span class="num">1</span><span class="tip" style="left:calc(100% + 40px)">받으신 <b>계정 이메일</b>을 넣습니다</span></span>
-      <div style="text-align:right;margin-top:16px"><span class="hl ib" style="outline-offset:6px"><span style="display:inline-block;background:#1a6a9e;color:#fff;font-size:13.5px;font-weight:700;padding:9px 22px;border-radius:3px">Continue</span>
-        <span class="num">2</span><span class="tip" style="left:auto;right:calc(100% + 40px)"><b>Continue</b> 를 누르면 다음 화면에서 <b>비밀번호</b>를 넣습니다</span></span></div>
-    </div>
-    <div style="position:absolute;left:0;right:0;bottom:120px;text-align:center;font-size:12px;color:#1a6a9e;text-decoration:underline">Sign in as Internal HMH User</div>
-    <div style="position:absolute;left:0;right:0;bottom:84px;text-align:center;font-size:12px;color:#1a6a9e;text-decoration:underline">Check System Status &#8599; &nbsp;&nbsp;&nbsp; Get Support &#8599;</div>
-  </div>
-  <div class="note" style="left:640px;top:560px;width:1080px">인터넷 주소창에 <b>teach.mapnwea.org</b> 를 넣으면 이 화면이 뜹니다<br>
-    <span style="font-size:15px;color:#c4cfe0">이메일 → Continue → 비밀번호 → Sign In 순서 · 비밀번호를 잊으면 비밀번호 화면의 Forgot password 로 다시 받습니다</span></div>
-</div></div>
 
-<!-- 0 -->
-<div class="sc home">
+<div class="sc on home">
   <div class="hd">
     <div class="logo">nwea<span class="tag">believe in<br>what is possible</span></div>
     <div class="bars"><i></i><i></i><i></i><i></i></div>
@@ -620,21 +585,7 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
 </div>
 
 <script>
-var caps = [
- "인터넷에서 <b>teach.mapnwea.org</b> 로 들어가 계정 이메일을 넣고 <b>Continue</b> · 다음 화면에서 비밀번호를 넣습니다",
- "NWEA 홈 화면입니다. 위쪽 <b>Rostering</b> 을 누릅니다",
- "펼쳐진 목록에서 <b>Import Profiles / Rostering</b> 으로 들어갑니다",
- "학기를 고르고, 등록 방식은 <b>Standard - Add/Update</b>. Overwrite는 절대 누르지 않습니다",
- "<b>Roster File</b> 의 Add 를 눌러 학생 명단 파일을 올립니다. Programs File 도 같은 방식으로",
- "두 파일이 다 올라온 걸 눈으로 확인하고 <b>Next</b>",
- "파일 형식 검사가 진행됩니다. <b>1~3분</b> 걸리니 창을 닫지 말고 기다립니다",
- "<b>여기서 끝나는 경우가 대부분입니다</b> — 오류 0건이면 바로 Post Valid Records",
- "<b>여기부터는 오류가 있을 때만</b> 봅니다. Review Import Summary 를 누릅니다",
- "Group Errors 는 0건, <b>Student Errors</b> 2건. 파란 글씨를 눌러 들어갑니다",
- "이름·생일이 비슷한 학생이 이미 있는 경우입니다. 같은 학생이면 고르고, 처음이면 새로 만듭니다",
- "오류를 다 정리하면 총 12명 확인 후 <b>Post Valid Records</b>",
- "등록이 반영됩니다. 끝나면 <b>Manage Students</b> 에서 학생 목록을 확인하세요"
-];
+var caps = ["로그인하면 나오는 첫 화면입니다. 위쪽 <b>Rostering</b> 을 누릅니다", "펼쳐진 목록에서 <b>Import Profiles / Rostering</b> 으로 들어갑니다", "학기를 고르고, 등록 방식은 <b>Standard - Add/Update</b>. Overwrite는 절대 누르지 않습니다", "<b>Roster File</b> 의 Add 를 눌러 학생 명단 파일을 올립니다. Programs File 도 같은 방식으로", "두 파일이 다 올라온 걸 눈으로 확인하고 <b>Next</b>", "파일 형식 검사가 진행됩니다. <b>1~3분</b> 걸리니 창을 닫지 말고 기다립니다", "<b>여기서 끝나는 경우가 대부분입니다</b> — 오류 0건이면 바로 Post Valid Records", "<b>여기부터는 오류가 있을 때만</b> 봅니다. Review Import Summary 를 누릅니다", "Group Errors 는 0건, <b>Student Errors</b> 2건. 파란 글씨를 눌러 들어갑니다", "이름·생일이 비슷한 학생이 이미 있는 경우입니다. 같은 학생이면 고르고, 처음이면 새로 만듭니다", "오류를 다 정리하면 총 12명 확인 후 <b>Post Valid Records</b>", "등록이 반영됩니다. 끝나면 <b>Manage Students</b> 에서 학생 목록을 확인하세요"];
 var scs = document.querySelectorAll('.sc'), i = 0, n = scs.length;
 var dots = document.getElementById('dots');
 for (var k = 0; k < n; k++) {
