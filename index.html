@@ -239,10 +239,10 @@
     .ss2-arrow::after { content: ''; position: absolute; right: -1px; top: -.65cqw; width: 1.3cqw; height: 1.3cqw; border-top: 2px solid var(--text); border-right: 2px solid var(--text); transform: rotate(45deg); }
     .ss2-chips { grid-column: 1 / -1; list-style: none; display: flex; flex-wrap: wrap; gap: 1cqw; margin: 1.5cqw 0 0; padding: 0; }
     .ss2-chips li { font-size: max(10px, 1.45cqw); font-weight: 600; color: var(--accent); border: 1px solid rgba(15,110,86,.35); padding: .5cqw 1.2cqw; border-radius: 3px; }
-    .ss2-regions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8cqw 3cqw; }
-    .ss2-regions > div { border-top: 1px solid var(--border); padding-top: 1.2cqw; }
-    .ss2-regions h4 { margin: 0; font-size: max(12px, 1.9cqw); font-weight: 700; display: flex; justify-content: space-between; align-items: baseline; }
-    .ss2-regions h4 b { font-family: 'Inter', sans-serif; font-size: max(12px, 2.2cqw); color: var(--accent); font-variant-numeric: tabular-nums; }
+    .ss2-regions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3cqw 3.5cqw; }
+    .ss2-regions > div { border-top: 2px solid var(--border); padding-top: 1.8cqw; }
+    .ss2-regions h4 { margin: 0; font-size: max(13px, 2.3cqw); font-weight: 700; display: flex; justify-content: space-between; align-items: baseline; }
+    .ss2-regions h4 b { font-family: 'Inter', sans-serif; font-size: max(14px, 3cqw); color: var(--accent); font-variant-numeric: tabular-nums; }
     .ss2-regions p { margin: .7cqw 0 0; font-size: max(9px, 1.3cqw); line-height: 1.55; color: var(--text-secondary); word-break: keep-all; }
     .ss2-cta { display: flex; gap: 1.6cqw; flex-wrap: wrap; margin-top: .5cqw; }
     .ss2-btn { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: max(12px, 1.9cqw); padding: 1.4cqw 2.6cqw; border-radius: 4px; text-decoration: none; border: 1px solid var(--accent); }
@@ -1671,7 +1671,7 @@
         CENTER_DATA.forEach(function (r) {
           var names = (r.centers || []).map(function (x) { return x.name; });
           total += names.length;
-          html += '<div><h4>' + r.label + '<b>' + names.length + '</b></h4><p>' + names.join(' · ') + '</p></div>';
+          html += '<div><h4>' + r.label + '<b>' + names.length + '</b></h4></div>';
         });
         box.innerHTML = html;
         var ce = document.getElementById('ss2Count'); if (ce) ce.textContent = total + '곳';
