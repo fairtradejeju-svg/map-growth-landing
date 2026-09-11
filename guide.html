@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>선생님 가이드 | MAP Growth Support Korea</title>
+<meta name="description" content="로그인부터 학생 등록, 시험 진행, 결과 확인, 리포트 출력까지 영상 7편으로 따라하고, 시험 당일 체크리스트와 문제 해결을 한 페이지에서.">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="canonical" href="https://www.mapgrowthsupportkorea.com/guide.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="선생님 가이드 | MAP Growth Support Korea">
+<meta property="og:description" content="로그인부터 학생 등록, 시험 진행, 결과 확인, 리포트 출력까지 영상 7편으로 따라하고, 시험 당일 체크리스트와 문제 해결을 한 페이지에서 확인하세요.">
+<meta property="og:image" content="https://www.mapgrowthsupportkorea.com/images/og.png">
+<meta property="og:url" content="https://www.mapgrowthsupportkorea.com/guide.html">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Inter:wght@500;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --accent:#0F6E56; --accent-deep:#0D5C48; --accent-light:rgba(15,110,86,.06);
+    --bg:#FFFFFF; --surface:#FFFFFF; --panel:#F8FAFC;
+    --border:#E2E8F0; --border-strong:#CBD5E1;
+    --text:#0F172A; --text-secondary:#334155; --text-tertiary:#64748B;
+    --stage:#0B1F14;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Noto Sans KR','Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px;word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  h1,h2,h3,h4{letter-spacing:-.03em;line-height:1.2}
+
+  /* NAV */
+  .nav-bar{position:sticky;top:0;z-index:100;height:60px;background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 32px;gap:20px}
+  .nav-logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:15px;text-decoration:none}
+  .nav-logo img{height:32px;width:auto;display:block}
+  .nav-logo i{font-family:'Inter',sans-serif;font-style:normal;font-size:11px;font-weight:600;color:#fff;background:var(--accent);padding:4px 7px;border-radius:4px;letter-spacing:.06em}
+  .nav-links{margin-left:auto;display:flex;gap:2px}
+  .nav-links a{padding:8px 12px;color:var(--text-secondary);text-decoration:none;font-size:14px;font-weight:500;border-radius:4px}
+  .nav-links a:hover{background:var(--accent-light);color:var(--accent)}
+  .nav-links a.on{color:var(--accent);font-weight:700}
+  .nav-links a.cta{background:var(--accent);color:#fff;font-weight:700;margin-left:6px}
+  .nav-links a.cta:hover{background:var(--accent-deep);color:#fff}
+
+  /* PAGE HEAD */
+  .page-head{border-bottom:1px solid var(--border);padding:clamp(40px,6vw,64px) 24px clamp(26px,4vw,36px)}
+  .wrap{max-width:1160px;margin:0 auto}
+  .eyebrow{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+  .page-head h1{font-size:clamp(2rem,4.2vw,3rem);font-weight:900;margin:8px 0 10px}
+  .page-head .lead{font-size:clamp(1rem,1.6vw,1.1rem);color:var(--text-secondary);max-width:680px;margin-bottom:22px}
+  .quick{display:flex;flex-wrap:wrap;gap:8px}
+  .quick a{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--border-strong);padding:9px 14px;font-weight:700;font-size:13.5px;text-decoration:none;border-radius:4px;transition:all .15s}
+  .quick a:hover{background:var(--accent-light);color:var(--accent);border-color:var(--accent)}
+  .quick a.pdf{border-color:var(--border-strong);color:var(--text-secondary);font-weight:500}
+  .quick a.pdf:hover{background:var(--panel);color:var(--text);border-color:var(--text)}
+  .quick a small{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.08em;color:var(--accent)}
+
+  /* LAYOUT */
+  .layout{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1160px;margin:0 auto;padding:0 24px}
+  .toc{position:sticky;top:60px;align-self:start;padding:28px 0 28px;border-right:1px solid var(--border);height:calc(100vh - 60px);overflow:auto}
+  .toc a{display:block;padding:10px 18px 10px 0;margin-left:-1px;border-left:3px solid transparent;padding-left:16px;color:var(--text-secondary);text-decoration:none;font-size:14px;font-weight:500}
+  .toc a small{display:block;font-size:11.5px;color:var(--text-tertiary);font-weight:400;margin-top:1px}
+  .toc a:hover{color:var(--text)}
+  .toc a.on{color:var(--text);font-weight:700;border-left-color:var(--accent);background:var(--accent-light)}
+  .main{padding:28px 0 80px 40px;min-width:0}
+  .sec{scroll-margin-top:76px;margin-bottom:64px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:2px solid var(--text);padding-bottom:10px;margin-bottom:22px}
+  .sec-head h2{font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:800}
+  .sec-head small{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--accent)}
+  .sec-desc{color:var(--text-secondary);margin:-8px 0 22px;font-size:14.5px}
+
+  /* EPISODE (매뉴얼 구조 재활용) */
+  .ep{background:var(--surface);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:22px;scroll-margin-top:76px}
+  .ep-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}
+  .ep-media{background:var(--stage);position:relative;display:flex;align-items:center}
+  .ep-media video{display:block;width:100%;aspect-ratio:16/9;background:var(--stage)}
+  .ep-body{padding:26px 28px 24px;display:flex;flex-direction:column}
+  .ep-kicker{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--text-tertiary);margin-bottom:10px}
+  .ep-kicker .n{font-family:'Inter',sans-serif;font-weight:800;color:var(--accent);font-size:13px;letter-spacing:.08em}
+  .ep-kicker i{font-style:normal;font-family:'Inter',sans-serif;font-variant-numeric:tabular-nums}
+  .ep h3{font-size:20px;font-weight:800;margin-bottom:8px}
+  .ep-desc{color:var(--text-secondary);font-size:14.5px;line-height:1.7;margin-bottom:16px}
+  .steps{list-style:none;margin-bottom:20px;border-top:1px solid var(--border)}
+  .steps li{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--border);font-size:14px;line-height:1.5}
+  .steps li.warn{margin-top:4px}
+  .steps li b{font-weight:700}
+  .steps .k{width:22px;height:22px;border-radius:4px;background:var(--accent-light);color:var(--accent);font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+  .steps li.warn .k{background:rgba(185,28,28,.08);color:#b91c1c}
+  .steps li.warn{color:#7f1d1d}
+  .ways{margin-top:auto;display:flex;flex-wrap:wrap;gap:8px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;cursor:pointer;border:1px solid var(--border-strong);background:var(--surface);color:var(--text);transition:all .15s;font-family:inherit}
+  .btn:hover{border-color:var(--accent);color:var(--accent)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+  .btn.primary:hover{background:var(--accent-deep);color:#fff}
+  .btn svg{width:15px;height:15px}
+  .docs{margin-top:14px;font-size:13px;color:var(--text-tertiary);line-height:1.8}
+  .docs a{display:inline-block;padding:2px 0;color:var(--text-secondary);text-decoration:none;border-bottom:1px solid var(--border-strong);margin-right:14px;cursor:pointer}
+  .docs a:hover{color:var(--accent);border-color:var(--accent)}
+
+  /* 체크리스트 */
+  .chk{border-top:1px solid var(--border)}
+  .chk label{display:grid;grid-template-columns:22px 1fr;gap:14px;align-items:start;padding:13px 0;border-bottom:1px solid var(--border);cursor:pointer;font-size:15px;line-height:1.55}
+  .chk input{appearance:none;width:20px;height:20px;border:2px solid var(--text);border-radius:3px;margin-top:2px;cursor:pointer;position:relative}
+  .chk input:checked{background:var(--accent);border-color:var(--accent)}
+  .chk input:checked::after{content:'';position:absolute;left:5px;top:1px;width:6px;height:11px;border-right:2.5px solid #fff;border-bottom:2.5px solid #fff;transform:rotate(45deg)}
+  .chk input:checked+span{color:var(--text-tertiary);text-decoration:line-through}
+  .chk b{font-weight:700}
+  .chk-foot{display:flex;justify-content:space-between;align-items:center;margin-top:12px;font-size:13px;color:var(--text-tertiary)}
+  .chk-foot span{font-family:'Inter',sans-serif;font-weight:600;font-variant-numeric:tabular-nums}
+  .chk-foot button{border:1px solid var(--border-strong);background:#fff;padding:6px 12px;border-radius:4px;font-size:12.5px;cursor:pointer;font-family:inherit}
+  .chk-foot button:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* 문제 해결 */
+  .faq{border-top:1px solid var(--border)}
+  .faq details{border-bottom:1px solid var(--border)}
+  .faq summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:14px 0;font-weight:700;font-size:15px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary .ep-link{font-family:'Inter',sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.06em;color:var(--accent);white-space:nowrap}
+  .faq summary::before{content:'';display:none}
+  .faq details[open] summary{color:var(--accent)}
+  .faq .ans{padding:0 0 16px;color:var(--text-secondary);font-size:14.5px}
+  .faq .ans p{margin-bottom:8px}
+  .faq .ans ol{margin-left:20px}
+  .faq .ans li{margin:4px 0}
+  .faq .ans a{color:var(--accent)}
+
+  /* 자료·링크 */
+  .res{border-top:2px solid var(--text)}
+  .res a{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:13px 0;border-bottom:1px solid var(--border);text-decoration:none;font-weight:500}
+  .res a:hover{color:var(--accent)}
+  .res a small{font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:.08em;color:var(--text-tertiary)}
+  .res a span em{font-style:normal;color:var(--text-tertiary);font-weight:400;margin-left:8px;font-size:13px}
+
+  /* 도움 */
+  .help{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--text)}
+  .help div{padding:18px 18px 18px 0;border-bottom:1px solid var(--border)}
+  .help div+div{border-left:1px solid var(--border);padding-left:24px}
+  .help small{display:block;font-family:'Inter',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;color:var(--accent);margin-bottom:6px}
+  .help b{display:block;font-size:16px;font-weight:700}
+  .help span{font-size:13px;color:var(--text-secondary)}
+  .help a{text-decoration:none}
+  .help a:hover b{color:var(--accent)}
+
+  /* MODAL */
+  .modal{position:fixed;inset:0;z-index:200;background:rgba(15,23,42,.72);display:none;align-items:center;justify-content:center;padding:20px}
+  .modal.open{display:flex}
+  .modal-box{width:min(1500px,100%);height:min(92vh,100%);background:var(--surface);border-radius:4px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+  .modal-head{height:50px;display:flex;align-items:center;padding:0 12px 0 20px;border-bottom:1px solid var(--border);font-weight:700;font-size:15px;flex-shrink:0}
+  .modal-head .hint{margin-left:14px;font-size:12.5px;color:var(--text-tertiary);font-weight:400}
+  .modal-head button{margin-left:auto;width:36px;height:36px;border:none;background:transparent;border-radius:4px;cursor:pointer;color:var(--text-secondary);font-size:22px;line-height:1}
+  .modal-head button:hover{background:var(--accent-light);color:var(--accent)}
+  .modal-box iframe{flex:1;width:100%;border:none;background:var(--stage)}
+  .modal-box iframe.doc{background:#fff}
+
+  .footer{padding:36px 24px;border-top:1px solid var(--border);text-align:center;color:var(--text-tertiary);font-size:13px;line-height:1.8}
+  .footer a{color:var(--accent);text-decoration:none}
+
+  @media(max-width:900px){
+    .layout{grid-template-columns:1fr}
+    .toc{display:none}
+    .main{padding-left:0}
+    .ep-grid{grid-template-columns:1fr}
+    .ep-body{padding:20px 18px 18px}
+    .help{grid-template-columns:1fr}
+    .help div+div{border-left:0;padding-left:0}
+    .nav-bar{padding:0 14px}
+    .nav-links a{padding:6px 7px;font-size:12.5px;white-space:nowrap}
+    .nav-links a.hide-m{display:none}
+    .modal{padding:0}
+    .modal-box{border-radius:0;height:100%}
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a class="nav-logo" href="index.html"><img class="nav-logo-icon" src="data:image/png;base64,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" alt="MAP Growth Logo">MAP Growth Support Korea</a>
+  <div class="nav-links">
+    <a class="hide-m" href="index.html#intro">MAP Growth 소개</a>
+    <a class="hide-m" href="index.html#services">서비스</a>
+    <a class="hide-m" href="index.html#analyzer">리포트 분석</a>
+    <a class="hide-m" href="index.html#resources">교재 자료</a>
+    <a class="on" href="guide.html">선생님 가이드</a>
+    <a class="cta" href="index.html#contact">문의하기</a>
+  </div>
+</nav>
+
+<header class="page-head">
+  <div class="wrap">
+    <div class="eyebrow">Teacher Guide</div>
+    <h1>선생님 가이드</h1>
+    <p class="lead">처음 로그인부터 학생 등록, 시험 진행, 결과 확인, 리포트 출력까지 영상 7편으로 화면 그대로 따라하세요. 시험 당일에는 체크리스트와 문제 해결을 바로 찾을 수 있어요.</p>
+    <div class="quick">
+      <a href="https://start.mapnwea.org/" target="_blank" rel="noopener"><small>NWEA</small>선생님 로그인</a>
+      <a href="https://check.nwea.org/" target="_blank" rel="noopener"><small>CHECK</small>시스템 점검</a>
+      <a href="https://test.mapnwea.org/" target="_blank" rel="noopener"><small>STUDENT</small>학생 시험 접속</a>
+      <a class="pdf" href="테스트_시작하기__셋팅_.pdf" target="_blank">PDF · 테스트 시작하기</a>
+      <a class="pdf" href="Testing_Tips.pdf" target="_blank">PDF · Testing Tips</a>
+      <a class="pdf" href="MAP_패스워드_리셋팅.pdf" target="_blank">PDF · 비밀번호 재설정</a>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <aside class="toc" id="toc">
+    <a href="#follow" class="on">따라하기 7편<small>영상 · 한 장씩 · 글</small></a>
+    <a href="#day">시험 당일 체크리스트<small>6항목</small></a>
+    <a href="#trouble">문제가 생겼을 때<small>증상별 해결 7가지</small></a>
+    <a href="#links">자료 · 링크<small>PDF 3종 · NWEA 바로가기</small></a>
+    <a href="#help">도움 요청<small>이메일 · 전화 · 카카오</small></a>
+  </aside>
+
+  <main class="main">
+
+    <section class="sec" id="follow">
+      <div class="sec-head"><h2>따라하기 7편</h2><small>처음부터 끝까지</small></div>
+      <p class="sec-desc">화면 속 학원명과 학생 이름은 모두 샘플입니다. 노란 테두리와 번호가 눌러야 할 곳, 빨간 표시는 누르면 안 되는 곳이에요.</p>
+    <!-- 01 -->
+    <article class="ep" id="ep01">
+      <div class="ep-grid">
+        <div class="ep-media">
+          <video controls preload="metadata" playsinline poster="manual/thumb/01.jpg" src="manual/video/01_로그인_접속.mp4"></video>
+        </div>
+        <div class="ep-body">
+          <div class="ep-kicker"><span class="n">EP 01</span><i>6장</i><i>·</i><i>1분 01초</i></div>
+          <h3>로그인과 접속</h3>
+          <p class="ep-desc">start.mapnwea.org 에 들어가 계정 이메일과 비밀번호로 로그인합니다. 비밀번호를 잊었을 때 다시 만드는 방법까지 담았습니다.</p>
+          <ul class="steps">
+            <li><span class="k">1</span><span>주소창에 <b>start.mapnwea.org</b> → 계정 이메일 → <b>Continue</b></span></li>
+            <li><span class="k">2</span><span>비밀번호 → <b>Sign in</b></span></li>
+            <li><span class="k">3</span><span>잊었으면 <b>Forgot Password?</b> → 메일의 Reset password → 새 비밀번호(8자 이상, 대·소문자·숫자·특수문자)</span></li>
+            <li class="warn"><span class="k">!</span><span>재설정 메일은 스팸함에 들어가기도 하고, 링크는 48시간만 유효합니다</span></li>
+          </ul>
+          <div class="ways">
+            <button class="btn primary" onclick="openSlides('manual/slides/01_로그인_슬라이드.html','01 로그인과 접속')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>한 장씩 넘겨보기</button>
+            <a class="btn" href="manual/video/01_로그인_접속.mp4" target="_blank">영상 새 창에서 보기</a>
+          </div>
+          <div class="docs">글로 보기:
+            <a onclick="openDoc('08. 빠른 접속 참고자료.html','08. 빠른 접속 참고자료')">접속 주소 모음</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 02 -->
+    <article class="ep" id="ep02">
+      <div class="ep-grid">
+        <div class="ep-media">
+          <video controls preload="metadata" playsinline poster="manual/thumb/02.jpg" src="manual/video/02_학생등록_로스터링.mp4"></video>
+        </div>
+        <div class="ep-body">
+          <div class="ep-kicker"><span class="n">EP 02</span><i>12장</i><i>·</i><i>1분 50초</i></div>
+          <h3>학생 등록 (로스터링)</h3>
+          <p class="ep-desc">학생 명단 파일을 올리고, 오류가 있으면 고친 뒤 등록을 마칩니다. 오류가 없으면 바로 등록해도 됩니다.</p>
+          <ul class="steps">
+            <li><span class="k">1</span><span>로그인 뒤 첫 화면 위쪽 <b>Rostering</b> → Import Profiles / Rostering</span></li>
+            <li><span class="k">2</span><span>학기 선택, <b>Standard - Add/Update</b>, 명단 파일 Add</span></li>
+            <li><span class="k">3</span><span>오류가 있으면 파일을 고쳐 다시 올리고, 없으면 <b>Post Valid Records</b> 로 등록 완료</span></li>
+            <li class="warn"><span class="k">!</span><span>계정을 새로 만들면 기존 응시 기록이 넘어오지 않습니다</span></li>
+          </ul>
+          <div class="ways">
+            <button class="btn primary" onclick="openSlides('manual/slides/02_로스터링_슬라이드.html','02 학생 등록 (로스터링)')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>한 장씩 넘겨보기</button>
+            <a class="btn" href="manual/video/02_학생등록_로스터링.mp4" target="_blank">영상 새 창에서 보기</a>
+          </div>
+          <div class="docs">글로 보기:
+            <a onclick="openDoc('01. 학생 등록 (로스터링) 가이드.html','01. 학생 등록 (로스터링) 가이드')">학생 등록 가이드</a>
+            <a onclick="openDoc('07. 로스터링 오류 해결.html','07. 로스터링 오류 해결')">오류가 났을 때</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 03 -->
+    <article class="ep" id="ep03">
+      <div class="ep-grid">
+        <div class="ep-media">
+          <video controls preload="metadata" playsinline poster="manual/thumb/03.jpg" src="manual/video/03_시험세션_만들고_진행하기.mp4"></video>
+        </div>
+        <div class="ep-body">
+          <div class="ep-kicker"><span class="n">EP 03</span><i>12장</i><i>·</i><i>1분 48초</i></div>
+          <h3>시험 세션 만들고 진행하기</h3>
+          <p class="ep-desc">시험 볼 학생을 담고 시험 종류를 지정해 세션을 엽니다. 시험이 끝나면 세션을 닫습니다.</p>
+          <ul class="steps">
+            <li><span class="k">1</span><span>위쪽 <b>MAP Growth</b> → <b>Manage Test Sessions</b> → <b>Find Students to Test</b>, 학교명 확인</span></li>
+            <li><span class="k">2</span><span>찾은 학생을 <b>Add Students</b> 로 담고 <b>Select Test</b> 에서 시험 지정</span></li>
+            <li><span class="k">3</span><span><b>Test Now</b> → 세션 이름·비밀번호를 학생에게 알려줍니다</span></li>
+            <li class="warn"><span class="k">!</span><span>K-2 · 2-5 · 6+ 학년대를 잘못 고르면 안 됩니다</span></li>
+          </ul>
+          <div class="ways">
+            <button class="btn primary" onclick="openSlides('manual/slides/03_시험세션_슬라이드.html','03 시험 세션 만들고 진행하기')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>한 장씩 넘겨보기</button>
+            <a class="btn" href="manual/video/03_시험세션_만들고_진행하기.mp4" target="_blank">영상 새 창에서 보기</a>
+          </div>
+          <div class="docs">글로 보기:
+            <a onclick="openDoc('02. 시험 세션 만들기 가이드.html','02. 시험 세션 만들기')">세션 만들기</a>
+            <a onclick="openDoc('04. 시험 중 관리 가이드.html','04. 시험 중 관리')">시험 중 관리</a>
+            <a onclick="openDoc('04-2. 시험 종료 가이드.html','04-2. 시험 종료')">시험 종료</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 04 -->
+    <article class="ep" id="ep04">
+      <div class="ep-grid">
+        <div class="ep-media">
+          <video controls preload="metadata" playsinline poster="manual/thumb/04.jpg" src="manual/video/04_학생로그인.mp4"></video>
+        </div>
+        <div class="ep-body">
+          <div class="ep-kicker"><span class="n">EP 04</span><i>8장</i><i>·</i><i>1분 16초</i></div>
+          <h3>학생 로그인</h3>
+          <p class="ep-desc">학생 화면에서 세션에 들어가 시험을 시작하기까지. 실제 학생 화면 그대로입니다.</p>
+          <ul class="steps">
+            <li><span class="k">1</span><span><b>test.mapnwea.org</b> · 팝업이 막히면 주소창 끝 표시를 눌러 항상 허용</span></li>
+            <li><span class="k">2</span><span><b>Session Name</b> · <b>Password</b> → 이름 고르기 → Next</span></li>
+            <li><span class="k">3</span><span>Is this correct? 에서 시험 종류 확인 → <b>Yes</b> → 선생님 Confirm 대기</span></li>
+            <li><span class="k">4</span><span>확인되면 화살표 → 시험 시작</span></li>
+            <li class="warn"><span class="k">!</span><span>시험 중 창을 닫거나 다른 탭으로 가지 않습니다</span></li>
+          </ul>
+          <div class="ways">
+            <button class="btn primary" onclick="openSlides('manual/slides/04_학생로그인_슬라이드.html','04 학생 로그인')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>한 장씩 넘겨보기</button>
+            <a class="btn" href="manual/video/04_학생로그인.mp4" target="_blank">영상 새 창에서 보기</a>
+          </div>
+          <div class="docs">글로 보기:
+            <a onclick="openDoc('03. 학생 로그인 안내.html','03. 학생 로그인 안내')">학생 로그인 안내</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 05 -->
+    <article class="ep" id="ep05">
+      <div class="ep-grid">
+        <div class="ep-media">
+          <video controls preload="metadata" playsinline poster="manual/thumb/05.jpg" src="manual/video/05_시험결과_보기.mp4"></video>
+        </div>
+        <div class="ep-body">
+          <div class="ep-kicker"><span class="n">EP 05</span><i>11장</i><i>·</i><i>1분 34초</i></div>
+          <h3>시험 결과 보기</h3>
+          <p class="ep-desc">반 전체 결과와 학생 한 명의 결과를 화면에서 바로 확인합니다.</p>
+          <ul class="steps">
+            <li><span class="k">1</span><span>위쪽 <b>MAP Growth</b> → 리포트 종류를 고릅니다</span></li>
+            <li><span class="k">2</span><span><b>Class Profile</b> — 반 전체의 RIT 점수와 영역별 결과</span></li>
+            <li><span class="k">3</span><span><b>Student Profile</b> — 학생 한 명, 과목 탭을 눌러 바꿔 봅니다</span></li>
+          </ul>
+          <div class="ways">
+            <button class="btn primary" onclick="openSlides('manual/slides/05_결과보기_슬라이드.html','05 시험 결과 보기')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>한 장씩 넘겨보기</button>
+            <a class="btn" href="manual/video/05_시험결과_보기.mp4" target="_blank">영상 새 창에서 보기</a>
+          </div>
+          <div class="docs">글로 보기:
+            <a onclick="openDoc('06. 리포트 결과 확인 가이드.html','06. 리포트 결과 확인')">리포트 결과 확인 가이드</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 06 -->
+    <article class="ep" id="ep06">
+      <div class="ep-grid">
+        <div class="ep-media">
+          <video controls preload="metadata" playsinline poster="manual/thumb/06.jpg" src="manual/video/06_StudentProgress_출력하기.mp4"></video>
+        </div>
+        <div class="ep-body">
+          <div class="ep-kicker"><span class="n">EP 06</span><i>11장</i><i>·</i><i>1분 41초</i></div>
+          <h3>Student Progress Report 출력하기</h3>
+          <p class="ep-desc">학생별 성장 리포트를 PDF 로 한꺼번에 내려받고, 받은 성적표를 읽는 법까지 봅니다.</p>
+          <ul class="steps">
+            <li><span class="k">1</span><span>위쪽 <b>MAP Growth</b> → 오른쪽 아래 <b>Other Reports</b> → <b>Student Progress</b> → Term</span></li>
+            <li><span class="k">2</span><span>School 은 <b>이름 글씨를 클릭</b> (체크박스는 여러 학원을 합칠 때)</span></li>
+            <li><span class="k">3</span><span>Instructor → 학생 체크 → <b>Create PDF Report</b></span></li>
+            <li><span class="k">4</span><span><b>Reports Queue</b> 에서 ZIP 내려받기 (14일 뒤 삭제) · 성적표의 RIT·백분위 읽는 법</span></li>
+          </ul>
+          <div class="ways">
+            <button class="btn primary" onclick="openSlides('manual/slides/06_StudentProgress_슬라이드.html','06 Student Progress Report 출력하기')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>한 장씩 넘겨보기</button>
+            <a class="btn" href="manual/video/06_StudentProgress_출력하기.mp4" target="_blank">영상 새 창에서 보기</a>
+          </div>
+          <div class="docs">글로 보기:
+            <a onclick="openDoc('06. 리포트 결과 확인 가이드.html','06. 리포트 결과 확인')">리포트 결과 확인 가이드</a>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- 07 -->
+    <article class="ep" id="ep07">
+      <div class="ep-grid">
+        <div class="ep-media">
+          <video controls preload="metadata" playsinline poster="manual/thumb/07.jpg" src="manual/video/07_리포트생성기_사용법.mp4"></video>
+        </div>
+        <div class="ep-body">
+          <div class="ep-kicker"><span class="n">EP 07</span><i>13장</i><i>·</i><i>1분 52초</i></div>
+          <h3>MAP 리포트 분석 제너레이터 사용법</h3>
+          <p class="ep-desc">NWEA 에서 내려받은 성적 파일을 넣으면 학생별 한글 분석 리포트가 만들어집니다. 계약 학원에 설치해 드리는 프로그램입니다.</p>
+          <ul class="steps">
+            <li><span class="k">1</span><span>받은 zip 을 압축 풀고 <b>리포트 생성하기</b> 를 두 번 클릭 · 처음 한 번은 바탕화면 아이콘이 생깁니다</span></li>
+            <li><span class="k">2</span><span>성적 파일(CSV·PDF)을 <b>끌어다 놓고</b> 리포트 생성하기</span></li>
+            <li><span class="k">3</span><span>다 만들어지면 <b>결과 확인하기</b> · 학원 폴더 안에 학생별 PDF·HTML 과 요약 엑셀</span></li>
+            <li class="warn"><span class="k">!</span><span>검은 창은 닫지 않습니다 · 닫으면 프로그램이 멈춥니다</span></li>
+          </ul>
+          <div class="ways">
+            <button class="btn primary" onclick="openSlides('manual/slides/07_리포트생성기_슬라이드.html','07 MAP 리포트 분석 제너레이터 사용법')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M8 21h8"/></svg>한 장씩 넘겨보기</button>
+            <a class="btn" href="manual/video/07_리포트생성기_사용법.mp4" target="_blank">영상 새 창에서 보기</a>
+          </div>
+          <div class="docs">자세한 설명은 프로그램 안 <b>사용 설명서 열기</b>에 있습니다. 설치는 MAP Growth Support Korea 로 문의해 주세요.          </div>
+        </div>
+      </div>
+    </article>
+    </section>
+
+    <section class="sec" id="day">
+      <div class="sec-head"><h2>시험 당일 체크리스트</h2><small>시작 전 6가지</small></div>
+      <p class="sec-desc">눌러서 체크하면 이 기기에 저장돼요. 다음 시험 땐 초기화 버튼으로 다시 시작하세요.</p>
+      <div class="chk" id="chk">
+        <label><input type="checkbox" data-k="c1"><span><b>크롬 브라우저</b>를 사용해 주세요. 가능하면 NWEA Secure Testing Browser 설치를 권장합니다.</span></label>
+        <label><input type="checkbox" data-k="c2"><span>관리자 ID는 <b>처음 등록한 이메일</b>입니다. start.mapnwea.org 에서 비밀번호를 설정해 주세요.</span></label>
+        <label><input type="checkbox" data-k="c3"><span>시험 전 <b>check.nwea.org</b> 에서 시스템 진단을 실행하세요.</span></label>
+        <label><input type="checkbox" data-k="c4"><span>아이패드는 앱스토어에서 <b>"NWEA"</b> 를 검색해 전용 앱을 설치하세요.</span></label>
+        <label><input type="checkbox" data-k="c5"><span>시험 후 점수는 화면에 바로 표시됩니다. 정식 리포트는 <b>48시간 후</b>에 확인되므로 점수 화면을 촬영해 기록해 두세요.</span></label>
+        <label><input type="checkbox" data-k="c6"><span>시험이 끝나면 반드시 <b>End Session</b>을 누르세요. 누르지 않으면 다음 시험 시작 때 오류가 납니다.</span></label>
+      </div>
+      <div class="chk-foot"><span id="chkCount">0 / 6 완료</span><button type="button" onclick="resetChk()">초기화</button></div>
+    </section>
+
+    <section class="sec" id="trouble">
+      <div class="sec-head"><h2>문제가 생겼을 때</h2><small>증상 → 해결</small></div>
+      <p class="sec-desc">자주 생기는 일곱 가지예요. 눌러서 펼치면 해결 순서가 나옵니다. 영상 편 번호를 누르면 해당 화면으로 갑니다.</p>
+      <div class="faq">
+        <details>
+          <summary>경고창이 뜨면서 시험이 시작되지 않아요 <a class="ep-link" href="#ep04">EP 04 학생 로그인</a></summary>
+          <div class="ans"><p>팝업 차단이 켜져 있을 가능성이 높습니다.</p><ol><li>크롬 주소창 오른쪽 끝의 팝업 차단 표시를 누르기</li><li>"이 사이트의 팝업 항상 허용" 선택</li><li>새로고침(F5) 후 다시 시도</li></ol></div>
+        </details>
+        <details>
+          <summary>"Some student(s) are unable to test" 경고 <a class="ep-link" href="#ep03">EP 03 시험 세션</a></summary>
+          <div class="ans"><p>학생 계정이 시험 세션에 제대로 담기지 않았을 때 나옵니다.</p><ol><li>관리자 화면에서 해당 학생의 세션 배정 확인</li><li>학생 이름과 ID가 정확한지 확인</li><li>세션을 다시 시작하거나 학생을 다시 추가</li><li>계속되면 <a href="mailto:cs@mapgrowthsupportkorea.com">cs@mapgrowthsupportkorea.com</a>으로 문의</li></ol></div>
+        </details>
+        <details>
+          <summary>시험 중 "temporary error" 메시지가 나왔어요 <a class="ep-link" href="#ep04">EP 04 학생 로그인</a></summary>
+          <div class="ans"><p>일시적인 서버 문제입니다. 학생의 진행 상황은 자동으로 저장됩니다.</p><ol><li>5~10초 기다린 뒤 "다시 시도"</li><li>반복되면 인터넷 연결 확인</li><li>그래도 안 되면 브라우저를 닫고 다시 로그인하면 이어서 진행됩니다</li></ol></div>
+        </details>
+        <details>
+          <summary>해상도 오류(1024×768)가 나와요 <a class="ep-link" href="#ep04">EP 04 학생 로그인</a></summary>
+          <div class="ans"><p>MAP 시험은 최소 1024×768 해상도가 필요합니다.</p><ol><li>크롬에서 Ctrl+0(맥은 Cmd+0)으로 확대·축소를 100%로</li><li>전체 화면(F11)으로 전환</li><li>태블릿은 가로로 회전. 화면이 작은 기기는 외부 모니터 연결 권장</li></ol></div>
+        </details>
+        <details>
+          <summary>비밀번호를 잊어버렸어요 <a class="ep-link" href="#ep01">EP 01 로그인</a></summary>
+          <div class="ans"><ol><li>로그인 화면에서 "Forgot Password?" 누르기</li><li>등록된 이메일 입력</li><li>메일로 받은 링크에서 새 비밀번호 설정(8자 이상, 대·소문자·숫자·특수문자)</li><li>메일이 안 오면 스팸함 확인. 링크는 48시간만 유효합니다</li></ol></div>
+        </details>
+        <details>
+          <summary>어떤 브라우저를 써야 하나요 <a class="ep-link" href="#day">체크리스트</a></summary>
+          <div class="ans"><p>크롬(Chrome)을 사용해 주세요. MAP Growth는 크롬에 최적화되어 있고 Safari·Firefox·Edge에서는 일부 기능이 제한될 수 있습니다. 항상 최신 버전으로 업데이트해 주세요.</p></div>
+        </details>
+        <details>
+          <summary>"Students are Ineligible to Test" 메시지가 떠요 <a class="ep-link" href="#help">문의</a></summary>
+          <div class="ans"><p>학기 변경에 따른 프로그램 재설정이 필요한 상태입니다. <a href="mailto:cs@mapgrowthsupportkorea.com">cs@mapgrowthsupportkorea.com</a>으로 연락 주시면 바로 처리해 드립니다.</p></div>
+        </details>
+      </div>
+    </section>
+
+    <section class="sec" id="links">
+      <div class="sec-head"><h2>자료 · 링크</h2><small>한글 자료 · NWEA</small></div>
+      <div class="res">
+        <a href="테스트_시작하기__셋팅_.pdf" target="_blank"><span>테스트 시작하기 (셋팅)<em>한글</em></span><small>PDF</small></a>
+        <a href="Testing_Tips.pdf" target="_blank"><span>Testing Tips<em>한글</em></span><small>PDF</small></a>
+        <a href="MAP_패스워드_리셋팅.pdf" target="_blank"><span>MAP 패스워드 리셋팅<em>한글</em></span><small>PDF</small></a>
+        <a href="https://start.mapnwea.org/" target="_blank" rel="noopener"><span>선생님 로그인<em>start.mapnwea.org</em></span><small>LINK</small></a>
+        <a href="https://test.mapnwea.org/" target="_blank" rel="noopener"><span>학생 시험 접속<em>test.mapnwea.org</em></span><small>LINK</small></a>
+        <a href="https://check.nwea.org/" target="_blank" rel="noopener"><span>시스템 점검<em>check.nwea.org</em></span><small>LINK</small></a>
+        <a href="https://connection.nwea.org/s/technical-resources?language=en_US" target="_blank" rel="noopener"><span>NWEA 기술 자료<em>영문</em></span><small>LINK</small></a>
+      </div>
+    </section>
+
+    <section class="sec" id="help">
+      <div class="sec-head"><h2>도움 요청</h2><small>평일 9:00~18:00</small></div>
+      <div class="help">
+        <div><a href="mailto:cs@mapgrowthsupportkorea.com"><small>EMAIL</small><b>cs@mapgrowthsupportkorea.com</b><span>가장 빠르게 처리돼요</span></a></div>
+        <div><a href="tel:070-7623-2105"><small>PHONE</small><b>070-7623-2105</b><span>시험 당일 급한 문제</span></a></div>
+        <div><a href="https://pf.kakao.com/_cAmIn/chat" target="_blank" rel="noopener"><small>KAKAO</small><b>카카오 채널</b><span>간단한 확인 사항</span></a></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<footer class="footer">
+  MAP Growth Support Korea · <a href="mailto:cs@mapgrowthsupportkorea.com">cs@mapgrowthsupportkorea.com</a> · 070-7623-2105<br>
+  화면 속 학원명·학생명은 모두 샘플입니다. NWEA MAP Help Center 기반.
+</footer>
+
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <div class="modal-head"><span id="modalTitle"></span><span class="hint" id="modalHint"></span><button onclick="closeModal()" aria-label="닫기">&times;</button></div>
+    <iframe id="modalFrame" src="about:blank" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+  var modal=document.getElementById('modal'),frame=document.getElementById('modalFrame');
+  function openSlides(src,title){document.getElementById('modalTitle').textContent=title;document.getElementById('modalHint').textContent='화살표 키 · 화면 좌우 클릭 · 폰은 밀어서 넘깁니다';frame.className='';frame.src=src;modal.classList.add('open');document.body.style.overflow='hidden';setTimeout(function(){try{frame.contentWindow.focus();}catch(e){}},300);}
+  function openDoc(file,title){document.getElementById('modalTitle').textContent=title;document.getElementById('modalHint').textContent='';frame.className='doc';frame.src='guides/'+file;modal.classList.add('open');document.body.style.overflow='hidden';}
+  function closeModal(){modal.classList.remove('open');frame.src='about:blank';document.body.style.overflow='';}
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+  frame.addEventListener('load',function(){try{frame.contentWindow.document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});}catch(e){}});
+  var vids=document.querySelectorAll('video');
+  vids.forEach(function(v){v.addEventListener('play',function(){vids.forEach(function(o){if(o!==v)o.pause();});});});
+
+  // 목차 하이라이트
+  var tocLinks=document.querySelectorAll('#toc a'),secs=document.querySelectorAll('.sec');
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){tocLinks.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id);});}});},{rootMargin:'-30% 0px -60% 0px'});
+  secs.forEach(function(s){io.observe(s);});
+
+  // 체크리스트 저장
+  var boxes=document.querySelectorAll('#chk input'),cnt=document.getElementById('chkCount');
+  function loadChk(){var s={};try{s=JSON.parse(localStorage.getItem('map_chk')||'{}');}catch(e){}boxes.forEach(function(b){b.checked=!!s[b.dataset.k];});countChk();}
+  function saveChk(){var s={};boxes.forEach(function(b){s[b.dataset.k]=b.checked;});try{localStorage.setItem('map_chk',JSON.stringify(s));}catch(e){}countChk();}
+  function countChk(){var n=0;boxes.forEach(function(b){if(b.checked)n++;});cnt.textContent=n+' / '+boxes.length+' 완료';}
+  function resetChk(){boxes.forEach(function(b){b.checked=false;});saveChk();}
+  boxes.forEach(function(b){b.addEventListener('change',saveChk);});
+  loadChk();
+</script>
+</body>
+</html>
