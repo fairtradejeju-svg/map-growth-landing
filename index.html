@@ -286,6 +286,21 @@
       .ss2-tabs button { padding: 8px 10px; font-size: 12px; }
     }
 
+    /* 소개 영상 버튼 · 모달 */
+    .ss2-watch { display: flex; align-items: center; gap: 14px; margin-top: 16px; flex-wrap: wrap; }
+    .ss2-watch-btn { display: inline-flex; align-items: center; gap: 9px; background: var(--accent); color: #fff; border: 0; border-radius: 4px; padding: 11px 18px; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+    .ss2-watch-btn:hover { background: var(--accent-deep, #0D5C48); }
+    .ss2-watch-btn svg { width: 15px; height: 15px; }
+    .ss2-watch-btn i { font-style: normal; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600; opacity: .8; font-variant-numeric: tabular-nums; }
+    .ss2-watch > span { font-size: 13px; color: var(--text-secondary); }
+    .vmodal { position: fixed; inset: 0; z-index: 1200; display: flex; align-items: center; justify-content: center; padding: 24px; }
+    .vmodal[hidden] { display: none !important; }
+    .vmodal-bd { position: absolute; inset: 0; background: rgba(15,23,42,.72); }
+    .vmodal-box { position: relative; width: min(1100px, 100%); }
+    .vmodal-box video { width: 100%; display: block; background: #000; border-radius: 4px; }
+    .vmodal-x { position: absolute; top: -42px; right: 0; width: 34px; height: 34px; border: 0; background: transparent; color: #fff; cursor: pointer; padding: 0; }
+    .vmodal-x svg { width: 24px; height: 24px; }
+    @media (max-width: 640px) { .vmodal { padding: 16px; } .vmodal-x { top: -38px; } }
     /* ===== CARD ===== */
     .card {
       background: var(--surface); border: 1px solid var(--border);
@@ -1017,9 +1032,26 @@
             <button type="button" class="ss2-ic ss2-play" id="ss2Play" aria-label="자동 재생"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
             <span class="ss2-cnt" id="ss2Cnt">1 / 7</span>
           </div>
+        <div class="ss2-watch">
+          <button type="button" class="ss2-watch-btn" id="introPlay">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>영상으로 보기<i>1분 24초</i>
+          </button>
+          <span>내레이션과 자막이 있는 소개 영상이에요</span>
+        </div>
         </div>
       </div>
     </section>
+
+    <!-- 소개 영상 모달 -->
+    <div class="vmodal" id="introModal" hidden>
+      <div class="vmodal-bd" data-vclose></div>
+      <div class="vmodal-box" role="dialog" aria-modal="true" aria-label="MAP Growth 소개 영상">
+        <button type="button" class="vmodal-x" data-vclose aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        <video id="introVideo" controls playsinline preload="none" poster="manual/thumb/00_intro.jpg">
+          <source src="manual/video/00_MAP_Growth_%EC%86%8C%EA%B0%9C.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
 
     <!-- SERVICES -->
     <section id="services" data-reveal>
@@ -1648,6 +1680,22 @@
       cnt.textContent = '1 / ' + T;
     })();
 
+    // === 소개 영상 모달 ===
+    (function () {
+      var open = document.getElementById('introPlay'), m = document.getElementById('introModal');
+      if (!open || !m) return;
+      var v = document.getElementById('introVideo');
+      function show() {
+        var pb = document.getElementById('ss2Play');
+        if (pb && pb.getAttribute('aria-label') === '일시정지') pb.click();
+        m.hidden = false; document.body.style.overflow = 'hidden';
+        try { v.play(); } catch (e) {}
+      }
+      function hide() { v.pause(); m.hidden = true; document.body.style.overflow = ''; }
+      open.onclick = show;
+      m.querySelectorAll('[data-vclose]').forEach(function (x) { x.onclick = hide; });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !m.hidden) hide(); });
+    })();
     // === Smooth Scroll for nav ===
     document.querySelectorAll('a[href^="#"]').forEach(function(a) {
       a.addEventListener('click', function(e) {
