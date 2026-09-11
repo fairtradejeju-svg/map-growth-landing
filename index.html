@@ -188,52 +188,103 @@
     .section-title { margin-bottom: 16px; }
     .section-desc { color: var(--text-secondary); font-size: 1.05rem; max-width: 600px; margin-bottom: 48px; line-height: 1.7; }
 
-    /* ===== SLIDESHOW EMBED ===== */
-    .slideshow-section { background: var(--surface); border-bottom: 1px solid var(--border); }
-    .slideshow-wrapper {
-      max-width: 720px; margin: 0 auto;
-      border-radius: 12px; overflow: hidden;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+    /* ===== SLIDESHOW v2 (MAP Growth 소개 7장) ===== */
+    .slideshow-section { background: #F8FAFC; border-bottom: 1px solid var(--border); }
+    .ss2 { max-width: 880px; margin: 0 auto; outline: none; }
+    .ss2-stage { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; background: #fff; border: 1px solid var(--border); border-radius: 4px; container-type: inline-size; }
+    .ss2-slide { position: absolute; inset: 0; padding: 4.5cqw 6cqw 6cqw; display: flex; flex-direction: column; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .45s ease; background: #fff; color: var(--text); }
+    .ss2-slide.active { opacity: 1; pointer-events: auto; }
+    .ss2-slide > * { transform: translateY(10px); opacity: 0; transition: transform .55s cubic-bezier(.22,1,.36,1), opacity .55s; }
+    .ss2-slide.active > * { transform: none; opacity: 1; }
+    .ss2-slide.active > *:nth-child(2) { transition-delay: .08s; }
+    .ss2-slide.active > *:nth-child(3) { transition-delay: .16s; }
+    .ss2-slide.active > *:nth-child(4) { transition-delay: .24s; }
+    .ss2-slide.active > *:nth-child(5) { transition-delay: .32s; }
+    .ss2-dark { background: #0B1F14; color: #fff; }
+    .ss2-eyebrow { font-family: 'Inter', sans-serif; font-size: max(10px, 1.5cqw); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.6cqw; }
+    .ss2-dark .ss2-eyebrow { color: #7ED4B4; }
+    .ss2-h { font-size: max(17px, 3.9cqw); font-weight: 800; line-height: 1.25; letter-spacing: -.03em; margin: 0 0 3cqw; word-break: keep-all; }
+    .ss2-dark .ss2-h { color: #fff; }
+    .ss2-h em { font-style: normal; color: var(--accent); box-shadow: inset 0 -.28em 0 rgba(15,110,86,.16); }
+    .ss2-dark .ss2-h em { color: #7ED4B4; box-shadow: inset 0 -.28em 0 rgba(126,212,180,.2); }
+    .ss2-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2cqw; border-top: 2px solid var(--text); padding-top: 2.6cqw; margin-top: .5cqw; }
+    .ss2-dark .ss2-stats { border-top-color: rgba(255,255,255,.18); }
+    .ss2-stats b { display: block; font-family: 'Inter', sans-serif; font-size: max(20px, 5.4cqw); font-weight: 800; letter-spacing: -.03em; line-height: 1; font-variant-numeric: tabular-nums; color: var(--accent); }
+    .ss2-dark .ss2-stats b { color: #fff; }
+    .ss2-stats b i { font-style: normal; font-size: .46em; margin-left: .12em; font-family: 'Noto Sans KR', sans-serif; font-weight: 700; }
+    .ss2-stats span { display: block; font-size: max(10px, 1.5cqw); color: var(--text-secondary); margin-top: 1cqw; line-height: 1.4; }
+    .ss2-dark .ss2-stats span { color: rgba(255,255,255,.72); }
+    .ss2-foot { font-size: max(10px, 1.5cqw); color: var(--text-secondary); margin: 3cqw 0 0; }
+    .ss2-dark .ss2-foot { color: rgba(255,255,255,.62); }
+    .ss2-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5cqw; }
+    .ss2-vs > div { border-top: 2px solid var(--text); padding-top: 2cqw; }
+    .ss2-vs > .ss2-vs-b { border-top-color: var(--accent); }
+    .ss2-tag { font-family: 'Inter', sans-serif; font-size: max(10px, 1.4cqw); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--text-tertiary); }
+    .ss2-vs-b .ss2-tag { color: var(--accent); }
+    .ss2-vs b { display: block; font-size: max(14px, 2.5cqw); margin: 1cqw 0 .9cqw; letter-spacing: -.02em; }
+    .ss2-vs p { font-size: max(11px, 1.7cqw); line-height: 1.6; color: var(--text-secondary); margin: 0; word-break: keep-all; }
+    .ss2-two { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4cqw; align-items: center; }
+    .ss2-two svg { width: 100%; height: auto; display: block; }
+    .ss2-list { list-style: none; margin: 0; padding: 0; }
+    .ss2-list li { font-size: max(11px, 1.7cqw); line-height: 1.55; padding: 1.3cqw 0; border-top: 1px solid var(--border); color: var(--text-secondary); word-break: keep-all; }
+    .ss2-list li:first-child { border-top: 0; padding-top: 0; }
+    .ss2-list b { color: var(--text); }
+    .ss2-reports { display: grid; grid-template-columns: 1fr 4cqw 1.4fr; gap: 2cqw; align-items: center; }
+    .ss2-reports figure { margin: 0; }
+    .ss2-reports img { display: block; width: 100%; border: 1px solid var(--border); background: #fff; max-height: 21cqw; object-fit: cover; object-position: top; }
+    .ss2-reports .out img { box-shadow: 0 10px 28px rgba(15,23,42,.14); }
+    .ss2-reports figcaption { font-size: max(10px, 1.4cqw); color: var(--text-secondary); margin-top: 1cqw; }
+    .ss2-reports figcaption b { color: var(--text); margin-right: .6cqw; }
+    .ss2-arrow { display: block; height: 2px; background: var(--text); position: relative; }
+    .ss2-arrow::after { content: ''; position: absolute; right: -1px; top: -.65cqw; width: 1.3cqw; height: 1.3cqw; border-top: 2px solid var(--text); border-right: 2px solid var(--text); transform: rotate(45deg); }
+    .ss2-chips { grid-column: 1 / -1; list-style: none; display: flex; flex-wrap: wrap; gap: 1cqw; margin: 1.5cqw 0 0; padding: 0; }
+    .ss2-chips li { font-size: max(10px, 1.45cqw); font-weight: 600; color: var(--accent); border: 1px solid rgba(15,110,86,.35); padding: .5cqw 1.2cqw; border-radius: 3px; }
+    .ss2-regions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8cqw 3cqw; }
+    .ss2-regions > div { border-top: 1px solid var(--border); padding-top: 1.2cqw; }
+    .ss2-regions h4 { margin: 0; font-size: max(12px, 1.9cqw); font-weight: 700; display: flex; justify-content: space-between; align-items: baseline; }
+    .ss2-regions h4 b { font-family: 'Inter', sans-serif; font-size: max(12px, 2.2cqw); color: var(--accent); font-variant-numeric: tabular-nums; }
+    .ss2-regions p { margin: .7cqw 0 0; font-size: max(9px, 1.3cqw); line-height: 1.55; color: var(--text-secondary); word-break: keep-all; }
+    .ss2-cta { display: flex; gap: 1.6cqw; flex-wrap: wrap; margin-top: .5cqw; }
+    .ss2-btn { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: max(12px, 1.9cqw); padding: 1.4cqw 2.6cqw; border-radius: 4px; text-decoration: none; border: 1px solid var(--accent); }
+    .ss2-btn-line { background: #fff; color: var(--text); border-color: var(--text); }
+    .ss2-dark .ss2-btn { background: #fff; color: #0B1F14; border-color: #fff; }
+    .ss2-dark .ss2-btn-line { background: transparent; color: #fff; border-color: rgba(255,255,255,.5); }
+    .ss2-btn:hover { text-decoration: none; opacity: .92; }
+    .ss2-bar { position: absolute; left: 0; right: 0; bottom: 0; height: 3px; background: rgba(15,23,42,.08); z-index: 2; }
+    .ss2-bar i { display: block; height: 100%; width: 0; background: var(--accent); }
+    .ss2-bar i.run { transition: width 7s linear; width: 100%; }
+    .ss2-stage.is-dark .ss2-bar { background: rgba(255,255,255,.14); }
+    .ss2-stage.is-dark .ss2-bar i { background: #7ED4B4; }
+    .ss2-nav { display: flex; align-items: center; gap: 8px; margin-top: 14px; }
+    .ss2-tabs { display: flex; gap: 4px; flex: 1; overflow-x: auto; scrollbar-width: none; }
+    .ss2-tabs::-webkit-scrollbar { display: none; }
+    .ss2-tabs button { flex: 0 0 auto; background: none; border: 0; border-bottom: 2px solid transparent; padding: 8px 10px; font-family: inherit; font-size: 13px; font-weight: 600; color: var(--text-secondary); cursor: pointer; white-space: nowrap; }
+    .ss2-tabs button i { font-style: normal; font-family: 'Inter', sans-serif; font-size: 11px; color: var(--text-tertiary); margin-right: 5px; font-variant-numeric: tabular-nums; }
+    .ss2-tabs button.on { color: var(--accent); border-bottom-color: var(--accent); }
+    .ss2-tabs button.on i { color: var(--accent); }
+    .ss2-tabs button:hover { color: var(--text); }
+    .ss2-ic { width: 34px; height: 34px; border: 1px solid var(--border); background: #fff; border-radius: 4px; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text); flex: 0 0 auto; padding: 0; }
+    .ss2-ic:hover { border-color: var(--accent); color: var(--accent); }
+    .ss2-ic svg { width: 16px; height: 16px; }
+    .ss2-cnt { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--text-secondary); font-variant-numeric: tabular-nums; min-width: 38px; text-align: right; }
+    @media (max-width: 640px) {
+      .ss2-stage { aspect-ratio: 4/3; }
+      .ss2-slide { padding: 6cqw; }
+      .ss2-stats { grid-template-columns: 1fr 1fr; gap: 3cqw 4cqw; }
+      .ss2-h { margin-bottom: 2cqw; }
+      .ss2-two { grid-template-columns: 1fr; gap: 2cqw; }
+      .ss2-two svg { max-height: 27cqw; }
+      .ss2-list li { padding: .7cqw 0; font-size: 11px; }
+      .ss2-list li:nth-child(3) { display: none; }
+      .ss2-reports { grid-template-columns: 1fr 1fr; gap: 3cqw; }
+      .ss2-reports img { max-height: 34cqw; }
+      .ss2-arrow { display: none; }
+      .ss2-chips li:nth-child(n+5) { display: none; }
+      .ss2-regions { grid-template-columns: 1fr 1fr 1fr; gap: 2cqw; }
+      .ss2-regions p { display: none; }
+      .ss2-cnt { display: none; }
+      .ss2-tabs button { padding: 8px 10px; font-size: 12px; }
     }
-    /* Slideshow internal styles */
-    .slideshow-wrapper .vp { max-width: 100%; }
-    .slideshow-wrapper .frame { background: var(--surface-hover); border-radius: 0; padding: 12px; }
-    .slideshow-wrapper .screen { position: relative; width: 100%; aspect-ratio: 16/9; overflow: hidden; border-radius: 8px; background: #0B1F14; }
-    .slideshow-wrapper .slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: clamp(18px,3vw,30px) clamp(22px,4vw,40px); opacity: 0; pointer-events: none; transition: opacity .45s ease; }
-    .slideshow-wrapper .slide.active { opacity: 1; pointer-events: auto; }
-    .slideshow-wrapper .slide>* { transform: translateY(12px); opacity: 0; transition: all .5s cubic-bezier(.22,1,.36,1); }
-    .slideshow-wrapper .slide.active>* { transform: translateY(0); opacity: 1; }
-    .slideshow-wrapper .slide.active>*:nth-child(2) { transition-delay: .06s; }
-    .slideshow-wrapper .slide.active>*:nth-child(3) { transition-delay: .12s; }
-    .slideshow-wrapper .slide.active>*:nth-child(4) { transition-delay: .18s; }
-    .slideshow-wrapper .slide.active>*:nth-child(5) { transition-delay: .24s; }
-    .slideshow-wrapper .slide.active>*:nth-child(6) { transition-delay: .3s; }
-    .slideshow-wrapper .slide.active>*:nth-child(7) { transition-delay: .36s; }
-    .slideshow-wrapper .s-dk { background: #0B1F14; }
-    .slideshow-wrapper .s-lt { background: #F2F8F4; }
-    .slideshow-wrapper .s-md { background: #0E2A1C; }
-    .slideshow-wrapper .pill { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 14px; border-radius: 100px; margin-bottom: 12px; }
-    .slideshow-wrapper .pill-l { background: #DFF0E6; color: #085041; }
-    .slideshow-wrapper .pill-d { background: rgba(255,255,255,.06); color: rgba(255,255,255,.4); }
-    .slideshow-wrapper .h1 { font-family: 'Noto Sans KR', sans-serif; font-weight: 600; line-height: 1.25; text-align: center; }
-    .slideshow-wrapper .h1-dk { color: #0B1F14; }
-    .slideshow-wrapper .h1-lt { color: #fff; }
-    .slideshow-wrapper .em { color: #0F6E56; }
-    .slideshow-wrapper .em2 { color: #5DCAA5; }
-    .slideshow-wrapper .sub { font-size: 12px; text-align: center; line-height: 1.65; max-width: 480px; }
-    .slideshow-wrapper .sub-dk { color: #444441; }
-    .slideshow-wrapper .sub-lt { color: rgba(255,255,255,.4); }
-    .slideshow-wrapper .mn { font-family: 'Inter', monospace; }
-    .slideshow-wrapper .ctrls { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 0 0; }
-    .slideshow-wrapper .cbtn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); font-size: 14px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    .slideshow-wrapper .cbtn:hover { background: var(--surface-hover); }
-    .slideshow-wrapper .pbtn { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); background: transparent; color: var(--text-secondary); font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    .slideshow-wrapper .dots { display: flex; gap: 5px; align-items: center; margin: 0 6px; }
-    .slideshow-wrapper .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); cursor: pointer; transition: all .2s; }
-    .slideshow-wrapper .dot.on { background: #0F6E56; width: 18px; border-radius: 8px; }
-    .slideshow-wrapper .cnt { font-size: 11px; color: var(--text-secondary); font-family: 'Inter', monospace; min-width: 44px; text-align: center; }
 
     /* ===== CARD ===== */
     .card {
@@ -826,187 +877,145 @@
       </div>
     </section>
 
-    <!-- MAP GROWTH INTRO SLIDESHOW -->
+    <!-- MAP GROWTH INTRO SLIDESHOW (v2 · 7장) -->
     <section class="slideshow-section" id="intro" style="padding:clamp(40px,8vw,80px) 0;">
       <div class="container">
-        <div class="animate" style="text-align:center;margin-bottom:40px;">
-          <span class="section-label">MAP Growth 소개</span>
-          <h2 class="section-title">MAP Growth는 어떤 시험인가요?</h2>
-          <p class="section-desc" style="margin-left:auto;margin-right:auto;">슬라이드를 넘기며 MAP Growth 테스트에 대해 알아보세요.<br>좌우 화살표 또는 재생 버튼을 사용할 수 있습니다.</p>
-        </div>
-        <div class="slideshow-wrapper animate delay-2">
-          <div class="vp">
-            <div class="frame">
-              <div class="screen">
-                <div class="slide s-dk active" id="s0">
-                  <div style="font-family:'Inter',sans-serif;font-weight:500;font-size:clamp(56px,11vw,96px);color:#fff;letter-spacing:-2px;line-height:.9;">MAP</div>
-                  <div style="font-weight:300;font-size:clamp(15px,2.5vw,22px);color:rgba(255,255,255,.3);letter-spacing:8px;text-transform:uppercase;margin-top:6px;">Growth</div>
-                  <div style="margin-top:28px;font-size:14px;color:rgba(255,255,255,.6);text-align:center;line-height:1.7;">우리 아이의 진짜 실력,<br><span style="color:#5DCAA5;font-weight:500;">세계 기준</span>으로 확인하세요</div>
-                </div>
-                <div class="slide s-lt" id="s1">
-                  <span class="pill pill-l">Why MAP?</span>
-                  <div class="h1 h1-dk" style="font-size:clamp(16px,2.8vw,28px);">학교 시험 성적만으로<br>충분할까요?</div>
-                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:460px;margin-top:18px;">
-                    <div style="background:#fff;border-radius:8px;padding:16px;border:0.5px solid #e5e5e5;">
-                      <div style="font-size:11px;color:#5F5E5A;font-weight:500;letter-spacing:1px;text-transform:uppercase;">학교 시험</div>
-                      <div style="font-size:13px;color:#2C2C2A;margin-top:10px;line-height:1.55;">"이번에 90점"<br>그런데 <span style="color:#A32D2D;font-weight:500;">어디가 부족한지</span><br>알 수 없습니다</div>
-                    </div>
-                    <div style="background:#fff;border-radius:8px;padding:16px;border:2px solid #0F6E56;">
-                      <div style="font-size:11px;color:#0F6E56;font-weight:500;letter-spacing:1px;text-transform:uppercase;">MAP Growth</div>
-                      <div style="font-size:13px;color:#2C2C2A;margin-top:10px;line-height:1.55;"><span style="color:#085041;font-weight:500;">영역별 수준</span>을 정확히<br>진단하고 <span style="color:#085041;font-weight:500;">성장 경로</span>를<br>제시합니다</div>
-                    </div>
-                  </div>
-                  <div class="sub sub-dk" style="margin-top:14px;opacity:.6;">MAP Growth는 정답/오답이 아닌, 학생이 무엇을 할 수 있는지를 측정합니다</div>
-                </div>
-                <div class="slide s-dk" id="s2">
-                  <span class="pill pill-d">Junior SAT</span>
-                  <div class="h1 h1-lt" style="font-size:clamp(15px,2.6vw,24px);"><span class="em2">SAT가 바뀌었습니다</span><br>MAP은 그 미래를 먼저 경험합니다</div>
-                  <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;width:100%;max-width:500px;margin-top:20px;">
-                    <div style="background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.08);border-radius:8px;padding:16px 14px;text-align:center;">
-                      <div style="font-size:11px;color:rgba(255,255,255,.3);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Digital SAT (2024~)</div>
-                      <div style="font-size:12px;color:rgba(255,255,255,.8);line-height:1.65;">컴퓨터 적응형<br>난이도 자동 조절<br>Reading + Math</div>
-                    </div>
-                    <div style="text-align:center;"><div style="font-size:20px;color:#5DCAA5;">=</div><div style="font-size:11px;color:rgba(255,255,255,.25);margin-top:4px;">동일 방식</div></div>
-                    <div style="background:rgba(93,202,165,.06);border:2px solid rgba(93,202,165,.25);border-radius:8px;padding:16px 14px;text-align:center;">
-                      <div style="font-size:11px;color:#5DCAA5;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">MAP Growth</div>
-                      <div style="font-size:12px;color:rgba(255,255,255,.8);line-height:1.65;">컴퓨터 적응형<br>난이도 자동 조절<br>Reading + Math + Lang</div>
-                    </div>
-                  </div>
-                  <div style="margin-top:16px;background:rgba(255,255,255,.03);border-radius:8px;padding:12px 20px;max-width:500px;">
-                    <div style="font-size:12px;color:rgba(255,255,255,.55);text-align:center;line-height:1.65;">2024년부터 SAT는 <span style="color:#5DCAA5;font-weight:500;">디지털 적응형</span>으로 전환되었습니다<br>MAP Growth는 <span style="color:#5DCAA5;font-weight:500;">K-12 시절부터</span> 같은 방식으로 훈련하는 유일한 시험입니다</div>
-                  </div>
-                </div>
-                <div class="slide s-lt" id="s3">
-                  <span class="pill pill-l">Global standard</span>
-                  <div class="h1 h1-dk" style="font-size:clamp(16px,2.8vw,28px);">전 세계 <span class="em">1,600만 명</span>의 학생이<br>같은 시험을 봅니다</div>
-                  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;width:100%;max-width:480px;margin-top:20px;">
-                    <div style="text-align:center;background:#fff;border-radius:8px;padding:14px 8px;border:0.5px solid #e5e5e5;"><div class="mn" style="font-size:clamp(18px,3.5vw,28px);font-weight:500;color:#085041;">149</div><div style="font-size:11px;color:#5F5E5A;margin-top:4px;">국가</div></div>
-                    <div style="text-align:center;background:#fff;border-radius:8px;padding:14px 8px;border:0.5px solid #e5e5e5;"><div class="mn" style="font-size:clamp(18px,3.5vw,28px);font-weight:500;color:#085041;">36K</div><div style="font-size:11px;color:#5F5E5A;margin-top:4px;">학교</div></div>
-                    <div style="text-align:center;background:#fff;border-radius:8px;padding:14px 8px;border:0.5px solid #e5e5e5;"><div class="mn" style="font-size:clamp(18px,3.5vw,28px);font-weight:500;color:#085041;">60%</div><div style="font-size:11px;color:#5F5E5A;margin-top:4px;">미국 국제학교<br>채택률</div></div>
-                    <div style="text-align:center;background:#fff;border-radius:8px;padding:14px 8px;border:0.5px solid #e5e5e5;"><div class="mn" style="font-size:clamp(18px,3.5vw,28px);font-weight:500;color:#085041;">55+</div><div style="font-size:11px;color:#5F5E5A;margin-top:4px;">년 연구</div></div>
-                  </div>
-                  <div class="sub sub-dk" style="margin-top:14px;">미국 사립학교와 국제학교가 가장 많이 채택한 표준 학력평가입니다</div>
-                </div>
-                <div class="slide s-lt" id="s4">
-                  <span class="pill pill-l">How it works</span>
-                  <div class="h1 h1-dk" style="font-size:clamp(16px,2.8vw,28px);">아이 수준에 맞춰<br><span class="em">실시간으로 조절</span>되는 시험</div>
-                  <div style="width:100%;max-width:460px;margin-top:18px;">
-                    <div style="display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:10px;">
-                      <div style="background:#E1F5EE;border-radius:8px;padding:8px 16px;font-size:12px;color:#04342C;font-weight:500;">문제 출제</div>
-                      <div style="color:#0F6E56;font-size:16px;">→</div>
-                      <div style="background:#9FE1CB;border-radius:8px;padding:8px 16px;font-size:12px;color:#04342C;font-weight:500;">정답</div>
-                      <div style="color:#0F6E56;font-size:16px;">→</div>
-                      <div style="background:#085041;border-radius:8px;padding:8px 16px;font-size:12px;color:#E1F5EE;font-weight:500;">더 어려운 문제</div>
-                    </div>
-                    <div style="display:flex;align-items:center;gap:8px;justify-content:center;">
-                      <div style="background:#E1F5EE;border-radius:8px;padding:8px 16px;font-size:12px;color:#04342C;font-weight:500;">문제 출제</div>
-                      <div style="color:#A32D2D;font-size:16px;">→</div>
-                      <div style="background:#FCEBEB;border-radius:8px;padding:8px 16px;font-size:12px;color:#501313;font-weight:500;">오답</div>
-                      <div style="color:#A32D2D;font-size:16px;">→</div>
-                      <div style="background:#791F1F;border-radius:8px;padding:8px 16px;font-size:12px;color:#FCEBEB;font-weight:500;">더 쉬운 문제</div>
-                    </div>
-                  </div>
-                  <div class="sub sub-dk" style="margin-top:16px;">Digital SAT와 동일한 컴퓨터 적응형(CAT) 방식으로<br>학생별 맞춤 난이도를 제공합니다</div>
-                </div>
-                <div class="slide s-lt" id="s5">
-                  <span class="pill pill-l">RIT score</span>
-                  <div class="h1 h1-dk" style="font-size:clamp(16px,2.8vw,28px);"><span class="em">RIT</span>라는 성장 척도로<br>매 시험 비교가 가능합니다</div>
-                  <div style="width:100%;max-width:460px;margin-top:16px;background:#fff;border-radius:12px;overflow:hidden;border:0.5px solid #e5e5e5;">
-                    <div style="padding:18px 22px;display:flex;align-items:center;gap:18px;">
-                      <div style="text-align:center;"><div style="font-size:11px;color:#5F5E5A;font-weight:500;letter-spacing:1px;text-transform:uppercase;">3학년 봄</div><div class="mn" style="font-size:clamp(22px,4.5vw,34px);font-weight:500;color:#0F6E56;margin-top:6px;">188</div></div>
-                      <div style="flex:1;height:4px;background:#E1F5EE;border-radius:2px;position:relative;"><div style="position:absolute;left:0;top:0;height:4px;width:65%;background:#0F6E56;border-radius:2px;"></div><div style="position:absolute;right:0;top:-10px;font-size:11px;color:#5F5E5A;">+12 RIT</div></div>
-                      <div style="text-align:center;"><div style="font-size:11px;color:#5F5E5A;font-weight:500;letter-spacing:1px;text-transform:uppercase;">3학년 겨울</div><div class="mn" style="font-size:clamp(22px,4.5vw,34px);font-weight:500;color:#085041;margin-top:6px;">200</div></div>
-                    </div>
-                    <div style="background:#F2F8F4;padding:12px 22px;font-size:12px;color:#444441;text-align:center;">같은 RIT 척도이므로 학년이 달라도 성장을 추적할 수 있습니다</div>
-                  </div>
-                  <div class="sub sub-dk" style="margin-top:12px;opacity:.5;">RIT 100~350 범위 / 학년 무관 등간 척도 / 미래 SAT 점수 예측 가능</div>
-                </div>
-                <div class="slide s-lt" id="s6">
-                  <span class="pill pill-l">Subjects</span>
-                  <div class="h1 h1-dk" style="font-size:clamp(16px,2.8vw,28px);"><span class="em">3개 핵심 과목</span>을 깊이 있게 진단</div>
-                  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;width:100%;max-width:500px;margin-top:20px;">
-                    <div style="background:#fff;border-radius:12px;padding:18px 14px;border:0.5px solid #e5e5e5;text-align:center;">
-                      <div style="width:44px;height:44px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:500;color:#085041;margin:0 auto 10px;">R</div>
-                      <div style="font-size:14px;font-weight:500;color:#2C2C2A;">Reading</div>
-                      <div style="font-size:11px;color:#5F5E5A;margin-top:6px;line-height:1.5;">독해력 / 어휘력<br>Lexile 독서 수준 연계</div>
-                    </div>
-                    <div style="background:#fff;border-radius:12px;padding:18px 14px;border:0.5px solid #e5e5e5;text-align:center;">
-                      <div style="width:44px;height:44px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:500;color:#085041;margin:0 auto 10px;">L</div>
-                      <div style="font-size:14px;font-weight:500;color:#2C2C2A;">Language</div>
-                      <div style="font-size:11px;color:#5F5E5A;margin-top:6px;line-height:1.5;">문법 / 작문 능력<br>SAT Writing 기초</div>
-                    </div>
-                    <div style="background:#fff;border-radius:12px;padding:18px 14px;border:0.5px solid #e5e5e5;text-align:center;">
-                      <div style="width:44px;height:44px;border-radius:50%;background:#E1F5EE;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:500;color:#085041;margin:0 auto 10px;">M</div>
-                      <div style="font-size:14px;font-weight:500;color:#2C2C2A;">Math</div>
-                      <div style="font-size:11px;color:#5F5E5A;margin-top:6px;line-height:1.5;">수리력 / 문제해결<br>Quantile 수학 수준 연계</div>
-                    </div>
-                  </div>
-                  <div class="sub sub-dk" style="margin-top:14px;">K-12 전 학년 / 과목별 40~55문항 / 약 45~60분 소요</div>
-                </div>
-                <div class="slide s-md" id="s7">
-                  <span class="pill pill-d">Reports</span>
-                  <div class="h1 h1-lt" style="font-size:clamp(15px,2.6vw,24px);">시험 후 받게 되는<br><span class="em2">상세 진단 리포트</span></div>
-                  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;max-width:500px;margin-top:18px;">
-                    <div style="background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.06);border-radius:8px;padding:14px 12px;text-align:center;"><div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.85);">영역별 수준</div><div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:6px;line-height:1.5;">읽기의 어떤 영역이<br>강하고 약한지 진단</div></div>
-                    <div style="background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.06);border-radius:8px;padding:14px 12px;text-align:center;"><div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.85);">성장 추이</div><div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:6px;line-height:1.5;">시험마다 얼마나<br>성장했는지 그래프</div></div>
-                    <div style="background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.06);border-radius:8px;padding:14px 12px;text-align:center;"><div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.85);">글로벌 비교</div><div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:6px;line-height:1.5;">같은 학년 미국 학생<br>대비 어느 위치인지</div></div>
-                  </div>
-                  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;max-width:500px;margin-top:8px;">
-                    <div style="background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.06);border-radius:8px;padding:14px 12px;text-align:center;"><div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.85);">독서 수준</div><div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:6px;line-height:1.5;">Lexile 지수로<br>맞춤 도서 추천</div></div>
-                    <div style="background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.06);border-radius:8px;padding:14px 12px;text-align:center;"><div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.85);">SAT 예측</div><div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:6px;line-height:1.5;">현재 RIT 기반<br>미래 SAT 점수 예측</div></div>
-                    <div style="background:rgba(255,255,255,.04);border:0.5px solid rgba(255,255,255,.06);border-radius:8px;padding:14px 12px;text-align:center;"><div style="font-size:13px;font-weight:500;color:rgba(255,255,255,.85);">학습 경로</div><div style="font-size:11px;color:rgba(255,255,255,.3);margin-top:6px;line-height:1.5;">다음 단계로 가기 위해<br>무엇을 해야 하는지</div></div>
-                  </div>
-                </div>
-                <div class="slide s-lt" id="s8">
-                  <span class="pill pill-l">Korea</span>
-                  <div class="h1 h1-dk" style="font-size:clamp(15px,2.6vw,24px);">한국 내 <span class="em">국제학교 입학</span>의<br>핵심 평가 도구</div>
-                  <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;max-width:500px;margin-top:16px;">
-                    <span style="background:#fff;border:0.5px solid #e5e5e5;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:500;color:#2C2C2A;">KIS 제주</span>
-                    <span style="background:#fff;border:0.5px solid #e5e5e5;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:500;color:#2C2C2A;">Chadwick International</span>
-                    <span style="background:#fff;border:0.5px solid #e5e5e5;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:500;color:#2C2C2A;">DIS 대구</span>
-                    <span style="background:#fff;border:0.5px solid #e5e5e5;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:500;color:#2C2C2A;">Branksome Hall Asia</span>
-                    <span style="background:#fff;border:0.5px solid #e5e5e5;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:500;color:#2C2C2A;">SJA Jeju</span>
-                    <span style="background:#fff;border:0.5px solid #e5e5e5;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:500;color:#2C2C2A;">셰퍼드 국제학교</span>
-                    <span style="background:#fff;border:0.5px solid #e5e5e5;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:500;color:#2C2C2A;">BC Collegiate</span>
-                    <span style="background:#fff;border:0.5px solid #e5e5e5;border-radius:8px;padding:6px 14px;font-size:11px;font-weight:500;color:#2C2C2A;">청라 달튼</span>
-                  </div>
-                  <div class="sub sub-dk" style="margin-top:14px;">국제학교 입학 전형에서 MAP Growth 점수는 필수 제출 서류입니다</div>
-                </div>
-                <div class="slide s-dk" id="s9" style="justify-content:flex-start;padding-top:clamp(16px,2.5vw,24px);">
-                  <span class="pill pill-d" style="margin-bottom:8px;">Test centers</span>
-                  <div class="h1 h1-lt" style="font-size:clamp(14px,2.2vw,20px);margin-bottom:4px;">전국 <span class="em2">MAP Growth</span> 공인 응시 센터</div>
-                  <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(6px,1.2vw,12px);width:100%;max-width:580px;margin-top:clamp(8px,1.5vw,14px);flex:1;overflow:hidden;">
-                    <div style="display:flex;flex-direction:column;gap:clamp(5px,.8vw,8px);">
-                      <div><div style="font-size:clamp(9px,1vw,11px);font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#5DCAA5;padding-bottom:3px;border-bottom:0.5px solid rgba(93,202,165,.15);margin-bottom:3px;">서울 강남구</div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">PACE 청담 · 대치</div></div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">아이큐브 iCUBED</div></div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">쥬빌리 프라임</div></div></div>
-                      <div><div style="font-size:clamp(9px,1vw,11px);font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#5DCAA5;padding-bottom:3px;border-bottom:0.5px solid rgba(93,202,165,.15);margin-bottom:3px;">서울 서초구</div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">SLP 서초어학원</div></div></div>
-                      <div><div style="font-size:clamp(9px,1vw,11px);font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#5DCAA5;padding-bottom:3px;border-bottom:0.5px solid rgba(93,202,165,.15);margin-bottom:3px;">서울 용산구</div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">퓨쳐스 아카데미</div></div></div>
-                    </div>
-                    <div style="display:flex;flex-direction:column;gap:clamp(5px,.8vw,8px);">
-                      <div><div style="font-size:clamp(9px,1vw,11px);font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#5DCAA5;padding-bottom:3px;border-bottom:0.5px solid rgba(93,202,165,.15);margin-bottom:3px;">경기</div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">FTK 아카데미 동탄</div></div></div>
-                      <div><div style="font-size:clamp(9px,1vw,11px);font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#5DCAA5;padding-bottom:3px;border-bottom:0.5px solid rgba(93,202,165,.15);margin-bottom:3px;">부산 해운대구</div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">SSI Busan</div></div></div>
-                      <div><div style="font-size:clamp(9px,1vw,11px);font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#5DCAA5;padding-bottom:3px;border-bottom:0.5px solid rgba(93,202,165,.15);margin-bottom:3px;">대구</div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">리틀지니어스</div></div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">힐사이드 범어</div></div></div>
-                                          </div>
-                    <div style="display:flex;flex-direction:column;gap:clamp(5px,.8vw,8px);">
-                      <div><div style="font-size:clamp(9px,1vw,11px);font-weight:500;letter-spacing:1px;text-transform:uppercase;color:#5DCAA5;padding-bottom:3px;border-bottom:0.5px solid rgba(93,202,165,.15);margin-bottom:3px;">제주</div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">SLP 제주어학원</div></div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">CNE Academy</div></div><div style="display:flex;align-items:baseline;gap:5px;padding:1.5px 0;"><div style="width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;margin-top:5px;"></div><div style="font-size:clamp(9px,1.2vw,11px);color:rgba(255,255,255,.75);font-weight:500;">다니엘에듀</div></div></div>
-                    </div>
-                  </div>
-                  <div style="text-align:center;margin-top:auto;padding-top:4px;font-size:11px;color:rgba(255,255,255,.15);">NWEA 공인 MAP Center / 전국 22개 센터에서 정식 응시 가능</div>
-                </div>
-                <div class="slide s-dk" id="s10">
-                  <div style="font-family:'Inter',sans-serif;font-weight:500;font-size:clamp(44px,8vw,72px);color:#fff;letter-spacing:-2px;line-height:.9;">MAP</div>
-                  <div style="font-weight:300;font-size:clamp(13px,2.2vw,20px);color:rgba(255,255,255,.25);letter-spacing:8px;text-transform:uppercase;margin-top:6px;">Growth</div>
-                  <div style="margin-top:28px;font-size:15px;color:rgba(255,255,255,.6);text-align:center;line-height:1.7;">아이의 현재를 정확히 알면<br><span style="color:#5DCAA5;font-weight:500;">미래를 설계</span>할 수 있습니다</div>
-                  <div style="margin-top:22px;font-size:11px;color:rgba(255,255,255,.2);text-align:center;line-height:1.6;">MAP Growth Support Korea<br>www.mapgrowthsupportkorea.com / 070-7623-2105</div>
-                </div>
+        <span class="section-label animate">MAP Growth 소개</span>
+        <h2 class="section-title animate delay-1">MAP Growth는 어떤 시험인가요?</h2>
+        <p class="section-desc animate delay-2">7장으로 정리했어요. 아래 제목을 누르면 그 장으로 바로 갑니다.</p>
+        <div class="ss2 animate delay-2" id="ss2" tabindex="0" aria-roledescription="carousel" aria-label="MAP Growth 소개 슬라이드">
+          <div class="ss2-stage" id="ss2Stage">
+
+            <div class="ss2-slide active" data-title="세계 기준">
+              <div class="ss2-eyebrow">NWEA MAP Growth</div>
+              <h3 class="ss2-h">미국 NWEA가 만든<br><em>세계 표준</em> 학력 평가입니다</h3>
+              <div class="ss2-stats">
+                <div><b>170</b><span>개국에서 시행</span></div>
+                <div><b>1,600<i>만</i></b><span>명이 같은 시험을 봅니다</span></div>
+                <div><b>55<i>년+</i></b><span>연구 데이터 기반</span></div>
+                <div><b>60<i>%</i></b><span>미국 국제학교 채택률</span></div>
+              </div>
+              <p class="ss2-foot">국내 여러 국제학교도 입학 전형에서 MAP Growth 점수를 활용합니다</p>
+            </div>
+
+            <div class="ss2-slide" data-title="왜 MAP">
+              <div class="ss2-eyebrow">Why MAP</div>
+              <h3 class="ss2-h">학교 시험 <em>90점</em>, 그런데 어디가 부족한지는 모릅니다</h3>
+              <div class="ss2-vs">
+                <div class="ss2-vs-a"><span class="ss2-tag">학교 시험</span><b>맞고 틀림만 남습니다</b><p>점수 하나로 끝나요. 다음에 무엇을 공부해야 할지는 알 수 없어요.</p></div>
+                <div class="ss2-vs-b"><span class="ss2-tag">MAP Growth</span><b>무엇을 할 수 있는지 봅니다</b><p>읽기·언어·수학의 세부 영역별 수준을 진단하고, 다음 성장 경로를 제시해요.</p></div>
               </div>
             </div>
-            <div class="ctrls">
-              <button class="cbtn" id="bp" aria-label="이전 슬라이드">&#8249;</button>
-              <button class="pbtn" id="pp" aria-label="자동 재생">&#9654;</button>
-              <div class="dots" id="dots"></div>
-              <button class="cbtn" id="bn" aria-label="다음 슬라이드">&#8250;</button>
-              <span class="cnt" id="cnt">1 / 11</span>
+
+            <div class="ss2-slide" data-title="시험 방식">
+              <div class="ss2-eyebrow">How it works</div>
+              <h3 class="ss2-h">아이 수준에 맞춰 <em>문제가 실시간으로</em> 바뀝니다</h3>
+              <div class="ss2-two">
+                <svg class="ss2-adapt" viewBox="0 0 520 250" aria-hidden="true">
+                  <line x1="44" y1="22" x2="44" y2="196" stroke="#CBD5E1" stroke-width="1.5"/>
+                  <text x="30" y="30" font-size="11" fill="#64748B" text-anchor="end" font-family="Noto Sans KR, sans-serif">높음</text>
+                  <text x="30" y="196" font-size="11" fill="#64748B" text-anchor="end" font-family="Noto Sans KR, sans-serif">낮음</text>
+                  <text x="14" y="112" font-size="11" fill="#64748B" text-anchor="middle" transform="rotate(-90 14 112)" font-family="Noto Sans KR, sans-serif">문제 난이도</text>
+                  <polyline points="90,150 170,108 250,66 330,108 410,76 490,44" fill="none" stroke="#0F6E56" stroke-width="2.5" stroke-linejoin="round"/>
+                  <g font-family="Inter, sans-serif" font-size="12" font-weight="700">
+                    <circle cx="90" cy="150" r="15" fill="#fff" stroke="#0F6E56" stroke-width="2"/><text x="90" y="154.5" text-anchor="middle" fill="#0F6E56">1</text>
+                    <circle cx="170" cy="108" r="15" fill="#fff" stroke="#0F6E56" stroke-width="2"/><text x="170" y="112.5" text-anchor="middle" fill="#0F6E56">2</text>
+                    <circle cx="250" cy="66" r="15" fill="#fff" stroke="#0F6E56" stroke-width="2"/><text x="250" y="70.5" text-anchor="middle" fill="#0F6E56">3</text>
+                    <circle cx="330" cy="108" r="15" fill="#fff" stroke="#B33A2E" stroke-width="2"/><text x="330" y="112.5" text-anchor="middle" fill="#B33A2E">4</text>
+                    <circle cx="410" cy="76" r="15" fill="#fff" stroke="#0F6E56" stroke-width="2"/><text x="410" y="80.5" text-anchor="middle" fill="#0F6E56">5</text>
+                    <circle cx="490" cy="44" r="15" fill="#0F6E56" stroke="#0F6E56" stroke-width="2"/><text x="490" y="48.5" text-anchor="middle" fill="#fff">6</text>
+                  </g>
+                  <g font-family="Noto Sans KR, sans-serif" font-size="11" font-weight="600">
+                    <text x="130" y="118" fill="#0F6E56" text-anchor="middle">정답</text>
+                    <text x="210" y="76" fill="#0F6E56" text-anchor="middle">정답</text>
+                    <text x="292" y="100" fill="#B33A2E" text-anchor="middle">오답</text>
+                    <text x="370" y="82" fill="#0F6E56" text-anchor="middle">정답</text>
+                    <text x="450" y="50" fill="#0F6E56" text-anchor="middle">정답</text>
+                  </g>
+                  <g font-family="Noto Sans KR, sans-serif" font-size="11.5" fill="#334155">
+                    <rect x="90" y="220" width="10" height="10" fill="#0F6E56"/><text x="106" y="229.5">정답이면 더 어려운 문제</text>
+                    <rect x="270" y="220" width="10" height="10" fill="#B33A2E"/><text x="286" y="229.5">오답이면 더 쉬운 문제</text>
+                  </g>
+                </svg>
+                <ul class="ss2-list">
+                  <li>Digital SAT와 같은 <b>컴퓨터 적응형(CAT)</b> 방식이라 아이마다 다른 문제를 풉니다</li>
+                  <li><b>Reading · Language Usage · Math</b> 세 과목, K-12 전 학년</li>
+                  <li>과목당 <b>40~55문항</b>, 약 <b>45~60분</b></li>
+                </ul>
+              </div>
             </div>
+
+            <div class="ss2-slide" data-title="RIT 점수">
+              <div class="ss2-eyebrow">RIT score</div>
+              <h3 class="ss2-h"><em>RIT</em>라는 같은 자로, 학년이 달라도 성장을 잽니다</h3>
+              <div class="ss2-two">
+                <svg class="ss2-chart" viewBox="0 0 520 250" aria-hidden="true">
+                  <g stroke="#E2E8F0" stroke-width="1">
+                    <line x1="60" y1="30" x2="500" y2="30"/><line x1="60" y1="70" x2="500" y2="70"/><line x1="60" y1="110" x2="500" y2="110"/><line x1="60" y1="150" x2="500" y2="150"/><line x1="60" y1="190" x2="500" y2="190"/>
+                  </g>
+                  <g font-family="Inter, sans-serif" font-size="11" fill="#94A3B8" text-anchor="end">
+                    <text x="50" y="34">220</text><text x="50" y="74">210</text><text x="50" y="114">200</text><text x="50" y="154">190</text><text x="50" y="194">180</text>
+                  </g>
+                  <polyline points="110,158 240,110 370,98 470,62" fill="none" stroke="#0F6E56" stroke-width="3" stroke-linejoin="round"/>
+                  <g fill="#fff" stroke="#0F6E56" stroke-width="2.5">
+                    <circle cx="110" cy="158" r="6"/><circle cx="240" cy="110" r="6"/><circle cx="370" cy="98" r="6"/><circle cx="470" cy="62" r="6" fill="#0F6E56"/>
+                  </g>
+                  <g font-family="Inter, sans-serif" font-size="13" font-weight="800" fill="#0F172A" text-anchor="middle">
+                    <text x="110" y="146">188</text><text x="240" y="98">200</text><text x="370" y="86">203</text><text x="470" y="50">212</text>
+                  </g>
+                  <g font-family="Inter, sans-serif" font-size="11" font-weight="700">
+                    <rect x="152" y="120" width="44" height="18" rx="3" fill="#E1F5EE"/><text x="174" y="133" fill="#0D5C48" text-anchor="middle">+12 RIT</text>
+                    <rect x="398" y="70" width="44" height="18" rx="3" fill="#E1F5EE"/><text x="420" y="83" fill="#0D5C48" text-anchor="middle">+9 RIT</text>
+                  </g>
+                  <g font-family="Noto Sans KR, sans-serif" font-size="11" fill="#64748B" text-anchor="middle">
+                    <text x="110" y="214">3학년 가을</text><text x="240" y="214">3학년 봄</text><text x="370" y="214">4학년 가을</text><text x="470" y="214">4학년 봄</text>
+                  </g>
+                  <text x="60" y="242" font-family="Noto Sans KR, sans-serif" font-size="10.5" fill="#94A3B8">예시 데이터 · Reading RIT</text>
+                </svg>
+                <ul class="ss2-list">
+                  <li>RIT는 100~350 범위의 <b>학년과 무관한 등간 척도</b>입니다</li>
+                  <li>봄·가을 시험마다 <b>얼마나 자랐는지</b> 숫자로 확인합니다</li>
+                  <li>현재 RIT로 <b>미래 SAT 점수 범위</b>를 예측할 수 있습니다</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="ss2-slide" data-title="리포트">
+              <div class="ss2-eyebrow">Reports</div>
+              <h3 class="ss2-h">시험 후, <em>한국어 진단 리포트</em>까지 받습니다</h3>
+              <div class="ss2-reports">
+                <figure><img src="manual/slides/캡처/spr_page.png" alt="NWEA Student Progress Report" loading="lazy"><figcaption><b>NWEA 원본 성적표</b></figcaption></figure>
+                <span class="ss2-arrow" aria-hidden="true"></span>
+                <figure class="out"><img src="manual/slides/캡처/gen_report_top.png" alt="한국어 AI 분석 리포트" loading="lazy"><figcaption><b>한국어 분석 리포트</b> 학부모 상담용</figcaption></figure>
+                <ul class="ss2-chips"><li>영역별 수준</li><li>성장 추이</li><li>또래 비교</li><li>Lexile 도서 추천</li><li>SAT 예측</li><li>다음 학습 경로</li></ul>
+              </div>
+            </div>
+
+            <div class="ss2-slide" data-title="응시 센터">
+              <div class="ss2-eyebrow">Test centers</div>
+              <h3 class="ss2-h">전국 <em id="ss2Count">22곳</em> NWEA 공인 응시 센터</h3>
+              <div class="ss2-regions" id="ss2Regions"></div>
+              <p class="ss2-foot">센터별 주소와 연락처는 아래 지도에서 볼 수 있어요</p>
+            </div>
+
+            <div class="ss2-slide" data-title="시작하기">
+              <div class="ss2-eyebrow">MAP Growth Support Korea</div>
+              <h3 class="ss2-h">아이의 현재를 정확히 알면<br><em>미래를 설계</em>할 수 있습니다</h3>
+              <div class="ss2-cta">
+                <a href="#samples" class="ss2-btn">샘플 리포트 보기</a>
+                <a href="#contact" class="ss2-btn ss2-btn-line">학원 도입 문의</a>
+              </div>
+              <p class="ss2-foot">www.mapgrowthsupportkorea.com · 070-7623-2105</p>
+            </div>
+
+            <div class="ss2-bar" aria-hidden="true"><i id="ss2Bar"></i></div>
+          </div>
+          <div class="ss2-nav">
+            <button type="button" class="ss2-ic" id="ss2Prev" aria-label="이전 장"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+            <div class="ss2-tabs" id="ss2Tabs" role="tablist"></div>
+            <button type="button" class="ss2-ic" id="ss2Next" aria-label="다음 장"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button>
+            <button type="button" class="ss2-ic ss2-play" id="ss2Play" aria-label="자동 재생"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+            <span class="ss2-cnt" id="ss2Cnt">1 / 7</span>
           </div>
         </div>
       </div>
@@ -1580,35 +1589,64 @@
 
 
     // === Slideshow ===
-    var T = 11, c = 0, playing = false, timer = null;
-    var ss = [];
-    for (var i = 0; i < T; i++) ss.push(document.getElementById('s' + i));
-    var dc = document.getElementById('dots');
-    for (var i = 0; i < T; i++) {
-      (function(idx) {
-        var d = document.createElement('div');
-        d.className = 'dot' + (idx === 0 ? ' on' : '');
-        d.onclick = function() { go(idx); stop(); };
-        dc.appendChild(d);
-      })(i);
-    }
-    var ds = dc.children;
-    function go(n) {
-      if (n < 0) n = T - 1;
-      if (n >= T) n = 0;
-      ss[c].classList.remove('active');
-      ds[c].classList.remove('on');
-      c = n;
-      ss[c].classList.add('active');
-      ds[c].classList.add('on');
-      document.getElementById('cnt').textContent = (c + 1) + ' / ' + T;
-    }
-    document.getElementById('bp').onclick = function() { go(c - 1); stop(); };
-    document.getElementById('bn').onclick = function() { go(c + 1); stop(); };
-    function play() { playing = true; document.getElementById('pp').innerHTML = '&#9646;&#9646;'; timer = setInterval(function() { go(c + 1); }, 4000); }
-    function stop() { playing = false; document.getElementById('pp').innerHTML = '&#9654;'; if (timer) { clearInterval(timer); timer = null; } }
-    function togglePlay() { playing ? stop() : play(); }
-    document.getElementById('pp').onclick = togglePlay;
+    // === MAP Growth 소개 슬라이드 v2 (7장) ===
+    (function () {
+      var root = document.getElementById('ss2'); if (!root) return;
+      var stage = document.getElementById('ss2Stage');
+      var slides = [].slice.call(stage.querySelectorAll('.ss2-slide'));
+      var T = slides.length, c = 0, timer = null, playing = false, userStopped = false, DUR = 7000;
+      var tabs = document.getElementById('ss2Tabs'), cnt = document.getElementById('ss2Cnt'), bar = document.getElementById('ss2Bar'), playBtn = document.getElementById('ss2Play');
+      var ICON_PLAY = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+      var ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+      slides.forEach(function (s, i) {
+        var b = document.createElement('button'); b.type = 'button'; b.setAttribute('role', 'tab');
+        b.innerHTML = '<i>' + (i + 1) + '</i>' + (s.getAttribute('data-title') || '');
+        if (i === 0) b.className = 'on';
+        b.onclick = function () { go(i); stop(true); };
+        tabs.appendChild(b);
+      });
+      function runBar() { bar.classList.remove('run'); bar.style.width = '0'; void bar.offsetWidth; if (playing) { bar.style.width = ''; bar.classList.add('run'); } }
+      function go(n) {
+        if (n < 0) n = T - 1; if (n >= T) n = 0;
+        slides[c].classList.remove('active'); tabs.children[c].classList.remove('on');
+        c = n;
+        slides[c].classList.add('active'); tabs.children[c].classList.add('on');
+        stage.classList.toggle('is-dark', slides[c].classList.contains('ss2-dark'));
+        cnt.textContent = (c + 1) + ' / ' + T;
+        var tb = tabs.children[c]; if (tb.scrollIntoView) { try { tb.scrollIntoView({ block: 'nearest', inline: 'center' }); } catch (e) {} }
+        runBar();
+      }
+      function play() { playing = true; playBtn.innerHTML = ICON_PAUSE; playBtn.setAttribute('aria-label', '일시정지'); runBar(); timer = setInterval(function () { go(c + 1); }, DUR); }
+      function stop(byUser) { playing = false; if (byUser) userStopped = true; playBtn.innerHTML = ICON_PLAY; playBtn.setAttribute('aria-label', '자동 재생'); if (timer) { clearInterval(timer); timer = null; } bar.classList.remove('run'); bar.style.width = '0'; }
+      document.getElementById('ss2Prev').onclick = function () { go(c - 1); stop(true); };
+      document.getElementById('ss2Next').onclick = function () { go(c + 1); stop(true); };
+      playBtn.onclick = function () { if (playing) { stop(true); } else { userStopped = false; play(); } };
+      root.addEventListener('keydown', function (e) { if (e.key === 'ArrowRight') { go(c + 1); stop(true); } else if (e.key === 'ArrowLeft') { go(c - 1); stop(true); } });
+      var tx = null;
+      stage.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
+      stage.addEventListener('touchend', function (e) { if (tx === null) return; var dx = e.changedTouches[0].clientX - tx; tx = null; if (Math.abs(dx) > 40) { go(dx < 0 ? c + 1 : c - 1); stop(true); } }, { passive: true });
+      // 화면에 보일 때만 자동 재생, 벗어나면 멈춤
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (x) { if (x.isIntersecting) { if (!playing && !userStopped) play(); } else if (playing) { stop(false); } });
+        }, { threshold: 0.5 });
+        io.observe(stage);
+      } else { play(); }
+      // 응시 센터 장은 지도 데이터(CENTER_DATA)에서 자동 생성 → 센터가 바뀌어도 어긋나지 않음
+      function buildRegions() {
+        var box = document.getElementById('ss2Regions'); if (!box || typeof CENTER_DATA === 'undefined') return;
+        var total = 0, html = '';
+        CENTER_DATA.forEach(function (r) {
+          var names = (r.centers || []).map(function (x) { return x.name; });
+          total += names.length;
+          html += '<div><h4>' + r.label + '<b>' + names.length + '</b></h4><p>' + names.join(' · ') + '</p></div>';
+        });
+        box.innerHTML = html;
+        var ce = document.getElementById('ss2Count'); if (ce) ce.textContent = total + '곳';
+      }
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', buildRegions); else buildRegions();
+      cnt.textContent = '1 / ' + T;
+    })();
 
     // === Smooth Scroll for nav ===
     document.querySelectorAll('a[href^="#"]').forEach(function(a) {
@@ -1939,6 +1977,7 @@ h1,h2,h3,p,li{word-break:keep-all}
 .aim-field{margin-bottom:16px}
 @media(max-width:860px){.aim-form{padding:28px 24px!important}}
 
+.region-list-sub{color:#475569}
 </style>
 </body>
 </html>
