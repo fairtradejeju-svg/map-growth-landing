@@ -41,7 +41,7 @@
 
   /* PAGE HEAD */
   .page-head{border-bottom:1px solid var(--border);padding:clamp(40px,6vw,64px) 24px clamp(26px,4vw,36px)}
-  .wrap{max-width:1160px;margin:0 auto}
+  .wrap{max-width:1680px;margin:0 auto}
   .eyebrow{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
   .page-head h1{font-size:clamp(2rem,4.2vw,3rem);font-weight:900;margin:8px 0 10px}
   .page-head .lead{font-size:clamp(1rem,1.6vw,1.1rem);color:var(--text-secondary);max-width:680px;margin-bottom:22px}
@@ -53,27 +53,27 @@
   .quick a small{font-family:'Inter',sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.08em;color:var(--accent)}
 
   /* LAYOUT */
-  .layout{display:grid;grid-template-columns:220px 1fr;gap:0;max-width:1160px;margin:0 auto;padding:0 24px}
-  .toc{position:sticky;top:60px;align-self:start;padding:28px 0 28px;border-right:1px solid var(--border);height:calc(100vh - 60px);overflow:auto}
-  .toc a{display:block;padding:10px 18px 10px 0;margin-left:-1px;border-left:3px solid transparent;padding-left:16px;color:var(--text-secondary);text-decoration:none;font-size:14px;font-weight:500}
-  .toc a small{display:block;font-size:11.5px;color:var(--text-tertiary);font-weight:400;margin-top:1px}
+  .layout{display:grid;grid-template-columns:1fr;gap:0;max-width:1680px;margin:0 auto;padding:0 24px}
+  .toc{position:sticky;top:60px;z-index:20;display:flex;gap:6px;overflow-x:auto;background:rgba(255,255,255,.97);border-bottom:1px solid var(--border);padding:10px 0;scrollbar-width:none}
+  .toc a{display:flex;align-items:baseline;gap:8px;white-space:nowrap;padding:8px 14px;border-radius:4px;color:var(--text-secondary);text-decoration:none;font-size:14px;font-weight:600}
+  .toc a small{font-size:12px;color:var(--text-tertiary);font-weight:400}
   .toc a:hover{color:var(--text)}
-  .toc a.on{color:var(--text);font-weight:700;border-left-color:var(--accent);background:var(--accent-light)}
-  .main{padding:28px 0 80px 40px;min-width:0}
-  .sec{scroll-margin-top:76px;margin-bottom:64px}
+  .toc a.on{color:var(--accent);font-weight:700;background:var(--accent-light)}
+  .main{padding:40px 0 80px;min-width:0}
+  .sec{scroll-margin-top:130px;margin-bottom:64px}
   .sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:2px solid var(--text);padding-bottom:10px;margin-bottom:22px}
   .sec-head h2{font-size:clamp(1.3rem,2.4vw,1.7rem);font-weight:800}
   .sec-head small{font-family:'Inter',sans-serif;font-size:12px;font-weight:600;letter-spacing:.08em;color:var(--accent)}
   .sec-desc{color:var(--text-secondary);margin:-8px 0 22px;font-size:14.5px}
 
   /* EPISODE (매뉴얼 구조 재활용) */
-  .ep{background:var(--surface);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:52px;scroll-margin-top:76px}
-  .ep-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}
+  .ep{background:var(--surface);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:52px;scroll-margin-top:130px}
+  .ep-grid{display:grid;grid-template-columns:minmax(440px,1fr) minmax(0,1.1fr)}
   .ep-body{order:1}
   .ep-media{order:2}
   .ep-media{background:#F3F5F7;position:relative;display:flex;align-items:center;padding:24px;border-left:1px solid var(--border)}
   .ep-media video{display:block;width:100%;aspect-ratio:16/9;background:#fff;border:1px solid var(--border);border-radius:4px;box-shadow:0 6px 18px rgba(15,23,42,.08)}
-  .ep-body{padding:26px 28px 24px;display:flex;flex-direction:column}
+  .ep-body{padding:32px 36px 28px;display:flex;flex-direction:column}
   .ep-kicker{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--text-tertiary);margin-bottom:10px}
   .ep-kicker .n{font-family:'Inter',sans-serif;font-weight:800;color:var(--accent);font-size:13px;letter-spacing:.08em}
   .ep-kicker i{font-style:normal;font-family:'Inter',sans-serif;font-variant-numeric:tabular-nums}
@@ -154,9 +154,13 @@
   .footer{padding:36px 24px;border-top:1px solid var(--border);text-align:center;color:var(--text-tertiary);font-size:13px;line-height:1.8}
   .footer a{color:var(--accent);text-decoration:none}
 
+  @media(max-width:1180px){
+    .ep-grid{grid-template-columns:1fr}
+    .ep-media{padding:0 36px 32px;background:transparent;border-left:0}
+  }
   @media(max-width:900px){
     .layout{grid-template-columns:1fr}
-    .toc{display:none}
+    .toc a small{display:none}
     .main{padding-left:0}
     .ep-grid{grid-template-columns:1fr}
     .ep{margin-bottom:36px}
