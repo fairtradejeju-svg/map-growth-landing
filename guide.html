@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>선생님 가이드 | MAP Growth Support Korea</title>
-<meta name="description" content="로그인부터 학생 등록, 시험 감독, 결과 확인, 리포트 출력, 기록 정리까지 영상 10편으로 따라하고, 시험 당일 체크리스트와 문제 해결을 한 페이지에서.">
+<meta name="description" content="로그인부터 학생 등록, 시험 감독, 결과 확인, 리포트 출력, 기록 정리까지 영상 매뉴얼 10편으로 익히고, 시험 당일 체크리스트와 문제 해결을 한 페이지에서.">
 <link rel="icon" type="image/png" href="images/favicon.png">
 <link rel="canonical" href="https://www.mapgrowthsupportkorea.com/guide.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="선생님 가이드 | MAP Growth Support Korea">
-<meta property="og:description" content="로그인부터 학생 등록, 시험 감독, 결과 확인, 리포트 출력, 기록 정리까지 영상 10편으로 따라하고, 시험 당일 체크리스트와 문제 해결을 한 페이지에서 확인하세요.">
+<meta property="og:description" content="로그인부터 학생 등록, 시험 감독, 결과 확인, 리포트 출력, 기록 정리까지 영상 매뉴얼 10편으로 익히고, 시험 당일 체크리스트와 문제 해결을 한 페이지에서 확인하세요.">
 <meta property="og:image" content="https://www.mapgrowthsupportkorea.com/images/og.png">
 <meta property="og:url" content="https://www.mapgrowthsupportkorea.com/guide.html">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Inter:wght@500;600;800&display=swap" rel="stylesheet">
@@ -67,8 +67,10 @@
   .sec-desc{color:var(--text-secondary);margin:-8px 0 22px;font-size:14.5px}
 
   /* EPISODE (매뉴얼 구조 재활용) */
-  .ep{background:var(--surface);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:22px;scroll-margin-top:76px}
-  .ep-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr)}
+  .ep{background:var(--surface);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-bottom:52px;scroll-margin-top:76px}
+  .ep-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr)}
+  .ep-body{order:1}
+  .ep-media{order:2}
   .ep-media{background:var(--stage);position:relative;display:flex;align-items:center}
   .ep-media video{display:block;width:100%;aspect-ratio:16/9;background:var(--stage)}
   .ep-body{padding:26px 28px 24px;display:flex;flex-direction:column}
@@ -157,6 +159,7 @@
     .toc{display:none}
     .main{padding-left:0}
     .ep-grid{grid-template-columns:1fr}
+    .ep{margin-bottom:36px}
     .ep-body{padding:20px 18px 18px}
     .help{grid-template-columns:1fr}
     .help div+div{border-left:0;padding-left:0}
@@ -200,7 +203,7 @@
 
 <div class="layout">
   <aside class="toc" id="toc">
-    <a href="#follow" class="on">따라하기 10편<small>영상 · 한 장씩 · 글</small></a>
+    <a href="#follow" class="on">영상 매뉴얼 10편<small>설명 · 영상 · 한 장씩</small></a>
     <a href="#day">시험 당일 체크리스트<small>6항목</small></a>
     <a href="#trouble">문제가 생겼을 때<small>증상별 해결 8가지</small></a>
     <a href="#links">자료 · 링크<small>PDF 3종 · NWEA 바로가기</small></a>
@@ -210,7 +213,7 @@
   <main class="main">
 
     <section class="sec" id="follow">
-      <div class="sec-head"><h2>따라하기 10편</h2><small>처음부터 끝까지</small></div>
+      <div class="sec-head"><h2>영상 매뉴얼 10편</h2><small>처음부터 끝까지</small></div>
       <p class="sec-desc">화면 속 학원명과 학생 이름은 모두 샘플입니다. 초록 테두리와 번호가 눌러야 할 곳, 빨간 표시는 누르면 안 되는 곳이에요.</p>
     <!-- 01 -->
     <article class="ep" id="ep01">
@@ -274,7 +277,7 @@
           <video controls preload="metadata" playsinline poster="manual/thumb/03.jpg" src="manual/video/03_시험세션_만들고_진행하기.mp4"></video>
         </div>
         <div class="ep-body">
-          <div class="ep-kicker"><span class="n">EP 03</span><i>13장</i><i>·</i><i>1분 60초</i></div>
+          <div class="ep-kicker"><span class="n">EP 03</span><i>13장</i><i>·</i><i>2분 00초</i></div>
           <h3>시험 세션 만들고 진행하기</h3>
           <p class="ep-desc">시험 볼 학생을 담고 시험 종류를 지정해 세션을 엽니다. 시험이 끝나면 세션을 닫습니다.</p>
           <ul class="steps">
