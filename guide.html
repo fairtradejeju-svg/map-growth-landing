@@ -54,11 +54,14 @@
 
   /* LAYOUT */
   .layout{display:grid;grid-template-columns:1fr;gap:0;max-width:1680px;margin:0 auto;padding:0 24px}
-  .toc{position:sticky;top:60px;z-index:20;display:flex;gap:6px;overflow-x:auto;background:rgba(255,255,255,.97);border-bottom:1px solid var(--border);padding:10px 0;scrollbar-width:none}
-  .toc a{display:flex;align-items:baseline;gap:8px;white-space:nowrap;padding:8px 14px;border-radius:4px;color:var(--text-secondary);text-decoration:none;font-size:14px;font-weight:600}
-  .toc a small{font-size:12px;color:var(--text-tertiary);font-weight:400}
-  .toc a:hover{color:var(--text)}
-  .toc a.on{color:var(--accent);font-weight:700;background:var(--accent-light)}
+  .toc{position:sticky;top:60px;z-index:20;display:flex;gap:10px;overflow-x:auto;background:rgba(255,255,255,.97);border-bottom:1px solid var(--border);padding:18px 0 14px;scrollbar-width:none}
+  .toc a{display:flex;align-items:baseline;gap:8px;white-space:nowrap;padding:9px 16px;border-radius:4px;border:1px solid var(--accent);background:#fff;color:var(--accent);text-decoration:none;font-size:14px;font-weight:700;box-shadow:0 1px 2px rgba(15,23,42,.06);transition:background .15s,color .15s}
+  .toc a small{font-size:12px;color:var(--text-tertiary);font-weight:500}
+  .toc a:hover{background:var(--accent-light)}
+  .toc a.on{background:var(--accent);color:#fff}
+  .toc a.on small{color:rgba(255,255,255,.8)}
+  .toc a .go{width:15px;height:15px;flex:none;align-self:center;margin-left:2px;transition:transform .2s}
+  .toc a:hover .go{transform:translateY(2px)}
   .main{padding:40px 0 80px;min-width:0}
   .sec{scroll-margin-top:130px;margin-bottom:64px}
   .sec-head{display:flex;align-items:baseline;gap:12px;border-bottom:2px solid var(--text);padding-bottom:10px;margin-bottom:22px}
@@ -161,6 +164,8 @@
   @media(max-width:900px){
     .layout{grid-template-columns:1fr}
     .toc a small{display:none}
+    .quick a .ext{display:none}
+    .quick a{padding:9px 12px}
     .main{padding-left:0}
     .ep-grid{grid-template-columns:1fr}
     .ep{margin-bottom:36px}
@@ -174,6 +179,11 @@
     .modal{padding:0}
     .modal-box{border-radius:0;height:100%}
   }
+
+  .quick a{border-color:var(--border-strong);background:#F8FAFC;align-items:center}
+  .quick a:hover{border-color:var(--accent);background:var(--accent-light)}
+  .quick a .ext{width:13px;height:13px;flex:none;margin-left:6px;color:var(--text-tertiary);transition:transform .2s,color .2s}
+  .quick a:hover .ext{color:var(--accent);transform:translate(1px,-1px)}
 </style>
 </head>
 <body>
@@ -196,30 +206,30 @@
     <h1>선생님 가이드</h1>
     <p class="lead">처음 로그인부터 학생 등록, 시험 진행과 감독, 결과 확인, 리포트 출력, 기록 정리까지 영상 10편으로 화면 그대로 따라하세요. 시험 당일에는 체크리스트와 문제 해결을 바로 찾을 수 있어요.</p>
     <div class="quick">
-      <a href="https://start.mapnwea.org/" target="_blank" rel="noopener"><small>NWEA</small>선생님 로그인</a>
-      <a href="https://check.nwea.org/" target="_blank" rel="noopener"><small>CHECK</small>시스템 점검</a>
-      <a href="https://test.mapnwea.org/" target="_blank" rel="noopener"><small>STUDENT</small>학생 시험 접속</a>
-      <a class="pdf" href="테스트_시작하기__셋팅_.pdf" target="_blank">PDF · 테스트 시작하기</a>
-      <a class="pdf" href="Testing_Tips.pdf" target="_blank">PDF · Testing Tips</a>
-      <a class="pdf" href="MAP_패스워드_리셋팅.pdf" target="_blank">PDF · 비밀번호 재설정</a>
+      <a href="https://start.mapnwea.org/" target="_blank" rel="noopener"><small>NWEA</small>선생님 로그인<svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+      <a href="https://check.nwea.org/" target="_blank" rel="noopener"><small>CHECK</small>시스템 점검<svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+      <a href="https://test.mapnwea.org/" target="_blank" rel="noopener"><small>STUDENT</small>학생 시험 접속<svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+      <a class="pdf" href="테스트_시작하기__셋팅_.pdf" target="_blank">PDF · 테스트 시작하기<svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+      <a class="pdf" href="Testing_Tips.pdf" target="_blank">PDF · Testing Tips<svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+      <a class="pdf" href="MAP_패스워드_리셋팅.pdf" target="_blank">PDF · 비밀번호 재설정<svg class="ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
     </div>
   </div>
 </header>
 
 <div class="layout">
   <aside class="toc" id="toc">
-    <a href="#follow" class="on">영상 매뉴얼 10편<small>설명 · 영상 · 한 장씩</small></a>
-    <a href="#day">시험 당일 체크리스트<small>6항목</small></a>
-    <a href="#trouble">문제가 생겼을 때<small>증상별 해결 8가지</small></a>
-    <a href="#links">자료 · 링크<small>PDF 3종 · NWEA 바로가기</small></a>
-    <a href="#help">도움 요청<small>이메일 · 전화 · 카카오</small></a>
+    <a href="#follow" class="on">영상 매뉴얼 10편<small>설명 · 영상 · 한 장씩</small><svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+    <a href="#day">시험 당일 체크리스트<small>6항목</small><svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+    <a href="#trouble">문제가 생겼을 때<small>증상별 해결 8가지</small><svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+    <a href="#links">자료 · 링크<small>PDF 3종 · NWEA 바로가기</small><svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
+    <a href="#help">도움 요청<small>이메일 · 전화 · 카카오</small><svg class="go" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></a>
   </aside>
 
   <main class="main">
 
     <section class="sec" id="follow">
       <div class="sec-head"><h2>영상 매뉴얼 10편</h2><small>처음부터 끝까지</small></div>
-      <p class="sec-desc">화면 속 학원명과 학생 이름은 모두 샘플입니다. 초록 테두리와 번호가 눌러야 할 곳, 빨간 표시는 누르면 안 되는 곳이에요.</p>
+      <p class="sec-desc">화면 속 학원명과 학생 이름은 모두 샘플입니다. <b style="color:var(--accent)">초록 테두리와 번호</b>가 눌러야 할 곳, <b style="color:#B42318">빨간 표시</b>는 누르면 안 되는 곳이에요.</p>
     <!-- 01 -->
     <article class="ep" id="ep01">
       <div class="ep-grid">
