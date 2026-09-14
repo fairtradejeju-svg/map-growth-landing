@@ -1,27 +1,27 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MAP 리포트 분석 제너레이터 사용법</title><style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;color:#fff;overflow:hidden;height:100vh}
+body{background:#EDF0F4;font-family:'Malgun Gothic','맑은 고딕',sans-serif;color:#111827;overflow:hidden;height:100vh}
 .top{position:fixed;left:0;right:0;top:0;height:74px;display:flex;align-items:center;
-  padding:0 34px;border-bottom:1px solid rgba(255,255,255,.09);background:#0f1c33;z-index:20}
+  padding:0 34px;border-bottom:1px solid #DFE4EA;background:#fff;z-index:20}
 .top .ttl{font-size:19px;font-weight:700;letter-spacing:-.01em}
-.top .ttl i{font-style:normal;color:#C9A961;margin-right:10px;font-size:14px;letter-spacing:.16em}
-.top .cnt{margin-left:auto;font-size:15px;color:#8d9bb5;letter-spacing:.06em}
-.top .cnt b{color:#C9A961;font-size:19px;font-weight:700}
+.top .ttl i{font-style:normal;color:#0E7C66;margin-right:10px;font-size:14px;letter-spacing:.16em}
+.top .cnt{margin-left:auto;font-size:15px;color:#6B7684;letter-spacing:.06em}
+.top .cnt b{color:#0E7C66;font-size:19px;font-weight:700}
 .stage{position:fixed;left:0;right:0;top:74px;bottom:132px;display:flex;align-items:center;justify-content:center}
 .screen{width:1916px;height:930px;transform-origin:center center;background:#fff;border-radius:6px;
-  box-shadow:0 22px 60px rgba(0,0,0,.5);position:relative;overflow:hidden;flex:none}
-.bot{position:fixed;left:0;right:0;bottom:0;height:132px;background:#0f1c33;
-  border-top:1px solid rgba(255,255,255,.09);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;z-index:20}
-.cap{font-size:18px;color:#d5deec;font-weight:300;text-align:center;padding:0 30px;line-height:1.5}
-.cap b{color:#C9A961;font-weight:600}
+  box-shadow:0 2px 10px rgba(17,24,39,.07);border:1px solid #E2E8F0;position:relative;overflow:hidden;flex:none}
+.bot{position:fixed;left:0;right:0;bottom:0;height:132px;background:#fff;
+  border-top:1px solid #DFE4EA;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;z-index:20}
+.cap{font-size:18px;color:#3F4A56;font-weight:300;text-align:center;padding:0 30px;line-height:1.5}
+.cap b{color:#0E7C66;font-weight:600}
 .ctl{display:flex;align-items:center;gap:20px}
-.nav{background:none;border:1px solid rgba(201,169,97,.5);color:#C9A961;font-family:inherit;font-size:15px;
+.nav{background:none;border:1px solid rgba(14,124,102,.45);color:#0E7C66;font-family:inherit;font-size:15px;
   padding:9px 22px;border-radius:3px;cursor:pointer;letter-spacing:.02em}
-.nav:hover{background:rgba(201,169,97,.12)}
+.nav:hover{background:rgba(14,124,102,.09)}
 .nav:disabled{opacity:.28;cursor:default}
 .dots{display:flex;gap:9px}
-.dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;transition:.15s}
-.dots i.on{background:#C9A961;transform:scale(1.25)}
+.dots i{width:9px;height:9px;border-radius:50%;background:#C8D0D8;cursor:pointer;transition:.15s}
+.dots i.on{background:#0E7C66;transform:scale(1.25)}
 
 /* NWEA 화면 재현 */
 .sc{position:absolute;inset:0;background:#fff;font-family:Verdana,'Malgun Gothic',sans-serif;color:#222;display:none}
@@ -162,25 +162,26 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
 .cmd .ttl2{color:#9a9a9a;font-size:12.5px;margin-bottom:10px}
 
 /* 클릭 표시 */
-.hl{position:relative;display:block;width:fit-content;outline:2.5px solid #C9A961;outline-offset:4px;border-radius:3px;box-shadow:0 0 0 8px rgba(201,169,97,.13)}
+.hl{position:relative;display:block;width:fit-content;outline:2.5px solid #0E7C66;outline-offset:4px;border-radius:3px;box-shadow:0 0 0 8px rgba(14,124,102,.14)}
 .hl.ib{display:inline-block}
 .hl.bad{outline-color:#c0392b;box-shadow:0 0 0 8px rgba(192,57,43,.10)}
+.hl.info{outline:2px dashed rgba(14,124,102,.8);box-shadow:none;background:rgba(14,124,102,.055)}
 .hl>.num{position:absolute;z-index:6;border:2px solid #fff;left:-49px;top:50%;transform:translateY(-50%);width:33px;height:33px;border-radius:50%;
-  background:#1A2B4A;color:#C9A961;font-family:'Malgun Gothic';font-size:15px;font-weight:700;
+  background:#0E7C66;color:#fff;font-family:'Malgun Gothic';font-size:15px;font-weight:700;
   display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,.28)}
 .hl>.tip{position:absolute;left:calc(100% + 30px);top:50%;transform:translateY(-50%);
-  background:#1A2B4A;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;font-weight:400;
+  background:#132A22;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;font-weight:400;
   padding:11px 17px;border-radius:4px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.15);line-height:1.35;z-index:7}
-.hl>.tip b{color:#C9A961;font-weight:700}
-.hl>.tip:after{content:'';position:absolute;left:-7px;top:calc(50% - 7px);border:7px solid transparent;border-right-color:#1A2B4A}
+.hl>.tip b{color:#7FD6B8;font-weight:700}
+.hl>.tip:after{content:'';position:absolute;left:-7px;top:calc(50% - 7px);border:7px solid transparent;border-right-color:#132A22}
 .hl.bad>.tip{background:#8e2a20}
 .hl.bad>.tip:after{border-right-color:#8e2a20}
 .hl.bad>.tip b{color:#ffd7d0}
 .up{top:calc(50% - 23px)!important}
 .dn{top:calc(50% + 23px)!important}
-.note{position:absolute;background:#1A2B4A;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;
+.note{position:absolute;background:#132A22;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;
   padding:14px 18px;border-radius:4px;line-height:1.6;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:7}
-.note b{color:#E5C77A;font-weight:700}
+.note b{color:#7FD6B8;font-weight:700}
 .note.warnbox{background:#8e2a20}
 .note.warnbox b{color:#ffd7d0}
 .note.okbox{background:#1d5c37}
@@ -220,7 +221,7 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
       <div class="rh"><span>이름</span><span style="width:170px">유형</span><span style="width:90px;text-align:right">크기</span></div>
       <div class="rw"><span>data</span><span style="width:170px;color:#666">파일 폴더</span><span style="width:90px;text-align:right;color:#666"></span></div><div class="rw"><span>input</span><span style="width:170px;color:#666">파일 폴더</span><span style="width:90px;text-align:right;color:#666"></span></div><div class="rw"><span>node</span><span style="width:170px;color:#666">파일 폴더</span><span style="width:90px;text-align:right;color:#666"></span></div><div class="rw"><span>output-reading</span><span style="width:170px;color:#666">파일 폴더</span><span style="width:90px;text-align:right;color:#666"></span></div>
       <span class="hl" style="display:block;width:auto;margin:2px 10px;outline-offset:2px"><div class="rw on"><span>&#9646; 리포트 생성하기.vbs</span><span style="width:170px;color:#666">VBScript 스크립트 파일</span><span style="width:90px;text-align:right;color:#666">4KB</span></div>
-        <span class="num">1</span><span class="tip" style="left:calc(100% + 40px)"><b>리포트 생성하기</b> 를 <b>두 번</b> 누릅니다</span></span>
+        <span class="num">1</span><span class="tip" style="left:auto;right:0;top:calc(100% + 22px);transform:none"><b>리포트 생성하기</b> 를 <b>두 번</b> 누릅니다</span></span>
       <div class="rw"><span>바탕화면에 바로가기 만들기.bat</span><span style="width:170px;color:#666">Windows 배치 파일</span><span style="width:90px;text-align:right;color:#666">1KB</span></div><div class="rw"><span>방화벽 허용 (한 번만).bat</span><span style="width:170px;color:#666">Windows 배치 파일</span><span style="width:90px;text-align:right;color:#666">2KB</span></div><div class="rw"><span>시작하기.html</span><span style="width:170px;color:#666">Chrome HTML 문서</span><span style="width:90px;text-align:right;color:#666">8KB</span></div><div class="rw"><span>사용 설명서.html</span><span style="width:170px;color:#666">Chrome HTML 문서</span><span style="width:90px;text-align:right;color:#666">680KB</span></div><div class="rw"><span>진단하기.bat</span><span style="width:170px;color:#666">Windows 배치 파일</span><span style="width:90px;text-align:right;color:#666">2KB</span></div>
     </div>
   </div>

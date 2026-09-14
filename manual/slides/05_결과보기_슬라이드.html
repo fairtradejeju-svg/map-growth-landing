@@ -1,27 +1,27 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>시험 결과 보기</title><style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;color:#fff;overflow:hidden;height:100vh}
+body{background:#EDF0F4;font-family:'Malgun Gothic','맑은 고딕',sans-serif;color:#111827;overflow:hidden;height:100vh}
 .top{position:fixed;left:0;right:0;top:0;height:74px;display:flex;align-items:center;
-  padding:0 34px;border-bottom:1px solid rgba(255,255,255,.09);background:#0f1c33;z-index:20}
+  padding:0 34px;border-bottom:1px solid #DFE4EA;background:#fff;z-index:20}
 .top .ttl{font-size:19px;font-weight:700;letter-spacing:-.01em}
-.top .ttl i{font-style:normal;color:#C9A961;margin-right:10px;font-size:14px;letter-spacing:.16em}
-.top .cnt{margin-left:auto;font-size:15px;color:#8d9bb5;letter-spacing:.06em}
-.top .cnt b{color:#C9A961;font-size:19px;font-weight:700}
+.top .ttl i{font-style:normal;color:#0E7C66;margin-right:10px;font-size:14px;letter-spacing:.16em}
+.top .cnt{margin-left:auto;font-size:15px;color:#6B7684;letter-spacing:.06em}
+.top .cnt b{color:#0E7C66;font-size:19px;font-weight:700}
 .stage{position:fixed;left:0;right:0;top:74px;bottom:132px;display:flex;align-items:center;justify-content:center}
 .screen{width:1916px;height:930px;transform-origin:center center;background:#fff;border-radius:6px;
-  box-shadow:0 22px 60px rgba(0,0,0,.5);position:relative;overflow:hidden;flex:none}
-.bot{position:fixed;left:0;right:0;bottom:0;height:132px;background:#0f1c33;
-  border-top:1px solid rgba(255,255,255,.09);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;z-index:20}
-.cap{font-size:18px;color:#d5deec;font-weight:300;text-align:center;padding:0 30px;line-height:1.5}
-.cap b{color:#C9A961;font-weight:600}
+  box-shadow:0 2px 10px rgba(17,24,39,.07);border:1px solid #E2E8F0;position:relative;overflow:hidden;flex:none}
+.bot{position:fixed;left:0;right:0;bottom:0;height:132px;background:#fff;
+  border-top:1px solid #DFE4EA;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;z-index:20}
+.cap{font-size:18px;color:#3F4A56;font-weight:300;text-align:center;padding:0 30px;line-height:1.5}
+.cap b{color:#0E7C66;font-weight:600}
 .ctl{display:flex;align-items:center;gap:20px}
-.nav{background:none;border:1px solid rgba(201,169,97,.5);color:#C9A961;font-family:inherit;font-size:15px;
+.nav{background:none;border:1px solid rgba(14,124,102,.45);color:#0E7C66;font-family:inherit;font-size:15px;
   padding:9px 22px;border-radius:3px;cursor:pointer;letter-spacing:.02em}
-.nav:hover{background:rgba(201,169,97,.12)}
+.nav:hover{background:rgba(14,124,102,.09)}
 .nav:disabled{opacity:.28;cursor:default}
 .dots{display:flex;gap:9px}
-.dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;transition:.15s}
-.dots i.on{background:#C9A961;transform:scale(1.25)}
+.dots i{width:9px;height:9px;border-radius:50%;background:#C8D0D8;cursor:pointer;transition:.15s}
+.dots i.on{background:#0E7C66;transform:scale(1.25)}
 
 /* NWEA 화면 재현 */
 .sc{position:absolute;inset:0;background:#fff;font-family:Verdana,'Malgun Gothic',sans-serif;color:#222;display:none}
@@ -162,25 +162,26 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
 .cmd .ttl2{color:#9a9a9a;font-size:12.5px;margin-bottom:10px}
 
 /* 클릭 표시 */
-.hl{position:relative;display:block;width:fit-content;outline:2.5px solid #C9A961;outline-offset:4px;border-radius:3px;box-shadow:0 0 0 8px rgba(201,169,97,.13)}
+.hl{position:relative;display:block;width:fit-content;outline:2.5px solid #0E7C66;outline-offset:4px;border-radius:3px;box-shadow:0 0 0 8px rgba(14,124,102,.14)}
 .hl.ib{display:inline-block}
 .hl.bad{outline-color:#c0392b;box-shadow:0 0 0 8px rgba(192,57,43,.10)}
+.hl.info{outline:2px dashed rgba(14,124,102,.8);box-shadow:none;background:rgba(14,124,102,.055)}
 .hl>.num{position:absolute;z-index:6;border:2px solid #fff;left:-49px;top:50%;transform:translateY(-50%);width:33px;height:33px;border-radius:50%;
-  background:#1A2B4A;color:#C9A961;font-family:'Malgun Gothic';font-size:15px;font-weight:700;
+  background:#0E7C66;color:#fff;font-family:'Malgun Gothic';font-size:15px;font-weight:700;
   display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,.28)}
 .hl>.tip{position:absolute;left:calc(100% + 30px);top:50%;transform:translateY(-50%);
-  background:#1A2B4A;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;font-weight:400;
+  background:#132A22;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;font-weight:400;
   padding:11px 17px;border-radius:4px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.15);line-height:1.35;z-index:7}
-.hl>.tip b{color:#C9A961;font-weight:700}
-.hl>.tip:after{content:'';position:absolute;left:-7px;top:calc(50% - 7px);border:7px solid transparent;border-right-color:#1A2B4A}
+.hl>.tip b{color:#7FD6B8;font-weight:700}
+.hl>.tip:after{content:'';position:absolute;left:-7px;top:calc(50% - 7px);border:7px solid transparent;border-right-color:#132A22}
 .hl.bad>.tip{background:#8e2a20}
 .hl.bad>.tip:after{border-right-color:#8e2a20}
 .hl.bad>.tip b{color:#ffd7d0}
 .up{top:calc(50% - 23px)!important}
 .dn{top:calc(50% + 23px)!important}
-.note{position:absolute;background:#1A2B4A;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;
+.note{position:absolute;background:#132A22;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;
   padding:14px 18px;border-radius:4px;line-height:1.6;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:7}
-.note b{color:#E5C77A;font-weight:700}
+.note b{color:#7FD6B8;font-weight:700}
 .note.warnbox{background:#8e2a20}
 .note.warnbox b{color:#ffd7d0}
 .note.okbox{background:#1d5c37}
@@ -345,8 +346,8 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
           <span style="display:block;border:1px solid #d8dde2;padding:8px 10px;font-size:11px;line-height:1.4"><b>HONG, Gildong</b><br><span style="color:#666">(214)</span></span></span>
       </span>
     </span>
-    <span class="num" style="left:-49px;top:34px;transform:none">1</span><span class="tip" style="left:40px;top:auto;bottom:-74px;transform:none">비슷한 점수끼리 <b>묶어서 보여 줍니다</b></span></span>
-  <div class="note okbox" style="left:300px;top:700px;width:1300px">여기 묶인 대로 <b>수업 그룹을 나누면 됩니다</b><br>
+    <span class="num" style="left:14px;top:14px;transform:none">1</span><span class="tip" style="left:40px;top:auto;bottom:-74px;transform:none">비슷한 점수끼리 <b>묶어서 보여 줍니다</b></span></span>
+  <div class="note okbox" style="left:300px;top:479px;width:1300px">여기 묶인 대로 <b>수업 그룹을 나누면 됩니다</b><br>
     <span style="font-size:15px;color:#c9e8d5">같은 칸에 있는 학생은 지금 배울 내용이 비슷합니다</span></div>
 </div></div>
 <div class="sc"><div style="height:56px;background:#fff;border-bottom:1px solid #e6e6e6;position:relative"><div style="position:absolute;left:30px;top:13px;font-size:20px;color:#666">&#9776;</div><div style="position:absolute;left:70px;top:9px;font-family:Arial;font-size:27px;font-weight:700;color:#7ab648;letter-spacing:-1px">map</div><div style="position:absolute;left:168px;top:14px;font-size:23px;color:#333;font-weight:400">Class Profile</div><div style="position:absolute;right:40px;top:8px;font-size:10.5px;color:#1a6a9e">Home | Help | Contact | Change Password | Logout</div><div style="position:absolute;left:0;right:0;top:54px;height:3px;display:flex"><i style="flex:1;background:#f5a800"></i><i style="flex:1;background:#e5006d"></i><i style="flex:1;background:#00a3ad"></i><i style="flex:1;background:#0077c8"></i></div></div><div style="background:#eef1f4;border-bottom:1px solid #dfe3e8;padding:9px 40px"><div style="font-size:11px;color:#333;margin-bottom:9px"><b>School:</b> 샘플영어학원 &nbsp;&rsaquo;&nbsp; <b>Tested:</b> Fall 2026-2027 &nbsp;&rsaquo;&nbsp; <b>Rostered:</b> Fall 2026-2027 &nbsp;&nbsp;<span style="color:#1a6a9e;text-decoration:underline">Change selections</span></div><div style="display:flex;gap:22px;align-items:flex-end"><div><div style="font-size:10.5px;color:#666;margin-bottom:4px">Instructor</div><span class="sel2" style="width:195px;height:25px;font-size:11.5px;padding:4px 6px;background:#e6e9ec;color:#888">TEST, TEST</span></div><div><div style="font-size:10.5px;color:#666;margin-bottom:4px">Class</div><span class="sel2" style="width:195px;height:25px;font-size:11.5px;padding:4px 6px;background:#e6e9ec;color:#888">Reading Class A</span></div><div><div style="font-size:10.5px;color:#666;margin-bottom:4px">Subject</div><span class="sel2" style="width:210px;height:25px;font-size:11.5px;padding:4px 6px">Language Arts</span></div><div><div style="font-size:10.5px;color:#666;margin-bottom:4px">Course</div><span class="sel2" style="width:210px;height:25px;font-size:11.5px;padding:4px 6px">Reading</span></div><div style="padding-bottom:1px"><span class="btn" style="padding:5px 18px;font-weight:700;font-size:11.5px">Update</span></div></div></div><div style="padding:14px 40px 0;background:#fff;display:flex;gap:3px;align-items:flex-end"><div style="background:#1a6a9e;color:#fff;font-weight:700;font-size:12px;padding:8px 22px;border-radius:3px 3px 0 0">Test details</div><div style="background:#e9edf0;color:#444;font-size:12px;padding:8px 22px;border-radius:3px 3px 0 0">Instructional Areas</div><div style="background:#e9edf0;color:#444;font-size:12px;padding:8px 22px;border-radius:3px 3px 0 0">Projected Proficiency</div><div style="margin-left:auto;font-size:11px;color:#1a6a9e;padding-bottom:6px">Class Profile Overview &#8599; &nbsp;&nbsp; &#8681; Download .CSV</div></div><div style="height:1px;background:#c9d2d9;margin:0 40px"></div><div style="padding:16px 40px 0;background:#fff;display:flex;align-items:center"><div style="font-size:22px;color:#333">Reading Class A | 샘플영어학원</div><div style="margin-left:auto;font-size:11px;color:#1a6a9e">&#128438; Print .PDF</div></div>
@@ -374,7 +375,7 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
       <span class="pill b" style="font-size:9px">&gt;80th</span>
       &nbsp;&nbsp;&nbsp; <b>Low Key</b> <span style="color:#c07000">&#9650;</span> Rapid-guessing in &gt;30% of questions. Not recommended reviewing.</div>
   </div>
-  <div class="note" style="left:40px;top:590px;width:1500px">색만 봐도 읽힙니다 · 파랑은 상위권, 빨강은 도움이 필요한 학생<br>
+  <div class="note" style="left:40px;top:499px;width:1500px">색만 봐도 읽힙니다 · 파랑은 상위권, 빨강은 도움이 필요한 학생<br>
     <span style="font-size:15px;color:#c4cfe0">주황 세모는 <b>찍은 문항이 많다</b>는 뜻이라 점수를 그대로 믿기 어렵습니다</span></div>
 </div></div>
 <div class="sc"><div style="height:56px;background:#fff;border-bottom:1px solid #e6e6e6;position:relative"><div style="position:absolute;left:30px;top:13px;font-size:20px;color:#666">&#9776;</div><div style="position:absolute;left:70px;top:9px;font-family:Arial;font-size:27px;font-weight:700;color:#7ab648;letter-spacing:-1px">map</div><div style="position:absolute;left:168px;top:14px;font-size:23px;color:#333;font-weight:400">Class Profile</div><div style="position:absolute;right:40px;top:8px;font-size:10.5px;color:#1a6a9e">Home | Help | Contact | Change Password | Logout</div><div style="position:absolute;left:0;right:0;top:54px;height:3px;display:flex"><i style="flex:1;background:#f5a800"></i><i style="flex:1;background:#e5006d"></i><i style="flex:1;background:#00a3ad"></i><i style="flex:1;background:#0077c8"></i></div></div><div style="background:#eef1f4;border-bottom:1px solid #dfe3e8;padding:9px 40px"><div style="font-size:11px;color:#333;margin-bottom:9px"><b>School:</b> 샘플영어학원 &nbsp;&rsaquo;&nbsp; <b>Tested:</b> Fall 2026-2027 &nbsp;&rsaquo;&nbsp; <b>Rostered:</b> Fall 2026-2027 &nbsp;&nbsp;<span style="color:#1a6a9e;text-decoration:underline">Change selections</span></div><div style="display:flex;gap:22px;align-items:flex-end"><div><div style="font-size:10.5px;color:#666;margin-bottom:4px">Instructor</div><span class="sel2" style="width:195px;height:25px;font-size:11.5px;padding:4px 6px;background:#e6e9ec;color:#888">TEST, TEST</span></div><div><div style="font-size:10.5px;color:#666;margin-bottom:4px">Class</div><span class="sel2" style="width:195px;height:25px;font-size:11.5px;padding:4px 6px;background:#e6e9ec;color:#888">Reading Class A</span></div><div><div style="font-size:10.5px;color:#666;margin-bottom:4px">Subject</div><span class="sel2" style="width:210px;height:25px;font-size:11.5px;padding:4px 6px">Language Arts</span></div><div><div style="font-size:10.5px;color:#666;margin-bottom:4px">Course</div><span class="sel2" style="width:210px;height:25px;font-size:11.5px;padding:4px 6px">Reading</span></div><div style="padding-bottom:1px"><span class="btn" style="padding:5px 18px;font-weight:700;font-size:11.5px">Update</span></div></div></div><div style="padding:14px 40px 0;background:#fff;display:flex;gap:3px;align-items:flex-end"><div style="background:#e9edf0;color:#444;font-size:12px;padding:8px 22px;border-radius:3px 3px 0 0">Test details</div><div style="background:#1a6a9e;color:#fff;font-weight:700;font-size:12px;padding:8px 22px;border-radius:3px 3px 0 0">Instructional Areas</div><div style="background:#e9edf0;color:#444;font-size:12px;padding:8px 22px;border-radius:3px 3px 0 0">Projected Proficiency</div><div style="margin-left:auto;font-size:11px;color:#1a6a9e;padding-bottom:6px">Class Profile Overview &#8599; &nbsp;&nbsp; &#8681; Download .CSV</div></div><div style="height:1px;background:#c9d2d9;margin:0 40px"></div><div style="padding:16px 40px 0;background:#fff;display:flex;align-items:center"><div style="font-size:22px;color:#333">Reading Class A | 샘플영어학원</div><div style="margin-left:auto;font-size:11px;color:#1a6a9e">&#128438; Print .PDF</div></div>
@@ -395,9 +396,9 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
         <span style="width:160px;background:#f2f4f6;border-radius:4px;padding:8px"><span style="display:block;font-size:10px;color:#333;font-weight:700;margin-bottom:6px">201-210 (1 student)</span>
           <span style="display:block;background:#fff;border:1px solid #d8dde2;border-radius:4px;padding:7px 9px;font-size:11px;line-height:1.5"><span style="color:#1a6a9e">Lee, Soyeon</span><br>206</span></span>
       </span>
-      <span style="display:block;font-size:10.5px;color:#1a6a9e;margin-top:12px">View standards for this instructional area in the Learning Continuum</span>
+      <span class="hl ib" style="margin-top:12px;outline-offset:5px"><span style="display:block;font-size:10.5px;color:#1a6a9e">View standards for this instructional area in the Learning Continuum</span><span class="num">2</span><span class="tip" style="left:calc(100% + 40px)">여기를 누르면 <b>Learning Continuum</b> 으로 넘어갑니다</span></span>
     </span>
-    <span class="num" style="left:-49px;top:30px;transform:none">1</span>
+    <span class="num" style="left:14px;top:14px;transform:none">1</span>
     <span class="tip" style="left:520px;top:104px;transform:none">영역을 골라 보면 <b>그 영역 점수대로 학생이 묶입니다</b></span></span>
   <div style="border:1px solid #dfe3e8;border-radius:3px;padding:16px 20px;margin-top:14px">
     <div style="font-size:15px;color:#333;font-weight:700;margin-bottom:10px">Instructional Area Details by Student&mdash;Growth: Reading 2-5 NWEA Intl 2025 1.1</div>
@@ -410,6 +411,15 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
       <tr><td style="color:#1a6a9e">Park, Yuna</td><td>3</td><td><span class="pill o">31st</span></td><td>186</td><td>420L-570L</td><td>184</td><td>190</td><td>185</td></tr>
     </table>
   </div>
+</div></div>
+<div class="sc"><div style="height:56px;background:#fff;border-bottom:1px solid #e6e6e6;position:relative"><div style="position:absolute;left:30px;top:13px;font-size:20px;color:#666">&#9776;</div><div style="position:absolute;left:70px;top:9px;font-family:Arial;font-size:27px;font-weight:700;color:#7ab648;letter-spacing:-1px">map</div><div style="position:absolute;left:168px;top:14px;font-size:23px;color:#333;font-weight:400">Learning Continuum</div><div style="position:absolute;right:40px;top:8px;font-size:10.5px;color:#1a6a9e">Home | Help | Contact | Change Password | Logout</div><div style="position:absolute;left:0;right:0;top:54px;height:3px;display:flex"><i style="flex:1;background:#f5a800"></i><i style="flex:1;background:#e5006d"></i><i style="flex:1;background:#00a3ad"></i><i style="flex:1;background:#0077c8"></i></div></div>
+<div style="position:absolute;left:0;right:0;top:110px;bottom:0;background:#fff;padding:26px 40px">
+  <div style="font-size:26px;color:#333;margin-bottom:6px">Fiction, Poetry, and Drama</div>
+  <div style="font-size:14px;color:#777;margin-bottom:26px">Reading Class A | 샘플영어학원 | RIT Band 191-200 (Hong, Gildong · Kim, Minjun)</div>
+  <div style="display:flex;gap:18px;align-items:flex-start"><span style="display:block;width:556px;background:#f4f6f8;border-radius:6px;padding:20px 22px"><span style="display:block;font-size:18px;font-weight:700;color:#1a7a3c;letter-spacing:.02em">Reinforce</span><span style="display:block;font-size:13px;color:#777;margin:6px 0 16px">한 칸 아래 · 이미 알고 있을 내용</span><span style="display:block;border:1px solid #dfe3e8;border-radius:4px;background:#fff;padding:10px 12px;font-size:14px;color:#444;line-height:1.6;margin-bottom:10px">이야기에서 인물이 한 일과 그 까닭을 찾습니다</span><span style="display:block;border:1px solid #dfe3e8;border-radius:4px;background:#fff;padding:10px 12px;font-size:14px;color:#444;line-height:1.6;margin-bottom:10px">앞뒤 문장을 보고 모르는 낱말의 뜻을 짐작합니다</span></span><span style="display:block;width:556px;background:#f4f6f8;border-radius:6px;padding:20px 22px;outline:2px solid #1a6a9e;outline-offset:3px"><span style="display:block;font-size:18px;font-weight:700;color:#1a6a9e;letter-spacing:.02em">Develop</span><span style="display:block;font-size:13px;color:#777;margin:6px 0 16px">지금 이 학생들의 칸 · 지금 가르칠 내용</span><span style="display:block;border:1px solid #dfe3e8;border-radius:4px;background:#fff;padding:10px 12px;font-size:14px;color:#444;line-height:1.6;margin-bottom:10px">인물의 말과 행동에서 성격을 설명합니다</span><span style="display:block;border:1px solid #dfe3e8;border-radius:4px;background:#fff;padding:10px 12px;font-size:14px;color:#444;line-height:1.6;margin-bottom:10px">이야기의 주제를 뒷받침하는 장면을 찾습니다</span><span style="display:block;border:1px solid #dfe3e8;border-radius:4px;background:#fff;padding:10px 12px;font-size:14px;color:#444;line-height:1.6;margin-bottom:10px">시에서 반복되는 표현이 주는 느낌을 말합니다</span></span><span style="display:block;width:556px;background:#f4f6f8;border-radius:6px;padding:20px 22px"><span style="display:block;font-size:18px;font-weight:700;color:#b07d20;letter-spacing:.02em">Introduce</span><span style="display:block;font-size:13px;color:#777;margin:6px 0 16px">한 칸 위 · 준비되면 맛보일 내용</span><span style="display:block;border:1px solid #dfe3e8;border-radius:4px;background:#fff;padding:10px 12px;font-size:14px;color:#444;line-height:1.6;margin-bottom:10px">두 이야기의 주제를 견주어 봅니다</span><span style="display:block;border:1px solid #dfe3e8;border-radius:4px;background:#fff;padding:10px 12px;font-size:14px;color:#444;line-height:1.6;margin-bottom:10px">글쓴이의 관점이 이야기에 주는 영향을 설명합니다</span></span>
+  </div>
+  <div class="note" style="left:60px;top:690px;width:1660px">학생 점수가 속한 칸이 <b>Develop</b> · 지금 가르치면 가장 잘 배우는 내용입니다<br>
+    <span style="font-size:15px;color:#c4cfe0">아래 칸 <b>Reinforce</b> 는 이미 알 가능성이 높아 다지기용, 위 칸 <b>Introduce</b> 는 준비되면 소개할 내용</span></div>
 </div></div>
 <div class="sc"><div style="height:56px;background:#fff;border-bottom:1px solid #e6e6e6;position:relative"><div style="position:absolute;left:30px;top:13px;font-size:20px;color:#666">&#9776;</div><div style="position:absolute;left:70px;top:9px;font-family:Arial;font-size:27px;font-weight:700;color:#7ab648;letter-spacing:-1px">map</div><div style="position:absolute;left:168px;top:14px;font-size:23px;color:#333;font-weight:400">Student Profile</div><div style="position:absolute;right:40px;top:8px;font-size:10.5px;color:#1a6a9e">Home | Help | Contact | Change Password | Logout</div><div style="position:absolute;left:0;right:0;top:54px;height:3px;display:flex"><i style="flex:1;background:#f5a800"></i><i style="flex:1;background:#e5006d"></i><i style="flex:1;background:#00a3ad"></i><i style="flex:1;background:#0077c8"></i></div></div>
 <div style="position:absolute;left:0;right:0;top:58px;height:34px;background:#4a545c;display:flex;align-items:center;padding:0 34px;gap:10px">
@@ -531,7 +541,7 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
           <span style="position:absolute;left:0;right:0;bottom:6px;display:flex;justify-content:space-around;font-size:9.5px;color:#666">
             <span>Fall 25 (Gr 2)</span><span>Winter 26</span><span>Spring 26</span><span>Fall 26 (Gr 3)</span><span>Winter 27</span><span>Spring 27</span></span>
         </span>
-        <span class="num">1</span><span class="tip" style="left:auto;right:calc(100% + 20px)">지난 점수와<br><b>앞으로의 예상</b></span></span>
+        <span class="num">1</span><span class="tip" style="left:calc(100% + 24px)">지난 점수와<br><b>앞으로의 예상</b></span></span>
       <div style="width:250px;font-size:10.5px;color:#444;line-height:2.1">
         <div><span style="display:inline-block;width:26px;border-top:2px solid #222;vertical-align:3px"></span> RIT Score: Reading <span style="float:right">&#9745;</span></div>
         <div><span style="display:inline-block;width:26px;border-top:2px dashed #222;vertical-align:3px"></span> Projected Score: Reading <span style="float:right">&#9745;</span></div>
@@ -552,13 +562,18 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
   <div style="background:#1a6a9e;color:#fff;font-weight:700;font-size:12px;padding:8px 22px;border-radius:3px 3px 0 0">Test details</div>
   <div style="background:#e9edf0;color:#444;font-size:12px;padding:8px 22px;border-radius:3px 3px 0 0">Instructional Areas</div>
   <div style="margin-left:auto;display:flex;gap:20px;padding-bottom:4px">
-    <span class="hl ib" style="outline-offset:5px"><span style="font-size:11px;color:#1a6a9e">Class Profile Overview &#8599;</span>
-      <span class="tip" style="left:auto;right:calc(100% + 30px);top:calc(50% + 70px)">반 전체를 한 장으로 요약해 봅니다</span></span>
+    <span style="font-size:11px;color:#1a6a9e">Class Profile Overview &#8599;</span>
     <span class="hl ib" style="outline-offset:5px"><span style="font-size:11px;color:#1a6a9e">&#8681; Download .CSV</span>
-      <span class="num">1</span><span class="tip" style="left:auto;right:calc(100% + 30px)">엑셀로 받아 <b>리포트 생성기</b>에 넣습니다</span></span>
+      <span class="num" style="left:50%;top:-44px;transform:translateX(-50%)">1</span><span class="tip" style="left:auto;right:calc(100% + 30px)">엑셀로 받아 <b>리포트 생성기</b>에 넣습니다</span></span>
   </div>
 </div>
-<div style="height:1px;background:#c9d2d9;margin:0 40px"></div><div style="padding:16px 40px 0;background:#fff;display:flex;align-items:center"><div style="font-size:22px;color:#333">Reading Class A | 샘플영어학원</div><div style="margin-left:auto;font-size:11px;color:#1a6a9e">&#128438; Print .PDF</div></div>
+<div style="height:1px;background:#c9d2d9;margin:0 40px"></div>
+<div style="padding:16px 40px 0;background:#fff;display:flex;align-items:center">
+  <div style="font-size:22px;color:#333">Reading Class A | 샘플영어학원</div>
+  <span class="hl ib" style="margin-left:auto;outline-offset:5px"><span style="font-size:11px;color:#1a6a9e">&#128438; Print .PDF</span>
+    <span class="num" style="left:-46px;top:50%;transform:translateY(-50%)">2</span>
+    <span class="tip" style="left:auto;right:calc(100% + 46px);top:calc(100% + 26px)">화면 그대로 <b>PDF 로 인쇄</b> · 가로(Landscape)로</span></span>
+</div>
 <div style="position:absolute;left:0;right:0;top:300px;bottom:0;background:#fff;padding:16px 40px">
   <table class="tb" style="width:100%;font-size:11px">
     <tr><th style="width:190px">Student Name</th><th style="width:60px">Grade</th><th style="width:110px">Achievement<br>Percentile</th>
@@ -566,10 +581,10 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
     <tr><td class="gray">HONG, Gildong</td><td class="gray">3</td><td><span class="pill b">95th</span></td><td class="gray">214</td><td class="gray">860L-1010L</td><td class="gray">Growth: Reading 2-5</td><td class="gray">09/04/2026</td></tr>
     <tr><td class="gray">KIM, Minjun</td><td class="gray">2</td><td><span class="pill g">75th</span></td><td class="gray">196</td><td class="gray">560L-710L</td><td class="gray">Growth: Reading 2-5</td><td class="gray">09/04/2026</td></tr>
   </table>
-  <div style="position:absolute;right:40px;top:96px;font-size:11px;color:#1a6a9e">&#128438; Print .PDF</div>
-  <div class="note okbox" style="left:40px;top:400px;width:1420px"><b>Download .CSV</b> 로 받은 파일을 그대로 <b>리포트 분석 제너레이터</b>에 넣으면<br>
-    <span style="font-size:15px;color:#c9e8d5">학부모용 한글 분석 리포트가 학생별로 만들어집니다 (07편에서 설명)</span></div>
-</div></div></div></div><div class="bot"><div class="cap" id="cap"></div><div class="ctl"><button class="nav" id="prev">&#8592; 이전</button><div class="dots" id="dots"></div><button class="nav" id="next">다음 &#8594;</button></div></div><script>var caps=["로그인하면 나오는 첫 화면입니다. 위쪽 <b>MAP Growth</b> 를 누릅니다", "MAP Growth 메뉴에서 <b>Class Profile</b> 을 엽니다", "학기·과목·과정을 맞추고 <b>Update</b> · 이걸 안 하면 화면이 비어 보입니다", "먼저 <b>몇 명이 제대로 시험을 마쳤는지</b> 확인합니다", "왼쪽은 우리 반 점수 분포, 오른쪽은 <b>미국 같은 학년 평균과 비교</b>", "비슷한 점수끼리 묶어서 보여 줍니다 · <b>수업 그룹 나눌 때</b> 그대로 씁니다", "학생별 표 · 점수·백분위·Lexile·찍은 비율까지 · 이름을 누르면 상세로", "<b>Instructional Areas</b> 탭에서는 영역별로 반 전체를 봅니다", "학생 상세 · 위쪽에 <b>과목별 점수</b>, 지금 보는 과목이 진한 박스로 열립니다", "성장 그래프 · 지난 점수와 <b>앞으로의 예상</b>이 함께 나옵니다", "<b>Download .CSV</b> 로 받아 두면 학부모용 한글 리포트를 만들 수 있습니다"];
+  
+  <div class="note okbox" style="left:40px;top:380px;width:1420px">받는 방법은 두 가지입니다 · <b>Download .CSV</b> 는 숫자 파일, <b>Print .PDF</b> 는 화면 그대로<br>
+    <span style="font-size:15px;color:#c9e8d5">CSV 로 받은 파일을 <b>리포트 분석 제너레이터</b>에 넣으면 학부모용 한글 리포트가 학생별로 만들어집니다 (07편)</span></div>
+</div></div></div></div><div class="bot"><div class="cap" id="cap"></div><div class="ctl"><button class="nav" id="prev">&#8592; 이전</button><div class="dots" id="dots"></div><button class="nav" id="next">다음 &#8594;</button></div></div><script>var caps=["로그인하면 나오는 첫 화면입니다. 위쪽 <b>MAP Growth</b> 를 누릅니다", "MAP Growth 메뉴에서 <b>Class Profile</b> 을 엽니다 · 반 전체를 한 화면에서 보는 리포트입니다", "학기·과목·과정을 맞추고 <b>Update</b> · 탭은 셋입니다 · 점수(Test details) · 영역(Instructional Areas) · 예측(Projected Proficiency)", "먼저 <b>몇 명이 제대로 시험을 마쳤는지</b> 확인합니다", "왼쪽은 우리 반 점수 분포, 오른쪽은 <b>미국 같은 학년 평균과 비교</b>", "비슷한 점수끼리 묶어서 보여 줍니다 · <b>수업 그룹 나눌 때</b> 그대로 씁니다", "학생별 표 · 점수·백분위·Lexile·찍은 비율까지 · 이름을 누르면 상세로", "<b>Instructional Areas</b> 탭 · 읽기 영역별로 반 전체를 보고, 영역을 바꿔 가며 봅니다", "<b>Learning Continuum</b> · Reinforce(다지기) · <b>Develop(지금 가르칠 것)</b> · Introduce(곧 배울 것)", "학생 상세 · 위쪽에 <b>과목별 점수</b>, 지금 보는 과목이 진한 박스로 열립니다", "성장 그래프 · 지난 점수와 <b>앞으로의 예상</b>이 함께 나옵니다", "오른쪽 위에서 내려받습니다 · <b>Download .CSV</b> 는 숫자 파일, <b>Print .PDF</b> 는 화면 그대로"];
 var scs=document.querySelectorAll('.sc'),i=0,n=scs.length;
 var dots=document.getElementById('dots');
 for(var k=0;k<n;k++){var d=document.createElement('i');d.dataset.k=k;d.onclick=function(){go(+this.dataset.k)};dots.appendChild(d)}

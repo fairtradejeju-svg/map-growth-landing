@@ -1,27 +1,27 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>시험 세션 만들고 진행하기</title><style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;color:#fff;overflow:hidden;height:100vh}
+body{background:#EDF0F4;font-family:'Malgun Gothic','맑은 고딕',sans-serif;color:#111827;overflow:hidden;height:100vh}
 .top{position:fixed;left:0;right:0;top:0;height:74px;display:flex;align-items:center;
-  padding:0 34px;border-bottom:1px solid rgba(255,255,255,.09);background:#0f1c33;z-index:20}
+  padding:0 34px;border-bottom:1px solid #DFE4EA;background:#fff;z-index:20}
 .top .ttl{font-size:19px;font-weight:700;letter-spacing:-.01em}
-.top .ttl i{font-style:normal;color:#C9A961;margin-right:10px;font-size:14px;letter-spacing:.16em}
-.top .cnt{margin-left:auto;font-size:15px;color:#8d9bb5;letter-spacing:.06em}
-.top .cnt b{color:#C9A961;font-size:19px;font-weight:700}
+.top .ttl i{font-style:normal;color:#0E7C66;margin-right:10px;font-size:14px;letter-spacing:.16em}
+.top .cnt{margin-left:auto;font-size:15px;color:#6B7684;letter-spacing:.06em}
+.top .cnt b{color:#0E7C66;font-size:19px;font-weight:700}
 .stage{position:fixed;left:0;right:0;top:74px;bottom:132px;display:flex;align-items:center;justify-content:center}
 .screen{width:1916px;height:930px;transform-origin:center center;background:#fff;border-radius:6px;
-  box-shadow:0 22px 60px rgba(0,0,0,.5);position:relative;overflow:hidden;flex:none}
-.bot{position:fixed;left:0;right:0;bottom:0;height:132px;background:#0f1c33;
-  border-top:1px solid rgba(255,255,255,.09);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:15px;z-index:20}
-.cap{font-size:18px;color:#d5deec;font-weight:300;text-align:center;padding:0 30px;line-height:1.5}
-.cap b{color:#C9A961;font-weight:600}
+  box-shadow:0 2px 10px rgba(17,24,39,.07);border:1px solid #E2E8F0;position:relative;overflow:hidden;flex:none}
+.bot{position:fixed;left:0;right:0;bottom:0;height:132px;background:#fff;
+  border-top:1px solid #DFE4EA;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;z-index:20}
+.cap{font-size:18px;color:#3F4A56;font-weight:300;text-align:center;padding:0 30px;line-height:1.5}
+.cap b{color:#0E7C66;font-weight:600}
 .ctl{display:flex;align-items:center;gap:20px}
-.nav{background:none;border:1px solid rgba(201,169,97,.5);color:#C9A961;font-family:inherit;font-size:15px;
+.nav{background:none;border:1px solid rgba(14,124,102,.45);color:#0E7C66;font-family:inherit;font-size:15px;
   padding:9px 22px;border-radius:3px;cursor:pointer;letter-spacing:.02em}
-.nav:hover{background:rgba(201,169,97,.12)}
+.nav:hover{background:rgba(14,124,102,.09)}
 .nav:disabled{opacity:.28;cursor:default}
 .dots{display:flex;gap:9px}
-.dots i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.22);cursor:pointer;transition:.15s}
-.dots i.on{background:#C9A961;transform:scale(1.25)}
+.dots i{width:9px;height:9px;border-radius:50%;background:#C8D0D8;cursor:pointer;transition:.15s}
+.dots i.on{background:#0E7C66;transform:scale(1.25)}
 
 /* NWEA 화면 재현 */
 .sc{position:absolute;inset:0;background:#fff;font-family:Verdana,'Malgun Gothic',sans-serif;color:#222;display:none}
@@ -162,25 +162,26 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
 .cmd .ttl2{color:#9a9a9a;font-size:12.5px;margin-bottom:10px}
 
 /* 클릭 표시 */
-.hl{position:relative;display:block;width:fit-content;outline:2.5px solid #C9A961;outline-offset:4px;border-radius:3px;box-shadow:0 0 0 8px rgba(201,169,97,.13)}
+.hl{position:relative;display:block;width:fit-content;outline:2.5px solid #0E7C66;outline-offset:4px;border-radius:3px;box-shadow:0 0 0 8px rgba(14,124,102,.14)}
 .hl.ib{display:inline-block}
 .hl.bad{outline-color:#c0392b;box-shadow:0 0 0 8px rgba(192,57,43,.10)}
+.hl.info{outline:2px dashed rgba(14,124,102,.8);box-shadow:none;background:rgba(14,124,102,.055)}
 .hl>.num{position:absolute;z-index:6;border:2px solid #fff;left:-49px;top:50%;transform:translateY(-50%);width:33px;height:33px;border-radius:50%;
-  background:#1A2B4A;color:#C9A961;font-family:'Malgun Gothic';font-size:15px;font-weight:700;
+  background:#0E7C66;color:#fff;font-family:'Malgun Gothic';font-size:15px;font-weight:700;
   display:flex;align-items:center;justify-content:center;box-shadow:0 3px 10px rgba(0,0,0,.28)}
 .hl>.tip{position:absolute;left:calc(100% + 30px);top:50%;transform:translateY(-50%);
-  background:#1A2B4A;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;font-weight:400;
+  background:#132A22;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;font-weight:400;
   padding:11px 17px;border-radius:4px;white-space:nowrap;box-shadow:0 4px 12px rgba(0,0,0,.15);line-height:1.35;z-index:7}
-.hl>.tip b{color:#C9A961;font-weight:700}
-.hl>.tip:after{content:'';position:absolute;left:-7px;top:calc(50% - 7px);border:7px solid transparent;border-right-color:#1A2B4A}
+.hl>.tip b{color:#7FD6B8;font-weight:700}
+.hl>.tip:after{content:'';position:absolute;left:-7px;top:calc(50% - 7px);border:7px solid transparent;border-right-color:#132A22}
 .hl.bad>.tip{background:#8e2a20}
 .hl.bad>.tip:after{border-right-color:#8e2a20}
 .hl.bad>.tip b{color:#ffd7d0}
 .up{top:calc(50% - 23px)!important}
 .dn{top:calc(50% + 23px)!important}
-.note{position:absolute;background:#1A2B4A;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;
+.note{position:absolute;background:#132A22;color:#fff;font-family:'Malgun Gothic';font-size:16.5px;
   padding:14px 18px;border-radius:4px;line-height:1.6;box-shadow:0 4px 12px rgba(0,0,0,.15);z-index:7}
-.note b{color:#E5C77A;font-weight:700}
+.note b{color:#7FD6B8;font-weight:700}
 .note.warnbox{background:#8e2a20}
 .note.warnbox b{color:#ffd7d0}
 .note.okbox{background:#1d5c37}
@@ -219,7 +220,7 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
     <div style="width:420px">
       <div style="font-size:14.5px;font-weight:700;color:#222;margin-bottom:12px">Testing</div>
       <span class="hl ib"><a style="font-size:13.5px;color:#1a6a9e;text-decoration:underline;font-weight:600">Manage Test Sessions</a>
-        <span class="num">1</span><span class="tip"><b>Manage Test Sessions</b> 로 들어갑니다</span></span>
+        <span class="num" style="left:50%;top:-46px;transform:translateX(-50%)">1</span><span class="tip"><b>Manage Test Sessions</b> 로 들어갑니다</span></span>
       <p style="font-size:11.5px;color:#666;margin-top:8px;line-height:1.6">Set up and manage MAP Growth test sessions. Find students to test and administer MAP Growth testing.</p>
       <div style="font-size:14.5px;font-weight:700;color:#222;margin:30px 0 12px">Resources</div>
       <a style="font-size:13.5px;color:#1a6a9e;text-decoration:underline;font-weight:600">MAP Growth Student Resources</a>
@@ -242,7 +243,7 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
   <div class="panel" style="margin-top:0">
     <div style="font-size:12.5px;color:#333;margin-bottom:14px">Find Students to Test 버튼을 눌러 학생을 찾거나, 담당 반이 있으면 Test My Class 를 누릅니다.</div>
     <span class="hl ib"><span class="go">Find Students to Test</span>
-      <span class="num">1</span><span class="tip"><b>Find Students to Test</b> 를 누릅니다 · Test My Class 는 선생님 계정에서만 켜집니다</span></span>
+      <span class="num" style="left:50%;top:-46px;transform:translateX(-50%)">1</span><span class="tip"><b>Find Students to Test</b> 를 누릅니다 · Test My Class 는 선생님 계정에서만 켜집니다</span></span>
     <div style="margin-top:12px"><span class="btn" style="color:#aaa;border-color:#ccc">Test My Class</span></div>
     <div style="font-size:12.5px;font-weight:700;color:#333;margin-top:16px">Secure Testing Browser Requirements</div>
   </div>
@@ -474,6 +475,32 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
 <div class="sc"><div class="hd"><div class="logo">nwea<span class="tag">believe in<br>what is possible</span></div><div class="bars"><i></i><i></i><i></i><i></i></div><div class="who">Logged in as sample@mapcenter.co.kr</div><div class="gnav"><span>Home</span>|<span>Help</span>|<span>Contact</span>|<span>Logout</span></div></div><div class="side"><a>MANAGE STUDENTS</a><a>MANAGE TEST SESSIONS</a><a>VIEW REPORTS <i>&#9662;</i></a><a>MANAGE PREFERENCES <i>&#9662;</i></a></div>
 <div class="main">
   <div class="ptitle">TEST STUDENTS</div>
+  <div style="position:absolute;right:30px;top:24px"><span class="btn">DOWNLOAD SESSION PROGRESS</span>
+    <span class="hl ib" style="margin-left:8px"><span class="go" style="background:#1a6a9e">END SESSION</span>
+      <span class="num" style="left:50%;top:-48px;transform:translateX(-50%)">2</span>
+      <span class="tip" style="left:auto;right:0;top:calc(100% + 22px);transform:none">모두 끝난 것을 보고 <b>END SESSION</b></span></span></div>
+  <div class="panel" style="margin-top:26px;display:flex;gap:60px;align-items:center">
+    <div><div style="font-size:12.5px;font-weight:700;margin-bottom:6px">Session Details</div>
+      <div style="font-size:12px;color:#555;line-height:1.6">Total Students: 3<br>Testing: 0</div></div>
+    <div><div style="font-size:12.5px;font-weight:700;margin-bottom:6px">Action Needed</div>
+      <div style="font-size:12px;color:#555;line-height:1.6">To Be Confirmed: 0<br>Paused: 0</div></div>
+  </div>
+  <table class="tb" style="width:1290px;margin-top:18px">
+    <tr><th style="width:44px"></th><th>Last Name</th><th>First Name</th>
+      <th><span class="hl ib" style="outline-offset:5px"><span>Status</span>
+        <span class="num">1</span>
+        <span class="tip" style="left:-30px;top:calc(100% + 150px);transform:none">세 명 모두 <b>Completed</b> 인지 먼저 봅니다</span></span></th>
+      <th>Question #</th><th>Rapid Guesses</th><th>Test Assignment</th></tr>
+    <tr><td><span class="chk"></span></td><td>HONG</td><td>Gildong</td><td style="color:#1a7a3c;font-weight:700">Completed</td><td>43</td><td>0</td><td>Growth: Reading 2-5 NWEA Intl 2025 1.1</td></tr>
+    <tr><td><span class="chk"></span></td><td>KIM</td><td>Minjun</td><td style="color:#1a7a3c;font-weight:700">Completed</td><td>41</td><td>0</td><td>Growth: Reading 2-5 NWEA Intl 2025 1.1</td></tr>
+    <tr><td><span class="chk"></span></td><td>LEE</td><td>Soyeon</td><td style="color:#1a7a3c;font-weight:700">Completed</td><td>44</td><td>1</td><td>Growth: Reading 2-5 NWEA Intl 2025 1.1</td></tr>
+  </table>
+  <div class="note" style="left:280px;top:600px;width:1060px"><b>Testing</b> 이나 <b>Paused</b> 가 남아 있으면 아직 안 끝난 학생입니다<br>
+    <span style="font-size:15px;color:#c4cfe0">그대로 닫으면 그 시험은 Suspended 로 남아 나중에 이어 볼 수 있습니다 (10편)</span></div>
+</div></div>
+<div class="sc"><div class="hd"><div class="logo">nwea<span class="tag">believe in<br>what is possible</span></div><div class="bars"><i></i><i></i><i></i><i></i></div><div class="who">Logged in as sample@mapcenter.co.kr</div><div class="gnav"><span>Home</span>|<span>Help</span>|<span>Contact</span>|<span>Logout</span></div></div><div class="side"><a>MANAGE STUDENTS</a><a>MANAGE TEST SESSIONS</a><a>VIEW REPORTS <i>&#9662;</i></a><a>MANAGE PREFERENCES <i>&#9662;</i></a></div>
+<div class="main">
+  <div class="ptitle">TEST STUDENTS</div>
   <table class="tb" style="width:1290px;margin-top:30px">
     <tr><th style="width:44px"></th><th>Last Name</th><th>First Name</th><th>Status</th><th>Question #</th></tr>
     <tr><td class="gray"></td><td class="gray">HONG</td><td class="gray">Gildong</td><td class="gray">Completed</td><td class="gray">43</td></tr>
@@ -490,15 +517,15 @@ body{background:#0f1c33;font-family:'Malgun Gothic','맑은 고딕',sans-serif;c
     <div class="sel2" style="width:300px">Class A</div>
     <div style="margin-top:20px">
       <span class="hl ib"><span class="go">Save and Exit</span>
-        <span class="num">1</span><span class="tip" style="left:calc(100% + 290px);top:calc(50% - 30px)">다음에 또 쓸 거면 <b>Save and Exit</b></span></span>
+        <span class="num" style="left:50%;top:-46px;transform:translateX(-50%)">1</span><span class="tip" style="left:calc(100% + 290px);top:calc(50% - 30px)">다음에 또 쓸 거면 <b>Save and Exit</b></span></span>
       <span class="hl ib" style="margin-left:20px"><span class="go" style="background:linear-gradient(#6f9ab3,#4d8fae)">Delete Session</span>
         <span class="tip" style="left:calc(100% + 110px);top:calc(50% + 30px)">다시 안 쓸 거면 <b>Delete Session</b></span></span>
       <span class="gh">Cancel</span>
     </div>
   </div>
 </div>
-<div class="note okbox" style="left:400px;top:760px;width:1080px">시험이 다 끝나면 반드시 <b>END SESSION</b> 으로 세션을 닫아 주세요<br>
-  <span style="font-size:15px;color:#c9e8d5">열어 두면 다음에 같은 이름으로 세션을 만들 때 걸립니다</span></div></div></div></div><div class="bot"><div class="cap" id="cap"></div><div class="ctl"><button class="nav" id="prev">&#8592; 이전</button><div class="dots" id="dots"></div><button class="nav" id="next">다음 &#8594;</button></div></div><script>var caps=["로그인하면 나오는 첫 화면입니다. 위쪽 <b>MAP Growth</b> 를 누릅니다", "펼쳐진 메뉴에서 <b>Manage Test Sessions</b> 로 들어갑니다", "Testing 아래 <b>Manage Test Sessions</b> · <b>Find Students to Test</b> 를 눌러 학생을 찾습니다", "<b>학원 이름</b>만 맞게 고르고 <b>Search</b> · 학년·반은 그대로 두면 전체가 나옵니다", "찾은 학생이 팝업으로 뜹니다 · 시험 볼 학생만 남기고 <b>Add Students</b>", "담은 학생을 모두 선택한 뒤 <b>Assign Test</b> 로 시험 종류를 지정합니다", "Test Name 목록에서 학년에 맞는 시험을 고릅니다 · <b>K-2 / 2-5 / 6+</b>", "Test Assigned 칸이 채워졌는지 확인하고 <b>Test Now</b>", "<b>세션 이름·비밀번호</b>를 학생들에게 알려 줍니다 · Proctor PIN은 선생님용", "학생이 들어오면 체크하고 <b>Confirm</b> · 그래야 시험이 시작됩니다", "시험 중에는 푸는 문제 번호가 실시간으로 보입니다", "끝나면 <b>END SESSION</b> · 또 쓸 거면 Save and Exit, 아니면 Delete Session"];
+<div class="note okbox" style="left:400px;top:700px;width:1080px"><b>이미 Completed 된 학생의 답안과 점수는 그대로 남습니다</b><br>
+  <span style="font-size:15px;color:#c9e8d5">Save and Exit 이든 Delete Session 이든 끝난 시험 결과는 바뀌지 않습니다 · 지워지는 것은 세션 이름뿐입니다<br>열어 두면 다음에 같은 이름으로 세션을 만들 때 걸리니 꼭 닫아 주세요</span></div></div></div></div><div class="bot"><div class="cap" id="cap"></div><div class="ctl"><button class="nav" id="prev">&#8592; 이전</button><div class="dots" id="dots"></div><button class="nav" id="next">다음 &#8594;</button></div></div><script>var caps=["로그인하면 나오는 첫 화면입니다. 위쪽 <b>MAP Growth</b> 를 누릅니다", "펼쳐진 메뉴에서 <b>Manage Test Sessions</b> 로 들어갑니다", "Testing 아래 <b>Manage Test Sessions</b> · <b>Find Students to Test</b> 를 눌러 학생을 찾습니다", "<b>학원 이름</b>만 맞게 고르고 <b>Search</b> · 학년·반은 그대로 두면 전체가 나옵니다", "찾은 학생이 팝업으로 뜹니다 · 시험 볼 학생만 남기고 <b>Add Students</b>", "담은 학생을 모두 선택한 뒤 <b>Assign Test</b> 로 시험 종류를 지정합니다", "Test Name 목록에서 학년에 맞는 시험을 고릅니다 · <b>K-2 / 2-5 / 6+</b>", "Test Assigned 칸이 채워졌는지 확인하고 <b>Test Now</b>", "<b>세션 이름·비밀번호</b>를 학생들에게 알려 줍니다 · Proctor PIN은 선생님용", "학생이 들어오면 체크하고 <b>Confirm</b> · 그래야 시험이 시작됩니다", "시험 중에는 푸는 문제 번호가 실시간으로 보입니다", "닫기 전에 <b>Status</b> 를 봅니다 · 모두 <b>Completed</b> 여야 다 끝난 것입니다", "끝나면 <b>END SESSION</b> · 또 쓸 거면 Save and Exit, 아니면 Delete Session · <b>끝난 시험 결과는 바뀌지 않습니다</b>"];
 var scs=document.querySelectorAll('.sc'),i=0,n=scs.length;
 var dots=document.getElementById('dots');
 for(var k=0;k<n;k++){var d=document.createElement('i');d.dataset.k=k;d.onclick=function(){go(+this.dataset.k)};dots.appendChild(d)}
