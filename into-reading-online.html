@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Into Reading AI Online Program · 온라인 브로슈어</title>
+<meta name="description" content="HMH Into Reading 교재 그대로, AI Tutor와 함께하는 온라인 학습. 강의지원 시스템 · LMS · Module Test · Vocabulary · Reading · AI Speaking · AI Writing을 한 번에 소개합니다.">
+<meta property="og:title" content="Into Reading AI Online Program">
+<meta property="og:description" content="교재 그대로, AI Tutor와 함께하는 온라인 학습 — 온라인 브로슈어">
+<meta property="og:image" content="https://www.mapgrowthsupportkorea.com/images/iro/og.jpg">
+<link rel="icon" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,500;0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+:root{
+  --g:#FFC027; --g-deep:#8F5400; --g-soft:#FFE7A6; --cover:#FFC027; --orange:#F58A1F;
+  --g1:#41A25E; --g2:#FD871A; --g3:#6A4A8C; --g4:#0966AA; --g5:#F8A213;
+  --ink:#1F1A14; --sub:#4A4339; --mute:#675E50; --line:#E9DFC9;
+  --tint:#FFF9EC; --tint-2:#FFF0CF; --edge:#F0E3C4; --moss:#6F6044;
+  --en:'Plus Jakarta Sans','Pretendard',sans-serif;
+  --ko:'Pretendard','Plus Jakarta Sans',-apple-system,'Malgun Gothic',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:112px}
+body{font-family:var(--ko);background:#fff;color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased;word-break:keep-all}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.in{max-width:1160px;margin:0 auto;padding:0 28px}
+
+/* 상단 바 */
+.topbar{position:sticky;top:0;z-index:40;background:#fff;border-bottom:1px solid var(--edge)}
+.topbar .in{display:flex;align-items:center;justify-content:space-between;gap:16px;height:60px}
+.logos{display:flex;align-items:center;gap:16px}
+.logos img.hmh{height:22px;width:auto}
+.logos i{width:1px;height:18px;background:var(--line)}
+.logos img.elt{height:15px;width:auto}
+.back{font-size:13px;font-weight:600;color:var(--g-deep);display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.back svg{width:15px;height:15px}
+
+/* 본책 학년 색 띠 */
+.grades{display:flex;height:6px}
+.grades i{flex:1}
+.grades i:nth-child(1){background:var(--g1)}.grades i:nth-child(2){background:var(--g2)}.grades i:nth-child(3){background:var(--g3)}.grades i:nth-child(4){background:var(--g4)}.grades i:nth-child(5){background:var(--g5)}
+
+/* 표지 */
+.cover{position:relative;overflow:hidden;background:#fff}
+.cover .in{position:relative;display:grid;grid-template-columns:1fr 1.04fr;gap:48px;align-items:center;padding-top:64px;padding-bottom:0}
+.kicker{font-family:var(--en);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--g-deep)}
+.cover h1{font-family:var(--en);font-weight:800;font-size:clamp(2.6rem,5.2vw,4.3rem);line-height:1.02;letter-spacing:-.045em;margin:14px 0 18px}
+.cover h1 sup{font-size:.28em;font-weight:600;vertical-align:top;position:relative;top:.5em;letter-spacing:0}
+.edition{display:inline-block;font-family:var(--en);font-weight:700;font-size:clamp(1.05rem,1.9vw,1.4rem);letter-spacing:-.01em;color:var(--ink);background:var(--g);padding:9px 20px 10px;border-radius:999px}
+.tagline{font-family:var(--en);font-style:italic;font-weight:600;font-size:clamp(1.05rem,1.7vw,1.3rem);letter-spacing:-.02em;margin:26px 0 12px}
+.cover p.lead{font-size:15.5px;color:var(--sub);max-width:470px}
+.cover-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.cover .cover-cta{margin-bottom:60px}
+.pill{display:inline-flex;align-items:center;gap:7px;font-family:var(--en);font-size:13.5px;font-weight:700;letter-spacing:-.01em;padding:10px 18px;border-radius:999px;border:1.5px solid var(--ink);background:#fff;transition:background .16s,color .16s}
+.pill:hover{background:var(--ink);color:#fff}
+.pill.fill{background:var(--ink);border-color:var(--ink);color:#fff}
+.pill.fill:hover{background:var(--g);border-color:var(--ink);color:var(--ink)}
+.pill svg{width:14px;height:14px}
+
+.stack{position:relative;align-self:stretch;min-height:520px}
+.stack::before{content:'';position:absolute;left:-34px;right:-600px;top:0;bottom:0;background:var(--cover);border-radius:50% 0 0 0 / 120px 0 0 0}
+.badge{position:absolute;right:2px;top:92px;z-index:3;width:104px;height:104px;border-radius:50%;background:#fff;border:6px solid #FFE7A6;box-shadow:0 6px 16px rgba(90,58,0,.13);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--en);line-height:1.05;color:var(--ink)}
+.badge small{font-size:11px;font-weight:600;letter-spacing:.02em}
+.badge b{font-size:25px;font-weight:800;letter-spacing:-.04em}
+.stack .shot{position:absolute;margin:0}
+.stack .s1{width:80%;left:0;top:84px}
+.stack .s2{width:52%;right:0;top:262px}
+.stack .s3{width:32%;left:7%;top:318px}
+.stack .shot img{border-radius:8px;border:1px solid rgba(255,255,255,.7);box-shadow:0 18px 40px rgba(90,58,0,.26);background:#fff}
+.stack .tag{position:absolute;left:10px;top:-11px;font-family:var(--en);font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--ink);padding:4px 9px;border-radius:4px}
+.stack .s2 .tag{background:var(--g4)}
+.stack .s3 .tag{background:#D9640A}
+
+.band{position:relative;background:var(--ink);color:#fff}
+.band .in{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:16px;padding-bottom:16px}
+.band b{font-family:var(--en);font-weight:800;font-size:15px;letter-spacing:.24em;color:var(--g)}
+.band span{font-size:13px;color:#DDD3BF}
+
+/* 목차 */
+.toc{position:sticky;top:60px;z-index:30;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--edge)}
+.toc .in{display:flex;gap:4px;overflow-x:auto;padding-top:9px;padding-bottom:9px;scrollbar-width:none}
+.toc .in::-webkit-scrollbar{display:none}
+.toc a{flex:0 0 auto;font-family:var(--en);font-size:12.5px;font-weight:700;color:var(--moss);padding:7px 13px;border-radius:999px;transition:background .15s,color .15s}
+.toc a em{font-style:normal;font-weight:600;opacity:.55;margin-right:5px;font-variant-numeric:tabular-nums}
+.toc a:hover{background:var(--tint-2);color:var(--g-deep)}
+.toc a.on{background:var(--g);color:var(--ink)}
+.toc a.on em{opacity:.8}
+
+/* 쪽(섹션) */
+.page{padding:76px 0 0}
+.page:nth-of-type(even){background:var(--tint)}
+.page-head{max-width:760px;margin-bottom:34px}
+.chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--en);font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);background:var(--g);padding:6px 13px;border-radius:999px}
+.chip::after{content:'';width:7px;height:7px;border-radius:50%;border:1.5px solid currentColor}
+.chip.dark{background:var(--ink);color:#fff}
+.page h2{font-size:clamp(1.65rem,3.1vw,2.35rem);font-weight:800;line-height:1.22;letter-spacing:-.045em;margin:16px 0 12px}
+.page h2 .en{font-family:var(--en);letter-spacing:-.04em}
+.page-head p{font-size:15.5px;color:var(--sub)}
+.page-head p+p{margin-top:6px}
+.folio{display:flex;justify-content:space-between;align-items:center;margin-top:56px;padding:14px 0;border-top:1px solid var(--edge);font-family:var(--en);font-size:11.5px;font-weight:600;color:var(--moss)}
+.folio b{font-weight:700;font-variant-numeric:tabular-nums}
+
+/* 카드 · 화면 */
+.card{background:#fff;border:1px solid var(--edge);border-radius:12px}
+.shot{margin:0}
+.shot button{display:block;width:100%;border-radius:8px;overflow:hidden;border:1px solid var(--edge);background:#fff;cursor:zoom-in;transition:box-shadow .18s,border-color .18s}
+.shot button:hover{border-color:var(--g);box-shadow:0 12px 30px rgba(90,58,0,.14)}
+.shot button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.shot img{width:100%;height:auto}
+.shot figcaption{padding:11px 2px 0;font-size:13px;color:var(--mute);line-height:1.5}
+.shot figcaption b{display:block;font-family:var(--en);font-size:13.5px;font-weight:700;color:var(--g-deep);letter-spacing:-.01em;margin-bottom:1px}
+.panel{padding:18px 18px 16px}
+.panel .shot figcaption{padding-top:12px}
+
+.row{display:flex;gap:18px;align-items:flex-start}
+.row .shot{flex:var(--r,1) 1 0;min-width:0}
+.even .shot img{aspect-ratio:1.9;object-fit:cover;object-position:top left}
+.mt-list .shot img{aspect-ratio:.78;object-fit:cover;object-position:top}
+/* 큰 화면 보기 */
+.viewer{background:#fff;border:1px solid var(--edge);border-radius:14px;padding:14px 14px 16px}
+.v-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.v-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.v-tabs button{font-family:var(--en);font-size:13.5px;font-weight:700;letter-spacing:-.01em;color:var(--sub);padding:8px 14px;border-radius:999px;border:1.5px solid #E3D3AC;background:#fff;transition:background .15s,color .15s,border-color .15s}
+.v-tabs button em{font-style:normal;font-weight:600;opacity:.55;margin-right:6px;font-variant-numeric:tabular-nums}
+.v-tabs button:hover{border-color:var(--ink);color:var(--ink)}
+.v-tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.v-tabs button:focus-visible,.v-nav button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.v-nav{display:flex;align-items:center;gap:8px;flex:none}
+.v-nav button{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--edge);font-size:20px;line-height:1;color:var(--g-deep);background:#fff}
+.v-nav button:hover{border-color:var(--g);background:var(--tint)}
+.v-count{font-family:var(--en);font-size:12.5px;font-weight:700;color:var(--moss);min-width:44px;text-align:center;font-variant-numeric:tabular-nums}
+.v-stage{background:var(--tint);border-radius:10px;padding:16px}
+.v-stage .shot+.shot{margin-top:22px}
+.js .v-stage .shot{display:none;margin-top:0}
+.js .v-stage .shot.on{display:block}
+.v-stage .shot button{margin:0 auto}
+.v-stage .shot figcaption{text-align:center;font-size:14.5px;padding-top:14px}
+.v-stage .shot figcaption b{font-size:15.5px}
+.v-hint{display:block;text-align:center;font-size:12px;color:var(--mute);margin-top:10px}
+.steps.h{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:26px;margin-bottom:28px}
+.steps.h li{padding-bottom:0}
+.steps.h li::after{display:none}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.split{display:grid;grid-template-columns:.8fr 1.5fr;gap:34px;align-items:start}
+.split.wide{grid-template-columns:.62fr 1.7fr}
+
+/* 01 주요 기능 */
+.feat{padding:26px 24px 24px;display:flex;flex-direction:column}
+.feat .no{font-family:var(--en);font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--g)}
+.feat h3{font-size:1.22rem;font-weight:800;letter-spacing:-.035em;margin:8px 0 14px}
+.feat ul{list-style:none;border-top:1px solid var(--edge)}
+.feat li{font-size:14.5px;color:var(--sub);padding:10px 0;border-bottom:1px solid var(--edge)}
+.feat a{margin-top:18px;font-family:var(--en);font-size:13px;font-weight:700;color:var(--g-deep)}
+.feat a:hover{text-decoration:underline}
+
+/* 단계 목록 */
+.steps{list-style:none;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:0 0 22px 46px}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:#fff;border:2.5px solid var(--g);color:var(--ink);font-family:var(--en);font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.steps li:not(:last-child)::after{content:'';position:absolute;left:14.5px;top:36px;bottom:6px;width:1px;background:var(--edge)}
+.steps h3{font-size:1.05rem;font-weight:800;letter-spacing:-.03em;line-height:30px}
+.steps h3 .en{font-family:var(--en)}
+.steps p{font-size:14.5px;color:var(--sub);margin-top:4px}
+
+/* Module Test */
+.mt{display:grid;grid-template-columns:230px 1fr;gap:26px;align-items:start}
+.mt-list .shot figcaption{text-align:left}
+.arrow-note{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600;color:var(--moss);margin:8px 0 18px}
+.arrow-note svg{width:34px;height:12px;flex:none}
+
+/* Star Talk 표 */
+.levels{padding:24px}
+.levels h3{font-family:var(--en);font-size:1.12rem;font-weight:800;letter-spacing:-.03em}
+.levels .facts{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 16px}
+.levels .facts span{font-size:12.5px;font-weight:600;color:var(--g-deep);background:var(--tint);border:1px solid var(--edge);padding:5px 11px;border-radius:999px}
+.levels table{width:100%;border-collapse:collapse;font-size:14px}
+.levels th,.levels td{text-align:left;padding:9px 0;border-top:1px solid var(--edge);vertical-align:top}
+.levels th{width:132px;font-family:var(--en);font-weight:700;color:var(--ink);white-space:nowrap}
+.levels tr.st th{color:#C4610A}
+.levels td{color:var(--sub)}
+
+.sub-head{display:flex;align-items:center;gap:12px;margin:44px 0 18px}
+.sub-head h3{font-size:1.18rem;font-weight:800;letter-spacing:-.035em}
+.sub-head h3 .en{font-family:var(--en)}
+.note{font-size:14.5px;color:var(--sub);max-width:760px;margin:-6px 0 20px}
+.eg{margin-top:20px;padding:16px 20px;border-left:3px solid var(--g2);background:var(--tint);border-radius:0 10px 10px 0;font-size:14.5px;color:var(--sub)}
+.eg b{color:var(--ink)}
+
+/* 마무리 */
+.closing{background:var(--cover);color:var(--ink);position:relative;overflow:hidden}
+.closing::before{content:'';display:block;height:70px;background:#fff;border-radius:0 0 50% 50% / 0 0 100% 100%;margin:0 -6%}
+.closing .in{position:relative;padding-top:64px;padding-bottom:64px}
+.closing .kicker{color:var(--ink)}
+.closing h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;letter-spacing:-.045em;line-height:1.25;margin:14px 0 12px}
+.closing p{font-size:15px;color:#3A3022;max-width:560px}
+.closing .cover-cta .pill{border-color:var(--ink);background:transparent;color:var(--ink)}
+.closing .cover-cta .pill:hover{background:var(--ink);color:#fff}
+.closing .cover-cta .pill.fill{background:var(--ink);border-color:var(--ink);color:#fff}
+.closing .cover-cta .pill.fill:hover{background:#fff;border-color:#fff;color:var(--ink)}
+.contact-line{margin-top:18px;font-size:14px!important;color:#3A3022}
+.contact-line b{font-weight:800;color:var(--ink)}
+.contact-line i{display:inline-block;width:1px;height:12px;background:rgba(31,26,20,.45);margin:0 12px;vertical-align:-1px}
+.contact-line{display:inline-block;max-width:none!important;padding:12px 18px;border:1.5px solid rgba(31,26,20,.8);border-radius:10px;background:rgba(255,255,255,.35)}
+.foot{background:var(--ink);color:#CFC6B5;font-size:12.5px}
+.foot .in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:18px;padding-bottom:18px}
+.foot a:hover{color:#fff}
+
+/* 크게 보기 */
+.lb{position:fixed;inset:0;z-index:100;background:rgba(24,18,8,.93);display:none;align-items:center;justify-content:center;padding:56px 24px 24px;cursor:zoom-out}
+.lb.open{display:flex}
+.lb .pan{max-width:100%;max-height:100%;overflow:auto;border-radius:8px;cursor:default}
+.lb img{display:block;max-width:100%;max-height:calc(100vh - 90px);background:#fff}
+@media (max-width:760px){.lb{padding:52px 0 0;align-items:flex-start}.lb .pan{width:100%;height:100%}.lb img{max-width:none;max-height:none;width:auto;height:auto;min-width:100%}.lb .tip{display:block}}
+.lb .tip{display:none;position:absolute;left:0;right:0;bottom:10px;text-align:center;font-size:12px;color:#fff;opacity:.85;pointer-events:none}
+.lb .cap{position:absolute;left:0;right:0;top:16px;text-align:center;font-family:var(--en);font-size:13.5px;font-weight:700;color:#fff}
+.lb .x{position:absolute;right:18px;top:10px;width:40px;height:40px;color:#fff;font-size:26px;line-height:1}
+
+@media (max-width:960px){
+  .cover .in{grid-template-columns:1fr;gap:36px;padding-top:44px}
+  .stack{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:22px 14px;padding:64px 0 36px}
+  .stack::before{left:-28px;right:-28px;border-radius:50% 50% 0 0 / 60px 60px 0 0}
+  .badge{top:-30px;right:6px;width:86px;height:86px;border-width:5px}.badge b{font-size:20px}.badge small{font-size:10px}
+  .stack .shot{position:relative;width:auto!important;left:auto!important;right:auto!important;top:auto!important}
+  .stack .s1{grid-column:1/3}
+  .split,.split.wide,.mt{grid-template-columns:1fr;gap:24px}
+  .mt-list{max-width:260px}
+  .g3{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:600px){
+  .contact-line{display:block}.contact-line i{display:block;width:0;height:4px;margin:0;background:none}
+  .in{padding:0 18px}
+  html{scroll-padding-top:104px}
+  .logos img.hmh{height:18px}.logos img.elt{height:12px}.logos{gap:11px}
+  .page{padding-top:56px}
+  .g2,.g3{grid-template-columns:1fr}
+  .steps.h{grid-template-columns:1fr;gap:18px}
+  .viewer{padding:10px 10px 12px}.v-stage{padding:8px}
+  .v-bar{flex-direction:column;align-items:stretch}.v-nav{justify-content:center}
+  .v-tabs{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}.v-tabs::-webkit-scrollbar{display:none}.v-tabs button{flex:0 0 auto;font-size:12.5px;padding:7px 12px}
+  .row{flex-direction:column}.row .shot{flex:none;width:100%}
+  .g3.keep2{grid-template-columns:repeat(2,1fr);gap:12px}
+  .folio{margin-top:40px}
+  .band b{font-size:13px;letter-spacing:.18em}
+  .chip{letter-spacing:.14em}
+  .toc a{padding:9px 14px}
+  .v-tabs{padding:0 4px 2px}
+  .levels th{width:104px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="in">
+    <div class="logos">
+      <img class="hmh" src="images/iro/logo-hmh.png" alt="HMH">
+      <i></i>
+      <img class="elt" src="images/iro/logo-elt.png" alt="천재교과서 ELT">
+    </div>
+    <a class="back" href="index.html#resources">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      교재 · 자료실
+    </a>
+  </div>
+</header>
+<div class="grades" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+
+<!-- 표지 -->
+<section class="cover" id="top">
+  <div class="in">
+    <div>
+      <span class="kicker">Structured Literacy · 미국교과서</span>
+      <h1>Into Reading<sup>&reg;</sup><br>AI Online Program</h1>
+      <span class="edition">Online Program with AI Tutor</span>
+      <p class="tagline">교재 그대로, AI Tutor와 함께하는 온라인 학습</p>
+      <p class="lead">AI 온라인 플랫폼은 관리자가 쉽게 운영할 수 있고, 학생들이 온라인 학습을 효과적으로 활용하도록 설계되었습니다.</p>
+      <div class="cover-cta">
+        <a class="pill fill" href="#overview">브로슈어 보기
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
+        </a>
+        <a class="pill" href="resources/into-reading-brochure.pdf" download>+ Into Reading V3 교재 브로슈어 (PDF)</a>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="badge" aria-hidden="true"><small>with</small><b>AI</b><small>Tutor</small></div>
+      <figure class="shot s1"><span class="tag">LMS</span><img src="images/iro/s02_1.jpg" srcset="images/iro/s02_1.jpg 1042w, images/iro/full/s02_1.png 2338w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s02_1.png" width="1042" height="671" alt="캘린더 형태의 LMS 대시보드 화면"></figure>
+      <figure class="shot s2"><span class="tag">AI Speaking</span><img src="images/iro/s02_3.jpg" srcset="images/iro/s02_3.jpg 1042w, images/iro/full/s02_3.png 2320w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s02_3.png" width="1042" height="642" alt="AI Speaking Coach 대화 화면"></figure>
+      <figure class="shot s3"><span class="tag">E-Book</span><img src="images/iro/s02_2.jpg" srcset="images/iro/s02_2.jpg 1042w, images/iro/full/s02_2.png 1228w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s02_2.png" width="1042" height="960" alt="학년별 강의자료실 화면"></figure>
+    </div>
+  </div>
+  <div class="band"><div class="in"><b>HMH INTO READING · V3</b><span>강의지원 시스템 · LMS · Module Test · 온라인 학습</span></div></div>
+</section>
+
+<nav class="toc" aria-label="브로슈어 목차">
+  <div class="in">
+    <a href="#overview"><em>01</em>주요 기능</a>
+    <a href="#lecture"><em>02</em>강의지원</a>
+    <a href="#lms"><em>03</em>LMS</a>
+    <a href="#test"><em>04</em>Module Test</a>
+    <a href="#vocabulary"><em>05</em>Vocabulary</a>
+    <a href="#sentence"><em>06</em>Sentence</a>
+    <a href="#reading"><em>07</em>Reading</a>
+    <a href="#speaking"><em>08</em>AI Speaking</a>
+    <a href="#writing"><em>09</em>AI Writing</a>
+    <a href="#contact">도입 문의</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- 01 -->
+<section class="page" id="overview">
+  <div class="in">
+    <div class="page-head">
+      <span class="chip">Online Program with AI Tutor</span>
+      <h2>수업 준비부터 관리, 학습까지<br>한 시스템으로</h2>
+      <p>관리자가 쉽게 운영할 수 있는 세 가지 주요 기능을 한 번에 제공합니다.</p>
+    </div>
+    <div class="g3">
+      <div class="card feat">
+        <span class="no">01</span>
+        <h3>강의지원 시스템</h3>
+        <ul><li>E-Book</li><li>강의자료실</li></ul>
+        <a href="#lecture">자세히 보기 →</a>
+      </div>
+      <div class="card feat">
+        <span class="no">02</span>
+        <h3>LMS</h3>
+        <ul><li>학생 및 클래스 등록</li><li>과제 부여</li><li>학습 결과 확인</li></ul>
+        <a href="#lms">자세히 보기 →</a>
+      </div>
+      <div class="card feat">
+        <span class="no">03</span>
+        <h3>온라인 학습</h3>
+        <ul><li>기본 학습 — Vocabulary · Sentence · Reading</li><li>Speaking 학습</li><li>Writing 학습</li></ul>
+        <a href="#vocabulary">자세히 보기 →</a>
+      </div>
+    </div>
+    <div class="folio"><span>HMH Into Reading&reg; · Online Program</span><b>01</b></div>
+  </div>
+</section>
+
+<!-- 02 -->
+<section class="page" id="lecture">
+  <div class="in">
+    <div class="page-head">
+      <span class="chip">강의지원 시스템</span>
+      <h2>교실 수업에 바로 쓰는 강의 툴</h2>
+      <p>교실 수업에서 다양한 자료를 활용할 수 있는 강의 툴을 제공합니다.</p>
+    </div>
+    <ol class="steps h" style="--n:2">
+        <li><h3><span class="en">E-Book</span></h3><p>PDF 교재, 음원 및 동영상</p></li>
+        <li><h3><span class="en">Teacher’s Resources</span></h3><p>Word List, Worksheets 등</p></li>
+      </ol>
+    <div class="viewer" data-viewer>
+      <div class="v-bar">
+        <div class="v-tabs" role="tablist">
+          <button type="button" role="tab" aria-selected="true"><em>1</em>E-Book</button>
+          <button type="button" role="tab" aria-selected="false"><em>2</em>동영상</button>
+          <button type="button" role="tab" aria-selected="false"><em>3</em>Word List</button>
+        </div>
+        <div class="v-nav"><button type="button" class="v-prev" aria-label="이전 화면">&#8249;</button><span class="v-count">1 / 3</span><button type="button" class="v-next" aria-label="다음 화면">&#8250;</button></div>
+      </div>
+      <div class="v-stage">
+        <figure class="shot on"><button type="button" style="max-width:1042px"><img src="images/iro/s03_1.jpg" srcset="images/iro/s03_1.jpg 1042w, images/iro/full/s03_1.jpg 1460w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s03_1.jpg" width="1042" height="548" alt="Into Reading G1 Module 2 E-Book 화면"></button><figcaption><b>E-Book</b>교재 지면 그대로, 음원과 함께 수업합니다.</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:1042px"><img src="images/iro/s03_4.jpg" srcset="images/iro/s03_4.jpg 1042w, images/iro/full/s03_4.jpg 1477w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s03_4.jpg" width="1042" height="646" alt="Get Curious 동영상 재생 화면" loading="lazy"></button><figcaption><b>동영상</b>Get Curious 영상 자료</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:720px"><img src="images/iro/full/s03_3.jpg" data-full="images/iro/full/s03_3.jpg" width="720" height="723" alt="Lesson별 Word List 자료" loading="lazy"></button><figcaption><b>Word List</b>Lesson별 단어 목록 자료</figcaption></figure>
+      </div>
+    </div>
+    <div class="folio"><span>HMH Into Reading&reg; · Online Program</span><b>02</b></div>
+  </div>
+</section>
+
+<!-- 03 -->
+<section class="page" id="lms">
+  <div class="in">
+    <div class="page-head">
+      <span class="chip">LMS</span>
+      <h2>캘린더로 한눈에 보는 학습 관리</h2>
+      <p>캘린더 형태로 한눈에 보기 쉽고, 관리하기 편한 LMS를 제공합니다.</p>
+    </div>
+    <ol class="steps h" style="--n:3">
+        <li><h3>학생 및 클래스 등록</h3><p>개별 및 다수 학생 등록<br>클래스 생성 및 학생 배정</p></li>
+        <li><h3>과제 부여</h3><p>학습별 과제 부여<br>개인 및 클래스별 과제 부여</p></li>
+        <li><h3>과제 확인</h3><p>캘린더를 통해 한눈에 결과 확인</p></li>
+      </ol>
+    <div class="viewer" data-viewer>
+      <div class="v-stage">
+        <figure class="shot on"><button type="button" style="max-width:1042px"><img src="images/iro/s04_1.jpg" srcset="images/iro/s04_1.jpg 1042w, images/iro/full/s04_1.jpg 1902w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s04_1.jpg" width="1042" height="503" alt="월별 캘린더에 과제와 결과가 표시된 LMS 화면"></button><figcaption><b>LMS Dashboard</b>날짜별 과제와 완료 여부를 캘린더에서 바로 확인합니다.</figcaption></figure>
+      </div>
+    </div>
+    <div class="folio"><span>HMH Into Reading&reg; · Online Program</span><b>03</b></div>
+  </div>
+</section>
+
+<!-- 04 -->
+<section class="page" id="test">
+  <div class="in">
+    <div class="page-head">
+      <span class="chip">Online Test System</span>
+      <h2><span class="en">Module Test</span></h2>
+      <p>Grade별 Module 학습을 마친 뒤 학습 성과를 확인할 수 있는 Test 문항을 영역별로 탑재하였습니다.</p>
+      <p>각 Module마다 Vocabulary, Reading Comprehension, MAP Practice 평가를 볼 수 있습니다.</p>
+    </div>
+    <p class="arrow-note">
+          <svg viewBox="0 0 34 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M1 6h31M27 1l5 5-5 5"/></svg>
+          목록에서 고르면 문항지와 OMR 답안지가 함께 열립니다.
+        </p>
+    <div class="viewer" data-viewer>
+      <div class="v-bar">
+        <div class="v-tabs" role="tablist">
+          <button type="button" role="tab" aria-selected="true"><em>1</em>Test 목록</button>
+          <button type="button" role="tab" aria-selected="false"><em>2</em>Vocabulary</button>
+          <button type="button" role="tab" aria-selected="false"><em>3</em>Reading Comprehension</button>
+          <button type="button" role="tab" aria-selected="false"><em>4</em>MAP Practice</button>
+        </div>
+        <div class="v-nav"><button type="button" class="v-prev" aria-label="이전 화면">&#8249;</button><span class="v-count">1 / 4</span><button type="button" class="v-next" aria-label="다음 화면">&#8250;</button></div>
+      </div>
+      <div class="v-stage">
+        <figure class="shot on"><button type="button" style="max-width:410px"><img src="images/iro/full/s05_1.jpg" data-full="images/iro/full/s05_1.jpg" width="410" height="715" alt="Module별 Test 목록 화면"></button><figcaption><b>Test 목록</b>Module마다 세 영역</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:1042px"><img src="images/iro/s05_2.jpg" srcset="images/iro/s05_2.jpg 1042w, images/iro/full/s05_2.jpg 1886w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s05_2.jpg" width="1042" height="503" alt="Vocabulary Test 문항과 OMR 답안" loading="lazy"></button><figcaption><b>Vocabulary</b>Module 핵심 단어 평가</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:1042px"><img src="images/iro/s05_3.jpg" srcset="images/iro/s05_3.jpg 1042w, images/iro/full/s05_3.jpg 1891w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s05_3.jpg" width="1042" height="502" alt="Reading Comprehension Test 문항과 OMR 답안" loading="lazy"></button><figcaption><b>Reading Comprehension</b>Story별 독해 평가</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:1042px"><img src="images/iro/s05_4.jpg" srcset="images/iro/s05_4.jpg 1042w, images/iro/full/s05_4.jpg 1888w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s05_4.jpg" width="1042" height="500" alt="MAP Practice 문항과 OMR 답안" loading="lazy"></button><figcaption><b>MAP Practice</b>MAP Growth 유형 연습</figcaption></figure>
+      </div>
+    </div>
+    <div class="folio"><span>HMH Into Reading&reg; · Online Program</span><b>04</b></div>
+  </div>
+</section>
+
+<!-- 05 -->
+<section class="page" id="vocabulary">
+  <div class="in">
+    <div class="page-head">
+      <span class="chip dark">온라인 학습 · 기본 학습</span>
+      <h2><span class="en">Vocabulary</span></h2>
+      <p>필요한 단어 학습 툴을 연계하여 쉽게 단어를 익힐 수 있습니다.</p>
+    </div>
+    <div class="viewer" data-viewer>
+      <div class="v-bar">
+        <div class="v-tabs" role="tablist">
+          <button type="button" role="tab" aria-selected="true"><em>1</em>Intro</button>
+          <button type="button" role="tab" aria-selected="false"><em>2</em>Matching 1 (Text)</button>
+          <button type="button" role="tab" aria-selected="false"><em>3</em>Matching 2 (Picture)</button>
+          <button type="button" role="tab" aria-selected="false"><em>4</em>Quiz</button>
+          <button type="button" role="tab" aria-selected="false"><em>5</em>Speaking</button>
+          <button type="button" role="tab" aria-selected="false"><em>6</em>Game</button>
+        </div>
+        <div class="v-nav"><button type="button" class="v-prev" aria-label="이전 화면">&#8249;</button><span class="v-count">1 / 6</span><button type="button" class="v-next" aria-label="다음 화면">&#8250;</button></div>
+      </div>
+      <div class="v-stage">
+        <figure class="shot on"><button type="button" style="max-width:1042px"><img src="images/iro/s06_1.jpg" srcset="images/iro/s06_1.jpg 1042w, images/iro/full/s06_1.jpg 1770w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s06_1.jpg" width="1042" height="567" alt="단어를 듣고 사진으로 익히는 Intro 화면"></button><figcaption><b>Intro</b>듣고 보며 단어 만나기</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:1042px"><img src="images/iro/s06_2.jpg" srcset="images/iro/s06_2.jpg 1042w, images/iro/full/s06_2.jpg 1771w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s06_2.jpg" width="1042" height="565" alt="단어와 뜻을 연결하는 Matching 화면" loading="lazy"></button><figcaption><b>Matching 1 (Text)</b>단어와 뜻 연결</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:1042px"><img src="images/iro/s06_3.jpg" srcset="images/iro/s06_3.jpg 1042w, images/iro/full/s06_3.jpg 1879w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s06_3.jpg" width="1042" height="505" alt="단어와 그림을 연결하는 Matching 화면" loading="lazy"></button><figcaption><b>Matching 2 (Picture)</b>단어와 그림 연결</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:1042px"><img src="images/iro/s06_5.jpg" srcset="images/iro/s06_5.jpg 1042w, images/iro/full/s06_5.jpg 1784w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s06_5.jpg" width="1042" height="536" alt="빈칸에 알맞은 단어를 고르는 Quiz 화면" loading="lazy"></button><figcaption><b>Quiz</b>문장 속 빈칸 채우기</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:1042px"><img src="images/iro/s06_4.jpg" srcset="images/iro/s06_4.jpg 1042w, images/iro/full/s06_4.jpg 1885w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s06_4.jpg" width="1042" height="505" alt="단어를 듣고 녹음하는 Speaking 화면" loading="lazy"></button><figcaption><b>Speaking</b>듣고 녹음해 발음 확인</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:1042px"><img src="images/iro/s06_6.jpg" srcset="images/iro/s06_6.jpg 1042w, images/iro/full/s06_6.jpg 1775w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s06_6.jpg" width="1042" height="487" alt="떨어지는 글자로 단어를 완성하는 Game 화면" loading="lazy"></button><figcaption><b>Game</b>글자를 순서대로 맞추기</figcaption></figure>
+      </div>
+    </div>
+    <div class="folio"><span>HMH Into Reading&reg; · Online Program</span><b>05</b></div>
+  </div>
+</section>
+
+<!-- 06 -->
+<section class="page" id="sentence">
+  <div class="in">
+    <div class="page-head">
+      <span class="chip dark">온라인 학습 · 기본 학습</span>
+      <h2><span class="en">Sentence</span></h2>
+      <p>문장별 음원 듣고 읽기, 문장 완성 등 온라인 Activity를 통해 학습합니다.</p>
+    </div>
+    <div class="viewer" data-viewer>
+      <div class="v-bar">
+        <div class="v-tabs" role="tablist">
+          <button type="button" role="tab" aria-selected="true"><em>1</em>Unscramble</button>
+          <button type="button" role="tab" aria-selected="false"><em>2</em>Listen and Repeat</button>
+        </div>
+        <div class="v-nav"><button type="button" class="v-prev" aria-label="이전 화면">&#8249;</button><span class="v-count">1 / 2</span><button type="button" class="v-next" aria-label="다음 화면">&#8250;</button></div>
+      </div>
+      <div class="v-stage">
+        <figure class="shot on"><button type="button" style="max-width:1042px"><img src="images/iro/s07_1.jpg" srcset="images/iro/s07_1.jpg 1042w, images/iro/full/s07_1.jpg 1784w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s07_1.jpg" width="1042" height="524" alt="단어를 끌어 문장을 완성하는 Unscramble 화면"></button><figcaption><b>Unscramble</b>단어를 끌어다 놓아 문장 완성</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:1042px"><img src="images/iro/s07_2.jpg" srcset="images/iro/s07_2.jpg 1042w, images/iro/full/s07_2.jpg 1780w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s07_2.jpg" width="1042" height="526" alt="문장을 듣고 따라 읽는 화면" loading="lazy"></button><figcaption><b>Listen and Repeat</b>문장별 음원을 듣고 따라 읽기</figcaption></figure>
+      </div>
+    </div>
+    <div class="folio"><span>HMH Into Reading&reg; · Online Program</span><b>06</b></div>
+  </div>
+</section>
+
+<!-- 07 -->
+<section class="page" id="reading">
+  <div class="in">
+    <div class="page-head">
+      <span class="chip dark">온라인 학습 · 기본 학습</span>
+      <h2><span class="en">Reading</span></h2>
+      <p>본문 읽기 연습으로 Speech 능력을 향상시킵니다.</p>
+      <p>읽는 속도(WPM)와 정확도를 측정(녹음)하고, 결과를 바로 확인할 수 있습니다.</p>
+    </div>
+    <div class="viewer" data-viewer>
+      <div class="v-bar">
+        <div class="v-tabs" role="tablist">
+          <button type="button" role="tab" aria-selected="true"><em>1</em>WPM 측정</button>
+          <button type="button" role="tab" aria-selected="false"><em>2</em>결과 확인</button>
+          <button type="button" role="tab" aria-selected="false"><em>3</em>Reading Comprehension</button>
+        </div>
+        <div class="v-nav"><button type="button" class="v-prev" aria-label="이전 화면">&#8249;</button><span class="v-count">1 / 3</span><button type="button" class="v-next" aria-label="다음 화면">&#8250;</button></div>
+      </div>
+      <div class="v-stage">
+        <figure class="shot on"><button type="button" style="max-width:1042px"><img src="images/iro/s08_1.jpg" srcset="images/iro/s08_1.jpg 1042w, images/iro/full/s08_1.jpg 1777w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s08_1.jpg" width="1042" height="527" alt="본문을 녹음하며 WPM과 정확도를 측정하는 화면"></button><figcaption><b>WPM 측정</b>본문을 읽고 녹음</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:1042px"><img src="images/iro/s08_2.jpg" srcset="images/iro/s08_2.jpg 1042w, images/iro/full/s08_2.jpg 1780w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s08_2.jpg" width="1042" height="527" alt="빠뜨리거나 더 읽은 부분이 색으로 표시된 결과 화면" loading="lazy"></button><figcaption><b>결과 확인</b>틀린 부분을 색으로 표시</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:1042px"><img src="images/iro/s08_3.jpg" srcset="images/iro/s08_3.jpg 1042w, images/iro/full/s08_3.jpg 1766w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s08_3.jpg" width="1042" height="504" alt="Reading Comprehension 문제 화면" loading="lazy"></button><figcaption><b>Reading Comprehension</b>읽은 내용 이해도 확인</figcaption></figure>
+      </div>
+    </div>
+    <div class="folio"><span>HMH Into Reading&reg; · Online Program</span><b>07</b></div>
+  </div>
+</section>
+
+<!-- 08 -->
+<section class="page" id="speaking">
+  <div class="in">
+    <div class="page-head">
+      <span class="chip">AI Speaking · ChatGPT</span>
+      <h2>ChatGPT와 대화하며 키우는 <span class="en">Speaking</span></h2>
+      <p>ChatGPT와의 대화를 통해 학생들은 실제 대화 상황을 경험하고 Speaking 능력을 향상시킬 수 있습니다.</p>
+      <p>수업 교재 내용에 대한 질문, 그림 보고 대화하기, 한글 문장 번역 등 콘텐츠 및 상황별 대화가 가능합니다.</p>
+      <p>온·오프라인 연계 학습으로, 수업 시간에 배운 내용 또는 다루지 못한 내용을 ChatGPT와의 대화로 복습·관리할 수 있습니다.</p>
+    </div>
+    <div class="viewer" data-viewer>
+      <div class="v-bar">
+        <div class="v-tabs" role="tablist">
+          <button type="button" role="tab" aria-selected="true"><em>1</em>Intro</button>
+          <button type="button" role="tab" aria-selected="false"><em>2</em>Picture Talk</button>
+          <button type="button" role="tab" aria-selected="false"><em>3</em>Translation</button>
+        </div>
+        <div class="v-nav"><button type="button" class="v-prev" aria-label="이전 화면">&#8249;</button><span class="v-count">1 / 3</span><button type="button" class="v-next" aria-label="다음 화면">&#8250;</button></div>
+      </div>
+      <div class="v-stage">
+        <figure class="shot on"><button type="button" style="max-width:1042px"><img src="images/iro/s09_1.jpg" srcset="images/iro/s09_1.jpg 1042w, images/iro/full/s09_1.png 2209w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s09_1.png" width="1042" height="653" alt="AI Speaking Coach가 안부와 이름을 묻는 대화 화면"></button><figcaption><b>Intro</b>안부 및 이름 물어보기</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:840px"><img src="images/iro/full/s09_2.jpg" data-full="images/iro/full/s09_2.jpg" width="840" height="677" alt="사진을 보고 AI와 대화하는 Picture Talk 화면" loading="lazy"></button><figcaption><b>Picture Talk</b>그림 보고 대화하기</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:841px"><img src="images/iro/full/s09_3.jpg" data-full="images/iro/full/s09_3.jpg" width="841" height="650" alt="한글 문장을 영어로 말하는 Translation 화면" loading="lazy"></button><figcaption><b>Translation</b>한글 문장을 영어로 말하기</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="sub-head"><span class="chip dark">Dialogue &amp; AI Report</span></div>
+    <p class="note">대화 내용은 학습 종료 후 음성 파일로 저장되어 다시 들어볼 수 있습니다. 5가지 핵심 스피킹 역량을 분석한 AI Report를 제공합니다.</p>
+    <div class="viewer" data-viewer>
+      <div class="v-bar">
+        <div class="v-tabs" role="tablist">
+          <button type="button" role="tab" aria-selected="true"><em>1</em>Dialogue</button>
+          <button type="button" role="tab" aria-selected="false"><em>2</em>AI Report</button>
+        </div>
+        <div class="v-nav"><button type="button" class="v-prev" aria-label="이전 화면">&#8249;</button><span class="v-count">1 / 2</span><button type="button" class="v-next" aria-label="다음 화면">&#8250;</button></div>
+      </div>
+      <div class="v-stage">
+        <figure class="shot on"><button type="button" style="max-width:996px"><img src="images/iro/full/s10_2.jpg" data-full="images/iro/full/s10_2.jpg" width="996" height="715" alt="저장된 대화를 다시 듣는 Dialogue 화면"></button><figcaption><b>Dialogue</b>저장된 대화를 음성으로 다시 듣기</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:742px"><img src="images/iro/full/s10_1.jpg" data-full="images/iro/full/s10_1.jpg" width="742" height="915" alt="5가지 역량을 분석한 AI Speaking Coach Report" loading="lazy"></button><figcaption><b>AI Report</b>5가지 핵심 스피킹 역량 분석</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="sub-head"><span class="chip dark">AI Speaking Contents · Star Talk</span></div>
+    <p class="note">8개 레벨 160개 주제를 기반으로 ChatGPT와 대화할 수 있는 Speaking Contents와 워크시트를 제공합니다.</p>
+    <div class="card levels">
+        <h3>AI Speaking Coach · Star Talk</h3>
+        <div class="facts"><span>총 8개 레벨</span><span>레벨당 20 Units (20개 차시)</span><span>Unit당 AI 스피킹 10분</span><span>종이 워크시트 제공</span></div>
+        <table>
+          <tr class="st"><th>Starter 1 · 2</th><td>파닉스 단계 또는 파닉스를 끝내고 학습하는 단계, 문장 패턴 연습</td></tr>
+          <tr><th>Level 1 · 2</th><td>영어 학습 6개월 차 이상</td></tr>
+          <tr><th>Level 3 · 4</th><td>영어 학습 1~2년 차</td></tr>
+          <tr><th>Level 5</th><td>영어 학습 2~3년 차</td></tr>
+          <tr><th>Level 6</th><td>영어 학습 3~4년 차</td></tr>
+        </table>
+      </div>
+    <div style="height:20px"></div>
+    <div class="viewer" data-viewer>
+      <div class="v-bar">
+        <div class="v-tabs" role="tablist">
+          <button type="button" role="tab" aria-selected="true"><em>1</em>Worksheet</button>
+          <button type="button" role="tab" aria-selected="false"><em>2</em>Worksheet</button>
+        </div>
+        <div class="v-nav"><button type="button" class="v-prev" aria-label="이전 화면">&#8249;</button><span class="v-count">1 / 2</span><button type="button" class="v-next" aria-label="다음 화면">&#8250;</button></div>
+      </div>
+      <div class="v-stage">
+        <figure class="shot on"><button type="button" style="max-width:532px"><img src="images/iro/full/s11_2.jpg" data-full="images/iro/full/s11_2.jpg" width="532" height="686" alt="Star Talk 워크시트 — 단어 쓰기"></button><figcaption><b>Worksheet</b>Write the words</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:534px"><img src="images/iro/full/s11_3.jpg" data-full="images/iro/full/s11_3.jpg" width="534" height="590" alt="Star Talk 워크시트 — 읽고 답 쓰기" loading="lazy"></button><figcaption><b>Worksheet</b>Read and write the answers</figcaption></figure>
+      </div>
+    </div>
+    <div class="folio"><span>HMH Into Reading&reg; · Online Program</span><b>08</b></div>
+  </div>
+</section>
+
+<!-- 09 -->
+<section class="page" id="writing">
+  <div class="in">
+    <div class="page-head">
+      <span class="chip">AI Writing · 자동 첨삭</span>
+      <h2>쓰는 즉시 첨삭받는 <span class="en">Writing</span></h2>
+      <p>학생이 작성한 글을 ChatGPT가 실시간으로 첨삭해 주는 프로그램입니다.</p>
+      <p>관리자가 직접 주제를 입력할 수 있어 다양한 Writing 활용이 가능합니다.</p>
+    </div>
+    <div class="viewer" data-viewer>
+      <div class="v-bar">
+        <div class="v-tabs" role="tablist">
+          <button type="button" role="tab" aria-selected="true"><em>1</em>First Draft</button>
+          <button type="button" role="tab" aria-selected="false"><em>2</em>Feedback</button>
+          <button type="button" role="tab" aria-selected="false"><em>3</em>Explanation</button>
+        </div>
+        <div class="v-nav"><button type="button" class="v-prev" aria-label="이전 화면">&#8249;</button><span class="v-count">1 / 3</span><button type="button" class="v-next" aria-label="다음 화면">&#8250;</button></div>
+      </div>
+      <div class="v-stage">
+        <figure class="shot on"><button type="button" style="max-width:785px"><img src="images/iro/full/s12_1.jpg" data-full="images/iro/full/s12_1.jpg" width="785" height="735" alt="주제를 보고 초안을 작성하는 First Draft 화면"></button><figcaption><b>First Draft</b>주제를 보고 초안 작성</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:1042px"><img src="images/iro/s12_2.jpg" srcset="images/iro/s12_2.jpg 1042w, images/iro/full/s12_2.jpg 1594w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s12_2.jpg" width="1042" height="539" alt="첨삭 내용을 보며 다시 쓰는 Feedback Check 화면" loading="lazy"></button><figcaption><b>Feedback</b>첨삭을 보며 Final Draft 다시 쓰기</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:790px"><img src="images/iro/full/s12_3.jpg" data-full="images/iro/full/s12_3.jpg" width="790" height="804" alt="오류마다 한글 설명이 달린 Feedback 화면" loading="lazy"></button><figcaption><b>Explanation</b>오류마다 한글 설명 제공</figcaption></figure>
+      </div>
+    </div>
+    <p class="eg"><b>활용 예</b> · 수행평가 내용을 주제로 입력하면, ChatGPT의 첨삭과 결과지를 통해 체계화된 Feedback을 확인하고 관리할 수 있습니다.</p>
+
+    <div class="sub-head"><span class="chip dark">Fluency · Speed Reading WPM</span></div>
+    <p class="note">최종 수정·제출된 글에 대해 읽는 속도와 정확도를 측정(녹음)하고, 결과를 바로 확인할 수 있습니다.</p>
+    <div class="viewer" data-viewer>
+      <div class="v-bar">
+        <div class="v-tabs" role="tablist">
+          <button type="button" role="tab" aria-selected="true"><em>1</em>WPM 측정</button>
+          <button type="button" role="tab" aria-selected="false"><em>2</em>결과 확인</button>
+        </div>
+        <div class="v-nav"><button type="button" class="v-prev" aria-label="이전 화면">&#8249;</button><span class="v-count">1 / 2</span><button type="button" class="v-next" aria-label="다음 화면">&#8250;</button></div>
+      </div>
+      <div class="v-stage">
+        <figure class="shot on"><button type="button" style="max-width:1042px"><img src="images/iro/s13_1.jpg" srcset="images/iro/s13_1.jpg 1042w, images/iro/full/s13_1.jpg 1878w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s13_1.jpg" width="1042" height="510" alt="완성한 글을 읽으며 WPM을 측정하는 화면"></button><figcaption><b>WPM 측정</b>내가 쓴 글을 소리 내어 읽기</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:1042px"><img src="images/iro/s13_2.jpg" srcset="images/iro/s13_2.jpg 1042w, images/iro/full/s13_2.jpg 1885w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s13_2.jpg" width="1042" height="514" alt="원문과 읽은 내용을 비교한 결과 화면" loading="lazy"></button><figcaption><b>결과 확인</b>Accuracy와 WPM 바로 확인</figcaption></figure>
+      </div>
+    </div>
+
+    <div class="sub-head"><span class="chip dark">Rubric &amp; Writing Report</span></div>
+    <p class="note">관리자가 제출된 글을 확인하고 평가할 수 있습니다. Rubric 채점을 자동 또는 수동으로 완료하면 Report가 생성되며, Writing Report는 항목별로 수정할 수 있습니다.</p>
+    <div class="viewer" data-viewer>
+      <div class="v-bar">
+        <div class="v-tabs" role="tablist">
+          <button type="button" role="tab" aria-selected="true"><em>1</em>확인 및 채점 (자동 / 수동)</button>
+          <button type="button" role="tab" aria-selected="false"><em>2</em>Writing Report</button>
+        </div>
+        <div class="v-nav"><button type="button" class="v-prev" aria-label="이전 화면">&#8249;</button><span class="v-count">1 / 2</span><button type="button" class="v-next" aria-label="다음 화면">&#8250;</button></div>
+      </div>
+      <div class="v-stage">
+        <figure class="shot on"><button type="button" style="max-width:1042px"><img src="images/iro/s14_1.jpg" srcset="images/iro/s14_1.jpg 1042w, images/iro/full/s14_1.jpg 1382w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s14_1.jpg" width="1042" height="651" alt="AI Writing Coach의 Rubric 채점 화면"></button><figcaption><b>확인 및 채점 (자동 / 수동)</b>Rubric 항목별 점수 부여</figcaption></figure>
+        <figure class="shot"><button type="button" style="max-width:605px"><img src="images/iro/full/s14_2.jpg" data-full="images/iro/full/s14_2.jpg" width="605" height="810" alt="Writing Coach Report" loading="lazy"></button><figcaption><b>Writing Report</b>항목별로 수정 가능한 결과지</figcaption></figure>
+      </div>
+    </div>
+    <div class="folio"><span>HMH Into Reading&reg; · Online Program</span><b>09</b></div>
+  </div>
+</section>
+
+</main>
+
+<section class="closing" id="contact">
+  <div class="in">
+    <span class="kicker">도입 문의</span>
+    <h2>Into Reading 온라인 프로그램,<br>도입이 궁금하시다면</h2>
+    <p>프로그램 시연과 도입 상담은 아래 담당자가 바로 도와드립니다.</p>
+    <!-- 문의처: 아래 네 칸만 채우면 버튼이 자동으로 생깁니다 (빈 칸은 버튼이 안 나옵니다) -->
+    <div class="cover-cta" id="contactBtns"
+         data-name="아이원에듀"
+         data-person="박준영 이사"
+         data-tel="010-5618-8136"
+         data-mail="jun_young@naver.com"
+         data-kakao=""
+         data-site=""></div>
+    <p class="contact-line" id="contactLine"></p>
+  </div>
+</section>
+<div class="grades" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+<footer class="foot"><div class="in"><span>HMH Into Reading&reg; · 천재교과서 ELT</span><a href="index.html">MAP Growth Support Korea 홈으로</a></div></footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="화면 크게 보기">
+  <span class="cap" id="lbCap"></span>
+  <button class="x" type="button" aria-label="닫기">&times;</button>
+  <div class="pan"><img id="lbImg" alt=""></div>
+  <span class="tip">손가락으로 밀어서 구석구석 볼 수 있어요</span>
+</div>
+
+<script>
+document.documentElement.classList.add('js');
+(function(){
+  var lb=document.getElementById('lb'),im=document.getElementById('lbImg'),cap=document.getElementById('lbCap'),pan=lb.querySelector('.pan'),last=null;
+  document.querySelectorAll('.shot button').forEach(function(b){
+    b.setAttribute('aria-label',(b.querySelector('img').alt||'화면')+' 크게 보기');
+    b.addEventListener('click',function(){
+      var g=b.querySelector('img'),c=b.parentNode.querySelector('figcaption b');
+      im.src=g.getAttribute('data-full')||g.currentSrc||g.src;im.alt=g.alt;cap.textContent=c?c.textContent:'';
+      last=b;lb.classList.add('open');document.body.style.overflow='hidden';pan.scrollTo(0,0);lb.querySelector('.x').focus();
+    });
+  });
+  function close(){lb.classList.remove('open');document.body.style.overflow='';if(last)last.focus();}
+  lb.addEventListener('click',function(e){if(e.target===im&&window.innerWidth<=760)return;close();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&lb.classList.contains('open'))close();});
+
+  document.querySelectorAll('[data-viewer]').forEach(function(v){
+    var hint=document.createElement('span');hint.className='v-hint';hint.textContent='그림을 누르면 더 크게 볼 수 있어요';v.appendChild(hint);
+    var figs=[].slice.call(v.querySelectorAll('.v-stage .shot')),tabs=[].slice.call(v.querySelectorAll('.v-tabs button')),cnt=v.querySelector('.v-count'),k=0;
+    if(figs.length<2)return;
+    function go(n,focus){
+      k=(n+figs.length)%figs.length;
+      figs.forEach(function(f,i){f.classList.toggle('on',i===k);});
+      tabs.forEach(function(t,i){t.setAttribute('aria-selected',i===k?'true':'false');t.tabIndex=i===k?0:-1;});
+      if(cnt)cnt.textContent=(k+1)+' / '+figs.length;
+      var t=tabs[k],bar=t.parentNode;if(bar.scrollWidth>bar.clientWidth)bar.scrollTo({left:t.offsetLeft-bar.clientWidth/2+t.clientWidth/2,behavior:'smooth'});
+      if(focus)t.focus();
+    }
+    tabs.forEach(function(t,i){
+      t.addEventListener('click',function(){go(i);});
+      t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();go(k+1,true);}if(e.key==='ArrowLeft'){e.preventDefault();go(k-1,true);}});
+    });
+    v.querySelector('.v-prev').addEventListener('click',function(){go(k-1);});
+    v.querySelector('.v-next').addEventListener('click',function(){go(k+1);});
+    go(0);
+  });
+
+
+  (function(){
+    var c=document.getElementById('contactBtns'),l=document.getElementById('contactLine');if(!c)return;
+    var d=c.dataset,h='',t=[];
+    if(d.tel){h+='<a class="pill fill" href="tel:'+d.tel.replace(/[^0-9+]/g,'')+'">전화 문의 '+d.tel+'</a>';t.push(d.tel);}
+    if(d.mail){h+='<a class="pill'+(d.tel?'':' fill')+'" href="mailto:'+d.mail+'?subject='+encodeURIComponent('Into Reading 온라인 프로그램 도입 문의')+'">메일로 문의하기</a>';t.push(d.mail);}
+    if(d.kakao){h+='<a class="pill" href="'+d.kakao+'" target="_blank" rel="noopener noreferrer">카카오톡 문의</a>';}
+    if(d.site){h+='<a class="pill" href="'+d.site+'" target="_blank" rel="noopener noreferrer">홈페이지</a>';}
+    c.innerHTML=h;
+    l.innerHTML='<b>'+d.name+'</b>'+(d.person?'<i></i>'+d.person:'')+(d.biz?'<i></i>사업자등록번호 '+d.biz:'')+(t.length?'<i></i>'+t.join('<i></i>'):'');
+  })();
+
+  var links=[].slice.call(document.querySelectorAll('.toc a')),bar=document.querySelector('.toc .in');
+  var secs=links.map(function(a){return document.querySelector(a.getAttribute('href'));});
+  function spy(){
+    var y=window.scrollY+140,k=-1;
+    secs.forEach(function(s,i){if(s.offsetTop<=y)k=i;});
+    links.forEach(function(a,i){
+      var on=i===k;if(on&&!a.classList.contains('on')){bar.scrollTo({left:a.offsetLeft-bar.clientWidth/2+a.clientWidth/2,behavior:'smooth'});}
+      a.classList.toggle('on',on);
+    });
+  }
+  window.addEventListener('scroll',spy,{passive:true});spy();
+})();
+</script>
+</body>
+</html>
