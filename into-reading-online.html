@@ -40,6 +40,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .back{font-size:13px;font-weight:600;color:var(--g-deep);display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .back svg{width:15px;height:15px}
 
+/* 표지 — 화면 세 장 대신 소개 영상 한 편 */
+.stack-video{display:flex;align-items:center;justify-content:center;min-height:520px}
+.stack-video .vid{position:relative;z-index:2;width:104%;margin:0}
+.stack-video .vid video{display:block;width:100%;height:auto;aspect-ratio:1284/716;border-radius:10px;border:1px solid rgba(255,255,255,.7);box-shadow:0 18px 40px rgba(90,58,0,.26);background:#000}
+.stack-video .tag{position:absolute;left:12px;top:-11px;z-index:3;font-family:var(--en);font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--ink);padding:4px 9px;border-radius:4px}
+
 /* 본책 학년 색 띠 */
 .grades{display:flex;height:6px}
 .grades i{flex:1}
@@ -223,6 +229,8 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 @media (max-width:960px){
   .cover .in{grid-template-columns:1fr;gap:36px;padding-top:44px}
+  .stack-video{display:block;min-height:0;padding:64px 0 36px}
+  .stack-video .vid{width:auto}
   .stack{height:auto;display:grid;grid-template-columns:1fr 1fr;gap:22px 14px;padding:64px 0 36px}
   .stack::before{left:-28px;right:-28px;border-radius:50% 50% 0 0 / 60px 60px 0 0}
   .badge{top:-30px;right:6px;width:86px;height:86px;border-width:5px}.badge b{font-size:20px}.badge small{font-size:10px}
@@ -288,11 +296,12 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
         <a class="pill" href="resources/into-reading-brochure.pdf" download>+ Into Reading V3 교재 브로슈어 (PDF)</a>
       </div>
     </div>
-    <div class="stack">
+    <div class="stack stack-video">
       <div class="badge" aria-hidden="true"><small>with</small><b>AI</b><small>Tutor</small></div>
-      <figure class="shot s1"><span class="tag">LMS</span><img src="images/iro/s02_1.jpg" srcset="images/iro/s02_1.jpg 1042w, images/iro/full/s02_1.png 2338w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s02_1.png" width="1042" height="671" alt="캘린더 형태의 LMS 대시보드 화면"></figure>
-      <figure class="shot s2"><span class="tag">AI Speaking</span><img src="images/iro/s02_3.jpg" srcset="images/iro/s02_3.jpg 1042w, images/iro/full/s02_3.png 2320w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s02_3.png" width="1042" height="642" alt="AI Speaking Coach 대화 화면"></figure>
-      <figure class="shot s3"><span class="tag">E-Book</span><img src="images/iro/s02_2.jpg" srcset="images/iro/s02_2.jpg 1042w, images/iro/full/s02_2.png 1228w" sizes="(min-width:1160px) 1042px, 92vw" data-full="images/iro/full/s02_2.png" width="1042" height="960" alt="학년별 강의자료실 화면"></figure>
+      <figure class="vid">
+        <span class="tag">Online Program</span>
+        <video src="images/iro/intro.mp4" poster="images/iro/intro-poster.jpg" autoplay muted loop playsinline controls preload="metadata" aria-label="초등 영어 온라인 과정 소개 영상"></video>
+      </figure>
     </div>
   </div>
   <div class="band"><div class="in"><b>HMH INTO READING · V3</b><span>강의지원 시스템 · LMS · Module Test · 온라인 학습</span></div></div>
@@ -658,15 +667,15 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 
 <section class="closing" id="contact">
   <div class="in">
-    <span class="kicker">도입 문의</span>
+    <span class="kicker">도입 문의 · 아이원 에듀</span>
     <h2>Into Reading 온라인 프로그램,<br>도입이 궁금하시다면</h2>
-    <p>프로그램 시연과 도입 상담은 아래 담당자가 바로 도와드립니다.</p>
+    <p>프로그램 시연과 도입 상담은 아래 운영사에서 바로 도와드립니다.</p>
     <!-- 문의처: 아래 네 칸만 채우면 버튼이 자동으로 생깁니다 (빈 칸은 버튼이 안 나옵니다) -->
     <div class="cover-cta" id="contactBtns"
-         data-name="아이원에듀"
-         data-person="박준영 이사"
+         data-name="아이원 에듀"
+         data-person="이사 박준영"
          data-tel="010-5618-8136"
-         data-mail="jun_young@naver.com"
+         data-mail="jun_young@ionenet.kr"
          data-kakao=""
          data-site=""></div>
     <p class="contact-line" id="contactLine"></p>
@@ -726,7 +735,7 @@ document.documentElement.classList.add('js');
     if(d.tel){h+='<a class="pill fill" href="tel:'+d.tel.replace(/[^0-9+]/g,'')+'">전화 문의 '+d.tel+'</a>';t.push(d.tel);}
     if(d.mail){h+='<a class="pill'+(d.tel?'':' fill')+'" href="mailto:'+d.mail+'?subject='+encodeURIComponent('Into Reading 온라인 프로그램 도입 문의')+'">메일로 문의하기</a>';t.push(d.mail);}
     if(d.kakao){h+='<a class="pill" href="'+d.kakao+'" target="_blank" rel="noopener noreferrer">카카오톡 문의</a>';}
-    if(d.site){h+='<a class="pill" href="'+d.site+'" target="_blank" rel="noopener noreferrer">홈페이지</a>';}
+    if(d.site){h+='<a class="pill" href="'+d.site+'" target="_blank" rel="noopener noreferrer">아이원 에듀 홈페이지</a>';}
     c.innerHTML=h;
     l.innerHTML='<b>'+d.name+'</b>'+(d.person?'<i></i>'+d.person:'')+(d.biz?'<i></i>사업자등록번호 '+d.biz:'')+(t.length?'<i></i>'+t.join('<i></i>'):'');
   })();
