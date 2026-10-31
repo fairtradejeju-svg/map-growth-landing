@@ -96,7 +96,7 @@ a{text-decoration:none;color:inherit}
     <h1>Into Reading V1 단어 워크시트</h1>
     <p>Into Reading V1 교재용 모듈별 단어 워크시트와 답지입니다. Grade를 고르고 모듈별로 내려받으세요.</p>
     <div class="meta">
-      <span>Grade <b>1</b> · <b>2</b></span>
+      <span>Grade <b>1</b> ~ <b>5</b></span>
       <span>학년별 <b>10</b>개 모듈</span>
       <span>유형 <b>6</b>종 · 워크시트 · 답지 <b>PDF</b></span>
     </div>
@@ -116,15 +116,15 @@ a{text-decoration:none;color:inherit}
 </div>
 
 <script>
-  var GRADES = ['G1','G2'];
-  var HINT = {G1:'Grade 1 단어 워크시트 10개 모듈 · 초등 1~3학년 · 워크북 82~88쪽 / 답지 6쪽', G2:'Grade 2 단어 워크시트 10개 모듈 · 초등 2~4학년 · 워크북 146~160쪽 / 답지 6쪽'};
+  var GRADES = ['G1','G2','G3','G4','G5'];
+  var HINT = {G1:'Grade 1 단어 워크시트 10개 모듈 · 초등 1~3학년 · 워크북 82~88쪽 / 답지 6쪽', G2:'Grade 2 단어 워크시트 10개 모듈 · 초등 2~4학년 · 워크북 146~160쪽 / 답지 6쪽', G3:'Grade 3 단어 워크시트 10개 모듈 · 초등 3~5학년 · 워크북 106~134쪽 / 답지 6쪽', G4:'Grade 4 단어 워크시트 10개 모듈 · 초등 4~5학년 · 워크북 120~138쪽 / 답지 6쪽', G5:'Grade 5 단어 워크시트 10개 모듈 · 초등 5~6학년 · 워크북 120~140쪽 / 답지 6쪽'};
   var COLORS = [
     {c:'#B73680',s:'#F7E1EE'}, {c:'#2C9DCB',s:'#DDF1F8'}, {c:'#7DB72F',s:'#E8F3D5'},
     {c:'#F58A1F',s:'#FCE9D3'}, {c:'#7C5CBF',s:'#E9E2F6'}, {c:'#0E9C8E',s:'#D6F1EE'},
     {c:'#E0563E',s:'#FADFD8'}, {c:'#4256B3',s:'#E0E4F5'}, {c:'#E0509B',s:'#FADFEC'},
     {c:'#D08A17',s:'#F8EBCC'}
   ];
-  var V1CH = {"G1": {"4": ["A Big Guy Took My Ball!"], "5": ["Blackout", "Waiting Is Not Easy!"]}, "G2": {"1": ["Spoon"]}};
+  var V1CH = {"G1": {"4": ["A Big Guy Took My Ball!"], "5": ["Blackout", "Waiting Is Not Easy!"]}, "G2": {"1": ["Spoon"]}, "G4": {"1": ["Yes! We Are Latinos"], "3": ["The Galveston Hurricane of 1900"], "4": ["The Battle of the Alamo"]}, "G5": {"4": ["Explore the Wild West!", "The Celestials' Railroad"], "6": ["Phillis's Big Test"]}};
   function render(grade){
     var grid = document.getElementById('modGrid');
     grid.innerHTML = '';
